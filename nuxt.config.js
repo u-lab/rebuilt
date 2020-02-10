@@ -4,7 +4,7 @@ module.exports = {
   srcDir: __dirname,
 
   env: {
-    apiUrl: process.env.API_URL,
+    apiUrl: process.env.API_URL + '/api/v1',
     appName: process.env.APP_NAME,
     appLocale: process.env.APP_LOCALE || 'en',
     githubAuth: !!process.env.GITHUB_CLIENT_ID
@@ -38,11 +38,13 @@ module.exports = {
     { src: '~plugins/bootstrap', mode: 'client' }
   ],
 
-  modules: ['@nuxtjs/router', '@nuxtjs/pwa', '@nuxtjs/sitemap'],
-
-  buildModules: [
-    '@nuxtjs/google-analytics'
+  modules: [
+    '@nuxtjs/router',
+    '@nuxtjs/pwa',
+    '@nuxtjs/sitemap'
   ],
+
+  buildModules: ['@nuxtjs/google-analytics'],
 
   build: {
     extractCSS: true
