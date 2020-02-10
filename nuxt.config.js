@@ -1,6 +1,4 @@
 require('dotenv').config()
-const { join } = require('path')
-const { copySync, removeSync } = require('fs-extra')
 
 module.exports = {
   srcDir: __dirname,
@@ -50,20 +48,5 @@ module.exports = {
 
   build: {
     extractCSS: true
-  },
-
-  hooks: {
-    generate: {
-      done (generator) {
-        // Copy dist files to public/_nuxt
-        if (generator.nuxt.options.dev === false && generator.nuxt.options.mode === 'spa') {
-          const publicDir = join(generator.nuxt.options.rootDir, 'public', '_nuxt')
-          removeSync(publicDir)
-          copySync(join(generator.nuxt.options.generate.dir, '_nuxt'), publicDir)
-          copySync(join(generator.nuxt.options.generate.dir, '200.html'), join(publicDir, 'index.html'))
-          removeSync(generator.nuxt.options.generate.dir)
-        }
-      }
-    }
   }
 }
