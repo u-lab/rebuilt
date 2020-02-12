@@ -34,7 +34,9 @@ const routes = [
   // 自分の作品一覧
   { path: '/users/storages', name: 'users.storages.index', component: pageUsers('storages/index.vue') },
   // 作品追加
-  { path: '/users/storages/:storageId/create', name: 'users.storages.create', component: pageUsers('storages/create.vue') },
+  { path: '/users/storages/create', name: 'users.storages.create', component: pageUsers('storages/create.vue') },
+  // 作品を見る
+  { path: '/users/storages/:storageId', name: 'users.storages.edit', component: pageUsers('storages/show.vue') },
   // 作品編集
   { path: '/users/storages/:storageId/edit', name: 'users.storages.edit', component: pageUsers('storages/edit.vue') },
 
