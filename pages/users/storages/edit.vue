@@ -28,6 +28,8 @@ import axios from 'axios'
 import Form from 'vform'
 
 export default {
+  middleware: 'auth',
+
   data () {
     return {
       form: new Form({
