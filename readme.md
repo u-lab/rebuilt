@@ -1,10 +1,9 @@
 # Rebuilt
 
-## �T��
+## 概説
 
-���z���̂��߂̃|�[�g�t�H���I�쐬�T�[�r�X�B
+建築生のためのポートフォリオ作成サービス。
 
-## ��
+## 環境
 
-Nuxt.js 2.11
-Vue.js 2.6
+Nuxt.js 2.11 Vue.js 2.6
