@@ -1,64 +1,83 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container">
-      <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand">
+  <v-app-bar app dense>
+    <v-toolbar-title>
+      <router-link :to="{ name: user ? 'home' : 'welcome' }">
         {{ appName }}
       </router-link>
+    </v-toolbar-title>
 
-      <button :aria-label="$t('toggle_navigation')" class="navbar-toggler" type="button"
-              data-toggle="collapse" data-target="#navbarToggler"
-              aria-controls="navbarToggler" aria-expanded="false"
-      >
-        <span class="navbar-toggler-icon" />
-      </button>
+    <v-spacer />
+    <!-- デバッグ捗るように入れておいた -->
+    <v-btn @click="$router.go(-1)">
+      一つ前に戻る
+    </v-btn>
 
-      <div id="navbarToggler" class="collapse navbar-collapse">
-        <ul class="navbar-nav">
-          <locale-dropdown />
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li> -->
-        </ul>
+    <v-spacer />
 
-        <ul class="navbar-nav ml-auto">
-          <!-- Authenticated -->
-          <li v-if="user" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark"
-               href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            >
-              <img :src="user.photo_url" class="rounded-circle profile-photo mr-1">
-              {{ user.name }}
-            </a>
-            <div class="dropdown-menu">
-              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
-                <fa icon="cog" fixed-width />
-                {{ $t('settings') }}
-              </router-link>
+    <!-- auth -->
+    <template v-if="user">
+      <v-btn v-model="listOpen" class="mx-2" fab dark color="teal" @click="listOpen = !listOpen">
+        <v-icon dark>
+          mdi-format-list-bulleted-square
+        </v-icon>
+      </v-btn>
 
-              <div class="dropdown-divider" />
-              <a class="dropdown-item pl-3" href="#" @click.prevent="logout">
-                <fa icon="sign-out-alt" fixed-width />
-                {{ $t('logout') }}
-              </a>
-            </div>
-          </li>
-          <!-- Guest -->
-          <template v-else>
-            <li class="nav-item">
-              <router-link :to="{ name: 'login' }" class="nav-link" active-class="active">
-                {{ $t('login') }}
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'register' }" class="nav-link" active-class="active">
-                {{ $t('register') }}
-              </router-link>
-            </li>
-          </template>
-        </ul>
-      </div>
-    </div>
-  </nav>
+      <template v-if="listOpen">
+        <v-card>
+          <!-- 参照: https://vuetifyjs.com/ja/components/lists -->
+          <v-list>
+            <v-list-item-group v-model="model">
+              <v-list-item>
+                <!-- <v-list-item-icon>
+                  <v-avatar>
+                    <img
+                      alt="Avatar"
+                      :src="user.photo_url"
+                    >
+                  </v-avatar>
+                </v-list-item-icon> -->
+                <v-list-item-content>
+                  <v-list-item-title :v-text="user.name" />
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item :to="{ name: 'settings.profile' }">
+                <!-- <v-list-item-icon>
+                  <v-icon>
+                    mdi_cog_outline
+                  </v-icon>
+                </v-list-item-icon> -->
+                <v-list-item-content>
+                  <v-list-item-title v-text="$t('settings')" />
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-list-item @click.prevent="logout">
+                <!-- <v-list-item-icon>
+                  <v-icon v-text="mdi-sign-out-alt" />
+                </v-list-item-icon> -->
+                <v-list-item-content>
+                  <v-list-item-title v-text="$t('logout')" />
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-item-group>
+          </v-list>
+        </v-card>
+      </template>
+    </template>
+
+    <!-- Guest -->
+    <template v-else>
+      <v-btn text :to="{ name: 'login' }">
+        {{ $t('login') }}
+      </v-btn>
+
+      <v-btn text :to="{ name: 'register' }">
+        {{ $t('register') }}
+      </v-btn>
+    </template>
+    </v-spacer>
+  </v-app-bar>
 </template>
 
 <script>
@@ -71,7 +90,9 @@ export default {
   },
 
   data: () => ({
-    appName: process.env.appName
+    appName: process.env.appName,
+    listOpen: false,
+    model: 1
   }),
 
   computed: mapGetters({
@@ -89,11 +110,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.profile-photo {
-  width: 2rem;
-  height: 2rem;
-  margin: -.375rem 0;
-}
-</style>

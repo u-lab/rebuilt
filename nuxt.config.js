@@ -39,6 +39,7 @@ module.exports = {
   ],
 
   modules: [
+    '@nuxtjs/vuetify',
     '@nuxtjs/router',
     '@nuxtjs/pwa',
     '@nuxtjs/sitemap'
