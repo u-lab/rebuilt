@@ -1,71 +1,86 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('login')">
-        <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" type="email" name="email" class="form-control">
-              <has-error :form="form" field="email" />
-            </div>
-          </div>
+  <auth-wrapper>
+    <auth-form>
+      <v-form @submit.prevent="login" @keydown="form.onKeydown($event)">
+        <v-text-field
+          v-model="form.email"
+          :rules="rules.email"
+          :counter="255"
+          :label="$t('username_or_email')"
+          required
+        />
 
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" type="password" name="password" class="form-control">
-              <has-error :form="form" field="password" />
-            </div>
-          </div>
+        <v-text-field
+          v-model="form.password"
+          :append-icon="field.password ? 'mdi-eye' : 'mdi-eye-off'"
+          :rules="rules.password"
+          :type="field.password ? 'text' : 'password'"
+          :label="$t('password')"
+          required
+          @click:append="field.password = !field.password"
+        />
 
-          <!-- Remember Me -->
-          <div class="form-group row">
-            <div class="col-md-3" />
-            <div class="col-md-7 d-flex">
-              <checkbox v-model="remember" name="remember">
-                {{ $t('remember_me') }}
-              </checkbox>
+        <div class="d-flex justify-space-between">
+          <v-checkbox
+            v-model="remember"
+            :label="$t('remember_me')"
+            class="mt-0 small"
+          />
 
-              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                {{ $t('forgot_password') }}
-              </router-link>
-            </div>
-          </div>
+          <router-link :to="{ name: 'password.request' }" class="small">
+            {{ $t('forgot_password') }}
+          </router-link>
+        </div>
 
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
-              <!-- Submit Button -->
-              <v-button :loading="form.busy">
-                {{ $t('login') }}
-              </v-button>
+        <div class="text-center login-btn-wraaper">
+          <!-- Submit Button -->
+          <v-btn color="grey lighten-1" large :disabled="form.busy" type="submit">
+            {{ $t('login') }}
+          </v-btn>
 
-              <!-- GitHub Login Button -->
-              <login-with-github />
-            </div>
-          </div>
-        </form>
-      </card>
-    </div>
-  </div>
+          <!-- GitHub Login Button -->
+          <login-with-github />
+        </div>
+      </v-form>
+    </auth-form>
+  </auth-wrapper>
 </template>
 
 <script>
 import Form from 'vform'
+import AuthForm from '~/components/auth/AuthForm'
+import AuthWrapper from '~/components/auth/AuthWrapper'
 
 export default {
   head () {
     return { title: this.$t('login') }
   },
 
+  components: {
+    AuthForm,
+    AuthWrapper
+  },
+
+  layout: 'auth',
+
   data: () => ({
     form: new Form({
       email: '',
       password: ''
     }),
-    remember: false
+    remember: false,
+    rules: {
+      email: [
+        v => !!v || 'Name is required'
+      ],
+      password: [
+        v => !!v || 'Password is required',
+        v => v.length >= 7 || 'Password must be more than 7 characters'
+      ]
+    },
+    field: {
+      password: false
+    }
   }),
 
   methods: {

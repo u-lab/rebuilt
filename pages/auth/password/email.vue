@@ -1,40 +1,45 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('reset_password')">
-        <form @submit.prevent="send" @keydown="form.onKeydown($event)">
-          <alert-success :form="form" :message="status" />
+  <auth-wrapper>
+    <auth-form>
+      <v-form @submit.prevent="send" @keydown="form.onKeydown($event)">
+        <alert-success :form="form" :message="status" />
 
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" type="email" name="email" class="form-control">
-              <has-error :form="form" field="email" />
-            </div>
-          </div>
+        <!-- Email -->
+        <v-text-field
+          v-model="form.email"
+          :class="{ 'is-invalid': form.errors.has('email') }"
+          :label="$t('email')"
+          required
+        />
+        <has-error :form="form" field="email" />
 
+        <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <div class="form-group row">
-            <div class="col-md-9 ml-md-auto">
-              <v-button :loading="form.busy">
-                {{ $t('send_password_reset_link') }}
-              </v-button>
-            </div>
-          </div>
-        </form>
-      </card>
-    </div>
-  </div>
+          <v-btn color="grey lighten-1" large :disabled="form.busy" type="submit">
+            {{ $t('reset_password') }}
+          </v-btn>
+        </div>
+      </v-form>
+    </auth-form>
+  </auth-wrapper>
 </template>
 
 <script>
 import Form from 'vform'
+import AuthForm from '~/components/auth/AuthForm'
+import AuthWrapper from '~/components/auth/AuthWrapper'
 
 export default {
   head () {
     return { title: this.$t('reset_password') }
   },
+
+  components: {
+    AuthForm,
+    AuthWrapper
+  },
+
+  layout: 'auth',
 
   data: () => ({
     status: '',
@@ -45,11 +50,15 @@ export default {
 
   methods: {
     async send () {
-      const { data } = await this.form.post('/password/email')
+      try {
+        const { data } = await this.form.post('/password/email')
 
-      this.status = data.status
+        this.status = data.status
 
-      this.form.reset()
+        this.form.reset()
+      } catch (e) {
+
+      }
     }
   }
 }

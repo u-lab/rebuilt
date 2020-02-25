@@ -69,6 +69,7 @@
   "updated_at": "更新日",
   "user": "ユーザー",
   "user_id": "ユーザーID",
+  "username_or_email": "ユーザー名かメールアドレス",
   "verify_email": "確認用Email",
   "verify_email_address": "確認用のリンクをあなたのメールに送りました",
   "you_are_logged_in": "あなたはログインしました",
