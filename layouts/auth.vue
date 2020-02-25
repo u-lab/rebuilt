@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <login-navbar />
+    <auth-navbar />
 
     <!-- Sizes your content based upon application components -->
-    <v-content class="login-container d-flex align-center">
+    <v-content class="auth-container d-flex align-center">
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <!-- If using vue-router -->
@@ -14,11 +14,11 @@
 </template>
 
 <script>
-import LoginNavbar from '~/components/login/LoginNavbar'
+import AuthNavbar from '~/components/auth/AuthNavbar'
 
 export default {
   components: {
-    LoginNavbar
+    AuthNavbar
   }
 }
 </script>

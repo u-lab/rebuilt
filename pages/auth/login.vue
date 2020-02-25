@@ -3,10 +3,10 @@
     <v-row>
       <v-col cols="2" />
 
-      <v-row class="login-form">
+      <v-row class="auth-form">
         <v-col cols="1" />
         <v-col cols="10">
-          <h1 class="text-center login-form-title">
+          <h1 class="text-center auth-form-title">
             Archi Walk
           </h1>
 
@@ -67,7 +67,7 @@ export default {
     return { title: this.$t('login') }
   },
 
-  layout: 'login',
+  layout: 'auth',
 
   data: () => ({
     form: new Form({
