@@ -6,7 +6,7 @@
       </router-link>
     </template>
 
-    <template v-if="getNowPageName === 'register'">
+    <template v-else>
       <router-link :to="{ name: 'login' }" class="other-page-link">
         {{ $t('login') }}
       </router-link>
