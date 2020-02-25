@@ -1,18 +1,25 @@
 <template>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" role="button"
-       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-    >
-      {{ locales[locale] }}
-    </a>
-    <div class="dropdown-menu">
-      <a v-for="(value, key) in locales" :key="key" class="dropdown-item" href="#"
-         @click.prevent="setLocale(key)"
+  <v-menu offset-y open-on-hover>
+    <template v-slot:activator="{ on }">
+      <v-btn
+        color="grey lighten-2"
+        large
+        v-on="on"
       >
-        {{ value }}
-      </a>
-    </div>
-  </li>
+        {{ locales[locale] }}
+        <v-icon>mdi-chevron-down</v-icon>
+      </v-btn>
+    </template>
+    <v-list>
+      <v-list-item
+        v-for="(value, key) in locales"
+        :key="key"
+        @click.prevent="setLocale(key)"
+      >
+        <v-list-item-title>{{ value }}</v-list-item-title>
+      </v-list-item>
+    </v-list>
+  </v-menu>
 </template>
 
 <script>

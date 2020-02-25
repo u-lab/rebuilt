@@ -1,55 +1,62 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('login')">
-        <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" type="email" name="email" class="form-control">
-              <has-error :form="form" field="email" />
-            </div>
-          </div>
+  <v-container class="d-flex center flex-column">
+    <v-row>
+      <v-col cols="2" />
 
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" type="password" name="password" class="form-control">
-              <has-error :form="form" field="password" />
-            </div>
-          </div>
+      <v-row class="auth-form">
+        <v-col cols="1" />
+        <v-col cols="10">
+          <h1 class="text-center auth-form-title">
+            Archi Walk
+          </h1>
 
-          <!-- Remember Me -->
-          <div class="form-group row">
-            <div class="col-md-3" />
-            <div class="col-md-7 d-flex">
-              <checkbox v-model="remember" name="remember">
-                {{ $t('remember_me') }}
-              </checkbox>
+          <v-form @submit.prevent="login" @keydown="form.onKeydown($event)">
+            <v-text-field
+              v-model="form.email"
+              :rules="rules.email"
+              :counter="255"
+              :label="$t('username_or_email')"
+              required
+            />
 
-              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
+            <v-text-field
+              v-model="form.password"
+              :append-icon="field.password ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="rules.password"
+              :type="field.password ? 'text' : 'password'"
+              :label="$t('password')"
+              required
+              @click:append="field.password = !field.password"
+            />
+
+            <div class="d-flex justify-space-between">
+              <v-checkbox
+                v-model="remember"
+                :label="$t('remember_me')"
+                class="mt-0 small"
+              />
+
+              <router-link :to="{ name: 'password.request' }" class="small">
                 {{ $t('forgot_password') }}
               </router-link>
             </div>
-          </div>
 
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
+            <div class="text-center login-btn-wraaper">
               <!-- Submit Button -->
-              <v-button :loading="form.busy">
+              <v-btn color="grey lighten-1" large :disabled="form.busy" type="submit">
                 {{ $t('login') }}
-              </v-button>
+              </v-btn>
 
               <!-- GitHub Login Button -->
               <login-with-github />
             </div>
-          </div>
-        </form>
-      </card>
-    </div>
-  </div>
+          </v-form>
+        </v-col>
+        <v-col cols="1" />
+      </v-row>
+      <v-col cols="2" />
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -60,12 +67,26 @@ export default {
     return { title: this.$t('login') }
   },
 
+  layout: 'auth',
+
   data: () => ({
     form: new Form({
       email: '',
       password: ''
     }),
-    remember: false
+    remember: false,
+    rules: {
+      email: [
+        v => !!v || 'Name is required'
+      ],
+      password: [
+        v => !!v || 'Password is required',
+        v => v.length >= 7 || 'Password must be more than 7 characters'
+      ]
+    },
+    field: {
+      password: false
+    }
   }),
 
   methods: {

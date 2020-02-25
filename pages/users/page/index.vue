@@ -5,8 +5,14 @@
 </template>
 
 <script>
-export default {
-  middleware: 'auth'
+import axios from 'axios'
 
+export default {
+  middleware: 'auth',
+
+  async asyncData ({ isDev, route, store, env, params, query, req, res, redirect, error }) {
+    const { data } = await axios.get('users/page')
+    return { success: true, data: data.data }
+  }
 }
 </script>
