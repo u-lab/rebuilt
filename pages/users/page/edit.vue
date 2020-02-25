@@ -11,6 +11,8 @@ import { mapGetters } from 'vuex'
 export default {
   middleware: 'auth',
 
+  layout: 'user',
+
   data: () => ({
     form: new Form({
       id: '',

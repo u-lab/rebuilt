@@ -30,6 +30,8 @@ import Form from 'vform'
 export default {
   middleware: 'auth',
 
+  layout: 'user',
+
   data () {
     return {
       form: new Form({
