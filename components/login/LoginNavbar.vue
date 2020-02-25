@@ -1,5 +1,6 @@
 <template>
   <v-app-bar app color="transparent" flat>
+    <other-page-link />
     <v-spacer />
     <locale-dropdown />
   </v-app-bar>
@@ -7,10 +8,12 @@
 
 <script>
 import LocaleDropdown from '~/components/LocaleDropdown'
+import OtherPageLink from '~/components/login/OtherPageLink'
 
 export default {
   components: {
-    LocaleDropdown
+    LocaleDropdown,
+    OtherPageLink
   }
 }
 </script>
