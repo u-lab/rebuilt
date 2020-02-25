@@ -15,7 +15,7 @@
               v-model="form.email"
               :rules="rules.email"
               :counter="255"
-              label="First name"
+              :label="$t('username_or_email')"
               required
             />
 
@@ -29,8 +29,14 @@
               @click:append="field.password = !field.password"
             />
 
-            <div class="text-right">
-              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
+            <div class="d-flex justify-space-between">
+              <v-checkbox
+                v-model="remember"
+                :label="$t('remember_me')"
+                class="mt-0 small"
+              />
+
+              <router-link :to="{ name: 'password.request' }" class="small">
                 {{ $t('forgot_password') }}
               </router-link>
             </div>
