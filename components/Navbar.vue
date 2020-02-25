@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app dense>
+  <v-app-bar app dense clipped-left>
     <v-toolbar-title>
       <router-link :to="{ name: user ? 'home' : 'welcome' }">
         {{ appName }}
