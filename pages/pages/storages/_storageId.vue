@@ -12,7 +12,7 @@
       <v-card color="#FFF8E1">
         <v-container class="mainhead px-10 pb-0">
           <v-row class="worktitle">
-            <v-card-title>TrialHome</v-card-title>
+            <v-card-title>{{worktitle}}</v-card-title>
           </v-row>
           <v-row class="user">
             <v-col cols="1">
@@ -53,15 +53,15 @@
             </v-col>
             <v-col cols="6" class="comments pt-10">
               <v-card>
-                <v-card-title>comments</v-card-title>
-                <v-card-text>最近自然の中の曲線や形に興味がある。特にネジバナやサボテンに見られる”螺旋”やバッタの脚を始めとした昆虫の足の曲線が凄く不思議に心が惹かれる。そこで、そういった自然的な形や線をロボットに入れ込むことで、naturalなロボットを作ることができるのかについて考えた。</v-card-text>
+                <v-card-title>Comments</v-card-title>
+                <v-card-text>{{comments}}</v-card-text>
               </v-card>
             </v-col>
           </v-row>
         </v-container>
         <v-container class="other-works">
           <v-row class="other-work-title px-5">
-            <v-card-title>other works</v-card-title>
+            <v-card-title>Other Works</v-card-title>
           </v-row>
           <v-container class="pa-0">
             <v-row>
@@ -109,7 +109,10 @@ export default {
     return {
       work1Img: work1Img,
       work2Img: work2Img,
-      subusername: "admin"
+      subusername: "admin",
+      worktitle: "TraialHome",
+      comments:
+        "最近自然の中の曲線や形に興味がある。特にネジバナやサボテンに見られる”螺旋”やバッタの脚を始めとした昆虫の足の曲線が凄く不思議に心が惹かれる。そこで、そういった自然的な形や線をロボットに入れ込むことで、naturalなロボットを作ることができるのかについて考えた。"
     };
   }
 };
