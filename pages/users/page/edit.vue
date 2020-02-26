@@ -1,15 +1,23 @@
 <template>
   <div>
     <!-- TODO 自分の情報を修正 -->
+    <user-title title="ポートフォリオ編集" />
   </div>
 </template>
 
 <script>
 import Form from 'vform'
 import { mapGetters } from 'vuex'
+import UserTitle from '~/components/user/UserTitle'
 
 export default {
   middleware: 'auth',
+
+  layout: 'user',
+
+  components: {
+    UserTitle
+  },
 
   data: () => ({
     form: new Form({

@@ -1,74 +1,74 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
+  <auth-wrapper>
+    <auth-form>
       <card v-if="mustVerifyEmail" :title="$t('register')">
         <div class="alert alert-success" role="alert">
           {{ $t('verify_email_address') }}
         </div>
       </card>
-      <card v-else :title="$t('register')">
-        <form @submit.prevent="register" @keydown="form.onKeydown($event)">
-          <!-- Name -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" type="text" name="name" class="form-control">
-              <has-error :form="form" field="name" />
-            </div>
-          </div>
 
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" type="email" name="email" class="form-control">
-              <has-error :form="form" field="email" />
-            </div>
-          </div>
+      <v-form v-else @submit.prevent="register" @keydown="form.onKeydown($event)">
+        <v-text-field
+          v-model="form.name"
+          :label="$t('name')"
+          :counter="255"
+          :class="{ 'is-invalid': form.errors.has('name') }"
+          required
+        />
+        <has-error :form="form" field="name" />
 
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" type="password" name="password" class="form-control">
-              <has-error :form="form" field="password" />
-            </div>
-          </div>
+        <v-text-field
+          v-model="form.email"
+          :label="$t('email')"
+          :class="{ 'is-invalid': form.errors.has('email') }"
+          :counter="255"
+          required
+        />
+        <has-error :form="form" field="email" />
 
-          <!-- Password Confirmation -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('confirm_password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password_confirmation" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" type="password" name="password_confirmation"
-                     class="form-control"
-              >
-              <has-error :form="form" field="password_confirmation" />
-            </div>
-          </div>
+        <v-text-field
+          v-model="form.password"
+          :label="$t('password')"
+          :class="{ 'is-invalid': form.errors.has('password') }"
+          :counter="255"
+          required
+        />
+        <has-error :form="form" field="password" />
 
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
-              <!-- Submit Button -->
-              <v-button :loading="form.busy">
-                {{ $t('register') }}
-              </v-button>
+        <v-text-field
+          v-model="form.password_confirmation"
+          :label="$t('confirm_password')"
+          required
+        />
+        <has-error :form="form" field="password_confirmation" />
 
-              <!-- GitHub Login Button -->
-              <login-with-github />
-            </div>
-          </div>
-        </form>
-      </card>
-    </div>
-  </div>
+        <div class="text-center login-btn-wraaper">
+          <!-- Submit Button -->
+          <v-btn color="grey lighten-1" large :disabled="form.busy" type="submit">
+            {{ $t('register') }}
+          </v-btn>
+
+          <!-- GitHub Login Button -->
+          <login-with-github />
+        </div>
+      </v-form>
+    </auth-form>
+  </auth-wrapper>
 </template>
 
 <script>
 import Form from 'vform'
+import AuthForm from '~/components/auth/AuthForm'
+import AuthWrapper from '~/components/auth/AuthWrapper'
 
 export default {
   head () {
     return { title: this.$t('register') }
+  },
+
+  components: {
+    AuthForm,
+    AuthWrapper
   },
 
   data: () => ({
@@ -81,10 +81,18 @@ export default {
     mustVerifyEmail: false
   }),
 
+  layout: 'auth',
+
   methods: {
+
     async register () {
-      // Register the user.
-      const { data } = await this.form.post('/register')
+      let data
+      try {
+        // Register the user.
+        data = await this.form.post('/register')
+      } catch (e) {
+        return
+      }
 
       // Must verify email fist.
       if (data.status) {
