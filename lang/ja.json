@@ -73,6 +73,8 @@
   "verify_email": "確認用Email",
   "verify_email_address": "確認用のリンクをあなたのメールに送りました",
   "you_are_logged_in": "あなたはログインしました",
+  "your_icon": "あなたのアイコン",
   "your_info": "あなたの情報",
-  "your_password": "あなたのパスワード"
+  "your_password": "あなたのパスワード",
+  "web_address": "あなたのサイト"
 }
