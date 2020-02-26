@@ -83,7 +83,7 @@
 
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <v-btn color="grey lighten-1" large :disabled="formUser.busy" type="submit">
+          <v-btn color="grey lighten-1" large :disabled="formProfile.busy" type="submit">
             {{ $t('update') }}
           </v-btn>
         </div>
