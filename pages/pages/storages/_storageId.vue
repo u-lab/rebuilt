@@ -35,7 +35,7 @@
                 <v-row>
                   <v-img height="400px" contain :src="work1Img"></v-img>
                 </v-row>
-                <v-row class="Perspectives">
+                <v-row class="perspectives">
                   <v-col cols="3">
                     <v-img width="100px" contain :src="work2Img"></v-img>
                   </v-col>
