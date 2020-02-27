@@ -17,7 +17,7 @@
 <script>
 export default {
   computed: {
-    getNowPageName () {
+    getNowPageName() {
       return this.$route.name
     }
   }

@@ -5,7 +5,10 @@
 
     <div>
       <h2>{{ $t('user') }}情報を編集</h2>
-      <v-form @submit.prevent="updateUser" @keydown="formUser.onKeydown($event)">
+      <v-form
+        @submit.prevent="updateUser"
+        @keydown="formUser.onKeydown($event)"
+      >
         <v-text-field
           v-model="formUser.name"
           :counter="255"
@@ -29,7 +32,12 @@
 
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <v-btn color="grey lighten-1" large :disabled="formUser.busy" type="submit">
+          <v-btn
+            :disabled="formUser.busy"
+            color="grey lighten-1"
+            large
+            type="submit"
+          >
             {{ $t('update') }}
           </v-btn>
         </div>
@@ -38,7 +46,10 @@
 
     <div>
       <h2>{{ $t('profile') }}情報を編集</h2>
-      <v-form @submit.prevent="updateProfile" @keydown="formProfile.onKeydown($event)">
+      <v-form
+        @submit.prevent="updateProfile"
+        @keydown="formProfile.onKeydown($event)"
+      >
         <v-text-field
           v-model="formProfile.description"
           :counter="255"
@@ -90,7 +101,12 @@
 
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <v-btn color="grey lighten-1" large :disabled="formProfile.busy" type="submit">
+          <v-btn
+            :disabled="formProfile.busy"
+            color="grey lighten-1"
+            large
+            type="submit"
+          >
             {{ $t('update') }}
           </v-btn>
         </div>
@@ -114,7 +130,7 @@ export default {
     UserTitle
   },
 
-  data () {
+  data() {
     return {
       formProfile: new Form({
         description: '',
@@ -138,7 +154,7 @@ export default {
     user: 'auth/user'
   }),
 
-  async asyncData () {
+  async asyncData() {
     try {
       const { data } = await axios.get('users/profile')
 
@@ -146,7 +162,7 @@ export default {
     } catch (e) {}
   },
 
-  created () {
+  created() {
     // Fill the formProfile with data.
     if (this.formProfile !== null) {
       this.formProfile.keys().forEach((key) => {
@@ -163,7 +179,7 @@ export default {
   },
 
   methods: {
-    async updateUser () {
+    async updateUser() {
       try {
         const { data } = await this.formUser.patch('/settings/profile')
 
@@ -176,7 +192,7 @@ export default {
       }
     },
 
-    async updateProfile () {
+    async updateProfile() {
       try {
         await this.formProfile.patch('users/profile')
 
@@ -187,6 +203,5 @@ export default {
       }
     }
   }
-
 }
 </script>

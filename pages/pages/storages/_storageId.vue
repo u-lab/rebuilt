@@ -4,7 +4,7 @@
     <v-container class="stl-viewer-parent">
       <v-card height="500px" color="#E3F2FD" class="stl-viewer">
         <v-container style="height: 100%" class="text-center pa-10">
-          <v-img height="100%" contain :src="work2Img" />
+          <v-img :src="work2Img" height="100%" contain></v-img>
         </v-container>
       </v-card>
     </v-container>
@@ -12,7 +12,7 @@
       <v-card color="#FFF8E1">
         <v-container class="mainhead px-10 pb-0">
           <v-row class="worktitle">
-            <v-card-title>TrialHome</v-card-title>
+            <v-card-title>{{ worktitle }}</v-card-title>
           </v-row>
           <v-row class="user">
             <v-col cols="1">
@@ -33,20 +33,20 @@
             <v-col cols="6">
               <v-container class="left-contents">
                 <v-row>
-                  <v-img height="400px" contain :src="work1Img" />
+                  <v-img :src="work1Img" height="400px" contain></v-img>
                 </v-row>
                 <v-row class="perspectives">
                   <v-col cols="3">
-                    <v-img width="100px" contain :src="work2Img" />
+                    <v-img :src="work2Img" width="100px" contain></v-img>
                   </v-col>
                   <v-col cols="3">
-                    <v-img width="100px" contain :src="work2Img" />
+                    <v-img :src="work2Img" width="100px" contain></v-img>
                   </v-col>
                   <v-col cols="3">
-                    <v-img width="100px" contain :src="work2Img" />
+                    <v-img :src="work2Img" width="100px" contain></v-img>
                   </v-col>
                   <v-col cols="3">
-                    <v-img width="100px" contain :src="work2Img" />
+                    <v-img :src="work2Img" width="100px" contain></v-img>
                   </v-col>
                 </v-row>
               </v-container>
@@ -62,27 +62,28 @@
         <v-container class="other-works">
           <v-row class="other-work-title px-5">
             <v-card-title>other works</v-card-title>
+            <v-card-title>Other Works</v-card-title>
           </v-row>
           <v-container class="pa-0">
             <v-row>
               <v-col cols="3">
                 <v-container class="fill-height">
-                  <v-img width="200px" contain :src="work2Img" />
+                  <v-img :src="work2Img" width="200px" contain></v-img>
                 </v-container>
               </v-col>
               <v-col cols="3">
                 <v-container class="fill-height">
-                  <v-img width="200px" contain :src="work2Img" />
+                  <v-img :src="work2Img" width="200px" contain></v-img>
                 </v-container>
               </v-col>
               <v-col cols="3">
                 <v-container class="fill-height">
-                  <v-img width="200px" contain :src="work2Img" />
+                  <v-img :src="work2Img" width="200px" contain></v-img>
                 </v-container>
               </v-col>
               <v-col cols="3">
                 <v-container class="fill-height">
-                  <v-img width="200px" contain :src="work2Img" />
+                  <v-img :src="work2Img" width="200px" contain></v-img>
                 </v-container>
               </v-col>
             </v-row>
@@ -103,6 +104,7 @@ export default {
     return {
       work1Img: '',
       work2Img,
+      worktitle: 'TraialHome',
       subusername: 'admin'
     }
   },

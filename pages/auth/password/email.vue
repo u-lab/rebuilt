@@ -15,7 +15,12 @@
 
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <v-btn color="grey lighten-1" large :disabled="form.busy" type="submit">
+          <v-btn
+            :disabled="form.busy"
+            color="grey lighten-1"
+            large
+            type="submit"
+          >
             {{ $t('reset_password') }}
           </v-btn>
         </div>
@@ -30,7 +35,7 @@ import AuthForm from '~/components/auth/AuthForm'
 import AuthWrapper from '~/components/auth/AuthWrapper'
 
 export default {
-  head () {
+  head() {
     return { title: this.$t('reset_password') }
   },
 
@@ -49,16 +54,14 @@ export default {
   }),
 
   methods: {
-    async send () {
+    async send() {
       try {
         const { data } = await this.form.post('/password/email')
 
         this.status = data.status
 
         this.form.reset()
-      } catch (e) {
-
-      }
+      } catch (e) {}
     }
   }
 }

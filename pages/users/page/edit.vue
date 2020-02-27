@@ -4,7 +4,10 @@
     <user-title title="ポートフォリオ編集" />
 
     <div>
-      <v-form @submit.prevent="updatePage" @keydown="formPage.onKeydown($event)">
+      <v-form
+        @submit.prevent="updatePage"
+        @keydown="formPage.onKeydown($event)"
+      >
         <v-text-field
           v-model="formPage.long_comment"
           :counter="255"
@@ -21,7 +24,12 @@
 
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <v-btn color="grey lighten-1" large :disabled="formPage.busy" type="submit">
+          <v-btn
+            :disabled="formPage.busy"
+            color="grey lighten-1"
+            large
+            type="submit"
+          >
             {{ $t('update') }}
           </v-btn>
         </div>
@@ -57,7 +65,7 @@ export default {
     user: 'auth/user'
   }),
 
-  async asyncData () {
+  async asyncData() {
     try {
       const { data } = await axios.get('users/page')
 
@@ -65,7 +73,7 @@ export default {
     } catch (e) {}
   },
 
-  created () {
+  created() {
     this.formPage.keys().forEach((key) => {
       if (this.data[key] !== null) {
         this.formPage[key] = this.data[key]
@@ -77,7 +85,7 @@ export default {
   },
 
   methods: {
-    async updatePage () {
+    async updatePage() {
       try {
         await this.formPage.patch('/users/page')
 
@@ -88,6 +96,5 @@ export default {
       }
     }
   }
-
 }
 </script>
