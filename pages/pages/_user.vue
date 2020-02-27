@@ -1,22 +1,17 @@
 <template>
   <div>
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      clipped
-      dark
-    >
-      <v-list
-        dense
-        nav
-        class="py-0"
-      >
+    <v-navigation-drawer v-model="drawer" app clipped dark>
+      <v-list dense nav class="py-0">
         <v-list-item v-for="item in sidebarItems" :key="item.title" link>
           <v-list-item-content>
             <v-list-item-title>
               {{ item.title }}
             </v-list-item-title>
-            <v-list-item v-for="subtitle in item.subtitles" :key="subtitle.title" link>
+            <v-list-item
+              v-for="subtitle in item.subtitles"
+              :key="subtitle.title"
+              link
+            >
               <v-list-item-title>
                 {{ subtitle.title }}
               </v-list-item-title>
@@ -34,8 +29,7 @@ import axios from 'axios'
 // import Form from 'vform'
 
 export default {
-
-  data () {
+  data() {
     return {
       drawer: true
       // form: new Form({
@@ -55,32 +49,32 @@ export default {
   }
   */
 
- computed: {
-  sidebarItems: () => {
-    return [
-          { title: 'ダッシュボード' },
-          {
-            title: '作品を記録する',
-            subtitles: [
-              { title: 'プロフィールの変更' },
-              { title: '作品の投稿' },
-              { title: '作品一覧' },
-              { title: 'アカウント設定' }
-            ]
-          },
-          {
-            title: '作品を眺める',
-            subtitles: [
-              { title: 'ギャラリー' },
-              { title: 'イイね履歴' },
-              { title: 'お気に入り一覧' }
-            ]
-          }
-        ]
-   }
- },
+  computed: {
+    sidebarItems: () => {
+      return [
+        { title: 'ダッシュボード' },
+        {
+          title: '作品を記録する',
+          subtitles: [
+            { title: 'プロフィールの変更' },
+            { title: '作品の投稿' },
+            { title: '作品一覧' },
+            { title: 'アカウント設定' }
+          ]
+        },
+        {
+          title: '作品を眺める',
+          subtitles: [
+            { title: 'ギャラリー' },
+            { title: 'イイね履歴' },
+            { title: 'お気に入り一覧' }
+          ]
+        }
+      ]
+    }
+  },
 
-  async asyncData ({ params, error }) {
+  async asyncData({ params, error }) {
     try {
       const { data } = await axios.get(`pages/${params.user}`)
       return { success: true, data }

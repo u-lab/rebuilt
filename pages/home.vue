@@ -2,15 +2,13 @@
   <card :title="$t('home')">
     {{ $t('you_are_logged_in') }}
 
-    <hr>
+    <hr />
 
     <h2>リンク集・デバッグ用</h2>
     <ul>
       <template v-for="(item, index) in getLinkList">
         <li :key="index" style="margin: 8px; font-size: 16px;">
-          <a :href="item.link">
-            {{ item.name }} ({{ item.link }})
-          </a>
+          <a :href="item.link"> {{ item.name }} ({{ item.link }}) </a>
         </li>
       </template>
     </ul>
@@ -21,7 +19,7 @@
 export default {
   middleware: 'auth',
 
-  head () {
+  head() {
     return { title: this.$t('home') }
   },
 
@@ -39,7 +37,10 @@ export default {
         { name: '自分の作品一覧', link: '/users/storages' },
         { name: '新規作品追加', link: '/users/storages/create' },
         { name: '自分の作品を見る', link: '/users/storages/1581315433ra05d0' },
-        { name: '自分の作品(編集)', link: '/users/storages/1581315433ra05d0/edit' }
+        {
+          name: '自分の作品(編集)',
+          link: '/users/storages/1581315433ra05d0/edit'
+        }
       ]
     }
   }

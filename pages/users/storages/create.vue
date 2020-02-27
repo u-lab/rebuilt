@@ -16,6 +16,5 @@ export default {
   components: {
     UserTitle
   }
-
 }
 </script>

@@ -16,7 +16,10 @@
             {{ status || $t('failed_to_verify_email') }}
           </div>
 
-          <router-link :to="{ name: 'verification.resend' }" class="small float-right">
+          <router-link
+            :to="{ name: 'verification.resend' }"
+            class="small float-right"
+          >
             {{ $t('resend_verification_link') }}
           </router-link>
         </template>
@@ -28,18 +31,23 @@
 <script>
 import axios from 'axios'
 
-const qs = params => Object.keys(params).map(key => `${key}=${params[key]}`).join('&')
+const qs = (params) =>
+  Object.keys(params)
+    .map((key) => `${key}=${params[key]}`)
+    .join('&')
 
 export default {
   middleware: 'guest',
 
-  metaInfo () {
+  metaInfo() {
     return { title: this.$t('verify_email') }
   },
 
-  async asyncData ({ params, query }) {
+  async asyncData({ params, query }) {
     try {
-      const { data } = await axios.post(`/email/verify/${params.id}?${qs(query)}`)
+      const { data } = await axios.post(
+        `/email/verify/${params.id}?${qs(query)}`
+      )
 
       return { success: true, status: data.status }
     } catch (e) {
