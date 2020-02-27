@@ -16,8 +16,8 @@
           :rules="rules.password"
           :type="field.password ? 'text' : 'password'"
           :label="$t('password')"
-          required
           @click:append="field.password = !field.password"
+          required
         />
 
         <div class="d-flex justify-space-between">
@@ -34,7 +34,12 @@
 
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <v-btn color="grey lighten-1" large :disabled="form.busy" type="submit">
+          <v-btn
+            :disabled="form.busy"
+            color="grey lighten-1"
+            large
+            type="submit"
+          >
             {{ $t('login') }}
           </v-btn>
 
@@ -52,7 +57,7 @@ import AuthForm from '~/components/auth/AuthForm'
 import AuthWrapper from '~/components/auth/AuthWrapper'
 
 export default {
-  head () {
+  head() {
     return { title: this.$t('login') }
   },
 
@@ -70,12 +75,10 @@ export default {
     }),
     remember: false,
     rules: {
-      email: [
-        v => !!v || 'Name is required'
-      ],
+      email: [(v) => !!v || 'Name is required'],
       password: [
-        v => !!v || 'Password is required',
-        v => v.length >= 7 || 'Password must be more than 7 characters'
+        (v) => !!v || 'Password is required',
+        (v) => v.length >= 7 || 'Password must be more than 7 characters'
       ]
     },
     field: {
@@ -84,7 +87,7 @@ export default {
   }),
 
   methods: {
-    async login () {
+    async login() {
       let data
 
       // Submit the form.

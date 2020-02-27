@@ -18,10 +18,20 @@ export default {
     UserTitle
   },
 
-  async asyncData ({ isDev, route, store, env, params, query, req, res, redirect, error }) {
+  async asyncData({
+    isDev,
+    route,
+    store,
+    env,
+    params,
+    query,
+    req,
+    res,
+    redirect,
+    error
+  }) {
     const { data } = await axios.get('users/profile')
     return { success: true, data: data.data }
   }
-
 }
 </script>

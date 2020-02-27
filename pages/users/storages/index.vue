@@ -9,7 +9,5 @@ export default {
   middleware: 'auth',
 
   layout: 'user'
-
 }
-
 </script>

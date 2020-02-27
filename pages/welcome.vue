@@ -23,7 +23,9 @@
       </div>
 
       <div class="links">
-        <a href="https://github.com/cretueusebiu/laravel-nuxt">github.com/cretueusebiu/laravel-nuxt</a>
+        <a href="https://github.com/cretueusebiu/laravel-nuxt"
+          >github.com/cretueusebiu/laravel-nuxt</a
+        >
       </div>
     </div>
   </div>
@@ -35,7 +37,7 @@ import { mapGetters } from 'vuex'
 export default {
   layout: 'simple',
 
-  head () {
+  head() {
     return { title: this.$t('home') }
   },
 

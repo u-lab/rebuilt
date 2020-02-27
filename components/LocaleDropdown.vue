@@ -1,11 +1,7 @@
 <template>
   <v-menu offset-y open-on-hover>
     <template v-slot:activator="{ on }">
-      <v-btn
-        color="grey lighten-2"
-        large
-        v-on="on"
-      >
+      <v-btn v-on="on" color="grey lighten-2" large>
         {{ locales[locale] }}
         <v-icon>mdi-chevron-down</v-icon>
       </v-btn>
@@ -33,7 +29,7 @@ export default {
   }),
 
   methods: {
-    setLocale (locale) {
+    setLocale(locale) {
       if (this.$i18n.locale !== locale) {
         loadMessages(locale)
 
