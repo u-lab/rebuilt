@@ -5,7 +5,14 @@
     "sourceType": "module"
   },
   "extends": [
-    "@nuxtjs"
+    "@nuxtjs",
+    "prettier",
+    "prettier/vue",
+    "plugin:prettier/recommended",
+    "plugin:nuxt/recommended"
+  ],
+  "plugins": [
+    "prettier"
   ],
   "rules": {
     "vue/max-attributes-per-line": "off",
