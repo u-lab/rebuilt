@@ -17,9 +17,7 @@
           <v-row class="user">
             <v-col cols="1">
               <v-avatar>
-                <img
-                  :src="user.user_profile.icon_image_url"
-                >
+                <img :src="user.user_profile.icon_image_url" />
               </v-avatar>
             </v-col>
             <v-col cols="11">
@@ -99,8 +97,7 @@ import axios from 'axios'
 import work2Img from '~/assets/img/work2.jpg'
 
 export default {
-
-  data () {
+  data() {
     return {
       work1Img: '',
       work2Img,
@@ -109,13 +106,13 @@ export default {
     }
   },
 
-  async asyncData ({ params }) {
+  async asyncData({ params }) {
     const { data } = await axios.get('pages/admin/storages/1581315433ra05d0')
 
     return { success: true, data: data.data, user: data.user }
   },
 
-  created () {
+  created() {
     this.work1Img = this.data.eyecatch_imgae_url
   }
 }
