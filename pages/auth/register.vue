@@ -7,7 +7,11 @@
         </div>
       </card>
 
-      <v-form v-else @submit.prevent="register" @keydown="form.onKeydown($event)">
+      <v-form
+        v-else
+        @submit.prevent="register"
+        @keydown="form.onKeydown($event)"
+      >
         <v-text-field
           v-model="form.name"
           :label="$t('name')"
@@ -44,7 +48,12 @@
 
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <v-btn color="grey lighten-1" large :disabled="form.busy" type="submit">
+          <v-btn
+            :disabled="form.busy"
+            color="grey lighten-1"
+            large
+            type="submit"
+          >
             {{ $t('register') }}
           </v-btn>
 
@@ -62,7 +71,7 @@ import AuthForm from '~/components/auth/AuthForm'
 import AuthWrapper from '~/components/auth/AuthWrapper'
 
 export default {
-  head () {
+  head() {
     return { title: this.$t('register') }
   },
 
@@ -84,8 +93,7 @@ export default {
   layout: 'auth',
 
   methods: {
-
-    async register () {
+    async register() {
       let data
       try {
         // Register the user.
@@ -99,7 +107,9 @@ export default {
         this.mustVerifyEmail = true
       } else {
         // Log in the user.
-        const { data: { token } } = await this.form.post('/login')
+        const {
+          data: { token }
+        } = await this.form.post('/login')
 
         // Save the token.
         this.$store.dispatch('auth/saveToken', { token })

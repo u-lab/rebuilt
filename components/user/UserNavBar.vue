@@ -21,7 +21,7 @@
 
     <!-- auth -->
     <template v-if="user">
-      <v-btn v-model="listOpen" class="mx-2" fab dark color="teal" @click="listOpen = !listOpen">
+      <v-btn v-model="listOpen" @click="listOpen = !listOpen" class="mx-2" fab dark color="teal">
         <v-icon dark>
           mdi-format-list-bulleted-square
         </v-icon>
@@ -73,11 +73,11 @@
 
     <!-- Guest -->
     <template v-else>
-      <v-btn text :to="{ name: 'login' }">
+      <v-btn :to="{ name: 'login' }" text>
         {{ $t('login') }}
       </v-btn>
 
-      <v-btn text :to="{ name: 'register' }">
+      <v-btn :to="{ name: 'register' }" text>
         {{ $t('register') }}
       </v-btn>
     </template>

@@ -1,11 +1,5 @@
 <template>
-  <v-navigation-drawer
-    v-model="drawer"
-    fixed
-    clipped
-    app
-    dark
-  >
+  <v-navigation-drawer v-model="drawer" fixed clipped app dark>
     <v-list>
       <v-list-item
         v-for="item in getLinkList"

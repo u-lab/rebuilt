@@ -6,7 +6,13 @@
       <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">タイトル</label>
         <div class="col-md-7">
-          <input v-model="form.title" :class="{ 'is-invalid': form.errors.has('password') }" type="text" name="title" class="form-control">
+          <input
+            v-model="form.title"
+            :class="{ 'is-invalid': form.errors.has('password') }"
+            type="text"
+            name="title"
+            class="form-control"
+          />
           <has-error :form="form" field="form.title" />
         </div>
       </div>
@@ -32,7 +38,7 @@ export default {
 
   layout: 'user',
 
-  data () {
+  data() {
     return {
       form: new Form({
         title: '',
@@ -41,22 +47,22 @@ export default {
     }
   },
 
-  async asyncData ({ params, error }) {
+  async asyncData({ params, error }) {
     const { data } = await axios.get(`/users/storage/${params.storageId}`)
     return { success: true, data: data.data }
   },
 
-  created () {
-      // Fill the form with data.
-      this.form.keys().forEach((key) => {
-        if (this.data[key] !== null) {
-          this.form[key] = this.data[key]
-        }
-      })
+  created() {
+    // Fill the form with data.
+    this.form.keys().forEach((key) => {
+      if (this.data[key] !== null) {
+        this.form[key] = this.data[key]
+      }
+    })
   },
 
   methods: {
-    async update () {
+    async update() {
       const storageId = this.form.storage_id
       console.log(storageId)
 
