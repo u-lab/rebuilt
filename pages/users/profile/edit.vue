@@ -53,11 +53,18 @@
           required
         />
 
-        <v-text-field
+        <!-- <v-text-field
           v-model="formProfile.icon_image_url"
           :counter="255"
           :label="$t('your_icon')"
           required
+        /> -->
+
+        <v-file-input
+          v-model="formProfile.icon_image"
+          :label="$t('your_icon')"
+          filled
+          prepend-icon="mdi-camera"
         />
 
         <v-text-field
@@ -112,6 +119,7 @@ export default {
       formProfile: new Form({
         description: '',
         hobby: '',
+        icon_image: '',
         icon_image_url: '',
         job_name: '',
         nick_name: '',
