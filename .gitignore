@@ -1,12 +1,28 @@
-/node_modules
+# Jetbrains editor
+.idea
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
 .env
 .env.backup
+.env.local
 .env.prod
 .env.production
-.env.local
-npm-debug.log
-yarn-error.log
+.env.test
+
+# Nuxt.js build / generate output
 .nuxt
-/dist
-.idea
+dist
+
+# @nuxtjs/pwa
 sw.*
