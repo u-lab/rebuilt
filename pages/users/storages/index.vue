@@ -6,6 +6,13 @@
     <!-- debug用 -->
     <v-card>
       <div :key="key" v-for="(items, key) in data.data">
+        <router-link
+          :to="{
+            name: 'users.storages.show',
+            params: { storageId: items.storage_id }
+          }"
+          >この作品を見る</router-link
+        >
         <div v-for="(item, keyItem) in items" :key="keyItem">
           {{ keyItem }} : {{ item }}
         </div>
