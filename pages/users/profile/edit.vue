@@ -129,19 +129,19 @@ export default {
   data() {
     return {
       formProfile: new Form({
-        description: '',
-        hobby: '',
-        icon_image: '',
-        icon_image_url: '',
-        job_name: '',
-        nick_name: '',
-        web_address: ''
+        description: '' /* String */,
+        hobby: '' /* Stirng */,
+        icon_image: '' /* FILE */,
+        icon_image_url: '' /* URL */,
+        job_name: '' /* String */,
+        nick_name: '' /* String */,
+        web_address: '' /* URL */
       }),
 
       formUser: new Form({
-        name: '',
-        email: '',
-        photo_url: ''
+        name: '' /* String */,
+        email: '' /* E-Mail */,
+        photo_url: '' /* URL */
       })
     }
   },
