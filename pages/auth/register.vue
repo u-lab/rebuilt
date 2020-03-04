@@ -92,6 +92,8 @@ export default {
 
   layout: 'auth',
 
+  middleware: 'guest',
+
   methods: {
     async register() {
       let data

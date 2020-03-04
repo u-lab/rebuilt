@@ -86,6 +86,8 @@ export default {
     }
   }),
 
+  middleware: 'guest',
+
   methods: {
     async login() {
       let data

@@ -1,5 +1,5 @@
 export default ({ store, redirect }) => {
   if (store.getters['auth/check']) {
-    return redirect('/')
+    return redirect('/users/dashboard')
   }
 }
