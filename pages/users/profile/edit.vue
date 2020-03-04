@@ -129,6 +129,7 @@ export default {
   data() {
     return {
       formProfile: new Form({
+        user_id: '' /* Integer */,
         description: '' /* String */,
         hobby: '' /* Stirng */,
         icon_image: '' /* FILE */,

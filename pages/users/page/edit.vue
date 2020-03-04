@@ -55,8 +55,9 @@ export default {
 
   data: () => ({
     formPage: new Form({
-      long_comment: '',
-      masterpiece_storage_id: ''
+      long_comment: '' /* String */,
+      masterpiece_storage_id: '' /* String */,
+      user_id: '' /* Integer */
     }),
     storage: ''
   }),
