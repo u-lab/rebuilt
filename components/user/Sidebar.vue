@@ -1,29 +1,41 @@
 <template>
   <v-navigation-drawer v-model="drawer" fixed clipped app dark>
-    <v-list>
-      <v-list-item
-        v-for="item in getLinkList"
-        :key="item.name"
-        :to="generateLink(item)"
-        nuxt
-        link
-      >
-        <v-list-item-content>
+    <v-list dark>
+      <template v-for="item in getLinkList">
+        <v-list-item
+          v-if="!item.subtitles"
+          :key="item.name"
+          :to="generateLink(item)"
+          nuxt
+          link
+          dark
+          color="white"
+        >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
+        </v-list-item>
+
+        <v-list-group
+          v-if="item.subtitles"
+          :key="item.name"
+          color="white"
+          sub-group
+        >
+          <template v-slot:activator>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </template>
 
           <v-list-item
-            v-for="subtitle in item.subtitles"
-            :key="subtitle.title"
-            :to="generateLink(subtitle)"
+            v-for="subItem in item.subtitles"
+            :key="subItem.name"
+            :to="generateLink(subItem)"
             link
             nuxt
+            dark
           >
-            <v-list-item-title>
-              {{ subtitle.title }}
-            </v-list-item-title>
+            <v-list-item-title>{{ subItem.title }}</v-list-item-title>
           </v-list-item>
-        </v-list-item-content>
-      </v-list-item>
+        </v-list-group>
+      </template>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -43,16 +55,8 @@ export default {
         {
           title: '作品を記録する',
           subtitles: [
-            { title: '作品の投稿', name: 'users.storages.create' },
-            { title: '作品一覧', name: 'users.storages.index' },
-            {
-              title: '作品(デバッグ用)',
-              link: '/users/storages/1581315433ra05d0'
-            },
-            {
-              title: '作品編集(デバッグ用)',
-              link: '/users/storages/1581315433ra05d0/edit'
-            }
+            { title: '新規作品追加', name: 'users.storages.create' },
+            { title: '作品一覧', name: 'users.storages.index' }
           ]
         },
         {

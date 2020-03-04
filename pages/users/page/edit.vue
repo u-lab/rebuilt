@@ -55,8 +55,9 @@ export default {
 
   data: () => ({
     formPage: new Form({
-      long_comment: '',
-      masterpiece_storage_id: ''
+      long_comment: '' /* String */,
+      masterpiece_storage_id: '' /* String */,
+      user_id: '' /* Integer */
     }),
     storage: ''
   }),
@@ -89,7 +90,7 @@ export default {
       try {
         await this.formPage.patch('/users/page')
 
-        // Redirect home.
+        // Redirect dashboard.
         this.$router.push({ name: 'users.dashboard' })
       } catch (e) {
         console.log(e)
