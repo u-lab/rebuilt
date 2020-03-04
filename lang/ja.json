@@ -37,6 +37,7 @@
   "login_with": "新規作成且つログイン",
   "logout": "ログアウト",
   "long_comment": "長文コメント",
+  "look_at_the_storage": "作品を眺める",
   "name": "名前",
   "new_password": "新しいパスワード",
   "nick_name": "ニックネーム",
@@ -49,6 +50,7 @@
   "prefecture": "都道府県",
   "profile": "プロフィール",
   "publish": "公開",
+  "record_your_storage": "作品を記録する",
   "register": "新規登録",
   "register_with": "新規登録はこちら",
   "remember_me": "パスワードを保存しますか",
@@ -77,5 +79,6 @@
   "your_icon": "あなたのアイコン",
   "your_info": "あなたの情報",
   "your_password": "あなたのパスワード",
-  "web_address": "あなたのサイト"
+  "web_address": "あなたのサイト",
+  "welcome_to_the_archi_walk": "Archi Walk へようこそ"
 }
