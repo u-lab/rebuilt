@@ -2,7 +2,7 @@
   <v-app-bar app clipped-left fixed dark dense color="grey darken-4">
     <v-toolbar-title>
       <router-link
-        :to="{ name: user ? 'home' : 'welcome' }"
+        :to="{ name: user ? 'users.dashboard' : 'welcome' }"
         style="color: white"
       >
         {{ appName }}

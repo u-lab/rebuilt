@@ -182,7 +182,7 @@ export default {
 
         this.$store.dispatch('auth/updateUser', { user: data })
 
-        // Redirect home.
+        // Redirect dashboard.
         this.$router.push({ name: 'users.dashboard' })
       } catch (e) {
         console.log(e)

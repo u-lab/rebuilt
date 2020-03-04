@@ -117,8 +117,8 @@ export default {
         // Update the user.
         await this.$store.dispatch('auth/updateUser', { user: data })
 
-        // Redirect home.
-        this.$router.push({ name: 'home' })
+        // Redirect dashboard.
+        this.$router.push({ name: 'users.dashboard' })
       }
     }
   }

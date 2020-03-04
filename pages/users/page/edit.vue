@@ -90,7 +90,7 @@ export default {
       try {
         await this.formPage.patch('/users/page')
 
-        // Redirect home.
+        // Redirect dashboard.
         this.$router.push({ name: 'users.dashboard' })
       } catch (e) {
         console.log(e)
