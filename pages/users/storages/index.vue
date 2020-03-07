@@ -19,14 +19,22 @@
                   :justify="end"
                   :to="{
                     name: 'users.storages.edit',
-                    params: { strageId: items.storage_id }
+                    params: { storageId: items.storage_id }
                   }"
                   class="ml-4 my-0"
                   nuxt
                 >編集</v-btn>
               </v-col>
             </v-row>
-            <v-img :src="items.eyecatch_image.url"></v-img>
+            <v-card
+              :to="{
+                name: 'pages.storages.show',
+                params: { user: user.name, storageId: items.storage_id }
+              }"
+              hover
+            >
+              <v-img :src="items.eyecatch_image.url"></v-img>
+            </v-card>
           </v-card>
         </v-col>
       </v-row>
@@ -57,6 +65,7 @@
 
 <script>
 import axios from 'axios'
+import { mapGetters } from 'vuex'
 import UserTitle from '~/components/user/UserTitle'
 
 export default {
@@ -68,6 +77,9 @@ export default {
     UserTitle
   },
 
+  computed: mapGetters({
+    user: 'auth/user'
+  }),
   async asyncData({ params, error }) {
     const { data } = await axios.get('users/storage')
     return { success: true, data }
