@@ -89,7 +89,7 @@ const routes = [
   {
     path: '/users/storages/:storageId/edit',
     name: 'users.storages.edit',
-    component: pageUsers('storages/edit.vue')
+    component: pageUsers('storages/_edit.vue')
   },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
