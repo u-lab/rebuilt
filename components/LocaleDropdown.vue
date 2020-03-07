@@ -1,7 +1,7 @@
 <template>
   <v-menu offset-y open-on-hover>
     <template v-slot:activator="{ on }">
-      <v-btn v-on="on" color="grey lighten-2" large>
+      <v-btn v-on="on" :color="color" :dark="dark" large>
         {{ locales[locale] }}
         <v-icon>mdi-chevron-down</v-icon>
       </v-btn>
@@ -23,6 +23,18 @@ import { mapGetters } from 'vuex'
 import { loadMessages } from '~/plugins/i18n'
 
 export default {
+  props: {
+    color: {
+      type: String,
+      default: 'grey lighten-2'
+    },
+
+    dark: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   computed: mapGetters({
     locale: 'lang/locale',
     locales: 'lang/locales'

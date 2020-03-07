@@ -64,11 +64,13 @@
           required
         />
 
-        <v-text-field
-          v-model="formProfile.icon_image_url"
-          :counter="255"
+        <v-file-input
+          v-model="formProfile.icon_image"
           :label="$t('your_icon')"
-          required
+          accept="image/*"
+          show-size
+          filled
+          prepend-icon="mdi-camera"
         />
 
         <v-text-field
@@ -112,6 +114,7 @@
 import Form from 'vform'
 import axios from 'axios'
 import { mapGetters } from 'vuex'
+import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/user/UserTitle'
 
 export default {
@@ -126,18 +129,20 @@ export default {
   data() {
     return {
       formProfile: new Form({
-        description: '',
-        hobby: '',
-        icon_image_url: '',
-        job_name: '',
-        nick_name: '',
-        web_address: ''
+        user_id: '' /* Integer */,
+        description: '' /* String */,
+        hobby: '' /* Stirng */,
+        icon_image: '' /* FILE */,
+        icon_image_url: '' /* URL */,
+        job_name: '' /* String */,
+        nick_name: '' /* String */,
+        web_address: '' /* URL */
       }),
 
       formUser: new Form({
-        name: '',
-        email: '',
-        photo_url: ''
+        name: '' /* String */,
+        email: '' /* E-Mail */,
+        photo_url: '' /* URL */
       })
     }
   },
@@ -177,7 +182,7 @@ export default {
 
         this.$store.dispatch('auth/updateUser', { user: data })
 
-        // Redirect home.
+        // Redirect dashboard.
         this.$router.push({ name: 'users.dashboard' })
       } catch (e) {
         console.log(e)
@@ -186,13 +191,20 @@ export default {
 
     async updateProfile() {
       try {
-        await this.formProfile.patch('users/profile')
-
-        // Redirect home.
-        this.$router.push({ name: 'users.dashboard' })
-      } catch (e) {
-        console.log(e)
-      }
+        await this.formProfile
+          .post('users/profile', {
+            transformRequest: [
+              function(data, headers) {
+                data._method = 'PATCH'
+                return objectToFormData(data)
+              }
+            ]
+          })
+          .then((response) => {
+            // Redirect User Dashboard.
+            this.$router.push({ name: 'users.dashboard' })
+          })
+      } catch (e) {}
     }
   }
 }

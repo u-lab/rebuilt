@@ -19,6 +19,7 @@
   "error_alert_title": "Oops...",
   "error_alert_text": "Something went wrong! Please try again.",
   "email": "Email",
+  "eyecatch_image": "Eye catch image",
   "failed_to_verify_email": "Failed to verify email.",
   "first_kana": "First Kana",
   "first_name": "First Name",
@@ -36,6 +37,7 @@
   "login_with": "Login with",
   "logout": "Logout",
   "long_comment": "Long Comment",
+  "look_at_the_storage": "Look at the Storage!!",
   "name": "Name",
   "new_password": "New Password",
   "nick_name": "Nick Name",
@@ -48,6 +50,7 @@
   "prefecture": "Prefecture",
   "profile": "Profile",
   "publish": "Publish",
+  "record_your_storage": "Record Your Stroage",
   "register": "Register",
   "register_with": "Register with",
   "remember_me": "Remember Me",
@@ -76,5 +79,6 @@
   "your_icon": "Your Icon",
   "your_info": "Your Info",
   "your_password": "Your Password",
-  "web_address": "Your Web Site"
+  "web_address": "Your Web Site",
+  "welcome_to_the_archi_walk": "Welcome to the Archi Walk"
 }

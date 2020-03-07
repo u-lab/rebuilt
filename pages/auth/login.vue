@@ -86,6 +86,8 @@ export default {
     }
   }),
 
+  middleware: 'guest',
+
   methods: {
     async login() {
       let data
@@ -107,8 +109,8 @@ export default {
       // Fetch the user.
       await this.$store.dispatch('auth/fetchUser')
 
-      // Redirect home.
-      this.$router.push({ name: 'home' })
+      // Redirect dashboard.
+      this.$router.push({ name: 'users.dashboard' })
     }
   }
 }

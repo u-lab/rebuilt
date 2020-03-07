@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app dense clipped-left>
     <v-toolbar-title>
-      <router-link :to="{ name: user ? 'home' : 'welcome' }">
+      <router-link :to="{ name: user ? 'users.dashboard' : 'welcome' }">
         {{ appName }}
       </router-link>
     </v-toolbar-title>

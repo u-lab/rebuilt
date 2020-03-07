@@ -1,6 +1,6 @@
 <template>
-  <div>
-    {{ title }}
+  <div class="user-title-container">
+    <h1 class="user-title">{{ title }}</h1>
   </div>
 </template>
 

@@ -82,7 +82,7 @@ const routes = [
   // 作品を見る
   {
     path: '/users/storages/:storageId',
-    name: 'users.storages.edit',
+    name: 'users.storages.show',
     component: pageUsers('storages/show.vue')
   },
   // 作品編集
@@ -115,7 +115,6 @@ const routes = [
     component: page('auth/verification/resend.vue')
   },
 
-  { path: '/home', name: 'home', component: page('home.vue') },
   {
     path: '/settings',
     component: page('settings/index.vue'),
