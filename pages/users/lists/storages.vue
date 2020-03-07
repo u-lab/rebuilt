@@ -5,8 +5,14 @@
 
     <!-- debug用 -->
     <v-card>
-      <div :key="key" v-for="(items, key) in data.data">
-        <div v-for="(item, keyItem) in items" :key="keyItem">
+      <div
+        :key="key"
+        v-for="(items, key) in data.data"
+      >
+        <div
+          v-for="(item, keyItem) in items"
+          :key="keyItem"
+        >
           {{ keyItem }} : {{ item }}
         </div>
 

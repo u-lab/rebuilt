@@ -2,18 +2,34 @@
   <div>
     <!-- TODO 自分の作品を見る -->
     <user-title title="自分の作品一覧" />
+    <v-container>
+      <v-row>
+        <v-col
+          v-for="(items, key) in data.data"
+          :key="key"
+          cols="4"
+        >
+          <v-card>
+            {{ items.storage_id }}
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
 
     <!-- debug用 -->
     <v-card>
-      <div :key="key" v-for="(items, key) in data.data">
-        <router-link
-          :to="{
+      <div
+        :key="key"
+        v-for="(items, key) in data.data"
+      >
+        <router-link :to="{
             name: 'users.storages.show',
             params: { storageId: items.storage_id }
-          }"
-          >この作品を見る</router-link
+          }">この作品を見る</router-link>
+        <div
+          v-for="(item, keyItem) in items"
+          :key="keyItem"
         >
-        <div v-for="(item, keyItem) in items" :key="keyItem">
           {{ keyItem }} : {{ item }}
         </div>
 
