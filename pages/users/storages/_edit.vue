@@ -1,7 +1,10 @@
 <template>
   <div>
     <!-- TODO 作品情報を修正 -->
-    <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
+    <v-form
+      @submit.prevent="update"
+      @keydown="form.onKeydown($event)"
+    >
       <!-- title -->
       <v-text-field
         v-model="form.title"
@@ -37,6 +40,35 @@
         prepend-icon="mdi-camera"
       />
 
+      <v-card class="d-inline-block mx-auto">
+        <input
+          @change="onFileChange"
+          type="file"
+          class="file_input"
+          name="photo"
+          accept="image/*"
+        />
+        <div v-if="preview.eyecatch_image">
+          <v-img
+            :src="preview.eyecatch_image"
+            alt=""
+            width="300px"
+          />
+        </div>
+
+        <div v-else-if="form.eyecatch_image_url">
+          <v-img
+            :src="form.eyecatch_image_url"
+            alt=""
+            width="300px"
+          />
+        </div>
+
+        <div v-else>
+          <v-icon x-large>mdi-plus</v-icon>
+        </div>
+      </v-card>
+
       <!-- storage -->
       <v-file-input
         v-model="form.storage"
@@ -49,27 +81,16 @@
       <!-- Submit Button -->
       <div class="text-center login-btn-wraaper">
         <!-- Submit Button -->
-        <v-btn :disabled="form.busy" color="grey lighten-1" large type="submit">
+        <v-btn
+          :disabled="form.busy"
+          color="grey lighten-1"
+          large
+          type="submit"
+        >
           {{ $t('update') }}
         </v-btn>
       </div>
     </v-form>
-
-    <v-card>
-      <v-card-title>アイキャッチ画像</v-card-title>
-
-      <div v-if="preview.eyecatch_image">
-        <v-img :src="preview.eyecatch_image" alt="" width="300px" />
-      </div>
-
-      <div v-else-if="form.eyecatch_image_url">
-        <v-img :src="form.eyecatch_image_url" alt="" width="300px" />
-      </div>
-
-      <div v-else>
-        <p>アイキャッチ画像はありません。</p>
-      </div>
-    </v-card>
   </div>
 </template>
 
@@ -104,6 +125,9 @@ export default {
       /* preview表示用 */
       preview: {
         eyecatch_image: ''
+      },
+      icons: {
+        iconfont: 'mdiSvg' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
       }
     }
   },
@@ -165,6 +189,18 @@ export default {
       } catch (e) {
         this.preview.eyecatch_image = null
       }
+    },
+    onFileChange(e) {
+      const files = e.target.files || e.dataTransfer.files
+      this.createImage(files[0])
+    },
+    // アップロードした画像を表示
+    createImage(file) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.uploadedImage = e.target.result
+      }
+      reader.readAsDataURL(file)
     }
   }
 }
