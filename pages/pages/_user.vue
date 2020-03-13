@@ -1,8 +1,21 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" app clipped dark>
-      <v-list dense nav class="py-0">
-        <v-list-item v-for="item in sidebarItems" :key="item.title" link>
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      clipped
+      dark
+    >
+      <v-list
+        dense
+        nav
+        class="py-0"
+      >
+        <v-list-item
+          v-for="item in sidebarItems"
+          :key="item.title"
+          link
+        >
           <v-list-item-content>
             <v-list-item-title>
               {{ item.title }}
