@@ -1,6 +1,9 @@
 <template>
   <v-card>
-    <v-card-title>{{ $t('look_at_the_storage') }}</v-card-title>
+    <v-card-title>
+      {{ $t('look_at_the_storage') }}
+      <v-icon>mdi-book-open-variant</v-icon>
+    </v-card-title>
 
     <v-list dense>
       <v-list-item-group>
