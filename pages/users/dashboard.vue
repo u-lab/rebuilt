@@ -11,7 +11,18 @@
     <v-row>
       <v-col cols="6">
         <v-card>
-          <v-card-title>{{ $t('record_your_storage') }}</v-card-title>
+          <v-card-title>
+            {{ $t('record_your_storage') }}
+            <v-icon>mdi-pencil</v-icon>
+          </v-card-title>
+
+          <v-card-text>
+            <ol>
+              <li>自分の情報を設定しよう!</li>
+              <li>作品を投稿しよう!</li>
+              <li>ポートフォリオを確認しよう!</li>
+            </ol>
+          </v-card-text>
         </v-card>
       </v-col>
 
