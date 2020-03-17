@@ -1,0 +1,14 @@
+.user_storage_eyecatch_image_input {
+  position: relative;
+}
+
+.user_storage_eyecatch_image_display {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  /* クリックイベントの無効 */
+  pointer-events: none;
+}
