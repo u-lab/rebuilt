@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app style="background: #ddd">
     <navbar />
 
     <!-- Sizes your content based upon application components -->
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Navbar from '~/components/Navbar'
+import Navbar from '~/components/default/Navbar'
 
 export default {
   components: {
