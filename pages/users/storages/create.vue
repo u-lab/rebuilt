@@ -99,6 +99,38 @@
             </v-row>
 
             <v-row>
+              <v-col cols="4">
+                <!-- title -->
+                <v-text-field
+                  v-model="form.title"
+                  :counter="255"
+                  :label="$t('title')"
+                  required
+                />
+              </v-col>
+
+              <v-col cols="4">
+                <!-- description -->
+                <v-text-field
+                  v-model="form.description"
+                  :counter="255"
+                  :label="$t('description')"
+                  required
+                />
+              </v-col>
+
+              <v-col cols="4">
+                <!-- web_address -->
+                <v-text-field
+                  v-model="form.web_address"
+                  :counter="255"
+                  :label="$t('web_address')"
+                  required
+                />
+              </v-col>
+            </v-row>
+
+            <v-row>
               <v-col>
                 <!-- long_comment -->
                 <!-- TODO: tinyMCEのようなエディタに置き換えたい -->
@@ -117,41 +149,6 @@
         </v-card>
       </v-container>
 
-      <!-- title -->
-      <v-text-field
-        v-model="form.title"
-        :counter="255"
-        :label="$t('title')"
-        required
-      />
-
-      <!-- description -->
-      <v-text-field
-        v-model="form.description"
-        :counter="255"
-        :label="$t('description')"
-        required
-      />
-
-      <!-- long_comment -->
-      <v-text-field
-        v-model="form.long_comment"
-        :counter="255"
-        :label="$t('long_comment')"
-        required
-      />
-
-      <!-- eyecatch_image -->
-      <v-file-input
-        v-model="form.eyecatch_image"
-        :label="$t('eyecatch_image')"
-        @change="eyecatchImageFileChange"
-        accept="image/*"
-        show-size
-        filled
-        prepend-icon="mdi-camera"
-      />
-
       <!-- storage -->
       <v-file-input
         v-model="form.storage"
@@ -159,14 +156,6 @@
         show-size
         filled
         prepend-icon="mdi-camera"
-      />
-
-      <!-- web_address -->
-      <v-text-field
-        v-model="form.web_address"
-        :counter="255"
-        :label="$t('web_address')"
-        required
       />
 
       <!-- Submit Button -->
@@ -177,22 +166,6 @@
         </v-btn>
       </div>
     </v-form>
-
-    <v-card>
-      <v-card-title>アイキャッチ画像</v-card-title>
-
-      <div v-if="preview.eyecatch_image">
-        <v-img :src="preview.eyecatch_image" alt="" width="300px" />
-      </div>
-
-      <div v-else-if="form.eyecatch_image_url">
-        <v-img :src="form.eyecatch_image_url" alt="" width="300px" />
-      </div>
-
-      <div v-else>
-        <p>アイキャッチ画像はありません。</p>
-      </div>
-    </v-card>
   </div>
 </template>
 
