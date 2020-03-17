@@ -1,14 +1,16 @@
 <template>
   <div>
     <!-- TODO 自分の作品を見る -->
-    <user-title class="text-center" title="-my work-" />
+    <user-title
+      class="text-center"
+      title="-my work-"
+    />
     <v-container>
       <v-row>
         <v-col>
           <v-card
             :to="{
-              name: 'users.storages.edit',
-              params: { storageId: data.data[0].storage_id }
+              name: 'users.storages.create'
             }"
             color="#26A69A"
             dark
@@ -16,8 +18,14 @@
             hover
           >
             <v-row align="center">
-              <v-col align="end" cols="2">
-                <v-icon dark x-large>mdi-plus</v-icon>
+              <v-col
+                align="end"
+                cols="2"
+              >
+                <v-icon
+                  dark
+                  x-large
+                >mdi-plus</v-icon>
               </v-col>
               <v-col cols="10">
                 <v-card-title>Work</v-card-title>
@@ -26,11 +34,15 @@
           </v-card>
         </v-col>
 
-        <v-col v-for="(items, key) in data.data" :key="key" cols="6">
+        <v-col
+          v-for="(items, key) in data.data"
+          :key="key"
+          cols="6"
+        >
           <v-card
             :to="{
-              name: 'pages.storages.show',
-              params: { user: user.name, storageId: items.storage_id }
+              name: 'users.storages.edit',
+              params: { storageId: items.storage_id }
             }"
             hover
             dark
