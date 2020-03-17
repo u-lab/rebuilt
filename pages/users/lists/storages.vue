@@ -58,23 +58,6 @@
         </v-col>
       </v-row>
     </v-container>
-
-    <!-- debug用 -->
-    <v-card>
-      <div
-        :key="key"
-        v-for="(items, key) in data.data"
-      >
-        <div
-          v-for="(item, keyItem) in items"
-          :key="keyItem"
-        >
-          {{ keyItem }} : {{ item }}
-        </div>
-
-        <hr />
-      </div>
-    </v-card>
   </div>
 </template>
 
