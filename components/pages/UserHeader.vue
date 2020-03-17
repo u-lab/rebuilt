@@ -1,9 +1,9 @@
 <template>
-  <div class="pages-user-header">
+  <div :style="getHeaderMarginBottom" class="pages-user-header">
     <v-img :src="bgSrc" height="180px" />
 
     <div class="pages-user-header-content">
-      <v-avatar size="130" class="pages-user-header-avatar">
+      <v-avatar :size="avaterSize" class="pages-user-header-avatar">
         <span
           v-if="iconSrc === true || iconSrc === false"
           v-text="getAvaterName"
@@ -45,12 +45,20 @@ export default {
   },
 
   computed: {
+    avaterSize() {
+      return 130
+    },
+
     getAvaterName() {
       return this.name.substr(0, 2)
     },
 
     getAvaterAlt() {
       return `${this.name} - Archi Walk アバターアイコン`
+    },
+
+    getHeaderMarginBottom() {
+      return `margin-bottom: ${this.avaterSize}px`
     }
   }
 }
