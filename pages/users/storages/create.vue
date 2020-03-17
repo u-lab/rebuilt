@@ -36,10 +36,12 @@
                   </v-btn>
 
                   <v-btn
+                    :disabled="form.busy"
                     class="teal--text text--lighten-1 mr-4"
                     color="#CFD8DC"
+                    type="submit"
                   >
-                    Store
+                    {{ $t('store') }}
                   </v-btn>
                 </div>
               </div>
@@ -50,7 +52,7 @@
             <v-row>
               <!-- 画像のForm -->
               <v-col cols="7">
-                <h3>メイン画像</h3>
+                <h3>{{ $t('eyecatch_image') }}</h3>
 
                 <div class="user_storage_eyecatch_image_input">
                   <!-- eyecatch_image -->
@@ -87,33 +89,18 @@
                   <!-- TODO: Plus Icon の上下中央揃え -->
                   <template v-else>
                     <v-card
-                      class="user_storage_eyecatch_image_display"
+                      class="user_storage_eyecatch_image_display "
                       style="border: 1px solid #111"
                     >
                       <div
-                        align="center"
+                        class="outer"
                         style="height: 200px"
                       >
-                        <v-row>
-                          <v-col
-                            v-for="n in 3"
-                            cols="12"
-                          >
-                            <template v-if="n === 2">
-                              <v-icon
-                                light
-                                x-large
-                              >mdi-plus</v-icon>
-                            </template>
-                            <template v-else>
-                              <v-icon
-                                light
-                                x-large
-                                color="white"
-                              >mdi-plus</v-icon>
-                            </template>
-                          </v-col>
-                        </v-row>
+                        <v-icon
+                          class="inner"
+                          light
+                          x-large
+                        >mdi-plus</v-icon>
                       </div>
                     </v-card>
                   </template>
@@ -126,29 +113,14 @@
                 <!-- TODO: Plus Icon の上下中央揃え -->
                 <v-card style="border: 1px solid #444">
                   <div
-                    align="center"
+                    class="outer"
                     style="height: 200px"
                   >
-                    <v-row>
-                      <v-col
-                        v-for="n in 3"
-                        cols="12"
-                      >
-                        <template v-if="n === 2">
-                          <v-icon
-                            light
-                            x-large
-                          >mdi-plus</v-icon>
-                        </template>
-                        <template v-else>
-                          <v-icon
-                            light
-                            x-large
-                            color="white"
-                          >mdi-plus</v-icon>
-                        </template>
-                      </v-col>
-                    </v-row>
+                    <v-icon
+                      class="inner"
+                      light
+                      x-large
+                    >mdi-plus</v-icon>
                   </div>
                 </v-card>
               </v-col>
