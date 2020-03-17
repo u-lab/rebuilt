@@ -1,17 +1,29 @@
 <template>
   <div>
-    <user-title class="text-center" title="-my work-" />
+    <user-title
+      class="text-center"
+      title="-my work-"
+    />
 
     <!-- TODO 作品情報を修正 -->
-    <v-form @submit.prevent="create" @keydown="form.onKeydown($event)">
+    <v-form
+      @submit.prevent="create"
+      @keydown="form.onKeydown($event)"
+    >
       <v-container class="top">
         <v-card>
-          <v-card color="#26A69A" dark>
+          <v-card
+            color="#26A69A"
+            dark
+          >
             <div class="px-4">
               <div class="d-flex justify-space-between">
                 <div>
                   <v-card-title>
-                    <v-icon dark x-large>mdi-plus</v-icon>Work
+                    <v-icon
+                      dark
+                      x-large
+                    >mdi-plus</v-icon>Work
                   </v-card-title>
                 </div>
 
@@ -78,8 +90,30 @@
                       class="user_storage_eyecatch_image_display"
                       style="border: 1px solid #111"
                     >
-                      <div style="height: 200px">
-                        <v-icon light x-large>mdi-plus</v-icon>
+                      <div
+                        align="center"
+                        style="height: 200px"
+                      >
+                        <v-row>
+                          <v-col
+                            v-for="n in 3"
+                            cols="12"
+                          >
+                            <template v-if="n === 2">
+                              <v-icon
+                                light
+                                x-large
+                              >mdi-plus</v-icon>
+                            </template>
+                            <template v-else>
+                              <v-icon
+                                light
+                                x-large
+                                color="white"
+                              >mdi-plus</v-icon>
+                            </template>
+                          </v-col>
+                        </v-row>
                       </div>
                     </v-card>
                   </template>
@@ -91,8 +125,30 @@
 
                 <!-- TODO: Plus Icon の上下中央揃え -->
                 <v-card style="border: 1px solid #444">
-                  <div style="height: 200px">
-                    <v-icon light x-large>mdi-plus</v-icon>
+                  <div
+                    align="center"
+                    style="height: 200px"
+                  >
+                    <v-row>
+                      <v-col
+                        v-for="n in 3"
+                        cols="12"
+                      >
+                        <template v-if="n === 2">
+                          <v-icon
+                            light
+                            x-large
+                          >mdi-plus</v-icon>
+                        </template>
+                        <template v-else>
+                          <v-icon
+                            light
+                            x-large
+                            color="white"
+                          >mdi-plus</v-icon>
+                        </template>
+                      </v-col>
+                    </v-row>
                   </div>
                 </v-card>
               </v-col>
@@ -161,7 +217,12 @@
       <!-- Submit Button -->
       <div class="text-center login-btn-wraaper">
         <!-- Submit Button -->
-        <v-btn :disabled="form.busy" color="grey lighten-1" large type="submit">
+        <v-btn
+          :disabled="form.busy"
+          color="grey lighten-1"
+          large
+          type="submit"
+        >
           {{ $t('update') }}
         </v-btn>
       </div>
