@@ -1,18 +1,15 @@
 <template>
   <div>
     <!-- TODO 全作品一覧を作る -->
-    <user-title
-      class="text-center"
-      title="-Open Gallery-"
-    />
+    <user-title class="text-center" title="-Open Gallery-" />
     <v-container>
-      <h3>{{ data.data[0].title }}</h3>
+      <h3>{{ data[0].data.title }}</h3>
 
       <v-card>
         <v-container>
           <v-row>
             <v-col cols="6">
-              <v-img :src="data.data[0].eyecatch_image.url"></v-img>
+              <v-img :src="data[0].data.eyecatch_image.url"></v-img>
             </v-col>
             <v-col cols="6">
               <v-row>
@@ -26,11 +23,8 @@
                 </v-col>
               </v-row>
               <v-row>
-                <v-card
-                  height="100%"
-                  width="100%"
-                >
-                  <v-card-text>{{ data.data[0].description }}</v-card-text>
+                <v-card width="100%">
+                  <v-card-text>{{ data[0].data.description }}</v-card-text>
                 </v-card>
               </v-row>
             </v-col>
@@ -41,19 +35,18 @@
 
     <v-container>
       <v-row>
-        <v-col
-          :key="key"
-          v-for="(items, key) in data.data"
-          cols="4"
-        >
+        <v-col :key="key" v-for="(items, key) in data" cols="4">
           <v-card
             :to="{
               name: 'pages.storages.show',
-              params: { user: user.name, storageId: items.storage_id }
+              params: {
+                user: items.user.name,
+                storageId: items.data.storage_id
+              }
             }"
             hover
           >
-            <v-img :src="items.eyecatch_image.url"></v-img>
+            <v-img :src="items.data.eyecatch_image.url"></v-img>
           </v-card>
         </v-col>
       </v-row>
@@ -63,28 +56,32 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
 import UserTitle from '~/components/user/UserTitle'
 import myIcon from '~/assets/img/usericon-ex.jpg'
+
 export default {
   components: {
     UserTitle
   },
-  computed: mapGetters({
-    user: 'auth/user'
-  }),
+
   data() {
     return {
       myIcon
     }
   },
+
   middleware: 'auth',
 
   layout: 'user',
 
   async asyncData() {
     const { data } = await axios.get(`/storages`)
-    return { success: true, data }
+    return {
+      success: true,
+      data: data.data,
+      links: data.links,
+      meta: data.meta
+    }
   }
 }
 </script>
