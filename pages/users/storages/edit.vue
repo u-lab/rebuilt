@@ -1,10 +1,7 @@
 <template>
   <div>
     <!-- TODO 作品情報を修正 -->
-    <v-form
-      @submit.prevent="update"
-      @keydown="form.onKeydown($event)"
-    >
+    <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <!-- title -->
       <v-text-field
         v-model="form.title"
@@ -49,19 +46,11 @@
           accept="image/*"
         />
         <div v-if="preview.eyecatch_image">
-          <v-img
-            :src="preview.eyecatch_image"
-            alt=""
-            width="300px"
-          />
+          <v-img :src="preview.eyecatch_image" alt="" width="300px" />
         </div>
 
         <div v-else-if="form.eyecatch_image_url">
-          <v-img
-            :src="form.eyecatch_image_url"
-            alt=""
-            width="300px"
-          />
+          <v-img :src="form.eyecatch_image_url" alt="" width="300px" />
         </div>
 
         <div v-else>
@@ -78,15 +67,18 @@
         prepend-icon="mdi-camera"
       />
 
+      <!-- web_address -->
+      <v-text-field
+        v-model="form.web_address"
+        :counter="255"
+        :label="$t('web_address')"
+        required
+      />
+
       <!-- Submit Button -->
       <div class="text-center login-btn-wraaper">
         <!-- Submit Button -->
-        <v-btn
-          :disabled="form.busy"
-          color="grey lighten-1"
-          large
-          type="submit"
-        >
+        <v-btn :disabled="form.busy" color="grey lighten-1" large type="submit">
           {{ $t('update') }}
         </v-btn>
       </div>
@@ -112,6 +104,7 @@ export default {
   data() {
     return {
       form: new Form({
+        user_id: '' /* Never Change!! */,
         storage_id: '' /* Never Change!! */,
         description: '' /* String */,
         long_comment: '' /* String */,

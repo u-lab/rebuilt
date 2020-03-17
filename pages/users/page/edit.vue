@@ -81,7 +81,7 @@ export default {
       }
     })
 
-    this.formPage.masterpiece_storage_id = this.data.masterpiece_storage.id
+    this.formPage.masterpiece_storage_id = this.data.masterpiece_storage.storage_id
     this.storage = this.data.masterpiece_storage
   },
 
