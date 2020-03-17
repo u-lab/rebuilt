@@ -1,96 +1,91 @@
 <template>
   <div>
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-      clipped
-      dark
-    >
-      <v-list
-        dense
-        nav
-        class="py-0"
-      >
-        <v-list-item
-          v-for="item in sidebarItems"
-          :key="item.title"
-          link
-        >
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ item.title }}
-            </v-list-item-title>
-            <v-list-item
-              v-for="subtitle in item.subtitles"
-              :key="subtitle.title"
-              link
-            >
-              <v-list-item-title>
-                {{ subtitle.title }}
-              </v-list-item-title>
-            </v-list-item>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <h1>作品を記録する</h1>
+    <!-- kanaをjobにしてる。デザインを見て直すか決める -->
+    <user-header
+      :bgSrc="BgExampleImg"
+      :iconSrc="getIconUrl"
+      :name="data.user_profile.nick_name"
+      :kana="data.user_profile.job_name"
+    />
+
+    <v-container>
+      <v-card>
+        <v-tabs v-model="tab" dark grow slider-color="white">
+          <v-tab>
+            - work -
+          </v-tab>
+          <v-tab>
+            - profile -
+          </v-tab>
+        </v-tabs>
+
+        <v-tabs-items v-model="tab">
+          <v-tab-item>
+            <v-card flat>
+              <tab-box title="Storage" content="作品を入れる" />
+            </v-card>
+          </v-tab-item>
+
+          <v-tab-item>
+            <v-card flat>
+              <tab-box title="History" content="あああ" />
+
+              <tab-box title="Award" content="いいい" />
+
+              <tab-box
+                :content="data.user_profile.description"
+                :title="$t('description')"
+              />
+
+              <tab-box
+                :content="data.user_profile.hobby"
+                :title="$t('hobby')"
+              />
+
+              <tab-box
+                :content="data.user_profile.web_address"
+                title="My Site"
+              />
+            </v-card>
+          </v-tab-item>
+        </v-tabs-items>
+      </v-card>
+    </v-container>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-// import Form from 'vform'
+import UserHeader from '@/components/pages/UserHeader'
+import TabBox from '@/components/pages/TabBox'
+import BgExampleImg from '@/assets/img/page_background_example.png'
+import myIcon from '~/assets/img/usericon-ex.jpg'
 
 export default {
+  components: {
+    UserHeader,
+    TabBox
+  },
+
   data() {
     return {
-      drawer: true
-      // form: new Form({
-      //   data: ''
-      // })
+      tab: null,
+      BgExampleImg,
+      myIcon
     }
   },
 
-  /*,
-  created () {
-      // Fill the form with data.
-      this.form.keys().forEach((key) => {
-        if (this.data[key] !== null) {
-          this.form[key] = this.data[key]
-        }
-      })
-  }
-  */
-
   computed: {
-    sidebarItems: () => {
-      return [
-        { title: 'ダッシュボード' },
-        {
-          title: '作品を記録する',
-          subtitles: [
-            { title: 'プロフィールの変更' },
-            { title: '作品の投稿' },
-            { title: '作品一覧' },
-            { title: 'アカウント設定' }
-          ]
-        },
-        {
-          title: '作品を眺める',
-          subtitles: [
-            { title: 'ギャラリー' },
-            { title: 'イイね履歴' },
-            { title: 'お気に入り一覧' }
-          ]
-        }
-      ]
+    getIconUrl() {
+      const image = this.data.user_profile.icon_image
+      return image.url_160 || image.url_320 || image.url
     }
   },
 
   async asyncData({ params, error }) {
     try {
       const { data } = await axios.get(`pages/${params.user}`)
-      return { success: true, data }
+      return { success: true, data: data.data }
     } catch (e) {
       // return error({
       //   statusCode: e.response.data.status,
