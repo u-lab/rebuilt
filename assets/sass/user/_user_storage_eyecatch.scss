@@ -1,0 +1,20 @@
+.user_storage_eyecatch_image_input {
+  position: relative;
+
+  /* アイコンの無効 */
+  .v-input__prepend-outer {
+    display: none;
+  }
+}
+
+.user_storage_eyecatch_image_display {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  background-color: rgba(#fff, 0);
+
+  /* クリックイベントの無効 */
+  pointer-events: none;
+}

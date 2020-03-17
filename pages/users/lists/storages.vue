@@ -1,7 +1,10 @@
 <template>
   <div>
     <!-- TODO 全作品一覧を作る -->
-    <user-title class="text-center" title="-Open Gallery-" />
+    <user-title
+      class="text-center"
+      title="-Open Gallery-"
+    />
     <v-container>
       <h3>{{ data[0].data.title }}</h3>
 
@@ -35,7 +38,11 @@
 
     <v-container>
       <v-row>
-        <v-col :key="key" v-for="(items, key) in data" cols="4">
+        <v-col
+          :key="key"
+          v-for="(items, key) in data"
+          cols="4"
+        >
           <v-card
             :to="{
               name: 'pages.storages.show',
