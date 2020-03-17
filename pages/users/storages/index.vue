@@ -1,10 +1,7 @@
 <template>
   <div>
     <!-- TODO 自分の作品を見る -->
-    <user-title
-      class="text-center"
-      title="-my work-"
-    />
+    <user-title class="text-center" title="-my work-" />
     <v-container>
       <v-row>
         <v-col>
@@ -14,18 +11,13 @@
               params: { storageId: data.data[0].storage_id }
             }"
             color="#26A69A"
-            class="white--text"
+            dark
+            height="80px"
             hover
           >
             <v-row align="center">
-              <v-col
-                align="end"
-                cols="2"
-              >
-                <v-icon
-                  color="white"
-                  x-large
-                >mdi-plus</v-icon>
+              <v-col align="end" cols="2">
+                <v-icon dark x-large>mdi-plus</v-icon>
               </v-col>
               <v-col cols="10">
                 <v-card-title>Work</v-card-title>
@@ -33,52 +25,31 @@
             </v-row>
           </v-card>
         </v-col>
-        <v-col
-          v-for="(items, key) in data.data"
-          :key="key"
-          cols="6"
-        >
+
+        <v-col v-for="(items, key) in data.data" :key="key" cols="6">
           <v-card
             :to="{
               name: 'pages.storages.show',
               params: { user: user.name, storageId: items.storage_id }
             }"
             hover
+            dark
+            nuxt
           >
             <v-img
               :src="items.eyecatch_image.url"
               class="align-center white--text"
               gradient="rgba(0,0,0,.5), rgba(0,0,0,.5)"
+              height="80px"
             >
-              <v-card-title class="justify-center">{{
-                items.title
-              }}</v-card-title>
+              <v-card-title class="justify-center">
+                {{ items.title }}
+              </v-card-title>
             </v-img>
           </v-card>
         </v-col>
       </v-row>
     </v-container>
-
-    <!-- debug用 -->
-    <v-card>
-      <div
-        :key="key"
-        v-for="(items, key) in data.data"
-      >
-        <router-link :to="{
-            name: 'users.storages.edit',
-            params: { storageId: items.storage_id }
-          }">この作品を見る</router-link>
-        <div
-          v-for="(item, keyItem) in items"
-          :key="keyItem"
-        >
-          {{ keyItem }} : {{ item }}
-        </div>
-
-        <hr />
-      </div>
-    </v-card>
   </div>
 </template>
 
@@ -95,13 +66,11 @@ export default {
   components: {
     UserTitle
   },
-  icons: {
-    iconfont: 'mdi' // default - only for display purposes
-  },
 
   computed: mapGetters({
     user: 'auth/user'
   }),
+
   async asyncData({ params, error }) {
     const { data } = await axios.get('users/storage')
     return { success: true, data }
