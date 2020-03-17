@@ -6,13 +6,13 @@
       title="-Open Gallery-"
     />
     <v-container>
-      <h3>Todays Home!!</h3>
+      <h3>{{ data.data[0].title }}</h3>
 
       <v-card>
         <v-container>
           <v-row>
             <v-col cols="6">
-              <v-img :src="myhomeImg"></v-img>
+              <v-img :src="data.data[0].eyecatch_image.url"></v-img>
             </v-col>
             <v-col cols="6">
               <v-row>
@@ -30,7 +30,7 @@
                   height="100%"
                   width="100%"
                 >
-                  <v-card-text>test</v-card-text>
+                  <v-card-text>{{ data.data[0].description }}</v-card-text>
                 </v-card>
               </v-row>
             </v-col>
@@ -58,6 +58,23 @@
         </v-col>
       </v-row>
     </v-container>
+
+    <!-- debug用 -->
+    <v-card>
+      <div
+        :key="key"
+        v-for="(items, key) in data.data"
+      >
+        <div
+          v-for="(item, keyItem) in items"
+          :key="keyItem"
+        >
+          {{ keyItem }} : {{ item }}
+        </div>
+
+        <hr />
+      </div>
+    </v-card>
   </div>
 </template>
 
@@ -65,9 +82,7 @@
 import axios from 'axios'
 import { mapGetters } from 'vuex'
 import UserTitle from '~/components/user/UserTitle'
-import myhomeImg from '~/assets/img/work2.jpg'
 import myIcon from '~/assets/img/usericon-ex.jpg'
-
 export default {
   components: {
     UserTitle
@@ -77,7 +92,6 @@ export default {
   }),
   data() {
     return {
-      myhomeImg,
       myIcon
     }
   },
