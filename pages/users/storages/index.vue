@@ -1,40 +1,59 @@
 <template>
   <div>
     <!-- TODO 自分の作品を見る -->
-    <user-title title="自分の作品一覧" />
+    <user-title
+      class="text-center"
+      title="-my work-"
+    />
     <v-container>
       <v-row>
+        <v-col>
+          <v-card
+            :to="{
+              name: 'users.storages.edit',
+              params: { storageId: data.data[0].storage_id }
+            }"
+            color="#26A69A"
+            class="white--text"
+            hover
+          >
+            <v-row align="center">
+              <v-col
+                align="end"
+                cols="2"
+              >
+                <v-icon
+                  color="white"
+                  x-large
+                >mdi-plus</v-icon>
+              </v-col>
+              <v-col cols="10">
+                <v-card-title>Work</v-card-title>
+              </v-col>
+            </v-row>
+          </v-card>
+        </v-col>
         <v-col
           v-for="(items, key) in data.data"
           :key="key"
-          cols="4"
+          cols="6"
         >
-          <v-card>
-            <v-row>
-              <v-col cols="8">
-                <div class="ml-5 mt-1">{{ items.id }}</div>
-              </v-col>
-              <v-col cols="4">
-                <v-btn
-                  :justify="end"
-                  :to="{
-                    name: 'users.storages.edit',
-                    params: { storageId: items.storage_id }
-                  }"
-                  class="ml-4 my-0"
-                  nuxt
-                >編集</v-btn>
-              </v-col>
-            </v-row>
-            <v-card
-              :to="{
-                name: 'pages.storages.show',
-                params: { user: user.name, storageId: items.storage_id }
-              }"
-              hover
+          <v-card
+            :to="{
+              name: 'pages.storages.show',
+              params: { user: user.name, storageId: items.storage_id }
+            }"
+            hover
+          >
+            <v-img
+              :src="items.eyecatch_image.url"
+              class="align-center white--text"
+              gradient="rgba(0,0,0,.5), rgba(0,0,0,.5)"
             >
-              <v-img :src="items.eyecatch_image.url"></v-img>
-            </v-card>
+              <v-card-title class="justify-center">{{
+                items.title
+              }}</v-card-title>
+            </v-img>
           </v-card>
         </v-col>
       </v-row>
@@ -75,6 +94,9 @@ export default {
 
   components: {
     UserTitle
+  },
+  icons: {
+    iconfont: 'mdi' // default - only for display purposes
   },
 
   computed: mapGetters({
