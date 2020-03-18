@@ -1,10 +1,7 @@
 <template>
   <div>
     <!-- TODO 自分の作品を見る -->
-    <user-title
-      class="text-center"
-      title="-my work-"
-    />
+    <user-title class="text-center" title="-my work-" />
     <v-container>
       <v-row>
         <v-col>
@@ -18,14 +15,8 @@
             hover
           >
             <v-row align="center">
-              <v-col
-                align="end"
-                cols="2"
-              >
-                <v-icon
-                  dark
-                  x-large
-                >mdi-plus</v-icon>
+              <v-col align="end" cols="2">
+                <v-icon dark x-large>mdi-plus</v-icon>
               </v-col>
               <v-col cols="10">
                 <v-card-title>Work</v-card-title>
@@ -34,11 +25,7 @@
           </v-card>
         </v-col>
 
-        <v-col
-          v-for="(items, key) in data.data"
-          :key="key"
-          cols="6"
-        >
+        <v-col v-for="(items, key) in data.data" :key="key" cols="6">
           <v-card
             :to="{
               name: 'users.storages.edit',
