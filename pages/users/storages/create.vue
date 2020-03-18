@@ -1,29 +1,17 @@
 <template>
   <div>
-    <user-title
-      class="text-center"
-      title="-my work-"
-    />
+    <user-title class="text-center" title="-my work-" />
 
     <!-- TODO 作品情報を修正 -->
-    <v-form
-      @submit.prevent="create"
-      @keydown="form.onKeydown($event)"
-    >
+    <v-form @submit.prevent="create" @keydown="form.onKeydown($event)">
       <v-container class="top">
         <v-card>
-          <v-card
-            color="#26A69A"
-            dark
-          >
+          <v-card color="#26A69A" dark>
             <div class="px-4">
               <div class="d-flex justify-space-between">
                 <div>
                   <v-card-title>
-                    <v-icon
-                      dark
-                      x-large
-                    >mdi-plus</v-icon>Work
+                    <v-icon dark x-large>mdi-plus</v-icon>Work
                   </v-card-title>
                 </div>
 
@@ -54,7 +42,7 @@
               <v-col cols="7">
                 <h3>{{ $t('eyecatch_image') }}</h3>
 
-                <div class="user_storage_eyecatch_image_input">
+                <div class="pos-relative v-file-input-icon-none">
                   <!-- eyecatch_image -->
                   <v-file-input
                     v-model="form.eyecatch_image"
@@ -67,7 +55,9 @@
                   />
 
                   <template v-if="preview.eyecatch_image">
-                    <div class="user_storage_eyecatch_image_display">
+                    <div
+                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
+                    >
                       <v-img
                         :src="preview.eyecatch_image"
                         alt=""
@@ -77,7 +67,9 @@
                   </template>
 
                   <template v-else-if="form.eyecatch_image_url">
-                    <div class="user_storage_eyecatch_image_display">
+                    <div
+                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
+                    >
                       <v-img
                         :src="form.eyecatch_image_url"
                         alt=""
@@ -86,21 +78,14 @@
                     </div>
                   </template>
 
-                  <!-- TODO: Plus Icon の上下中央揃え -->
                   <template v-else>
                     <v-card
-                      class="user_storage_eyecatch_image_display "
-                      style="border: 1px solid #111"
+                      class="pos-topLeftAlign user_storage_eyecatch_image_empty"
                     >
-                      <div
-                        class="outer"
-                        style="height: 200px"
-                      >
-                        <v-icon
-                          class="inner"
-                          light
-                          x-large
-                        >mdi-plus</v-icon>
+                      <div class="pos-relative" style="height: 200px">
+                        <v-icon class="pos-topAndBottomCenter" light x-large>
+                          mdi-plus
+                        </v-icon>
                       </div>
                     </v-card>
                   </template>
@@ -110,19 +95,25 @@
               <v-col cols="5">
                 <h3>{{ $t('stl obj fbx file') }}</h3>
 
-                <!-- TODO: Plus Icon の上下中央揃え -->
-                <v-card style="border: 1px solid #444">
-                  <div
-                    class="outer"
-                    style="height: 200px"
-                  >
-                    <v-icon
-                      class="inner"
-                      light
-                      x-large
-                    >mdi-plus</v-icon>
-                  </div>
-                </v-card>
+                <div class="pos-relative v-file-input-icon-none">
+                  <!-- storage -->
+                  <v-file-input
+                    v-model="form.storage"
+                    :label="$t('storage')"
+                    show-size
+                    filled
+                    prepend-icon="mdi-camera"
+                    height="200px"
+                  />
+
+                  <v-card class="pos-topLeftAlign user_storage_object_empty">
+                    <div class="pos-relative" style="height: 200px">
+                      <v-icon class="pos-topAndBottomCenter" light x-large>
+                        mdi-plus
+                      </v-icon>
+                    </div>
+                  </v-card>
+                </div>
               </v-col>
             </v-row>
 
@@ -173,31 +164,21 @@
                 />
               </v-col>
             </v-row>
+
+            <!-- Submit Button -->
+            <div class="text-right login-btn-wraaper">
+              <v-btn
+                :disabled="form.busy"
+                color="grey lighten-1"
+                large
+                type="submit"
+              >
+                {{ $t('store') }}
+              </v-btn>
+            </div>
           </v-container>
         </v-card>
       </v-container>
-
-      <!-- storage -->
-      <v-file-input
-        v-model="form.storage"
-        :label="$t('storage')"
-        show-size
-        filled
-        prepend-icon="mdi-camera"
-      />
-
-      <!-- Submit Button -->
-      <div class="text-center login-btn-wraaper">
-        <!-- Submit Button -->
-        <v-btn
-          :disabled="form.busy"
-          color="grey lighten-1"
-          large
-          type="submit"
-        >
-          {{ $t('update') }}
-        </v-btn>
-      </div>
     </v-form>
   </div>
 </template>
