@@ -108,7 +108,7 @@
               </v-col>
 
               <v-col cols="5">
-                <h3>Stl obj fbxファイル</h3>
+                <h3>{{ $t('stl obj fbx file') }}</h3>
 
                 <!-- TODO: Plus Icon の上下中央揃え -->
                 <v-card style="border: 1px solid #444">
