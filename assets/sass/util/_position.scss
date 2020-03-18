@@ -1,0 +1,23 @@
+.pos-relative {
+  position: relative;
+}
+
+.pos-absolute {
+  position: absolute;
+}
+
+// 上左揃え
+.pos-topLeftAlign {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// 上下中央揃え
+.pos-topAndBottomCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  -webkit-transform: translateY(-50%) translateX(-50%);
+}
