@@ -1,5 +1,7 @@
 <template>
-  <div class="simple-layout d-flex align-items-center justify-content-center m-0 bg-white">
+  <div
+    class="simple-layout d-flex align-items-center justify-content-center m-0 bg-white"
+  >
     <nuxt />
   </div>
 </template>
@@ -16,7 +18,7 @@
     padding: 0 25px;
     font-size: 12px;
     font-weight: 600;
-    letter-spacing: .1rem;
+    letter-spacing: 0.1rem;
     text-decoration: none;
     text-transform: uppercase;
   }

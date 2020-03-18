@@ -5,18 +5,34 @@
 
       <!-- Name -->
       <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
+        <label class="col-md-3 col-form-label text-md-right">{{
+          $t('name')
+        }}</label>
         <div class="col-md-7">
-          <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" type="text" name="name" class="form-control">
+          <input
+            v-model="form.name"
+            :class="{ 'is-invalid': form.errors.has('name') }"
+            type="text"
+            name="name"
+            class="form-control"
+          />
           <has-error :form="form" field="name" />
         </div>
       </div>
 
       <!-- Email -->
       <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
+        <label class="col-md-3 col-form-label text-md-right">{{
+          $t('email')
+        }}</label>
         <div class="col-md-7">
-          <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" type="email" name="email" class="form-control">
+          <input
+            v-model="form.email"
+            :class="{ 'is-invalid': form.errors.has('email') }"
+            type="email"
+            name="email"
+            class="form-control"
+          />
           <has-error :form="form" field="email" />
         </div>
       </div>
@@ -40,7 +56,7 @@ import { mapGetters } from 'vuex'
 export default {
   scrollToTop: false,
 
-  head () {
+  head() {
     return { title: this.$t('settings') }
   },
 
@@ -55,7 +71,7 @@ export default {
     user: 'auth/user'
   }),
 
-  created () {
+  created() {
     // Fill the form with user data.
     this.form.keys().forEach((key) => {
       this.form[key] = this.user[key]
@@ -63,7 +79,7 @@ export default {
   },
 
   methods: {
-    async update () {
+    async update() {
       const { data } = await this.form.patch('/settings/profile')
 
       this.$store.dispatch('auth/updateUser', { user: data })

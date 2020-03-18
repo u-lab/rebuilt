@@ -4,7 +4,11 @@
       <card :title="$t('settings')" class="settings-card">
         <ul class="nav flex-column nav-pills">
           <li v-for="tab in tabs" :key="tab.route" class="nav-item">
-            <router-link :to="{ name: tab.route }" class="nav-link" active-class="active">
+            <router-link
+              :to="{ name: tab.route }"
+              class="nav-link"
+              active-class="active"
+            >
               <fa :icon="tab.icon" fixed-width />
               {{ tab.name }}
             </router-link>
@@ -26,7 +30,7 @@ export default {
   middleware: 'auth',
 
   computed: {
-    tabs () {
+    tabs() {
       return [
         {
           icon: 'user',
