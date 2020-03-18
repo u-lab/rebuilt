@@ -93,7 +93,7 @@
               </v-col>
 
               <v-col cols="5">
-                <h3>{{ $t('stl obj fbx file') }}</h3>
+                <h3>Stl obj fbxファイル</h3>
 
                 <div class="pos-relative v-file-input-icon-none">
                   <!-- storage -->
