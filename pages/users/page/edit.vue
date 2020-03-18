@@ -2,8 +2,82 @@
   <div>
     <!-- TODO 自分の情報を修正 -->
     <user-title title="ポートフォリオ編集" />
-
-    <div>
+  
+  
+<v-container>
+  <v-card color="grey lighten-1">
+    <v-row justify="end">
+      
+      <v-col  cols="4">
+        <div class="d-flex justify-end pr-3">
+        <v-btn  class="teal--text text--lighten-1 " color="grey lighten-3">
+          Store
+        </v-btn>
+        </div>
+      </v-col>
+    </v-row>
+    <v-row justify="center" >
+      <v-col cols="1">
+        
+                
+                      <div class=" align-end">
+                        <v-avatar color="indigo">
+                        <v-icon class="pos-topAndBottomCenter" light x-large>
+                          mdi-plus
+                        </v-icon>
+                        </v-avatar>
+                      </div>
+                    
+      </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-col class="pb-0" cols="12">
+      <v-card  color="grey lighten-4">
+        <v-row justify="center">
+          <v-col class="pt-20" cols="4">
+        <v-text-field
+            label="name"
+            single-line
+          ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row justify="center">
+          <v-col cols="10">
+            <v-textarea outlined>
+               <template v-slot:label>
+                <div>
+                  Bio
+                </div>
+              </template>
+            </v-textarea>
+          </v-col>
+        </v-row>
+        <v-row justify="center">
+          <v-col cols="5">
+            <v-card-title>
+              Career
+            </v-card-title>
+            <v-card height="500px">
+            </v-card>
+          </v-col>
+          <v-col cols="5">
+             <v-card-title>
+              Reword
+            </v-card-title>
+            <v-card height="500px">
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card>
+      </v-col>
+    </v-row>
+  </v-card>
+</v-container>
+    
+  
+  
+    <!--debug-->
+    
       <v-form
         @submit.prevent="updatePage"
         @keydown="formPage.onKeydown($event)"
@@ -99,3 +173,8 @@ export default {
   }
 }
 </script>
+<style>
+.pt-20{
+  padding:40px
+}
+</style>
