@@ -3,8 +3,8 @@
     <user-title class="text-center" title="-my work-" />
 
     <!-- TODO 作品情報を修正 -->
-    <v-form @submit.prevent="create" @keydown="form.onKeydown($event)">
-      <v-container class="top">
+    <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
+      <v-container>
         <v-card>
           <v-card color="#26A69A" dark>
             <div class="px-4">
@@ -214,7 +214,7 @@ export default {
         description: '' /* String */,
         long_comment: '' /* String */,
         eyecatch_image: '' /* FILE */,
-        eyecatch_image_url: '' /* URL */,
+        eyecatch_image_id: '' /* UUID Never Change!! */,
         title: '' /* String */,
         storage: '' /* FILE */,
         storage_url: '' /* URL */,
@@ -223,9 +223,6 @@ export default {
       /* preview表示用 */
       preview: {
         eyecatch_image: ''
-      },
-      icons: {
-        iconfont: 'mdiSvg' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
       }
     }
   },
@@ -242,6 +239,8 @@ export default {
         this.form[key] = this.data[key]
       }
     })
+    this.preview.eyecatch_image = this.data.eyecatch_image
+    this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
   },
 
   methods: {

@@ -2,9 +2,8 @@
   <div>
     <user-title class="text-center" title="-my work-" />
 
-    <!-- TODO 作品情報を修正 -->
     <v-form @submit.prevent="create" @keydown="form.onKeydown($event)">
-      <v-container class="top">
+      <v-container>
         <v-card>
           <v-card color="#26A69A" dark>
             <div class="px-4">
