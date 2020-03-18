@@ -64,6 +64,7 @@
   "street": "Street",
   "storage": "Storage",
   "storage_id": "Storage ID",
+  "store": "Store",
   "title": "Title",
   "token_expired_alert_title": "Session Expired!",
   "token_expired_alert_text": "Please log in again to continue.",

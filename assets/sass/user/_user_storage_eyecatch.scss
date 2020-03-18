@@ -1,0 +1,22 @@
+.user_storage_eyecatch_image_preview {
+  width: 100%;
+
+  /* クリックイベントの無効 */
+  pointer-events: none;
+}
+
+.user_storage_eyecatch_image_empty {
+  border: 1px solid #444;
+  width: 100%;
+
+  /* クリックイベントの無効 */
+  pointer-events: none;
+}
+
+.user_storage_object_empty {
+  border: 1px solid #444;
+  width: 100%;
+
+  /* クリックイベントの無効 */
+  pointer-events: none;
+}

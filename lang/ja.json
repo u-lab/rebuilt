@@ -64,6 +64,7 @@
   "street": "建物・マンション名",
   "storage": "ストレージ",
   "storage_id": "ストレージID",
+  "store": "保存",
   "title": "タイトル",
   "token_expired_alert_title": "セッションが途切れました",
   "token_expired_alert_text": "ログインして続けて下さい",
