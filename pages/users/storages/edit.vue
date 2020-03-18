@@ -1,29 +1,17 @@
 <template>
   <div>
-    <user-title
-      class="text-center"
-      title="-my work-"
-    />
+    <user-title class="text-center" title="-my work-" />
 
     <!-- TODO 作品情報を修正 -->
-    <v-form
-      @submit.prevent="create"
-      @keydown="form.onKeydown($event)"
-    >
-      <v-container class="top">
+    <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
+      <v-container>
         <v-card>
-          <v-card
-            color="#26A69A"
-            dark
-          >
+          <v-card color="#26A69A" dark>
             <div class="px-4">
               <div class="d-flex justify-space-between">
                 <div>
                   <v-card-title>
-                    <v-icon
-                      dark
-                      x-large
-                    >mdi-plus</v-icon>Work
+                    <v-icon dark x-large>mdi-plus</v-icon>Work
                   </v-card-title>
                 </div>
 
@@ -93,7 +81,9 @@
                   />
 
                   <template v-if="preview.eyecatch_image">
-                    <div class="pos-topLeftAlign user_storage_eyecatch_image_preview">
+                    <div
+                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
+                    >
                       <v-img
                         :src="preview.eyecatch_image"
                         alt=""
@@ -103,7 +93,9 @@
                   </template>
 
                   <template v-else-if="form.eyecatch_image_url">
-                    <div class="pos-topLeftAlign user_storage_eyecatch_image_preview">
+                    <div
+                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
+                    >
                       <v-img
                         :src="form.eyecatch_image_url"
                         alt=""
@@ -113,16 +105,11 @@
                   </template>
 
                   <template v-else>
-                    <v-card class="pos-topLeftAlign user_storage_eyecatch_image_empty">
-                      <div
-                        class="pos-relative"
-                        style="height: 200px"
-                      >
-                        <v-icon
-                          class="pos-topAndBottomCenter"
-                          light
-                          x-large
-                        >
+                    <v-card
+                      class="pos-topLeftAlign user_storage_eyecatch_image_empty"
+                    >
+                      <div class="pos-relative" style="height: 200px">
+                        <v-icon class="pos-topAndBottomCenter" light x-large>
                           mdi-plus
                         </v-icon>
                       </div>
@@ -146,15 +133,8 @@
                   />
 
                   <v-card class="pos-topLeftAlign user_storage_object_empty">
-                    <div
-                      class="pos-relative"
-                      style="height: 200px"
-                    >
-                      <v-icon
-                        class="pos-topAndBottomCenter"
-                        light
-                        x-large
-                      >
+                    <div class="pos-relative" style="height: 200px">
+                      <v-icon class="pos-topAndBottomCenter" light x-large>
                         mdi-plus
                       </v-icon>
                     </div>
@@ -234,7 +214,7 @@ export default {
         description: '' /* String */,
         long_comment: '' /* String */,
         eyecatch_image: '' /* FILE */,
-        eyecatch_image_url: '' /* URL */,
+        eyecatch_image_id: '' /* UUID Never Change!! */,
         title: '' /* String */,
         storage: '' /* FILE */,
         storage_url: '' /* URL */,
@@ -243,9 +223,6 @@ export default {
       /* preview表示用 */
       preview: {
         eyecatch_image: ''
-      },
-      icons: {
-        iconfont: 'mdiSvg' // 'mdi' || 'mdiSvg' || 'md' || 'fa' || 'fa4' || 'faSvg'
       }
     }
   },
@@ -262,6 +239,8 @@ export default {
         this.form[key] = this.data[key]
       }
     })
+    this.preview.eyecatch_image = this.data.eyecatch_image
+    this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
   },
 
   methods: {
