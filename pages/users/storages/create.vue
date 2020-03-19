@@ -37,6 +37,32 @@
 
           <v-container>
             <v-row>
+              <v-col cols="12">
+                <!-- title -->
+                <v-text-field
+                  v-model="form.title"
+                  :counter="255"
+                  :label="$t('title')"
+                  required
+                  outlined
+                  clearable
+                />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <!-- web_address -->
+                <v-text-field
+                  v-model="form.web_address"
+                  :counter="255"
+                  :label="$t('web_address')"
+                  required
+                  outlined
+                  clearable
+                />
+              </v-col>
+            </v-row>
+            <v-row>
               <!-- 画像のForm -->
               <v-col cols="7">
                 <h3>{{ $t('eyecatch_image') }}</h3>
@@ -117,33 +143,15 @@
             </v-row>
 
             <v-row>
-              <v-col cols="4">
-                <!-- title -->
-                <v-text-field
-                  v-model="form.title"
-                  :counter="255"
-                  :label="$t('title')"
-                  required
-                />
-              </v-col>
-
-              <v-col cols="4">
+              <v-col cols="12">
                 <!-- description -->
                 <v-text-field
                   v-model="form.description"
                   :counter="255"
                   :label="$t('description')"
                   required
-                />
-              </v-col>
-
-              <v-col cols="4">
-                <!-- web_address -->
-                <v-text-field
-                  v-model="form.web_address"
-                  :counter="255"
-                  :label="$t('web_address')"
-                  required
+                  outlined
+                  clearable
                 />
               </v-col>
             </v-row>
