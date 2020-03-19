@@ -8,11 +8,7 @@
         <!-- 画像の挿入 -->
         <div class="">
           <div class="d-flex pos-relative justify-end pr-0 pt-0">
-            <v-img
-              :src="headerimg"
-              width="100%"
-              height="200"
-            > </v-img>
+            <v-img :src="headerimg" width="100%" height="200"> </v-img>
             <v-btn
               class="teal--text text--lighten-1 btn "
               color="grey lighten-3"
@@ -36,10 +32,7 @@
 
           <template v-if="preview.eyecatch_image">
             <div class="user_storage_eyecatch_image_preview">
-              <v-avatar
-                class=""
-                size="280"
-              >
+              <v-avatar class="" size="200">
                 <v-img
                   :src="preview.eyecatch_image"
                   class="pos-topAndBottomCenter"
@@ -51,10 +44,7 @@
 
           <template v-else-if="formPage.eyecatch_image_url">
             <div class=" user_storage_eyecatch_image_preview">
-              <v-avatar
-                class="user-icon"
-                size="280"
-              >
+              <v-avatar class="user-icon" size="200">
                 <v-img
                   :src="formPage.eyecatch_image_url"
                   class="pos-topAndBottomCenter"
@@ -65,16 +55,8 @@
           </template>
 
           <template v-else>
-            <v-avatar
-              class="user-icon"
-              size="280"
-              color="grey lighten-1"
-            >
-              <v-icon
-                class="pos-topAndBottomCenter"
-                light
-                x-large
-              >
+            <v-avatar class="user-icon" size="200" color="grey lighten-1">
+              <v-icon class="pos-topAndBottomCenter" light x-large>
                 mdi-plus
               </v-icon>
             </v-avatar>
@@ -82,20 +64,11 @@
         </div>
 
         <v-row justify="center">
-          <v-col
-            class="pb-0 pt-0"
-            cols="12"
-          >
+          <v-col class="pb-0 pt-0" cols="12">
             <v-card color="grey lighten-4">
               <v-row justify="center">
-                <v-col
-                  class="pt170"
-                  cols="4"
-                >
-                  <v-text-field
-                    label="name"
-                    single-line
-                  ></v-text-field>
+                <v-col class="pt170" cols="4">
+                  <v-text-field label="name" single-line></v-text-field>
                 </v-col>
               </v-row>
               <v-row justify="center">
@@ -131,10 +104,7 @@
 
     <!--debug-->
 
-    <v-form
-      @submit.prevent="updatePage"
-      @keydown="formPage.onKeydown($event)"
-    >
+    <v-form @submit.prevent="updatePage" @keydown="formPage.onKeydown($event)">
       <v-text-field
         v-model="formPage.long_comment"
         :counter="255"
