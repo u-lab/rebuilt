@@ -37,7 +37,7 @@
           <template v-if="preview.eyecatch_image">
             <div class="user_storage_eyecatch_image_preview">
               <v-avatar
-                class="user-icon"
+                class=""
                 size="280"
               >
                 <v-img
