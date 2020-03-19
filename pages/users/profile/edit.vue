@@ -7,10 +7,15 @@
     <v-container>
       <v-card color="grey lighten-1">
         <!-- 画像の挿入 -->
-        <div class="pb150">
-          <div class="d-flex justify-end pr-3 pt-4">
+        <div class="">
+          <div class="d-flex pos-relative justify-end pr-0 pt-0">
+            <v-img
+              :src="headerimg"
+              width="100%"
+              height="200"
+            > </v-img>
             <v-btn
-              class="teal--text text--lighten-1 "
+              class="teal--text text--lighten-1 btn-store "
               color="grey lighten-3"
             >
               Store
@@ -82,14 +87,20 @@
           >
             <v-card color="grey lighten-4">
               <v-row justify="center">
+                <v-btn
+                  class="teal--text text--lighten-1 btn-edit "
+                  color="grey lighten-3"
+                >編集</v-btn>
                 <v-col
                   class="pt170"
                   cols="4"
                 >
                   <v-text-field
-                    label="name"
-                    single-line
-                  ></v-text-field>
+                    v-model="formUser.name"
+                    :counter="255"
+                    :label="$t('name')"
+                    required
+                  />
                 </v-col>
               </v-row>
               <v-row justify="center">
@@ -104,17 +115,24 @@
                 </v-col>
               </v-row>
               <v-row justify="center">
-                <v-col cols="5">
-                  <v-card-title>
-                    Career
-                  </v-card-title>
-                  <v-card height="700px"> </v-card>
-                </v-col>
-                <v-col cols="5">
-                  <v-card-title>
-                    Reword
-                  </v-card-title>
-                  <v-card height="700px"> </v-card>
+                <v-card-title>-work-</v-card-title>
+                <v-btn
+                  class="white--text  btn-work"
+                  color="teal lighten-1"
+                >
+                  <v-icon left>mdi-plus</v-icon>work
+                </v-btn>
+              </v-row>
+              <v-row>
+                <v-col
+                  v-for="n in 9"
+                  align="center"
+                  cols="4"
+                >
+                  <v-card width="400px">
+                    <v-img :src="workimg"> </v-img>
+                    <v-card-title>Rocket room</v-card-title>
+                  </v-card>
                 </v-col>
               </v-row>
             </v-card>
@@ -236,6 +254,8 @@ import axios from 'axios'
 import { mapGetters } from 'vuex'
 import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/user/UserTitle'
+import headerimg from '~/assets/img/work2.jpg'
+import workimg from '~/assets/img/work1.jpg'
 
 export default {
   middleware: 'auth',
@@ -267,7 +287,9 @@ export default {
       }),
       preview: {
         eyecatch_image: ''
-      }
+      },
+      headerimg,
+      workimg
     }
   },
 
@@ -357,5 +379,30 @@ export default {
   transform: translateY(50%) translateX(-50%);
   -webkit-transform: translateY(50%) translateX(-50%);
   z-index: 1;
+}
+.btn-store {
+  position: absolute;
+  left: 95%;
+  top: 0;
+
+  transform: translateY(50%) translateX(-50%);
+  -webkit-transform: translateY(50%) translateX(-50%);
+  z-index: 1;
+}
+.btn-edit {
+  position: absolute;
+  left: 15%;
+  top: 5%;
+
+  transform: translateY(50%) translateX(-50%);
+  -webkit-transform: translateY(50%) translateX(-50%);
+}
+.btn-work {
+  position: absolute;
+  left: 92%;
+  top: 27%;
+
+  transform: translateY(50%) translateX(-50%);
+  -webkit-transform: translateY(50%) translateX(-50%);
 }
 </style>
