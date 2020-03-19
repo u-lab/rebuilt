@@ -6,28 +6,48 @@
     <v-container>
       <v-card color="grey lighten-1">
         <!-- 画像の挿入 -->
-        <div class="pb20">
+        <div class="pb150">
           <div class="d-flex justify-end pr-3 pt-4">
-            <v-btn class="teal--text text--lighten-1 " color="grey lighten-3">
+            <v-btn
+              class="teal--text text--lighten-1 "
+              color="grey lighten-3"
+            >
               Store
             </v-btn>
           </div>
         </div>
 
         <div class="pos-relative">
-          <v-avatar class="user-icon" size="280" color="grey lighten-1">
-            <v-icon class="pos-topAndBottomCenter" light x-large>
+          <v-avatar
+            class="user-icon"
+            size="280"
+            color="grey lighten-1"
+          >
+            <v-icon
+              class="pos-topAndBottomCenter"
+              light
+              x-large
+            >
               mdi-plus
             </v-icon>
           </v-avatar>
         </div>
 
         <v-row justify="center">
-          <v-col class="pb-0" cols="12">
+          <v-col
+            class="pb-0"
+            cols="12"
+          >
             <v-card color="grey lighten-4">
               <v-row justify="center">
-                <v-col class="pt20" cols="4">
-                  <v-text-field label="name" single-line></v-text-field>
+                <v-col
+                  class="pt170"
+                  cols="4"
+                >
+                  <v-text-field
+                    label="name"
+                    single-line
+                  ></v-text-field>
                 </v-col>
               </v-row>
               <v-row justify="center">
@@ -63,7 +83,10 @@
 
     <!--debug-->
 
-    <v-form @submit.prevent="updatePage" @keydown="formPage.onKeydown($event)">
+    <v-form
+      @submit.prevent="updatePage"
+      @keydown="formPage.onKeydown($event)"
+    >
       <v-text-field
         v-model="formPage.long_comment"
         :counter="255"
@@ -106,6 +129,13 @@ export default {
 
   components: {
     UserTitle
+  },
+  data() {
+    return {
+      preview: {
+        eyecatch_image: ''
+      }
+    }
   },
 
   data: () => ({
@@ -155,10 +185,10 @@ export default {
 }
 </script>
 <style>
-.pt20 {
+.pt170 {
   padding-top: 170px;
 }
-.pb20 {
+.pb150 {
   padding-bottom: 150px;
 }
 
