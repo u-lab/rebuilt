@@ -18,19 +18,52 @@
         </div>
 
         <div class="pos-relative">
-          <v-avatar
-            class="user-icon"
-            size="280"
-            color="grey lighten-1"
-          >
-            <v-icon
-              class="pos-topAndBottomCenter"
-              light
-              x-large
+          <!-- eyecatch_image -->
+          <v-file-input
+            v-model="formPage.eyecatch_image"
+            :label="$t('eyecatch_image')"
+            @change="eyecatchImageFileChange"
+            accept="image/*"
+            show-size
+            filled
+            height="200px"
+          />
+
+          <template v-if="preview.eyecatch_image">
+            <div class="pos-topLeftAlign user_storage_eyecatch_image_preview">
+              <v-img
+                :src="preview.eyecatch_image"
+                alt=""
+                height="200px"
+              />
+            </div>
+          </template>
+
+          <template v-else-if="formPage.eyecatch_image_url">
+            <div class="pos-topLeftAlign user_storage_eyecatch_image_preview">
+              <v-img
+                :src="formPage.eyecatch_image_url"
+                alt=""
+                height="200px"
+              />
+            </div>
+          </template>
+
+          <template v-else>
+            <v-avatar
+              class="user-icon"
+              size="280"
+              color="grey lighten-1"
             >
-              mdi-plus
-            </v-icon>
-          </v-avatar>
+              <v-icon
+                class="pos-topAndBottomCenter"
+                light
+                x-large
+              >
+                mdi-plus
+              </v-icon>
+            </v-avatar>
+          </template>
         </div>
 
         <v-row justify="center">
@@ -132,20 +165,18 @@ export default {
   },
   data() {
     return {
+      formPage: new Form({
+        long_comment: '' /* String */,
+        masterpiece_storage_id: '' /* String */,
+        eyecatch_image: '' /* FILE */,
+        user_id: '' /* Integer */,
+        storage: ''
+      }),
       preview: {
         eyecatch_image: ''
       }
     }
   },
-
-  data: () => ({
-    formPage: new Form({
-      long_comment: '' /* String */,
-      masterpiece_storage_id: '' /* String */,
-      user_id: '' /* Integer */
-    }),
-    storage: ''
-  }),
 
   computed: mapGetters({
     user: 'auth/user'
@@ -179,6 +210,14 @@ export default {
         this.$router.push({ name: 'users.dashboard' })
       } catch (e) {
         console.log(e)
+      }
+    },
+    eyecatchImageFileChange(e) {
+      // e は FILE Objectであることに注意
+      try {
+        this.preview.eyecatch_image = URL.createObjectURL(e)
+      } catch (e) {
+        this.preview.eyecatch_image = null
       }
     }
   }
