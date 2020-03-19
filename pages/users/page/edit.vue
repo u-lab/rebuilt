@@ -3,10 +3,9 @@
     <!-- TODO 自分の情報を修正 -->
     <user-title title="ポートフォリオ編集" />
   
-  
 <v-container>
-  <v-card color="grey lighten-1">
-    <v-row justify="end">
+  <v-card  color="grey lighten-1">
+    <v-row class="pb20" justify="end">
       
       <v-col  cols="4">
         <div class="d-flex justify-end pr-3">
@@ -16,25 +15,23 @@
         </div>
       </v-col>
     </v-row>
-    <v-row justify="center" >
-      <v-col cols="1">
-        
-                
-                      <div class=" align-end">
-                        <v-avatar color="indigo">
-                        <v-icon class="pos-topAndBottomCenter" light x-large>
-                          mdi-plus
-                        </v-icon>
-                        </v-avatar>
-                      </div>
-                    
+    <v-row class="user-icon-parent"  justify="center" >
+      <v-col cols="1">  
+        <div class=" align-end">
+          <v-avatar class="user-icon" size="280" color="grey lighten-1">
+          <v-icon class="pos-topAndBottomCenter" light x-large>
+            mdi-plus
+          </v-icon>
+          </v-avatar>
+        </div>
+                      
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col class="pb-0" cols="12">
       <v-card  color="grey lighten-4">
         <v-row justify="center">
-          <v-col class="pt-20" cols="4">
+          <v-col class="pt20" cols="4">
         <v-text-field
             label="name"
             single-line
@@ -57,14 +54,14 @@
             <v-card-title>
               Career
             </v-card-title>
-            <v-card height="500px">
+            <v-card height="700px">
             </v-card>
           </v-col>
           <v-col cols="5">
              <v-card-title>
               Reword
             </v-card-title>
-            <v-card height="500px">
+            <v-card height="700px">
             </v-card>
           </v-col>
         </v-row>
@@ -174,7 +171,23 @@ export default {
 }
 </script>
 <style>
-.pt-20{
-  padding:40px
+.pt20{
+  padding-top:170px
+}
+.pb20{
+  padding-bottom: 150px;
+}
+.user-icon-parent{
+  position: relative;
+}
+.user-icon{
+    position: absolute;
+  left: 50%;
+  bottom: 50%;
+
+  transform: translateY(50%) translateX(-50%);
+  -webkit-transform: translateY(50%) translateX(-50%);
+  z-index: 1;
+  
 }
 </style>
