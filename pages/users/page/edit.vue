@@ -2,31 +2,26 @@
   <div>
     <!-- TODO 自分の情報を修正 -->
     <user-title title="ポートフォリオ編集" />
-  
-<v-container>
-  <v-card  color="grey lighten-1">
-    <v-row class="pb20" justify="end">
-      
-      <v-col  cols="4">
-        <div class="d-flex justify-end pr-3">
-        <v-btn  class="teal--text text--lighten-1 " color="grey lighten-3">
-          Store
-        </v-btn>
+
+    <v-container>
+      <v-card  color="grey lighten-1">
+        <!-- 画像の挿入 -->
+        <div class="pb20">
+          <div class="d-flex justify-end pr-3 pt-4">
+            <v-btn class="teal--text text--lighten-1 " color="grey lighten-3">
+              Store
+            </v-btn>
+          </div>
         </div>
-      </v-col>
-    </v-row>
-    <v-row class="user-icon-parent"  justify="center" >
-      <v-col cols="1">  
-        <div class=" align-end">
+
+        <div class="pos-relative">
           <v-avatar class="user-icon" size="280" color="grey lighten-1">
-          <v-icon class="pos-topAndBottomCenter" light x-large>
-            mdi-plus
-          </v-icon>
+            <v-icon class="pos-topAndBottomCenter" light x-large>
+              mdi-plus
+            </v-icon>
           </v-avatar>
         </div>
-                      
-      </v-col>
-    </v-row>
+
     <v-row justify="center">
       <v-col class="pb-0" cols="12">
       <v-card  color="grey lighten-4">
@@ -70,11 +65,11 @@
     </v-row>
   </v-card>
 </v-container>
-    
-  
-  
+
+
+
     <!--debug-->
-    
+
       <v-form
         @submit.prevent="updatePage"
         @keydown="formPage.onKeydown($event)"
@@ -177,17 +172,14 @@ export default {
 .pb20{
   padding-bottom: 150px;
 }
-.user-icon-parent{
-  position: relative;
-}
+
 .user-icon{
-    position: absolute;
+  position: absolute;
   left: 50%;
   bottom: 50%;
 
   transform: translateY(50%) translateX(-50%);
   -webkit-transform: translateY(50%) translateX(-50%);
   z-index: 1;
-  
 }
 </style>
