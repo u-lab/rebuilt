@@ -68,7 +68,10 @@
               <v-col cols="7">
                 <h3>{{ $t('eyecatch_image') }}</h3>
 
-                <div class="pos-relative v-file-input-icon-none">
+                <eye-catch-image-display
+                  :src="eyecatch_image_display_src"
+                  height="200px"
+                >
                   <!-- eyecatch_image -->
                   <v-file-input
                     v-model="form.eyecatch_image"
@@ -79,59 +82,7 @@
                     filled
                     height="200px"
                   />
-
-                  <template v-if="preview.eyecatch_image_url">
-                    <div
-                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
-                    >
-                      <v-img
-                        :src="preview.eyecatch_image_url"
-                        alt=""
-                        height="200px"
-                      />
-                      <div
-                        class="pos-topLeftAlign"
-                        style="width: 100%; height: 200px"
-                      >
-                        <v-icon class="pos-topAndBottomCenter" light x-large>
-                          mdi-plus
-                        </v-icon>
-                      </div>
-                    </div>
-                  </template>
-
-                  <template v-else-if="form.eyecatch_image_url">
-                    <div
-                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
-                    >
-                      <v-img
-                        :src="form.eyecatch_image_url"
-                        alt=""
-                        height="200px"
-                      />
-                      <div
-                        class="pos-topLeftAlign"
-                        style="width: 100%; height: 200px"
-                      >
-                        <v-icon class="pos-topAndBottomCenter" light x-large>
-                          mdi-plus
-                        </v-icon>
-                      </div>
-                    </div>
-                  </template>
-
-                  <template v-else>
-                    <v-card
-                      class="pos-topLeftAlign user_storage_eyecatch_image_empty"
-                    >
-                      <div class="pos-relative" style="height: 200px">
-                        <v-icon class="pos-topAndBottomCenter" light x-large>
-                          mdi-plus
-                        </v-icon>
-                      </div>
-                    </v-card>
-                  </template>
-                </div>
+                </eye-catch-image-display>
               </v-col>
 
               <v-col cols="5">
@@ -212,6 +163,7 @@ import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/user/UserTitle'
+import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {
@@ -221,6 +173,7 @@ function throwNotEqualStorageID() {
 export default {
   middleware: 'auth',
   components: {
+    EyeCatchImageDisplay,
     UserTitle
   },
 
@@ -244,6 +197,20 @@ export default {
       preview: {
         eyecatch_image_url: ''
       }
+    }
+  },
+
+  computed: {
+    eyecatch_image_display_src() {
+      if (this.preview.eyecatch_image_url) {
+        return this.preview.eyecatch_image_url
+      }
+
+      if (this.data.eyecatch_image.url) {
+        return this.data.eyecatch_image.url
+      }
+
+      return ''
     }
   },
 
