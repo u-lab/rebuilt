@@ -1,29 +1,17 @@
 <template>
   <div>
-    <user-title
-      class="text-center"
-      title="-my work-"
-    />
+    <user-title class="text-center" title="-my work-" />
 
     <!-- TODO 作品情報を修正 -->
-    <v-form
-      @submit.prevent="update"
-      @keydown="form.onKeydown($event)"
-    >
+    <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <v-container>
         <v-card>
-          <v-card
-            color="#26A69A"
-            dark
-          >
+          <v-card color="#26A69A" dark>
             <div class="px-4">
               <div class="d-flex justify-space-between">
                 <div>
                   <v-card-title>
-                    <v-icon
-                      dark
-                      x-large
-                    >mdi-plus</v-icon>Work
+                    <v-icon dark x-large>mdi-plus</v-icon>Work
                   </v-card-title>
                 </div>
 
@@ -92,37 +80,52 @@
                     height="200px"
                   />
 
-                  <template v-if="preview.eyecatch_image">
-                    <div class="pos-topLeftAlign user_storage_eyecatch_image_preview">
+                  <template v-if="preview.eyecatch_image_url">
+                    <div
+                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
+                    >
                       <v-img
-                        :src="preview.eyecatch_image"
+                        :src="preview.eyecatch_image_url"
                         alt=""
                         height="200px"
                       />
+                      <div
+                        class="pos-topLeftAlign"
+                        style="width: 100%; height: 200px"
+                      >
+                        <v-icon class="pos-topAndBottomCenter" light x-large>
+                          mdi-plus
+                        </v-icon>
+                      </div>
                     </div>
                   </template>
 
                   <template v-else-if="form.eyecatch_image_url">
-                    <div class="pos-topLeftAlign user_storage_eyecatch_image_preview">
+                    <div
+                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
+                    >
                       <v-img
                         :src="form.eyecatch_image_url"
                         alt=""
                         height="200px"
                       />
+                      <div
+                        class="pos-topLeftAlign"
+                        style="width: 100%; height: 200px"
+                      >
+                        <v-icon class="pos-topAndBottomCenter" light x-large>
+                          mdi-plus
+                        </v-icon>
+                      </div>
                     </div>
                   </template>
 
                   <template v-else>
-                    <v-card class="pos-topLeftAlign user_storage_eyecatch_image_empty">
-                      <div
-                        class="pos-relative"
-                        style="height: 200px"
-                      >
-                        <v-icon
-                          class="pos-topAndBottomCenter"
-                          light
-                          x-large
-                        >
+                    <v-card
+                      class="pos-topLeftAlign user_storage_eyecatch_image_empty"
+                    >
+                      <div class="pos-relative" style="height: 200px">
+                        <v-icon class="pos-topAndBottomCenter" light x-large>
                           mdi-plus
                         </v-icon>
                       </div>
@@ -146,15 +149,8 @@
                   />
 
                   <v-card class="pos-topLeftAlign user_storage_object_empty">
-                    <div
-                      class="pos-relative"
-                      style="height: 200px"
-                    >
-                      <v-icon
-                        class="pos-topAndBottomCenter"
-                        light
-                        x-large
-                      >
+                    <div class="pos-relative" style="height: 200px">
+                      <v-icon class="pos-topAndBottomCenter" light x-large>
                         mdi-plus
                       </v-icon>
                     </div>
@@ -246,7 +242,7 @@ export default {
       }),
       /* preview表示用 */
       preview: {
-        eyecatch_image: ''
+        eyecatch_image_url: ''
       }
     }
   },
@@ -263,7 +259,7 @@ export default {
         this.form[key] = this.data[key]
       }
     })
-    this.preview.eyecatch_image = this.data.eyecatch_image
+    this.preview.eyecatch_image_url = this.data.eyecatch_image.url
     this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
   },
 
