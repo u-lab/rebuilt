@@ -269,9 +269,9 @@ export default {
     eyecatchImageFileChange(e) {
       // e は FILE Objectであることに注意
       try {
-        this.preview.eyecatch_image = URL.createObjectURL(e)
+        this.preview.eyecatch_image_url = URL.createObjectURL(e)
       } catch (e) {
-        this.preview.eyecatch_image = null
+        this.preview.eyecatch_image_url = null
       }
     },
     onFileChange(e) {
