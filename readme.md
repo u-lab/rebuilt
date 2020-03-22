@@ -21,49 +21,47 @@ $ npm run dev
 
 ## 環境
 
--   Nuxt.js 2.11
--   Vue.js 2.6
+- Nuxt.js 2.11
+- Vue.js 2.6
 
 ## サイトマップ
 
--   HOME (/)
+- HOME (/)
 
--   個人ページ (/pages/{username})
+- 個人ページ (/pages/{username})
+  - 作品ページ一覧(/pages/{username}/storages)
+    - 作品ページ (/pages/{username}/storages/{ storageID })
 
-    -   作品ページ一覧(/pages/{username}/storages)
+- サイトマップ(/sitemap)
 
-        -   作品ページ (/pages/{username}/storages/{ storageID })
+- ログイン(/login)
 
--   サイトマップ(/sitemap)
+- 新規登録(/register)
 
--   ログイン(/login)
-
--   新規登録(/register)
-
--   パスワード再発行(/未定義)
+- パスワード再発行(/未定義)
 
 ### 会員ページ
 
--   会員ページ (/users)
+- 会員ページ (/users)
 
--   プロフィール一覧 (/profiles)
+- プロフィール一覧 (/profiles)
 
--   作品一覧(/storages)
+- 作品一覧(/storages)
 
--   ダッシュボード(/users/dashboard)
+- ダッシュボード(/users/dashboard)
 
-    -   自分のプロフィール(/users/profile)
+  - 自分のプロフィール(/users/profile)
+  - プロフィール編集(/users/profile/edit)
 
-    -   プロフィール編集(/users/profile/edit)
+- 自分のポートフォリオ(/users/page)
+  - ポートフォリオ編集(/users/page/edit)
 
--   自分のポートフォリオ(/users/page)
+- 自分の作品一覧 (/users/storages)
+  - 作品追加(/users/storages/{ storageID }/create)
+  - 作品編集(/users/storages/{ storageID }/edit)
 
-    -   ポートフォリオ編集(/users/page/edit)
+- 設定 (/users/settings)
+  - パスワード変更 (/users/settings/password)
+  - メールアドレス変更 (/users/settings/email)
 
--   自分の作品一覧 (/users/storages)
-
-    -   作品追加(/users/storages/{ storageID }/create)
-
-    -   作品編集(/users/storages/{ storageID }/edit)
-
--   ログアウト(/logout)
+- ログアウト(/logout)
