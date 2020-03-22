@@ -6,7 +6,7 @@
     <!-- メールアドレス変更へのリンク -->
 
     <div>
-      <nuxt-link to="">
+      <nuxt-link :to="{ name: 'users.settings.password' }">
         パスワードを変更する
       </nuxt-link>
     </div>
