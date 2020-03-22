@@ -67,7 +67,10 @@
               <v-col cols="7">
                 <h3>{{ $t('eyecatch_image') }}</h3>
 
-                <div class="pos-relative v-file-input-icon-none">
+                <eye-catch-image-display
+                  :src="eyecatch_image_display_src"
+                  height="200px"
+                >
                   <!-- eyecatch_image -->
                   <v-file-input
                     v-model="form.eyecatch_image"
@@ -78,43 +81,7 @@
                     filled
                     height="200px"
                   />
-
-                  <template v-if="preview.eyecatch_image">
-                    <div
-                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
-                    >
-                      <v-img
-                        :src="preview.eyecatch_image"
-                        alt=""
-                        height="200px"
-                      />
-                    </div>
-                  </template>
-
-                  <template v-else-if="form.eyecatch_image_url">
-                    <div
-                      class="pos-topLeftAlign user_storage_eyecatch_image_preview"
-                    >
-                      <v-img
-                        :src="form.eyecatch_image_url"
-                        alt=""
-                        height="200px"
-                      />
-                    </div>
-                  </template>
-
-                  <template v-else>
-                    <v-card
-                      class="pos-topLeftAlign user_storage_eyecatch_image_empty"
-                    >
-                      <div class="pos-relative" style="height: 200px">
-                        <v-icon class="pos-topAndBottomCenter" light x-large>
-                          mdi-plus
-                        </v-icon>
-                      </div>
-                    </v-card>
-                  </template>
-                </div>
+                </eye-catch-image-display>
               </v-col>
 
               <v-col cols="5">
@@ -194,6 +161,7 @@
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/user/UserTitle'
+import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
 
 export default {
   middleware: 'auth',
@@ -201,6 +169,7 @@ export default {
   layout: 'user',
 
   components: {
+    EyeCatchImageDisplay,
     UserTitle
   },
 
@@ -216,8 +185,18 @@ export default {
       }),
       /* preview表示用 */
       preview: {
-        eyecatch_image: ''
+        eyecatch_image_url: ''
       }
+    }
+  },
+
+  computed: {
+    eyecatch_image_display_src() {
+      if (this.preview.eyecatch_image_url) {
+        return this.preview.eyecatch_image_url
+      }
+
+      return ''
     }
   },
 
@@ -245,9 +224,9 @@ export default {
     eyecatchImageFileChange(e) {
       // e は FILE Objectであることに注意
       try {
-        this.preview.eyecatch_image = URL.createObjectURL(e)
+        this.preview.eyecatch_image_url = URL.createObjectURL(e)
       } catch (e) {
-        this.preview.eyecatch_image = null
+        this.preview.eyecatch_image_url = null
       }
     }
   }

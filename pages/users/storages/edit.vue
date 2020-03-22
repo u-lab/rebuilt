@@ -1,29 +1,17 @@
 <template>
   <div>
-    <user-title
-      class="text-center"
-      title="-my work-"
-    />
+    <user-title class="text-center" title="-my work-" />
 
     <!-- TODO 作品情報を修正 -->
-    <v-form
-      @submit.prevent="update"
-      @keydown="form.onKeydown($event)"
-    >
+    <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <v-container>
         <v-card>
-          <v-card
-            color="#26A69A"
-            dark
-          >
+          <v-card color="#26A69A" dark>
             <div class="px-4">
               <div class="d-flex justify-space-between">
                 <div>
                   <v-card-title>
-                    <v-icon
-                      dark
-                      x-large
-                    >mdi-plus</v-icon>Work
+                    <v-icon dark x-large>mdi-plus</v-icon>Work
                   </v-card-title>
                 </div>
 
@@ -80,7 +68,10 @@
               <v-col cols="7">
                 <h3>{{ $t('eyecatch_image') }}</h3>
 
-                <div class="pos-relative v-file-input-icon-none">
+                <eye-catch-image-display
+                  :src="eyecatch_image_display_src"
+                  height="200px"
+                >
                   <!-- eyecatch_image -->
                   <v-file-input
                     v-model="form.eyecatch_image"
@@ -91,44 +82,7 @@
                     filled
                     height="200px"
                   />
-
-                  <template v-if="preview.eyecatch_image">
-                    <div class="pos-topLeftAlign user_storage_eyecatch_image_preview">
-                      <v-img
-                        :src="preview.eyecatch_image"
-                        alt=""
-                        height="200px"
-                      />
-                    </div>
-                  </template>
-
-                  <template v-else-if="form.eyecatch_image_url">
-                    <div class="pos-topLeftAlign user_storage_eyecatch_image_preview">
-                      <v-img
-                        :src="form.eyecatch_image_url"
-                        alt=""
-                        height="200px"
-                      />
-                    </div>
-                  </template>
-
-                  <template v-else>
-                    <v-card class="pos-topLeftAlign user_storage_eyecatch_image_empty">
-                      <div
-                        class="pos-relative"
-                        style="height: 200px"
-                      >
-                        <v-icon
-                          class="pos-topAndBottomCenter"
-                          light
-                          x-large
-                        >
-                          mdi-plus
-                        </v-icon>
-                      </div>
-                    </v-card>
-                  </template>
-                </div>
+                </eye-catch-image-display>
               </v-col>
 
               <v-col cols="5">
@@ -146,15 +100,8 @@
                   />
 
                   <v-card class="pos-topLeftAlign user_storage_object_empty">
-                    <div
-                      class="pos-relative"
-                      style="height: 200px"
-                    >
-                      <v-icon
-                        class="pos-topAndBottomCenter"
-                        light
-                        x-large
-                      >
+                    <div class="pos-relative" style="height: 200px">
+                      <v-icon class="pos-topAndBottomCenter" light x-large>
                         mdi-plus
                       </v-icon>
                     </div>
@@ -216,6 +163,7 @@ import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/user/UserTitle'
+import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {
@@ -225,6 +173,7 @@ function throwNotEqualStorageID() {
 export default {
   middleware: 'auth',
   components: {
+    EyeCatchImageDisplay,
     UserTitle
   },
 
@@ -246,8 +195,22 @@ export default {
       }),
       /* preview表示用 */
       preview: {
-        eyecatch_image: ''
+        eyecatch_image_url: ''
       }
+    }
+  },
+
+  computed: {
+    eyecatch_image_display_src() {
+      if (this.preview.eyecatch_image_url) {
+        return this.preview.eyecatch_image_url
+      }
+
+      if (this.data.eyecatch_image.url) {
+        return this.data.eyecatch_image.url
+      }
+
+      return ''
     }
   },
 
@@ -263,7 +226,7 @@ export default {
         this.form[key] = this.data[key]
       }
     })
-    this.preview.eyecatch_image = this.data.eyecatch_image
+    this.preview.eyecatch_image_url = this.data.eyecatch_image.url
     this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
   },
 
@@ -306,9 +269,9 @@ export default {
     eyecatchImageFileChange(e) {
       // e は FILE Objectであることに注意
       try {
-        this.preview.eyecatch_image = URL.createObjectURL(e)
+        this.preview.eyecatch_image_url = URL.createObjectURL(e)
       } catch (e) {
-        this.preview.eyecatch_image = null
+        this.preview.eyecatch_image_url = null
       }
     },
     onFileChange(e) {

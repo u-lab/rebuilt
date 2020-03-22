@@ -74,6 +74,10 @@ export default {
             { title: 'アカウント情報を見る', name: 'users.profile.index' },
             { title: 'アカウント情報を編集', name: 'users.profile.edit' }
           ]
+        },
+        {
+          title: '設定',
+          name: 'users.settings.index'
         }
       ]
     }
