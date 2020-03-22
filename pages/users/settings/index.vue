@@ -3,6 +3,8 @@
     <!-- TODO 設定 -->
     <user-title title="設定" />
 
+    <!-- メールアドレス変更へのリンク -->
+
     <div>
       <nuxt-link to="">
         パスワードを変更する
