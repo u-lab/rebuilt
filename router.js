@@ -92,6 +92,12 @@ const routes = [
     component: pageUsers('storages/edit.vue')
   },
 
+  {
+    path: '/users/settings',
+    name: 'users.settings.index',
+    component: pageUsers('settings/index.vue')
+  },
+
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
   {
