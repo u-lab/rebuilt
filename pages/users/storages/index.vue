@@ -1,51 +1,26 @@
 <template>
   <div>
     <!-- TODO 自分の作品を見る -->
-    <user-title class="text-center" title="-my work-" />
+    <user-title :title="$t('mywork')" class="text-center" />
     <v-container>
       <v-row>
-        <v-col>
-          <v-card
+        <v-col cols="4">
+          <storage-card-for-create
             :to="{
               name: 'users.storages.create'
             }"
-            color="#26A69A"
-            dark
-            height="80px"
-            hover
-          >
-            <v-row align="center">
-              <v-col align="end" cols="2">
-                <v-icon dark x-large>mdi-plus</v-icon>
-              </v-col>
-              <v-col cols="10">
-                <v-card-title>Work</v-card-title>
-              </v-col>
-            </v-row>
-          </v-card>
+          />
         </v-col>
 
-        <v-col v-for="(items, key) in data.data" :key="key" cols="6">
-          <v-card
+        <v-col v-for="(items, key) in data.data" :key="key" cols="4">
+          <storage-card-for-edit
             :to="{
               name: 'users.storages.edit',
               params: { storageId: items.storage_id }
             }"
-            hover
-            dark
-            nuxt
-          >
-            <v-img
-              :src="items.eyecatch_image.url"
-              class="align-center white--text"
-              gradient="rgba(0,0,0,.5), rgba(0,0,0,.5)"
-              height="80px"
-            >
-              <v-card-title class="justify-center">
-                {{ items.title }}
-              </v-card-title>
-            </v-img>
-          </v-card>
+            :title="items.title"
+            :src="items.eyecatch_image.url"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -56,6 +31,8 @@
 import axios from 'axios'
 import { mapGetters } from 'vuex'
 import UserTitle from '~/components/user/UserTitle'
+import StorageCardForEdit from '@/components/user/storages/index/StorageCardForEdit'
+import StorageCardForCreate from '@/components/user/storages/index/StorageCardForCreate'
 
 export default {
   middleware: 'auth',
@@ -63,12 +40,24 @@ export default {
   layout: 'user',
 
   components: {
-    UserTitle
+    UserTitle,
+    StorageCardForCreate,
+    StorageCardForEdit
   },
 
-  computed: mapGetters({
-    user: 'auth/user'
-  }),
+  computed: {
+    ...mapGetters({
+      user: 'auth/user'
+    }),
+
+    cardHeight() {
+      return '200px'
+    },
+
+    cardHeightStyle() {
+      return `height: ${this.cardHeight};`
+    }
+  },
 
   async asyncData({ params, error }) {
     const { data } = await axios.get('users/storage')
