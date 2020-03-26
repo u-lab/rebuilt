@@ -42,9 +42,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      drawer: true
+  props: {
+    drawer: {
+      type: Boolean,
+      default: false
     }
   },
 
