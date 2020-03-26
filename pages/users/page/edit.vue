@@ -8,9 +8,32 @@
         <!-- 画像の挿入 -->
         <v-card>
           <div class="pos-relative" style="margin-bottom: 130px">
-            <v-img :src="headerimg" height="180px" />
+            <v-img
+              v-if="preview.background_image_url"
+              :src="preview.background_image_url"
+              class="user_storage_eyecatch_image_preview"
+              height="180px"
+              style="z-index:3;"
+            />
 
-            <div class="pos-marginBottomCenter">
+            <v-img
+              v-else-if="data.background_image.url"
+              :src="data.background_image.url"
+              class="user_storage_eyecatch_image_preview"
+              height="180px"
+              style="z-index:3;"
+            />
+
+            <v-file-input
+              v-model="formPage.background_image"
+              :label="$t('background_image')"
+              @change="backgroundImageFileChange"
+              class="pos-topLeftAlign v-file-input-icon-none w-100"
+              filled
+              height="180px"
+            />
+
+            <div class="pos-marginBottomCenter" style="z-index: 3">
               <div class="pos-relative">
                 <v-avatar
                   :size="130"
@@ -22,6 +45,7 @@
                     class="user_storage_eyecatch_image_preview"
                     style="z-index:5;"
                   />
+
                   <v-img
                     v-else-if="data.icon_image.url"
                     :src="data.icon_image.url"
@@ -60,7 +84,11 @@
 
           <v-row justify="center">
             <v-col cols="4">
-              <v-text-field label="name" single-line></v-text-field>
+              <v-text-field
+                v-model="formPage.nick_name"
+                label="name"
+                single-line
+              />
             </v-col>
           </v-row>
 
@@ -85,7 +113,7 @@
                 <v-card-title>
                   これまでの歴史
                 </v-card-title>
-                <v-card height="700px">
+                <v-card height="200px">
                   <v-btn @click.stop="historyModal = true">追加</v-btn>
 
                   <v-list>
@@ -195,11 +223,9 @@ export default {
       formPage: new Form({
         user_id: '' /* Integer */,
         description: '' /* String */,
-        hobby: '' /* Stirng */,
+        nick_name: '' /* String */,
         icon_image: '' /* FILE */,
         background_image: '' /* FILE */,
-        job_name: '' /* String */,
-        nick_name: '' /* String */,
         web_address: '' /* URL */,
         user_carrer: []
       }),
@@ -269,6 +295,16 @@ export default {
         console.log(e)
       }
     },
+
+    backgroundImageFileChange(e) {
+      // e は FILE Objectであることに注意
+      try {
+        this.preview.background_image_url = URL.createObjectURL(e)
+      } catch (e) {
+        this.preview.background_image_url = null
+      }
+    },
+
     iconImageFileChange(e) {
       // e は FILE Objectであることに注意
       try {
