@@ -3,121 +3,66 @@
     <!-- TODO 自分の情報を修正 -->
     <user-title title="ポートフォリオ編集" />
 
-    <v-container class="pos-relative">
-      <v-card color=" grey lighten-1">
-        <!-- 画像の挿入 -->
-        <div class="">
-          <div class="d-flex pos-relative justify-end pr-0 pt-0">
-            <v-img :src="headerimg" width="100%" height="200"> </v-img>
-            <v-btn
-              class="teal--text text--lighten-1 btn "
-              color="grey lighten-3"
-            >
-              Store
-            </v-btn>
-          </div>
-        </div>
-
-        <div class="pos-relative img-form ">
-          <!-- eyecatch_image -->
-          <v-file-input
-            v-model="formPage.eyecatch_image"
-            :label="$t('eyecatch_image')"
-            @change="eyecatchImageFileChange"
-            accept="image/*"
-            show-size
-            filled
-            height="200px"
-          />
-
-          <template v-if="preview.eyecatch_image">
-            <div class="user_storage_eyecatch_image_preview">
-              <v-avatar class="" size="200">
-                <v-img
-                  :src="preview.eyecatch_image"
-                  class="pos-topAndBottomCenter"
-                  alt=""
-                />
-              </v-avatar>
-            </div>
-          </template>
-
-          <template v-else-if="formPage.eyecatch_image_url">
-            <div class=" user_storage_eyecatch_image_preview">
-              <v-avatar class="user-icon" size="200">
-                <v-img
-                  :src="formPage.eyecatch_image_url"
-                  class="pos-topAndBottomCenter"
-                  alt=""
-                />
-              </v-avatar>
-            </div>
-          </template>
-
-          <template v-else>
-            <v-avatar class="user-icon" size="200" color="grey lighten-1">
-              <v-icon class="pos-topAndBottomCenter" light x-large>
-                mdi-plus
-              </v-icon>
-            </v-avatar>
-          </template>
-        </div>
-
-        <v-row justify="center">
-          <v-col class="pb-0 pt-0" cols="12">
-            <v-card color="grey lighten-4">
-              <v-row justify="center">
-                <v-col class="pt170" cols="4">
-                  <v-text-field label="name" single-line></v-text-field>
-                </v-col>
-              </v-row>
-              <v-row justify="center">
-                <v-col cols="10">
-                  <v-textarea outlined>
-                    <template v-slot:label>
-                      <div>
-                        Bio
-                      </div>
-                    </template>
-                  </v-textarea>
-                </v-col>
-              </v-row>
-              <v-row justify="center">
-                <v-col cols="5">
-                  <v-card-title>
-                    Career
-                  </v-card-title>
-                  <v-card height="700px"> </v-card>
-                </v-col>
-                <v-col cols="5">
-                  <v-card-title>
-                    Reword
-                  </v-card-title>
-                  <v-card height="700px"> </v-card>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-card>
-    </v-container>
-
-    <!--debug-->
-
     <v-form @submit.prevent="updatePage" @keydown="formPage.onKeydown($event)">
-      <v-text-field
-        v-model="formPage.long_comment"
-        :counter="255"
-        :label="$t('long_comment')"
-        required
-      />
+      <v-container>
+        <!-- 画像の挿入 -->
+        <v-card>
+          <div class="pos-relative" style="margin-bottom: 130px">
+            <v-img :src="headerimg" height="180px" />
 
-      <v-text-field
-        v-model="formPage.masterpiece_storage_id"
-        :counter="255"
-        :label="$t('masterpiece_storage')"
-        required
-      />
+            <div class="pos-marginBottomCenter">
+              <v-avatar :size="130" class="pages-user-header-avatar">
+                <v-img :src="preview.icon_image_url" />
+              </v-avatar>
+            </div>
+          </div>
+
+          <v-row justify="center">
+            <v-col cols="4">
+              <v-text-field label="name" single-line></v-text-field>
+            </v-col>
+          </v-row>
+
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-textarea
+                  v-model="formPage.description"
+                  filled
+                  auto-grow
+                  label="Four rows"
+                  rows="4"
+                  row-height="30"
+                  shaped
+                ></v-textarea>
+              </v-col>
+
+              <v-col cols="6">
+                <!-- TODO: 作品一覧の表示 -->
+              </v-col>
+              <v-col cols="6">
+                <v-card-title>
+                  これまでの歴史
+                </v-card-title>
+                <v-card height="700px">
+                  <v-btn @click.stop="historyModal = true">追加</v-btn>
+
+                  <v-list>
+                    <v-list-item
+                      v-for="(item, key) in formPage.user_carrer"
+                      :key="`history-${key}`"
+                    >
+                      <v-list-item-title
+                        >{{ item.date }}: {{ item.name }}</v-list-item-title
+                      >
+                    </v-list-item>
+                  </v-list>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
+      </v-container>
 
       <div class="text-center login-btn-wraaper">
         <!-- Submit Button -->
@@ -130,6 +75,61 @@
           {{ $t('update') }}
         </v-btn>
       </div>
+
+      <v-dialog v-model="historyModal" :width="dialogWidth">
+        <v-card>
+          <v-text-field v-model="history.name" :label="$t('name')" />
+
+          <template v-slot:activator="{ on }">
+            <v-text-field
+              v-model="date"
+              v-on="on"
+              label="Picker in dialog"
+              prepend-icon="event"
+              readonly
+            ></v-text-field>
+          </template>
+
+          <v-dialog
+            ref="dialog"
+            v-model="dateModal"
+            :return-value.sync="history.date"
+            :width="dialogWidth"
+            persistent
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="history.date"
+                v-on="on"
+                label="Picker in dialog"
+                readonly
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="history.date" type="month" scrollable>
+              <v-spacer></v-spacer>
+              <v-btn @click="dateModal = false" text color="primary"
+                >Cancel</v-btn
+              >
+              <v-btn
+                @click="$refs.dialog.save(history.date)"
+                text
+                color="primary"
+              >
+                OK
+              </v-btn>
+            </v-date-picker>
+          </v-dialog>
+
+          <div>
+            <v-btn @click="historyModal = false" text color="primary">
+              Cancel
+            </v-btn>
+            <v-btn @click="historyAdd" text color="primary">
+              OK
+            </v-btn>
+          </div>
+        </v-card>
+      </v-dialog>
     </v-form>
   </div>
 </template>
@@ -152,26 +152,55 @@ export default {
   data() {
     return {
       formPage: new Form({
-        long_comment: '' /* String */,
-        masterpiece_storage_id: '' /* String */,
-        eyecatch_image: '' /* FILE */,
         user_id: '' /* Integer */,
-        storage: ''
+        description: '' /* String */,
+        hobby: '' /* Stirng */,
+        icon_image: '' /* FILE */,
+        background_image: '' /* FILE */,
+        job_name: '' /* String */,
+        nick_name: '' /* String */,
+        web_address: '' /* URL */,
+        user_carrer: []
       }),
       preview: {
-        eyecatch_image: ''
+        icon_image_url: '',
+        background_image_url: ''
       },
-      headerimg
+      headerimg,
+      date: new Date().toISOString().substr(0, 10),
+      dateModal: false,
+      historyModal: false,
+
+      history: {
+        name: '',
+        date: new Date().toISOString().substr(0, 10)
+      }
     }
   },
 
-  computed: mapGetters({
-    user: 'auth/user'
-  }),
+  computed: {
+    ...mapGetters({
+      user: 'auth/user'
+    }),
+
+    dialogWidth() {
+      return '290px'
+    },
+
+    getIconSrc() {
+      const image = this.data.user_profile.icon_image
+      return (
+        this.preview.eyecatch_image_url ||
+        image.url_160 ||
+        image.url_320 ||
+        image.url
+      )
+    }
+  },
 
   async asyncData() {
     try {
-      const { data } = await axios.get('users/page')
+      const { data } = await axios.get('users/profile')
 
       return { success: true, data: data.data }
     } catch (e) {}
@@ -184,8 +213,8 @@ export default {
       }
     })
 
-    this.formPage.masterpiece_storage_id = this.data.masterpiece_storage.storage_id
-    this.storage = this.data.masterpiece_storage
+    this.preview.icon_image_url = this.data.icon_image.url
+    this.preview.background_image_url = this.data.background_image.url
   },
 
   methods: {
@@ -199,19 +228,26 @@ export default {
         console.log(e)
       }
     },
-    eyecatchImageFileChange(e) {
+    iconImageFileChange(e) {
       // e は FILE Objectであることに注意
       try {
-        this.preview.eyecatch_image = URL.createObjectURL(e)
+        this.preview.icon_image_url = URL.createObjectURL(e)
       } catch (e) {
-        this.preview.eyecatch_image = null
+        this.preview.icon_image_url = null
       }
+    },
+
+    historyAdd() {
+      const history = this.history
+      this.formPage.user_carrer.push(Object.create(history))
+      this.history = { name: '', date: new Date().toISOString().substr(0, 10) }
+      this.historyModal = false
     }
   }
 }
 </script>
 <style>
-.pt170 {
+/* .pt170 {
   padding-top: 170px;
 }
 .pb150 {
@@ -246,5 +282,5 @@ export default {
   z-index: 1;
   transform: translateY(50%) translateX(-50%);
   -webkit-transform: translateY(50%) translateX(-50%);
-}
+} */
 </style>
