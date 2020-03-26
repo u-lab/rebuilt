@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <sidebar />
+    <sidebar :drawer="drawer" />
 
-    <user-navbar />
+    <user-navbar @drawer="drawerEvent" />
 
     <!-- Sizes your content based upon application components -->
     <v-content>
@@ -22,6 +22,18 @@ export default {
   components: {
     Sidebar,
     UserNavbar
+  },
+
+  data() {
+    return {
+      drawer: false
+    }
+  },
+
+  methods: {
+    drawerEvent(payload) {
+      this.drawer = payload
+    }
   }
 }
 </script>

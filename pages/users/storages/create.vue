@@ -77,7 +77,6 @@
                     :label="$t('eyecatch_image')"
                     @change="eyecatchImageFileChange"
                     accept="image/*"
-                    show-size
                     filled
                     height="200px"
                   />
@@ -92,9 +91,7 @@
                   <v-file-input
                     v-model="form.storage"
                     :label="$t('storage')"
-                    show-size
                     filled
-                    prepend-icon="mdi-camera"
                     height="200px"
                   />
 
@@ -178,8 +175,8 @@ export default {
       form: new Form({
         description: '' /* String */,
         long_comment: '' /* String */,
-        eyecatch_image: '' /* FILE */,
         title: '' /* String */,
+        eyecatch_image: '' /* FILE */,
         storage: '' /* FILE */,
         web_address: '' /* URL */
       }),
