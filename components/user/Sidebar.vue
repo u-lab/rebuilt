@@ -66,15 +66,8 @@ export default {
             { title: 'みんなの作品を見る', name: 'users.storages' }
           ]
         },
-        {
-          title: 'アカウント設定',
-          subtitles: [
-            { title: 'ポートフォリオを見る', name: 'users.page.index' },
-            { title: 'ポートフォリオを編集', name: 'users.page.edit' },
-            { title: 'アカウント情報を見る', name: 'users.profile.index' },
-            { title: 'アカウント情報を編集', name: 'users.profile.edit' }
-          ]
-        },
+        { title: 'ポートフォリオを見る', name: 'users.page.index' },
+        { title: 'ポートフォリオを編集', name: 'users.page.edit' },
         {
           title: '設定',
           name: 'users.settings.index'

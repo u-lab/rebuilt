@@ -26,3 +26,12 @@
   position: absolute;
   bottom: 0;
 }
+
+.pos-marginBottomCenter {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  transform: translateY(60%) translateX(-50%);
+  -webkit-transform: translateY(60%) translateX(-50%);
+}

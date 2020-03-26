@@ -22,20 +22,24 @@ export default {
     UserTitle
   },
 
-  async asyncData({
-    isDev,
-    route,
-    store,
-    env,
-    params,
-    query,
-    req,
-    res,
-    redirect,
-    error
-  }) {
-    const { data } = await axios.get('users/page')
-    return { success: true, data: data.data }
+  async asyncData() {
+    let profile
+    let storage
+    try {
+      const { data } = await axios.get('users/profile')
+      profile = data
+    } catch (e) {
+      console.error(e)
+    }
+
+    try {
+      const { data } = await axios.get('users/storage')
+      storage = data
+    } catch (e) {
+      console.error(e)
+    }
+
+    return { success: true, data: profile.data, storage }
   }
 }
 </script>
