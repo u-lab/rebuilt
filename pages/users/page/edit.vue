@@ -11,9 +11,50 @@
             <v-img :src="headerimg" height="180px" />
 
             <div class="pos-marginBottomCenter">
-              <v-avatar :size="130" class="pages-user-header-avatar">
-                <v-img :src="preview.icon_image_url" />
-              </v-avatar>
+              <div class="pos-relative">
+                <v-avatar
+                  :size="130"
+                  class="pages-user-header-avatar pos-relative"
+                >
+                  <v-img
+                    v-if="preview.icon_image_url"
+                    :src="preview.icon_image_url"
+                    class="user_storage_eyecatch_image_preview"
+                    style="z-index:5;"
+                  />
+                  <v-img
+                    v-else-if="data.icon_image.url"
+                    :src="data.icon_image.url"
+                    class="user_storage_eyecatch_image_preview"
+                    style="z-index:5;"
+                  />
+
+                  <span
+                    v-else
+                    v-text="`アイコン`"
+                    class="user_storage_eyecatch_image_preview"
+                  />
+
+                  <v-file-input
+                    v-model="formPage.icon_image"
+                    :label="$t('icon')"
+                    @change="iconImageFileChange"
+                    class="pos-topLeftAlign v-file-input-icon-none w-100"
+                    show-size
+                    filled
+                    height="130px"
+                  />
+                </v-avatar>
+
+                <div
+                  class="pos-topAndBottomCenter"
+                  style="z-index: 10; pointer-events: none;"
+                >
+                  <v-icon size="40" class="user_storage_eyecatch_image_preview">
+                    mdi-plus
+                  </v-icon>
+                </div>
+              </div>
             </div>
           </div>
 
