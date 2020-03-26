@@ -43,18 +43,6 @@ const routes = [
     name: 'users.dashboard',
     component: pageUsers('dashboard.vue')
   },
-  // 自分のプロフィール
-  {
-    path: '/users/profile',
-    name: 'users.profile.index',
-    component: pageUsers('profile/index.vue')
-  },
-  // プロフィール編集
-  {
-    path: '/users/profile/edit',
-    name: 'users.profile.edit',
-    component: pageUsers('profile/edit.vue')
-  },
   // 自分のポートフォリオ
   {
     path: '/users/page',
