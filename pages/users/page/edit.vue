@@ -5,6 +5,19 @@
 
     <v-form @submit.prevent="updatePage" @keydown="formPage.onKeydown($event)">
       <v-container>
+        <div class="d-flex justify-end mb-2">
+          <!-- Submit Button -->
+          <v-btn
+            :disabled="formPage.busy"
+            class="teal--text text--lighten-1"
+            color="grey lighten-3"
+            large
+            type="submit"
+          >
+            {{ $t('store') }}
+          </v-btn>
+        </div>
+
         <!-- 画像の挿入 -->
         <v-card>
           <div class="pos-relative" style="margin-bottom: 130px">
@@ -118,7 +131,7 @@
 
                   <v-list>
                     <v-list-item
-                      v-for="(item, key) in formPage.user_carrer"
+                      v-for="(item, key) in formPage.user_career"
                       :key="`history-${key}`"
                     >
                       <v-list-item-title
@@ -132,18 +145,6 @@
           </v-container>
         </v-card>
       </v-container>
-
-      <div class="text-center login-btn-wraaper">
-        <!-- Submit Button -->
-        <v-btn
-          :disabled="formPage.busy"
-          color="grey lighten-1"
-          large
-          type="submit"
-        >
-          {{ $t('update') }}
-        </v-btn>
-      </div>
 
       <v-dialog v-model="historyModal" :width="dialogWidth">
         <v-card>
@@ -227,7 +228,7 @@ export default {
         icon_image: '' /* FILE */,
         background_image: '' /* FILE */,
         web_address: '' /* URL */,
-        user_carrer: []
+        user_career: []
       }),
       preview: {
         icon_image_url: '',
@@ -239,6 +240,7 @@ export default {
       historyModal: false,
 
       history: {
+        id: '',
         name: '',
         date: new Date().toISOString().substr(0, 10)
       }
@@ -282,12 +284,14 @@ export default {
 
     this.preview.icon_image_url = this.data.icon_image.url
     this.preview.background_image_url = this.data.background_image.url
+    this.formPage.background_image = ''
+    this.formPage.icon_image = ''
   },
 
   methods: {
     async updatePage() {
       try {
-        await this.formPage.patch('/users/page')
+        await this.formPage.patch('/users/profile')
 
         // Redirect dashboard.
         this.$router.push({ name: 'users.dashboard' })
@@ -316,8 +320,12 @@ export default {
 
     historyAdd() {
       const history = this.history
-      this.formPage.user_carrer.push(Object.create(history))
-      this.history = { name: '', date: new Date().toISOString().substr(0, 10) }
+      this.formPage.user_career.push(Object.create(history))
+      this.history = {
+        id: '',
+        name: '',
+        date: new Date().toISOString().substr(0, 10)
+      }
       this.historyModal = false
     }
   }
