@@ -50,7 +50,14 @@
                   align="center"
                   cols="6"
                 >
-                  <v-card>
+                  <v-card
+                    :to="{
+                      name: 'users.storages.show',
+                      params: {
+                        storageId: item.storage_id
+                      }
+                    }"
+                  >
                     <v-img :src="item.eyecatch_image.url"> </v-img>
                     <v-card-title v-text="item.title" />
                   </v-card>
