@@ -45,7 +45,7 @@
               <h3>-作品-</h3>
               <v-row>
                 <v-col
-                  v-for="(item, key) in storage.data"
+                  v-for="(item, key) in filterStorage(8)"
                   :key="`storage-${key}`"
                   align="center"
                   cols="6"
@@ -121,7 +121,7 @@ export default {
 
   methods: {
     filterStorage(num = 8) {
-      return num
+      return this.storage.data.slice(0, num)
     }
   }
 }
