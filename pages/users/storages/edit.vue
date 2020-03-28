@@ -44,9 +44,11 @@
                   v-model="form.title"
                   :counter="255"
                   :label="$t('title')"
+                  :error-messages="form.errors.errors.title"
                   required
                   outlined
                   clearable
+                  prefix="必須"
                 />
               </v-col>
             </v-row>
@@ -55,6 +57,7 @@
                 <!-- web_address -->
                 <v-text-field
                   v-model="form.web_address"
+                  :error-messages="form.errors.errors.web_address"
                   :counter="255"
                   :label="$t('web_address')"
                   required
@@ -112,6 +115,7 @@
                 <!-- description -->
                 <v-text-field
                   v-model="form.description"
+                  :error-messages="form.errors.errors.description"
                   :counter="255"
                   :label="$t('description')"
                   required
@@ -127,6 +131,7 @@
                 <!-- TODO: tinyMCEのようなエディタに置き換えたい -->
                 <v-text-field
                   v-model="form.long_comment"
+                  :error-messages="form.errors.errors.long_comment"
                   :counter="255"
                   :label="$t('long_comment')"
                   height="300px"
