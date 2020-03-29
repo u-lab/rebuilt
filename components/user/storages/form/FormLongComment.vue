@@ -1,18 +1,14 @@
 <template>
-  <!-- title -->
-  <v-text-field
+  <v-textarea
     v-model="valueModel"
-    :counter="50"
+    :label="$t('long_comment')"
     :error-messages="errorMessage"
-    :label="$t('title')"
-    clearable
     outlined
-    placeholder="必須"
   />
 </template>
 
 <script>
-import { maxLength, required } from 'vuelidate/lib/validators'
+import { maxLength } from 'vuelidate/lib/validators'
 import { form } from '@/mixins/form'
 
 export default {
@@ -20,8 +16,7 @@ export default {
 
   validations: {
     v: {
-      maxLength: maxLength(50),
-      required
+      maxLength: maxLength(100000)
     }
   },
 
@@ -39,8 +34,7 @@ export default {
       }
 
       const errors = []
-      !validate.required && errors.push('タイトルを入力してください')
-      !validate.maxLength && errors.push('50文字以内で入力してください')
+      !validate.maxLength && errors.push('100000文字以内で入力してください')
       return errors
     }
   }

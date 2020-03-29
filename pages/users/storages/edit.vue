@@ -48,21 +48,19 @@
                   obj-key="title"
                 />
               </v-col>
-            </v-row>
-            <v-row>
+
               <v-col cols="12">
                 <!-- web_address -->
-                <v-text-field
+                <form-web-address
                   v-model="form.web_address"
-                  :error-messages="form.errors.errors.web_address"
-                  :counter="255"
-                  :label="$t('web_address')"
-                  required
-                  outlined
-                  clearable
+                  :dirty="formDirty"
+                  :errors="form.errors"
+                  @dirty="dirty"
+                  obj-key="web_address"
                 />
               </v-col>
             </v-row>
+
             <v-row>
               <!-- 画像のForm -->
               <v-col cols="7">
@@ -110,31 +108,24 @@
             <v-row>
               <v-col cols="12">
                 <!-- description -->
-                <v-text-field
+                <form-description
                   v-model="form.description"
-                  :error-messages="form.errors.errors.description"
-                  :counter="255"
-                  :label="$t('description')"
-                  required
-                  outlined
-                  clearable
+                  :dirty="formDirty"
+                  :errors="form.errors"
+                  @dirty="dirty"
+                  obj-key="description"
                 />
               </v-col>
-            </v-row>
 
-            <v-row>
               <v-col>
                 <!-- long_comment -->
                 <!-- TODO: tinyMCEのようなエディタに置き換えたい -->
-                <v-text-field
+                <form-long-comment
                   v-model="form.long_comment"
-                  :error-messages="form.errors.errors.long_comment"
-                  :counter="255"
-                  :label="$t('long_comment')"
-                  height="300px"
-                  required
-                  outlined
-                  clearable
+                  :dirty="formDirty"
+                  :errors="form.errors"
+                  @dirty="dirty"
+                  obj-key="long_comment"
                 />
               </v-col>
             </v-row>
@@ -164,6 +155,9 @@ import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/user/UserTitle'
 import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
 import FormTitle from '@/components/user/storages/form/FormTitle'
+import FormWebAddress from '@/components/user/storages/form/FormWebAddress'
+import FormDescription from '@/components/user/storages/form/FormDescription'
+import FormLongComment from '@/components/user/storages/form/FormLongComment'
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {
@@ -175,6 +169,9 @@ export default {
   components: {
     EyeCatchImageDisplay,
     FormTitle,
+    FormWebAddress,
+    FormDescription,
+    FormLongComment,
     UserTitle
   },
 
@@ -191,7 +188,6 @@ export default {
         eyecatch_image_id: '' /* UUID Never Change!! */,
         title: '' /* String */,
         storage: '' /* FILE */,
-        storage_url: '' /* URL */,
         web_address: '' /* URL */
       }),
       formDirty: false,
