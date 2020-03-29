@@ -13,9 +13,16 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators'
+
 export default {
   props: {
-    value: { type: String, required: true },
+    value: { type: String, default: '' },
+
+    dirty: {
+      type: Boolean,
+      required: true
+    },
 
     /**
      * APIで発生したエラー
@@ -23,14 +30,18 @@ export default {
     errors: {
       type: Object,
       default: null
-    },
+    }
+  },
 
-    /**
-     * ユーザーが編集したかどうか
-     */
-    isEdit: {
-      type: Boolean,
-      default: false
+  data() {
+    return {
+      v: this.value
+    }
+  },
+
+  validations: {
+    v: {
+      required
     }
   },
 
@@ -41,15 +52,40 @@ export default {
      * @return {?String} エラーメッセージ
      */
     errorMessage() {
-      return this.isEdit ? '' : this.errors.errors.title
+      const errors = []
+      const validate = this.$v.v
+      // ユーザーが一回以上touchしたか
+      if (!this.dirty) {
+        if (this.isErrorServer) {
+          return this.errorServerMessage
+        }
+        return errors
+      }
+      !validate.required && errors.push('タイトルを入力してください')
+      return errors
+    },
+
+    isErrorServer() {
+      const err = this.errors.errors
+      return err && 'title' in err
+    },
+
+    errorServerMessage() {
+      return this.errors.errors.title
     },
 
     valueModel: {
       get() {
-        return this.value
+        return this.$v.v.$model
       },
       set(newVal) {
-        this.isEdit = true /* Userが編集した */
+        this.v = newVal
+        this.$v.v.$touch()
+
+        if (!this.dirty) {
+          this.$emit('dirty')
+        }
+
         return this.$emit('input', newVal)
       }
     }

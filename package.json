@@ -26,7 +26,8 @@
     "popper.js": "^1.16.1",
     "sweetalert2": "^8.19.0",
     "vform": "^1.0.1",
-    "vue-i18n": "^8.15.3"
+    "vue-i18n": "^8.15.3",
+    "vuelidate": "^0.7.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.1.2",

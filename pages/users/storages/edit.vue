@@ -39,8 +39,13 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <!-- title
-                <form-title v-model="form.title" :errors="form.errors" />
+                <!-- title -->
+                <form-title
+                  v-model="form.title"
+                  :dirty="formDirty"
+                  :errors="form.errors"
+                  @dirty="dirty"
+                />
               </v-col>
             </v-row>
             <v-row>
@@ -188,6 +193,7 @@ export default {
         storage_url: '' /* URL */,
         web_address: '' /* URL */
       }),
+      formDirty: false,
       /* preview表示用 */
       preview: {
         eyecatch_image_url: ''
@@ -226,8 +232,13 @@ export default {
   },
 
   methods: {
+    dirty() {
+      this.formDirty = true
+    },
+
     async update() {
       const storageId = this.form.storage_id
+      this.formDirty = false
 
       // storageID が書き換えられていないか確認
       try {
