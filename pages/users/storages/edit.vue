@@ -45,6 +45,7 @@
                   :dirty="formDirty"
                   :errors="form.errors"
                   @dirty="dirty"
+                  obj-key="title"
                 />
               </v-col>
             </v-row>
