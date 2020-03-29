@@ -49,13 +49,13 @@ export default {
     /**
      * エラーメッセージ
      *
-     * @return {?String} エラーメッセージ
+     * @return {String[]} エラーメッセージ
      */
     errorMessage() {
       const errors = []
       const validate = this.$v.v
       // ユーザーが一回以上touchしたか
-      if (!this.dirty) {
+      if (!this.dirty || !this.$v.v.$dirty) {
         if (this.isErrorServer) {
           return this.errorServerMessage
         }
@@ -65,11 +65,21 @@ export default {
       return errors
     },
 
+    /**
+     * サーバーでエラーが発生したかどうか
+     *
+     * @return {Boolean}
+     */
     isErrorServer() {
       const err = this.errors.errors
       return err && 'title' in err
     },
 
+    /**
+     * サーバーで発生したエラー
+     *
+     * @return {String[]}
+     */
     errorServerMessage() {
       return this.errors.errors.title
     },
