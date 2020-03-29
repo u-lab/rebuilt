@@ -39,26 +39,23 @@
             <v-row>
               <v-col cols="12">
                 <!-- title -->
-                <v-text-field
+                <form-title
                   v-model="form.title"
-                  :counter="255"
-                  :label="$t('title')"
-                  required
-                  outlined
-                  clearable
+                  :dirty="formDirty"
+                  :errors="form.errors"
+                  @dirty="dirty"
+                  obj-key="title"
                 />
               </v-col>
-            </v-row>
-            <v-row>
+
               <v-col cols="12">
                 <!-- web_address -->
-                <v-text-field
+                <form-web-address
                   v-model="form.web_address"
-                  :counter="255"
-                  :label="$t('web_address')"
-                  required
-                  outlined
-                  clearable
+                  :dirty="formDirty"
+                  :errors="form.errors"
+                  @dirty="dirty"
+                  obj-key="web_address"
                 />
               </v-col>
             </v-row>
@@ -109,13 +106,12 @@
             <v-row>
               <v-col cols="12">
                 <!-- description -->
-                <v-text-field
+                <form-description
                   v-model="form.description"
-                  :counter="255"
-                  :label="$t('description')"
-                  required
-                  outlined
-                  clearable
+                  :dirty="formDirty"
+                  :errors="form.errors"
+                  @dirty="dirty"
+                  obj-key="description"
                 />
               </v-col>
             </v-row>
@@ -124,14 +120,12 @@
               <v-col>
                 <!-- long_comment -->
                 <!-- TODO: tinyMCEのようなエディタに置き換えたい -->
-                <v-text-field
+                <form-long-comment
                   v-model="form.long_comment"
-                  :counter="255"
-                  :label="$t('long_comment')"
-                  height="300px"
-                  required
-                  outlined
-                  clearable
+                  :dirty="formDirty"
+                  :errors="form.errors"
+                  @dirty="dirty"
+                  obj-key="long_comment"
                 />
               </v-col>
             </v-row>
@@ -159,6 +153,10 @@ import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/user/UserTitle'
 import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
+import FormTitle from '@/components/user/storages/form/FormTitle'
+import FormWebAddress from '@/components/user/storages/form/FormWebAddress'
+import FormDescription from '@/components/user/storages/form/FormDescription'
+import FormLongComment from '@/components/user/storages/form/FormLongComment'
 
 export default {
   middleware: 'auth',
@@ -167,6 +165,10 @@ export default {
 
   components: {
     EyeCatchImageDisplay,
+    FormTitle,
+    FormWebAddress,
+    FormDescription,
+    FormLongComment,
     UserTitle
   },
 
@@ -180,6 +182,7 @@ export default {
         storage: '' /* FILE */,
         web_address: '' /* URL */
       }),
+      formDirty: false,
       /* preview表示用 */
       preview: {
         eyecatch_image_url: ''
@@ -198,6 +201,10 @@ export default {
   },
 
   methods: {
+    dirty() {
+      this.formDirty = true
+    },
+
     async create() {
       // API Serverに POST する
       try {

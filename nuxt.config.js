@@ -51,6 +51,7 @@ module.exports = {
     '~plugins/vform',
     '~plugins/axios',
     '~plugins/fontawesome',
+    '@/plugins/vuelidate',
     { src: '~plugins/bootstrap', mode: 'client' }
   ],
 
