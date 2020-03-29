@@ -39,17 +39,8 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <!-- title -->
-                <v-text-field
-                  v-model="form.title"
-                  :counter="255"
-                  :label="$t('title')"
-                  :error-messages="form.errors.errors.title"
-                  required
-                  outlined
-                  clearable
-                  prefix="必須"
-                />
+                <!-- title
+                <form-title v-model="form.title" :errors="form.errors" />
               </v-col>
             </v-row>
             <v-row>
@@ -166,6 +157,7 @@ import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/user/UserTitle'
 import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
+import FormTitle from '@/components/user/storages/form/FormTitle'
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {
@@ -176,6 +168,7 @@ export default {
   middleware: 'auth',
   components: {
     EyeCatchImageDisplay,
+    FormTitle,
     UserTitle
   },
 
