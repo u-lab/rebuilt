@@ -1,5 +1,4 @@
 <template>
-  <!-- title -->
   <v-text-field
     v-model="valueModel"
     :counter="255"
