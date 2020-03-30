@@ -151,13 +151,17 @@
 <script>
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
+import VueQuillEditor from 'vue-quill-editor/dist/vue-quill-editor'
 import UserTitle from '~/components/user/UserTitle'
 import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
 import FormTitle from '@/components/user/storages/form/FormTitle'
 import FormWebAddress from '@/components/user/storages/form/FormWebAddress'
 import FormDescription from '@/components/user/storages/form/FormDescription'
 import FormLongComment from '@/components/user/storages/form/FormLongComment'
-
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+Vue.use(VueQuillEditor)
 export default {
   middleware: 'auth',
 
