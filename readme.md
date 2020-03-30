@@ -29,8 +29,8 @@ $ npm run dev
 - HOME (/)
 
 - 個人ページ (/pages/{username})
-  - 作品ページ一覧(/pages/{username}/storages)
-    - 作品ページ (/pages/{username}/storages/{ storageID })
+
+  - 作品ページ (/pages/{username}/storages/{ storageID })
 
 - サイトマップ(/sitemap)
 
@@ -41,10 +41,6 @@ $ npm run dev
 - パスワード再発行(/未定義)
 
 ### 会員ページ
-
-- 会員ページ (/users)
-
-- プロフィール一覧 (/profiles)
 
 - 作品一覧(/storages)
 

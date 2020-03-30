@@ -24,12 +24,6 @@ const routes = [
     name: 'pages.storages.show',
     component: page('pages/storages/_storageId.vue')
   },
-  // プロフィール一覧
-  {
-    path: '/profiles',
-    name: 'users.profiles',
-    component: pageUsers('lists/profiles.vue')
-  },
   // 作品一覧
   {
     path: '/storages',
