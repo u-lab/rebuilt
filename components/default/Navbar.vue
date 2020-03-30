@@ -29,16 +29,3 @@ export default {
   }
 }
 </script>
-<style>
-.triangle {
-  position: absolute;
-  top: 22%;
-  right: 5%;
-  margin: 0 auto;
-  width: 70px;
-  border-top: 50px solid #000000;
-  border-right: 50px solid transparent;
-  border-bottom: 50px solid #bdbdbd;
-  border-left: 50px solid transparent;
-}
-</style>
