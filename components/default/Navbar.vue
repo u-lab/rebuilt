@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <header class="d-flex justify-content-between">
-      <div class="default-navbar-container">
+      <div class="default-navbar-container pos-relative">
         <div class="default-navbar-wrapper">
           <nuxt-link
             :to="{ name: 'welcome' }"
@@ -13,6 +13,7 @@
 
             <p v-if="!IsTopPage" class="default-navbar-title">Archi Walk</p>
           </nuxt-link>
+          <div class="triangle "></div>
         </div>
       </div>
     </header>

@@ -1,6 +1,10 @@
 .default-navbar-container {
   width: 100vw;
   padding: 0.5rem 2rem;
+  margin-bottom: 1rem;
+  @include mq(sm) {
+    margin-bottom: 2rem;
+  }
 }
 
 .default-navbar-wrapper {
@@ -8,7 +12,10 @@
 }
 
 .default-navbar-title {
-  font-size: 2rem;
+  font-size: 1.5rem;
+  @include mq(sm) {
+    font-size: 2rem;
+  }
   color: #333;
   padding: 0.25rem 0 0.25rem 1rem;
   margin-bottom: 0 !important; /* pタグの打ち消し */
@@ -16,7 +23,7 @@
 
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     width: 1rem;
     height: 1rem;
     -webkit-box-sizing: border-box;
