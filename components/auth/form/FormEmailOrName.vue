@@ -1,18 +1,16 @@
 <template>
   <v-text-field
     v-model="valueModel"
-    :append-icon="hidden ? 'mdi-eye-off' : 'mdi-eye'"
-    :label="$t('password')"
+    :label="$t('email')"
     :error-messages="errorMessage"
-    :type="hidden ? 'password' : 'text'"
-    @click:append="hidden = !hidden"
     @blur="$v.v.$touch()"
     outlined
+    clearable
   />
 </template>
 
 <script>
-import { minLength, required } from 'vuelidate/lib/validators'
+import { maxLength, required } from 'vuelidate/lib/validators'
 import { form } from '@/mixins/form'
 
 export default {
@@ -20,14 +18,8 @@ export default {
 
   validations: {
     v: {
-      minLength: minLength(8),
+      maxLength: maxLength(255),
       required
-    }
-  },
-
-  data() {
-    return {
-      hidden: true
     }
   },
 
@@ -45,8 +37,8 @@ export default {
       }
 
       const errors = []
-      !validate.required && errors.push('パスワードは必須です')
-      !validate.minLength && errors.push('8文字以上で入力してください')
+      !validate.required && errors.push('ユーザー名かメールアドレスは必須です')
+      !validate.maxLength && errors.push('255文字以内で入力してください')
       return errors
     }
   }

@@ -13,7 +13,7 @@
         />
 
         <!-- Password -->
-        <form-password
+        <form-password-with-confirmation
           v-model="form.password"
           :confirmationField="form.password_confirmation"
           :dirty="formDirty"
@@ -45,7 +45,7 @@ import Form from 'vform'
 import AuthForm from '~/components/auth/AuthForm'
 import AuthWrapper from '~/components/auth/AuthWrapper'
 import FormEmail from '@/components/auth/form/FormEmail'
-import FormPassword from '@/components/auth/form/FormPassword'
+import FormPasswordWithConfirmation from '@/components/auth/form/FormPasswordWithConfirmation'
 
 export default {
   head() {
@@ -56,7 +56,7 @@ export default {
     AuthForm,
     AuthWrapper,
     FormEmail,
-    FormPassword
+    FormPasswordWithConfirmation
   },
 
   layout: 'auth',
