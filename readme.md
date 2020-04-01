@@ -38,7 +38,7 @@ $ npm run dev
 
 - 新規登録(/register)
 
-- パスワード再発行(/未定義)
+- パスワード再発行(/password/reset)
 
 ### 会員ページ
 

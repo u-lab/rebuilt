@@ -1,88 +1,69 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('reset_password')">
-        <form @submit.prevent="reset" @keydown="form.onKeydown($event)">
-          <alert-success :form="form" :message="status" />
+  <auth-wrapper>
+    <auth-form>
+      <v-form @submit.prevent="reset" @keydown="form.onKeydown($event)">
+        <alert-success :form="form" :message="status" />
 
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{
-              $t('email')
-            }}</label>
-            <div class="col-md-7">
-              <input
-                v-model="form.email"
-                :class="{ 'is-invalid': form.errors.has('email') }"
-                type="email"
-                name="email"
-                class="form-control"
-                readonly
-              />
-              <has-error :form="form" field="email" />
-            </div>
-          </div>
+        <!-- Email -->
+        <form-email
+          v-model="form.email"
+          :dirty="formDirty"
+          :errors="form.errors"
+          @dirty="dirty"
+          obj-key="email"
+        />
 
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{
-              $t('password')
-            }}</label>
-            <div class="col-md-7">
-              <input
-                v-model="form.password"
-                :class="{ 'is-invalid': form.errors.has('password') }"
-                type="password"
-                name="password"
-                class="form-control"
-              />
-              <has-error :form="form" field="password" />
-            </div>
-          </div>
+        <!-- Password -->
+        <form-password
+          v-model="form.password"
+          :confirmationField="form.password_confirmation"
+          :dirty="formDirty"
+          :errors="form.errors"
+          @confirmation="updatePasswordConfirmation"
+          @dirty="dirty"
+          obj-key="password"
+        />
 
-          <!-- Password Confirmation -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{
-              $t('confirm_password')
-            }}</label>
-            <div class="col-md-7">
-              <input
-                v-model="form.password_confirmation"
-                :class="{
-                  'is-invalid': form.errors.has('password_confirmation')
-                }"
-                type="password"
-                name="password_confirmation"
-                class="form-control"
-              />
-              <has-error :form="form" field="password_confirmation" />
-            </div>
-          </div>
-
+        <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
-          <div class="form-group row">
-            <div class="col-md-9 ml-md-auto">
-              <v-button :loading="form.busy">
-                {{ $t('reset_password') }}
-              </v-button>
-            </div>
-          </div>
-        </form>
-      </card>
-    </div>
-  </div>
+          <v-btn
+            :disabled="form.busy"
+            color="grey lighten-1"
+            large
+            type="submit"
+          >
+            {{ $t('reset_password') }}
+          </v-btn>
+        </div>
+      </v-form>
+    </auth-form>
+  </auth-wrapper>
 </template>
 
 <script>
 import Form from 'vform'
+import AuthForm from '~/components/auth/AuthForm'
+import AuthWrapper from '~/components/auth/AuthWrapper'
+import FormEmail from '@/components/auth/form/FormEmail'
+import FormPassword from '@/components/auth/form/FormPassword'
 
 export default {
   head() {
     return { title: this.$t('reset_password') }
   },
 
+  components: {
+    AuthForm,
+    AuthWrapper,
+    FormEmail,
+    FormPassword
+  },
+
+  layout: 'auth',
+
   data: () => ({
     status: '',
+    formDirty: false,
     form: new Form({
       token: '',
       email: '',
@@ -97,6 +78,14 @@ export default {
   },
 
   methods: {
+    dirty() {
+      this.formDirty = true
+    },
+
+    updatePasswordConfirmation(value) {
+      this.form.password_confirmation = value
+    },
+
     async reset() {
       const { data } = await this.form.post('/password/reset')
 
