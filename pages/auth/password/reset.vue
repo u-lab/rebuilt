@@ -2,8 +2,6 @@
   <auth-wrapper>
     <auth-form>
       <v-form @submit.prevent="reset" @keydown="form.onKeydown($event)">
-        <alert-success :form="form" :message="status" />
-
         <!-- Email -->
         <form-email
           v-model="form.email"
@@ -94,6 +92,8 @@ export default {
       this.status = data.status
 
       this.form.reset()
+
+      this.$router.push({ name: 'password.reset.success' })
     }
   }
 }

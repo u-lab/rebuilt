@@ -93,6 +93,11 @@ const routes = [
     component: page('auth/password/email.vue')
   },
   {
+    path: '/password/reset/success',
+    name: 'password.reset.success',
+    component: page('auth/password/success.vue')
+  },
+  {
     path: '/password/reset/:token',
     name: 'password.reset',
     component: page('auth/password/reset.vue')
