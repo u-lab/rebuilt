@@ -38,7 +38,11 @@ $ npm run dev
 
 - 新規登録(/register)
 
-- パスワード再発行(/未定義)
+- パスワード再発行申請画面(/password/reset)
+
+- パスワードを変更(/password/reset/:token)
+
+- パスワードの変更完了画面(/password/reset/success)
 
 ### 会員ページ
 
