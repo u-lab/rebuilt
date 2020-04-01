@@ -9,6 +9,7 @@
           v-model="form.email"
           :dirty="formDirty"
           :errors="form.errors"
+          :lazy-validation="true"
           @dirty="dirty"
           obj-key="email"
         />

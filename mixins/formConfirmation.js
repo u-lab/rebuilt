@@ -1,4 +1,4 @@
-export const form = {
+export const formConfirmation = {
   props: {
     /**
      * v-model
@@ -30,6 +30,11 @@ export const form = {
     errors: {
       type: Object,
       default: null
+    },
+
+    lazyValidation: {
+      type: Boolean,
+      default: false
     },
 
     objKey: {
@@ -74,7 +79,10 @@ export const form = {
       },
       set(newVal) {
         this.v = newVal
-        this.$v.v.$touch()
+
+        if (!this.lazyValidation) {
+          this.$v.v.$touch()
+        }
 
         if (!this.dirty) {
           this.$emit('dirty')
@@ -90,7 +98,10 @@ export const form = {
       },
       set(newVal) {
         this.vc = newVal
-        this.$v.vc.$touch()
+
+        if (!this.lazyValidation) {
+          this.$v.vc.$touch()
+        }
 
         if (!this.dirty) {
           this.$emit('dirty')

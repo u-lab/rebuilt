@@ -9,6 +9,7 @@
           v-model="form.email"
           :dirty="formDirty"
           :errors="form.errors"
+          :lazy-validation="true"
           @dirty="dirty"
           obj-key="email"
         />
@@ -19,6 +20,7 @@
           :confirmationField="form.password_confirmation"
           :dirty="formDirty"
           :errors="form.errors"
+          :lazy-validation="true"
           @confirmation="updatePasswordConfirmation"
           @dirty="dirty"
           obj-key="password"

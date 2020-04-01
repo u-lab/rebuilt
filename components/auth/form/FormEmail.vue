@@ -3,6 +3,7 @@
     v-model="valueModel"
     :label="$t('email')"
     :error-messages="errorMessage"
+    @blur="$v.v.$touch()"
     outlined
     clearable
   />

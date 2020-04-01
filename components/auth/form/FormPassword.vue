@@ -4,6 +4,7 @@
       v-model="valueModel"
       :label="$t('password')"
       :error-messages="errorMessage"
+      @blur="$v.v.$touch()"
       outlined
       clearable
     />
@@ -12,6 +13,7 @@
       v-model="valueConfirmationModel"
       :label="$t('confirm_password')"
       :error-messages="errorMessageConfirmation"
+      @blur="$v.vc.$touch()"
       outlined
       clearable
     />
