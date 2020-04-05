@@ -17,7 +17,7 @@
           <v-row class="user">
             <v-col cols="1">
               <v-avatar>
-                <!-- <v-img :src="user.user_profile.icon_image.url" /> -->
+                <v-img :src="user.user_profile.icon_image.url" />
               </v-avatar>
             </v-col>
             <v-col cols="11">
