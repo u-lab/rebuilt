@@ -8,6 +8,7 @@ num=${list[1]}
 kill -9 $num
 
 cd /home/ec2-user/rebuilt
+sudo cp .env.example .env
 sudo rm -rf node_modules
 sudo rm -f package-lock.json
 npm install
