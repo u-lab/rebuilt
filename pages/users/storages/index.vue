@@ -30,7 +30,7 @@
 <script>
 import axios from 'axios'
 import { mapGetters } from 'vuex'
-import UserTitle from '~/components/user/UserTitle'
+import UserTitle from '~/components/molecues/pages/UserTitle'
 import StorageCardForEdit from '@/components/user/storages/index/StorageCardForEdit'
 import StorageCardForCreate from '@/components/user/storages/index/StorageCardForCreate'
 

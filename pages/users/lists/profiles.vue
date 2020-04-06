@@ -18,7 +18,7 @@
 
 <script>
 import axios from 'axios'
-import UserTitle from '~/components/user/UserTitle'
+import UserTitle from '~/components/molecues/pages/UserTitle'
 
 export default {
   middleware: 'auth',

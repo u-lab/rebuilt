@@ -152,7 +152,7 @@
 import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
-import UserTitle from '~/components/user/UserTitle'
+import UserTitle from '~/components/molecues/pages/UserTitle'
 import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
 import FormTitle from '@/components/user/storages/form/FormTitle'
 import FormWebAddress from '@/components/user/storages/form/FormWebAddress'
