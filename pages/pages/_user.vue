@@ -56,8 +56,8 @@
 
 <script>
 import axios from 'axios'
-import UserHeader from '@/components/pages/UserHeader'
-import TabBox from '@/components/pages/TabBox'
+import UserHeader from '@/components/molecues/pages/UserHeader'
+import TabBox from '@/components/molecues/pages/TabBox'
 import BgExampleImg from '@/assets/img/page_background_example.png'
 import myIcon from '~/assets/img/usericon-ex.jpg'
 
