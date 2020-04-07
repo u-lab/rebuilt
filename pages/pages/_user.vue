@@ -2,7 +2,7 @@
   <div>
     <!-- kanaをjobにしてる。デザインを見て直すか決める -->
     <user-header
-      :bgSrc="BgExampleImg"
+      :bgSrc="getBgUrl"
       :iconSrc="getIconUrl"
       :name="data.user_profile.nick_name"
       :kana="data.user_profile.job_name"
@@ -21,9 +21,11 @@
 
         <v-tabs-items v-model="tab">
           <v-tab-item>
-            <v-card flat>
-              <tab-box title="Storage" content="作品を入れる" />
-            </v-card>
+            <div class="pa-4">
+              <user-storage-page
+                :storage="data.user_portfolio.masterpiece_storage"
+              />
+            </div>
           </v-tab-item>
 
           <v-tab-item>
@@ -43,6 +45,14 @@
           </v-tab-item>
         </v-tabs-items>
       </v-card>
+
+      <div class="py-4">
+        <h3>- Other Work -</h3>
+        <storage-card-list
+          :storages="storages.data"
+          :user="$route.params.user"
+        />
+      </div>
     </v-container>
   </div>
 </template>
@@ -50,23 +60,23 @@
 <script>
 import axios from 'axios'
 import UserHeader from '@/components/pages/UserHeader'
+import StorageCardList from '@/components/pages/StorageCardList'
 import TabBox from '@/components/pages/TabBox'
 import TabBoxHistory from '@/components/pages/TabBoxHistory'
-import BgExampleImg from '@/assets/img/page_background_example.png'
-import myIcon from '~/assets/img/usericon-ex.jpg'
+import UserStoragePage from '@/components/templates/pages/UserStoragePage'
 
 export default {
   components: {
     UserHeader,
+    UserStoragePage,
+    StorageCardList,
     TabBox,
     TabBoxHistory
   },
 
   data() {
     return {
-      tab: null,
-      BgExampleImg,
-      myIcon
+      tab: null
     }
   },
 
@@ -74,6 +84,11 @@ export default {
     getIconUrl() {
       const image = this.data.user_profile.icon_image
       return image.url_160 || image.url_320 || image.url
+    },
+
+    getBgUrl() {
+      const image = this.data.user_profile.background_image
+      return image.url_1280 || image.url
     }
   },
 
