@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import LocaleDropdown from '~/components/LocaleDropdown'
-import OtherPageLink from '~/components/auth/OtherPageLink'
+import LocaleDropdown from '~/components/organisms/LocaleDropdown'
+import OtherPageLink from '~/components/molecues/auth/OtherPageLink'
 
 export default {
   components: {

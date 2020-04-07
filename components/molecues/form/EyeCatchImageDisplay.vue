@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import EmptyImage from '@/components/user/storages/form/EmptyImage'
-import PreviewImage from '@/components/user/storages/form/PreviewImage'
+import EmptyImage from '@/components/molecues/form/EmptyImage'
+import PreviewImage from '@/components/molecues/form/PreviewImage'
 
 export default {
   components: {

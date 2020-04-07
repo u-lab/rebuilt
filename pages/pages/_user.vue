@@ -59,10 +59,10 @@
 
 <script>
 import axios from 'axios'
-import UserHeader from '@/components/pages/UserHeader'
-import StorageCardList from '@/components/pages/StorageCardList'
-import TabBox from '@/components/pages/TabBox'
-import TabBoxHistory from '@/components/pages/TabBoxHistory'
+import StorageCardList from '@/components/molecues/storages/StorageCardList'
+import UserHeader from '@/components/molecues/pages/UserHeader'
+import TabBox from '@/components/molecues/pages/TabBox'
+import TabBoxHistory from '@/components/molecues/storages/TabBoxHistory'
 import UserStoragePage from '@/components/templates/pages/UserStoragePage'
 
 export default {

@@ -32,8 +32,8 @@
 
 <script>
 import Form from 'vform'
-import AuthForm from '~/components/auth/AuthForm'
-import AuthWrapper from '~/components/auth/AuthWrapper'
+import AuthForm from '~/components/molecues/auth/AuthForm'
+import AuthWrapper from '~/components/atoms/Wrapper'
 import FormEmail from '@/components/auth/form/FormEmail'
 
 export default {

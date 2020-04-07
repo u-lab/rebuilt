@@ -208,7 +208,7 @@
 import Form from 'vform'
 import { mapGetters } from 'vuex'
 import axios from 'axios'
-import UserTitle from '~/components/user/UserTitle'
+import UserTitle from '~/components/molecues/pages/UserTitle'
 import headerimg from '~/assets/img/work2.jpg'
 
 export default {
