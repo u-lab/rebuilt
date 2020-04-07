@@ -15,6 +15,11 @@ export const form = {
       default: null
     },
 
+    lazyValidation: {
+      type: Boolean,
+      default: false
+    },
+
     objKey: {
       type: String,
       required: true
@@ -56,7 +61,10 @@ export const form = {
       },
       set(newVal) {
         this.v = newVal
-        this.$v.v.$touch()
+
+        if (!this.lazyValidation) {
+          this.$v.v.$touch()
+        }
 
         if (!this.dirty) {
           this.$emit('dirty')

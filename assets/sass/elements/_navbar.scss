@@ -6,14 +6,35 @@
 .nav-item {
   .dropdown-menu {
     border: none;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     border-top: 1px solid #f2f2f2 !important;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
   }
 }
 
 .nav-link {
   .svg-inline--fa {
     font-size: 1.4rem;
+  }
+}
+.triangle {
+  position: absolute;
+  top: 25%;
+  right: 5%;
+  margin: 0 auto;
+  border-top: 50px solid #000000;
+  border-right: 50px solid transparent;
+  border-bottom: 50px solid #bdbdbd;
+  border-left: 50px solid transparent;
+  border-left-width: 35px;
+  border-right-width: 35px;
+  border-bottom-width: 40px;
+  border-top-width: 40px;
+  @include mq(sm) {
+    top: 22%;
+    border-left-width: 50px;
+    border-right-width: 50px;
+    border-bottom-width: 50px;
+    border-top-width: 50px;
   }
 }

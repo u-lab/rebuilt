@@ -5,13 +5,14 @@
         <alert-success :form="form" :message="status" />
 
         <!-- Email -->
-        <v-text-field
+        <form-email
           v-model="form.email"
-          :class="{ 'is-invalid': form.errors.has('email') }"
-          :label="$t('email')"
-          required
+          :dirty="formDirty"
+          :errors="form.errors"
+          :lazy-validation="true"
+          @dirty="dirty"
+          obj-key="email"
         />
-        <has-error :form="form" field="email" />
 
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
@@ -33,6 +34,7 @@
 import Form from 'vform'
 import AuthForm from '~/components/auth/AuthForm'
 import AuthWrapper from '~/components/auth/AuthWrapper'
+import FormEmail from '@/components/auth/form/FormEmail'
 
 export default {
   head() {
@@ -41,19 +43,25 @@ export default {
 
   components: {
     AuthForm,
-    AuthWrapper
+    AuthWrapper,
+    FormEmail
   },
 
   layout: 'auth',
 
   data: () => ({
     status: '',
+    formDirty: false,
     form: new Form({
       email: ''
     })
   }),
 
   methods: {
+    dirty() {
+      this.formDirty = true
+    },
+
     async send() {
       try {
         const { data } = await this.form.post('/password/email')

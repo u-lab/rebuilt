@@ -1,19 +1,20 @@
-@import "variables";
-@import "~sweetalert2/src/sweetalert2";
+@import 'mq.scss';
+@import 'variables';
+@import '~sweetalert2/src/sweetalert2';
 
-@import "elements/card";
-@import "elements/navbar";
-@import "elements/buttons";
-@import "elements/transitions";
+@import 'elements/card';
+@import 'elements/navbar';
+@import 'elements/buttons';
+@import 'elements/transitions';
 
-@import "util/position";
-@import "util/util";
+@import 'util/position';
+@import 'util/util';
 
-@import "auth/auth.scss";
-@import "user/user_title";
-@import "user/user_storage_eyecatch";
-@import "user/user_storage_index";
-@import "user/user_navbar";
-@import "default/navbar.scss";
-@import "pages/_user_header.scss";
-@import "pages/tab_box";
+@import 'auth/auth.scss';
+@import 'user/user_title';
+@import 'user/user_storage_eyecatch';
+@import 'user/user_storage_index';
+@import 'user/user_navbar';
+@import 'default/navbar.scss';
+@import 'pages/_user_header.scss';
+@import 'pages/tab_box';

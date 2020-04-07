@@ -24,12 +24,6 @@ const routes = [
     name: 'pages.storages.show',
     component: page('pages/storages/_storageId.vue')
   },
-  // プロフィール一覧
-  {
-    path: '/profiles',
-    name: 'users.profiles',
-    component: pageUsers('lists/profiles.vue')
-  },
   // 作品一覧
   {
     path: '/storages',
@@ -97,6 +91,11 @@ const routes = [
     path: '/password/reset',
     name: 'password.request',
     component: page('auth/password/email.vue')
+  },
+  {
+    path: '/password/reset/success',
+    name: 'password.reset.success',
+    component: page('auth/password/success.vue')
   },
   {
     path: '/password/reset/:token',

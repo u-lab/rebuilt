@@ -88,6 +88,7 @@
                   <v-file-input
                     v-model="form.storage"
                     :label="$t('storage')"
+                    accept=".obj, .stl, .fbx"
                     filled
                     height="200px"
                   />
