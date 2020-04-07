@@ -1,26 +1,27 @@
 <template>
-  <v-card :to="to" :height="height" color="#26A69A" dark hover>
-    <slot />
+  <v-card :to="to" nuxt>
+    <v-img :src="src" />
   </v-card>
 </template>
 
 <script>
 export default {
   props: {
-    to: {
-      type: Object,
+    src: {
+      type: String,
+      required: false,
+      default: 'no-image.png'
+    },
+
+    title: {
+      type: String,
       required: true
     },
 
-    height: {
-      type: [String, Number],
-      default: '200px'
-    }
-  },
-
-  computed: {
-    heightStyle() {
-      return `height: ${this.height};`
+    to: {
+      type: [String, Object],
+      required: false,
+      default: null
     }
   }
 }

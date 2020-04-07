@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import TabBox from '@/components/pages/TabBox'
+import TabBox from '@/components/molecues/pages/TabBox'
 
 export default {
   components: {
