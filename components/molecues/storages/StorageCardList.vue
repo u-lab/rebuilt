@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import StorageCard from '@/components/pages/StorageCard'
+import StorageCard from '@/components/molecues/storages/StorageCard'
 
 export default {
   components: {
