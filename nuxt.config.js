@@ -46,7 +46,6 @@ module.exports = {
   css: [{ src: '~assets/sass/app.scss', lang: 'scss' }],
 
   plugins: [
-    '~components/global',
     '~plugins/i18n',
     '~plugins/vform',
     '~plugins/axios',
