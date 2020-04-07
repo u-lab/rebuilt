@@ -82,7 +82,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import LocaleDropdown from './LocaleDropdown'
+import LocaleDropdown from '~/components/organism/LocaleDropdown'
 
 export default {
   components: {
