@@ -9,6 +9,9 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
+# Coverage directory used by tools like istanbul
+coverage
+
 # Dependency directories
 node_modules/
 
@@ -23,6 +26,9 @@ node_modules/
 # Nuxt.js build / generate output
 .nuxt
 dist
+
+# macOS
+.DS_Store
 
 # @nuxtjs/pwa
 sw.*
