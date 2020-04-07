@@ -1,5 +1,5 @@
 <template>
-  <storage-card :to="to" :height="height">
+  <v-card :to="to" :height="height" :title="title">
     <div :style="heightStyle" class="pos-relative">
       <v-img
         :src="src"
@@ -15,17 +15,11 @@
         </v-card-title>
       </div>
     </div>
-  </storage-card>
+  </v-card>
 </template>
 
 <script>
-import StorageCard from '@/components/molecues/storages/StorageCard'
-
 export default {
-  components: {
-    StorageCard
-  },
-
   props: {
     src: {
       type: String,

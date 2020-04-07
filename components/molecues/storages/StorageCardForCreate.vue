@@ -1,5 +1,5 @@
 <template>
-  <storage-card :to="to" :height="height">
+  <v-card :to="to" :height="height" color="#26A69A" dark hover>
     <div
       :style="heightStyle"
       class="d-flex justify-center align-center flex-column"
@@ -7,17 +7,11 @@
       <v-icon dark x-large>mdi-plus</v-icon>
       <v-card-title>Work</v-card-title>
     </div>
-  </storage-card>
+  </v-card>
 </template>
 
 <script>
-import StorageCard from '@/components/molecues/storages/StorageCard'
-
 export default {
-  components: {
-    StorageCard
-  },
-
   props: {
     to: {
       type: Object,
