@@ -2,22 +2,23 @@
   <auth-wrapper>
     <auth-form>
       <v-form @submit.prevent="login" @keydown="form.onKeydown($event)">
-        <v-text-field
+        <!-- Email -->
+        <form-email-or-name
           v-model="form.email"
-          :rules="rules.email"
-          :counter="255"
-          :label="$t('username_or_email')"
-          required
+          :dirty="formDirty"
+          :errors="form.errors"
+          :lazy-validation="true"
+          @dirty="dirty"
+          obj-key="email"
         />
 
-        <v-text-field
+        <form-password
           v-model="form.password"
-          :append-icon="field.password ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="rules.password"
-          :type="field.password ? 'text' : 'password'"
-          :label="$t('password')"
-          @click:append="field.password = !field.password"
-          required
+          :dirty="formDirty"
+          :errors="form.errors"
+          :lazy-validation="true"
+          @dirty="dirty"
+          obj-key="password"
         />
 
         <div class="d-flex justify-space-between">
@@ -42,9 +43,6 @@
           >
             {{ $t('login') }}
           </v-btn>
-
-          <!-- GitHub Login Button -->
-          <login-with-github />
         </div>
       </v-form>
     </auth-form>
@@ -55,6 +53,8 @@
 import Form from 'vform'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
+import FormEmailOrName from '@/components/auth/form/FormEmailOrName'
+import FormPassword from '@/components/auth/form/FormPassword'
 
 export default {
   head() {
@@ -63,7 +63,9 @@ export default {
 
   components: {
     AuthForm,
-    AuthWrapper
+    AuthWrapper,
+    FormEmailOrName,
+    FormPassword
   },
 
   layout: 'auth',
@@ -73,14 +75,8 @@ export default {
       email: '',
       password: ''
     }),
+    formDirty: false,
     remember: false,
-    rules: {
-      email: [(v) => !!v || 'Name is required'],
-      password: [
-        (v) => !!v || 'Password is required',
-        (v) => v.length >= 7 || 'Password must be more than 7 characters'
-      ]
-    },
     field: {
       password: false
     }
@@ -89,6 +85,10 @@ export default {
   middleware: 'guest',
 
   methods: {
+    dirty() {
+      this.formDirty = true
+    },
+
     async login() {
       let data
 

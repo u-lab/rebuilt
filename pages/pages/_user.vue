@@ -2,7 +2,7 @@
   <div>
     <!-- kanaをjobにしてる。デザインを見て直すか決める -->
     <user-header
-      :bgSrc="BgExampleImg"
+      :bgSrc="getBgUrl"
       :iconSrc="getIconUrl"
       :name="data.user_profile.nick_name"
       :kana="data.user_profile.job_name"
@@ -21,57 +21,63 @@
 
         <v-tabs-items v-model="tab">
           <v-tab-item>
-            <v-card flat>
-              <tab-box title="Storage" content="作品を入れる" />
-            </v-card>
+            <div class="pa-4">
+              <user-storage-page
+                :storage="data.user_portfolio.masterpiece_storage"
+              />
+            </div>
           </v-tab-item>
 
           <v-tab-item>
             <v-card flat>
-              <tab-box title="History" content="あああ" />
-
-              <tab-box title="Award" content="いいい" />
+              <tab-box
+                :content="data.user_profile.web_address"
+                title="My Site"
+              />
 
               <tab-box
                 :content="data.user_profile.description"
                 :title="$t('description')"
               />
 
-              <tab-box
-                :content="data.user_profile.hobby"
-                :title="$t('hobby')"
-              />
-
-              <tab-box
-                :content="data.user_profile.web_address"
-                title="My Site"
-              />
+              <tab-box-history :career="data.user_profile.user_career" />
             </v-card>
           </v-tab-item>
         </v-tabs-items>
       </v-card>
+
+      <div class="py-4">
+        <h3>- Other Work -</h3>
+        <storage-card-list
+          :storages="storages.data"
+          :user="$route.params.user"
+        />
+      </div>
     </v-container>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import UserHeader from '@/components/pages/UserHeader'
+import StorageCardList from '@/components/pages/StorageCardList'
 import UserHeader from '@/components/molecues/pages/UserHeader'
 import TabBox from '@/components/molecues/pages/TabBox'
-import BgExampleImg from '@/assets/img/page_background_example.png'
-import myIcon from '~/assets/img/usericon-ex.jpg'
+import TabBoxHistory from '@/components/pages/TabBoxHistory'
+import UserStoragePage from '@/components/templates/pages/UserStoragePage'
 
 export default {
   components: {
     UserHeader,
-    TabBox
+    UserStoragePage,
+    StorageCardList,
+    TabBox,
+    TabBoxHistory
   },
 
   data() {
     return {
-      tab: null,
-      BgExampleImg,
-      myIcon
+      tab: null
     }
   },
 
@@ -79,13 +85,19 @@ export default {
     getIconUrl() {
       const image = this.data.user_profile.icon_image
       return image.url_160 || image.url_320 || image.url
+    },
+
+    getBgUrl() {
+      const image = this.data.user_profile.background_image
+      return image.url_1280 || image.url
     }
   },
 
   async asyncData({ params, error }) {
     try {
       const { data } = await axios.get(`pages/${params.user}`)
-      return { success: true, data: data.data }
+      const storages = await axios.get(`pages/${params.user}/storages`)
+      return { success: true, data: data.data, storages: storages.data }
     } catch (e) {
       // return error({
       //   statusCode: e.response.data.status,

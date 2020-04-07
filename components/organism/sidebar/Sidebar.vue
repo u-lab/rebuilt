@@ -53,20 +53,9 @@ export default {
     getLinkList: () => {
       return [
         { title: 'ダッシュボード', name: 'users.dashboard' },
-        {
-          title: '作品を記録する',
-          subtitles: [
-            { title: '新規作品追加', name: 'users.storages.create' },
-            { title: '作品一覧', name: 'users.storages.index' }
-          ]
-        },
-        {
-          title: '作品を眺める',
-          subtitles: [
-            { title: 'みんなのプロフィールを見る', name: 'users.profiles' },
-            { title: 'みんなの作品を見る', name: 'users.storages' }
-          ]
-        },
+        { title: '新規作品追加', name: 'users.storages.create' },
+        { title: '作品一覧', name: 'users.storages.index' },
+        { title: 'みんなの作品を見る', name: 'users.storages' },
         { title: 'ポートフォリオを見る', name: 'users.page.index' },
         { title: 'ポートフォリオを編集', name: 'users.page.edit' },
         {
