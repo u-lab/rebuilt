@@ -28,24 +28,17 @@
 
           <v-tab-item>
             <v-card flat>
-              <tab-box title="History" content="あああ" />
-
-              <tab-box title="Award" content="いいい" />
+              <tab-box
+                :content="data.user_profile.web_address"
+                title="My Site"
+              />
 
               <tab-box
                 :content="data.user_profile.description"
                 :title="$t('description')"
               />
 
-              <tab-box
-                :content="data.user_profile.hobby"
-                :title="$t('hobby')"
-              />
-
-              <tab-box
-                :content="data.user_profile.web_address"
-                title="My Site"
-              />
+              <tab-box-history :career="data.user_profile.user_career" />
             </v-card>
           </v-tab-item>
         </v-tabs-items>
@@ -58,13 +51,15 @@
 import axios from 'axios'
 import UserHeader from '@/components/pages/UserHeader'
 import TabBox from '@/components/pages/TabBox'
+import TabBoxHistory from '@/components/pages/TabBoxHistory'
 import BgExampleImg from '@/assets/img/page_background_example.png'
 import myIcon from '~/assets/img/usericon-ex.jpg'
 
 export default {
   components: {
     UserHeader,
-    TabBox
+    TabBox,
+    TabBoxHistory
   },
 
   data() {
@@ -85,7 +80,8 @@ export default {
   async asyncData({ params, error }) {
     try {
       const { data } = await axios.get(`pages/${params.user}`)
-      return { success: true, data: data.data }
+      const storages = await axios.get(`pages/${params.user}/storages`)
+      return { success: true, data: data.data, storages: storages.data }
     } catch (e) {
       // return error({
       //   statusCode: e.response.data.status,
