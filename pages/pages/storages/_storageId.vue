@@ -58,7 +58,7 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-container class="other-works">
+        <!-- <v-container class="other-works">
           <v-row class="other-work-title px-5">
             <v-card-title>Other Works</v-card-title>
           </v-row>
@@ -74,15 +74,30 @@
             </v-row>
           </v-container>
         </v-container>
+          -->
       </v-card>
+
+      <div class="py-4">
+        <h3>- Other Work -</h3>
+
+        <storage-card-list
+          :storages="storages.data"
+          :user="$route.params.user"
+        />
+      </div>
     </v-container>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import StorageCardList from '@/components/pages/StorageCardList'
 
 export default {
+  components: {
+    StorageCardList
+  },
+
   computed: {
     /**
      * 作品データを返す
@@ -113,8 +128,14 @@ export default {
       const { data } = await axios.get(
         `pages/${params.user}/storages/${params.storageId}`
       )
+      const storages = await axios.get(`pages/${params.user}/storages`)
 
-      return { success: true, data: data.data, user: data.user }
+      return {
+        success: true,
+        data: data.data,
+        user: data.user,
+        storages: storages.data
+      }
     } catch (e) {
       return error({
         statusCode: 404,
