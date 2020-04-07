@@ -5,7 +5,7 @@
       :dark="dark"
       :items="locales"
       :title="locales[locale]"
-      @select-dropdown="setLocale"
+      @click="setLocale"
     />
   </div>
 </template>

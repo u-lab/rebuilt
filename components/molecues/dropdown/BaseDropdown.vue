@@ -11,7 +11,7 @@
       <v-list-item
         v-for="(value, key) in items"
         :key="key"
-        @click.prevent="selectItem(key)"
+        @click.prevent="clickItem(key)"
       >
         <v-list-item-title v-text="value" />
       </v-list-item>
@@ -58,8 +58,8 @@ export default {
   },
 
   methods: {
-    selectItem(newVal) {
-      return this.$emit('select-dropdown', newVal)
+    clickItem(newVal) {
+      return this.$emit('click', newVal)
     }
   }
 }
