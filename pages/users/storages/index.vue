@@ -31,8 +31,8 @@
 import axios from 'axios'
 import { mapGetters } from 'vuex'
 import UserTitle from '~/components/molecues/pages/UserTitle'
-import StorageCardForEdit from '@/components/user/storages/index/StorageCardForEdit'
-import StorageCardForCreate from '@/components/user/storages/index/StorageCardForCreate'
+import StorageCardForEdit from '@/components/molecues/storages/StorageCardForEdit'
+import StorageCardForCreate from '@/components/molecues/storages/StorageCardForCreate'
 
 export default {
   middleware: 'auth',

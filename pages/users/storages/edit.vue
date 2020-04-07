@@ -153,11 +153,11 @@ import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import UserTitle from '~/components/molecues/pages/UserTitle'
-import EyeCatchImageDisplay from '@/components/user/storages/form/EyeCatchImageDisplay'
-import FormTitle from '@/components/user/storages/form/FormTitle'
-import FormWebAddress from '@/components/user/storages/form/FormWebAddress'
-import FormDescription from '@/components/user/storages/form/FormDescription'
-import FormLongComment from '@/components/user/storages/form/FormLongComment'
+import EyeCatchImageDisplay from '@/components/molecues/form/EyeCatchImageDisplay'
+import FormTitle from '@/components/molecues/form/FormTitle'
+import FormWebAddress from '@/components/molecues/form/FormWebAddress'
+import FormDescription from '@/components/molecues/form/FormDescription'
+import FormLongComment from '@/components/molecues/form/FormLongComment'
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {

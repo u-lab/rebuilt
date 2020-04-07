@@ -12,7 +12,7 @@
 
 <script>
 import LocaleDropdown from '~/components/organism/LocaleDropdown'
-import OtherPageLink from '~/components/molecues/form/OtherPageLink'
+import OtherPageLink from '~/components/molecues/auth/OtherPageLink'
 
 export default {
   components: {
