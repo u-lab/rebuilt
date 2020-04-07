@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TabBox from '@/components/pages/TabBox'
+import TabBox from '@/components/molecues/pages/TabBox'
 
 const formatDate = (date) => {
   const newDate = new Date(date)

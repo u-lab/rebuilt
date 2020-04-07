@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import AuthFormTitle from '~/components/auth/AuthFormTitle'
+import AuthFormTitle from '~/components/atoms/auth/AuthFormTitle'
 
 export default {
   components: {

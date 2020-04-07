@@ -35,8 +35,8 @@
 
 <script>
 import axios from 'axios'
-import LookStorage from '~/components/user/dashboard/LookStorage'
-import UserTitle from '~/components/user/UserTitle'
+import LookStorage from '@/components/organisms/dashboard/LookStorage'
+import UserTitle from '@/components/molecues/pages/UserTitle'
 
 export default {
   middleware: 'auth',

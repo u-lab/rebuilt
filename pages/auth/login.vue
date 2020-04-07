@@ -51,8 +51,8 @@
 
 <script>
 import Form from 'vform'
-import AuthForm from '~/components/auth/AuthForm'
-import AuthWrapper from '~/components/auth/AuthWrapper'
+import AuthForm from '~/components/molecues/auth/AuthForm'
+import AuthWrapper from '~/components/atoms/Wrapper'
 import FormEmailOrName from '@/components/auth/form/FormEmailOrName'
 import FormPassword from '@/components/auth/form/FormPassword'
 

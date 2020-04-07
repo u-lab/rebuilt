@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Navbar from '~/components/default/Navbar'
+import Navbar from '~/components/molecues/navbar/BaseNavbar'
 
 export default {
   components: {

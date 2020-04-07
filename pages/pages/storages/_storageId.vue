@@ -91,7 +91,7 @@
 
 <script>
 import axios from 'axios'
-import StorageCardList from '@/components/pages/StorageCardList'
+import StorageCardList from '@/components/molecues/storages/StorageCardList'
 
 export default {
   components: {
