@@ -106,6 +106,38 @@
               </v-col>
             </v-row>
 
+            <div>
+              <h3>パース画像</h3>
+
+              <v-row>
+                <v-col cols="2">
+                  <v-file-input
+                    v-model="form.storage_sub_image[newNumber]"
+                    @change="subImageFileChange(e, newNumber)"
+                    accept="image/*"
+                    filled
+                    height="150px"
+                    label="サブ画像"
+                  />
+                </v-col>
+
+                <v-col
+                  v-for="subImageNum in 5"
+                  :key="`subImage-${subImageNum}`"
+                  cols="2"
+                >
+                  <v-file-input
+                    v-model="form.storage_sub_image[subImageNum - 1]"
+                    @change="subImageFileChange(e, subImage - 1)"
+                    accept="image/*"
+                    filled
+                    height="150px"
+                    label="サブ画像"
+                  />
+                </v-col>
+              </v-row>
+            </div>
+
             <v-row>
               <v-col cols="12">
                 <!-- description -->
@@ -189,12 +221,14 @@ export default {
         eyecatch_image_id: '' /* UUID Never Change!! */,
         title: '' /* String */,
         storage: '' /* FILE */,
+        storage_sub_image: [] /* FILE */,
         web_address: '' /* URL */
       }),
       formDirty: false,
       /* preview表示用 */
       preview: {
-        eyecatch_image_url: ''
+        eyecatch_image_url: '',
+        storage_sub_image: []
       }
     }
   },
@@ -210,6 +244,16 @@ export default {
       }
 
       return ''
+    },
+
+    newNumber() {
+      const subImage = this.form.storage_sub_image
+      for (let i = 0; i < subImage.length; i++) {
+        if (subImage[i] === undefined) {
+          return i
+        }
+      }
+      return subImage.length
     }
   },
 
@@ -274,10 +318,21 @@ export default {
       // e は FILE Objectであることに注意
       try {
         this.preview.eyecatch_image_url = URL.createObjectURL(e)
-      } catch (e) {
+      } catch (err) {
         this.preview.eyecatch_image_url = null
       }
     },
+
+    subImageFileChange(e) {
+      // e は FILE Objectであることに注意
+      const idx = this.newNumber - 1
+      try {
+        this.preview.storage_sub_image[idx] = URL.createObjectURL(e)
+      } catch (err) {
+        this.preview.storage_sub_image[idx] = null
+      }
+    },
+
     onFileChange(e) {
       const files = e.target.files || e.dataTransfer.files
       this.createImage(files[0])
