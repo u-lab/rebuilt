@@ -10,7 +10,7 @@ export default {
     src: {
       type: String,
       required: false,
-      default: 'no-image.png'
+      default: '/no-image.png'
     },
 
     title: {

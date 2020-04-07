@@ -46,20 +46,18 @@ module.exports = {
   css: [{ src: '~assets/sass/app.scss', lang: 'scss' }],
 
   plugins: [
-    '~components/global',
     '~plugins/i18n',
     '~plugins/vform',
     '~plugins/axios',
-    '~plugins/fontawesome',
-    '@/plugins/vuelidate',
-    { src: '~plugins/bootstrap', mode: 'client' }
+    '@/plugins/vuelidate'
   ],
 
   modules: [
     '@nuxtjs/vuetify',
     '@nuxtjs/router',
     '@nuxtjs/pwa',
-    '@nuxtjs/sitemap'
+    '@nuxtjs/sitemap',
+    '@nuxtjs/style-resources'
   ],
 
   buildModules: ['@nuxtjs/google-analytics'],
@@ -70,6 +68,10 @@ module.exports = {
 
   sitemap: {
     // custom configuration for @nuxtjs/sitemap
+  },
+
+  styleResources: {
+    scss: ['@/assets/scss/variables.scss', '@/assets/scss/functions/*.scss']
   },
 
   googleAnalytics: {
