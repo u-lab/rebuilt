@@ -47,6 +47,9 @@ export default {
       default: ''
     },
 
+    /**
+     * @see { @link https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VFileInput/VFileInput.ts | Vuetify }
+     */
     value: {
       default: undefined,
       validator: (val) => {
