@@ -111,11 +111,12 @@
 
               <v-row>
                 <v-col cols="2">
-                  <v-file-input
+                  <base-file-input
                     v-model="form.storage_sub_image[newNumber]"
-                    @change="subImageFileChange(e, newNumber)"
+                    @change="subImageFileChange"
                     accept="image/*"
                     filled
+                    no-icon
                     height="150px"
                     label="サブ画像"
                   />
@@ -126,12 +127,13 @@
                   :key="`subImage-${subImageNum}`"
                   cols="2"
                 >
-                  <v-file-input
+                  <base-file-input
                     v-model="form.storage_sub_image[subImageNum - 1]"
-                    @change="subImageFileChange(e, subImage - 1)"
+                    @change="subImageFileChange"
                     accept="image/*"
                     filled
                     height="150px"
+                    no-icon
                     label="サブ画像"
                   />
                 </v-col>
@@ -185,12 +187,13 @@
 import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
-import UserTitle from '~/components/molecues/pages/UserTitle'
+import BaseFileInput from '@/components/molecues/form/BaseFileInput'
 import EyeCatchImageDisplay from '@/components/molecues/form/EyeCatchImageDisplay'
 import FormTitle from '@/components/molecues/form/FormTitle'
 import FormWebAddress from '@/components/molecues/form/FormWebAddress'
 import FormDescription from '@/components/molecues/form/FormDescription'
 import FormLongComment from '@/components/molecues/form/FormLongComment'
+import UserTitle from '~/components/molecues/pages/UserTitle'
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {
@@ -200,6 +203,7 @@ function throwNotEqualStorageID() {
 export default {
   middleware: 'auth',
   components: {
+    BaseFileInput,
     EyeCatchImageDisplay,
     FormTitle,
     FormWebAddress,
