@@ -66,20 +66,15 @@
               <v-col cols="7">
                 <h3>{{ $t('eyecatch_image') }}</h3>
 
-                <eye-catch-image-display
-                  :src="eyecatch_image_display_src"
+                <!-- eyecatch_image -->
+                <image-file-input
+                  v-model="form.eyecatch_image"
+                  :label="$t('eyecatch_image')"
+                  :preview="eyecatch_image_display_src"
+                  accept="image/*"
+                  filled
                   height="200px"
-                >
-                  <!-- eyecatch_image -->
-                  <v-file-input
-                    v-model="form.eyecatch_image"
-                    :label="$t('eyecatch_image')"
-                    @change="eyecatchImageFileChange"
-                    accept="image/*"
-                    filled
-                    height="200px"
-                  />
-                </eye-catch-image-display>
+                />
               </v-col>
 
               <v-col cols="5">
@@ -112,7 +107,7 @@
               <v-row>
                 <v-col cols="2">
                   <base-file-input
-                    v-model="form.storage_sub_image[newNumber]"
+                    v-model="form.storage_sub_images[newNumber]"
                     @change="subImageFileChange"
                     accept="image/*"
                     filled
@@ -128,7 +123,7 @@
                   cols="2"
                 >
                   <base-file-input
-                    v-model="form.storage_sub_image[subImageNum - 1]"
+                    v-model="form.storage_sub_images[subImageNum - 1]"
                     @change="subImageFileChange"
                     accept="image/*"
                     filled
@@ -188,11 +183,11 @@ import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import BaseFileInput from '@/components/molecues/form/BaseFileInput'
-import EyeCatchImageDisplay from '@/components/molecues/form/EyeCatchImageDisplay'
 import FormTitle from '@/components/molecues/form/FormTitle'
 import FormWebAddress from '@/components/molecues/form/FormWebAddress'
 import FormDescription from '@/components/molecues/form/FormDescription'
 import FormLongComment from '@/components/molecues/form/FormLongComment'
+import ImageFileInput from '@/components/molecues/form/ImageFileInput'
 import UserTitle from '~/components/molecues/pages/UserTitle'
 
 // ストレージIDの不一致時にエラーを投げる
@@ -204,11 +199,11 @@ export default {
   middleware: 'auth',
   components: {
     BaseFileInput,
-    EyeCatchImageDisplay,
     FormTitle,
     FormWebAddress,
     FormDescription,
     FormLongComment,
+    ImageFileInput,
     UserTitle
   },
 
@@ -225,14 +220,15 @@ export default {
         eyecatch_image_id: '' /* UUID Never Change!! */,
         title: '' /* String */,
         storage: '' /* FILE */,
-        storage_sub_image: [] /* FILE */,
+        storage_sub_images: [] /* FILE */,
+        storage_sub_images_id: [] /* UUID[] */,
         web_address: '' /* URL */
       }),
       formDirty: false,
       /* preview表示用 */
       preview: {
-        eyecatch_image_url: '',
-        storage_sub_image: []
+        eyecatch_image: null,
+        storage_sub_images: []
       }
     }
   },
@@ -251,7 +247,7 @@ export default {
     },
 
     newNumber() {
-      const subImage = this.form.storage_sub_image
+      const subImage = this.form.storage_sub_images
       for (let i = 0; i < subImage.length; i++) {
         if (subImage[i] === undefined) {
           return i
@@ -273,8 +269,15 @@ export default {
         this.form[key] = this.data[key]
       }
     })
+
+    this.form.storage_sub_images_id = []
+    for (let i = 0; i < this.data.storage_sub_images.length; i++) {
+      this.form.storage_sub_images_id[i] = this.data.storage_sub_images[i].id
+    }
+
     this.preview.eyecatch_image_url = this.data.eyecatch_image.url
     this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
+    this.form.storage_sub_images = []
   },
 
   methods: {
@@ -318,22 +321,22 @@ export default {
       }
     },
 
-    eyecatchImageFileChange(e) {
-      // e は FILE Objectであることに注意
-      try {
-        this.preview.eyecatch_image_url = URL.createObjectURL(e)
-      } catch (err) {
-        this.preview.eyecatch_image_url = null
-      }
-    },
+    // eyecatchImageFileChange(e) {
+    //   // e は FILE Objectであることに注意
+    //   try {
+    //     this.preview.eyecatch_image_url = URL.createObjectURL(e)
+    //   } catch (err) {
+    //     this.preview.eyecatch_image_url = null
+    //   }
+    // },
 
     subImageFileChange(e) {
       // e は FILE Objectであることに注意
       const idx = this.newNumber - 1
       try {
-        this.preview.storage_sub_image[idx] = URL.createObjectURL(e)
+        this.preview.storage_sub_images[idx] = URL.createObjectURL(e)
       } catch (err) {
-        this.preview.storage_sub_image[idx] = null
+        this.preview.storage_sub_images[idx] = null
       }
     },
 
