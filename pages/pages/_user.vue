@@ -29,7 +29,7 @@
           </v-tab-item>
 
           <v-tab-item>
-            <v-card flat>
+            <v-card flat style="min-height: 640px">
               <tab-box
                 :content="data.user_profile.web_address"
                 title="My Site"

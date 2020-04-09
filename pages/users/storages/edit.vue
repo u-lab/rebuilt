@@ -66,31 +66,26 @@
               <v-col cols="7">
                 <h3>{{ $t('eyecatch_image') }}</h3>
 
-                <eye-catch-image-display
-                  :src="eyecatch_image_display_src"
+                <!-- eyecatch_image -->
+                <image-file-input
+                  v-model="form.eyecatch_image"
+                  :label="$t('eyecatch_image')"
+                  :preview="eyecatch_image_display_src"
+                  accept="image/*"
+                  filled
                   height="200px"
-                >
-                  <!-- eyecatch_image -->
-                  <v-file-input
-                    v-model="form.eyecatch_image"
-                    :label="$t('eyecatch_image')"
-                    @change="eyecatchImageFileChange"
-                    accept="image/*"
-                    filled
-                    height="200px"
-                  />
-                </eye-catch-image-display>
+                />
               </v-col>
 
               <v-col cols="5">
-                <h3>Stl obj fbxファイル</h3>
+                <h3>Stl objファイル</h3>
 
                 <div class="pos-relative v-file-input-icon-none">
                   <!-- storage -->
                   <v-file-input
                     v-model="form.storage"
                     :label="$t('storage')"
-                    accept=".obj, .stl, .fbx"
+                    accept=".obj, .stl"
                     filled
                     height="200px"
                   />
@@ -105,38 +100,6 @@
                 </div>
               </v-col>
             </v-row>
-
-            <div>
-              <h3>パース画像</h3>
-
-              <v-row>
-                <v-col cols="2">
-                  <v-file-input
-                    v-model="form.storage_sub_image[newNumber]"
-                    @change="subImageFileChange(e, newNumber)"
-                    accept="image/*"
-                    filled
-                    height="150px"
-                    label="サブ画像"
-                  />
-                </v-col>
-
-                <v-col
-                  v-for="subImageNum in 5"
-                  :key="`subImage-${subImageNum}`"
-                  cols="2"
-                >
-                  <v-file-input
-                    v-model="form.storage_sub_image[subImageNum - 1]"
-                    @change="subImageFileChange(e, subImage - 1)"
-                    accept="image/*"
-                    filled
-                    height="150px"
-                    label="サブ画像"
-                  />
-                </v-col>
-              </v-row>
-            </div>
 
             <v-row>
               <v-col cols="12">
@@ -185,12 +148,12 @@
 import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
-import UserTitle from '~/components/molecues/pages/UserTitle'
-import EyeCatchImageDisplay from '@/components/molecues/form/EyeCatchImageDisplay'
 import FormTitle from '@/components/molecues/form/FormTitle'
 import FormWebAddress from '@/components/molecues/form/FormWebAddress'
 import FormDescription from '@/components/molecues/form/FormDescription'
 import FormLongComment from '@/components/molecues/form/FormLongComment'
+import ImageFileInput from '@/components/molecues/form/ImageFileInput'
+import UserTitle from '~/components/molecues/pages/UserTitle'
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {
@@ -200,11 +163,11 @@ function throwNotEqualStorageID() {
 export default {
   middleware: 'auth',
   components: {
-    EyeCatchImageDisplay,
     FormTitle,
     FormWebAddress,
     FormDescription,
     FormLongComment,
+    ImageFileInput,
     UserTitle
   },
 
@@ -221,14 +184,12 @@ export default {
         eyecatch_image_id: '' /* UUID Never Change!! */,
         title: '' /* String */,
         storage: '' /* FILE */,
-        storage_sub_image: [] /* FILE */,
         web_address: '' /* URL */
       }),
       formDirty: false,
       /* preview表示用 */
       preview: {
-        eyecatch_image_url: '',
-        storage_sub_image: []
+        eyecatch_image: null
       }
     }
   },
@@ -244,16 +205,6 @@ export default {
       }
 
       return ''
-    },
-
-    newNumber() {
-      const subImage = this.form.storage_sub_image
-      for (let i = 0; i < subImage.length; i++) {
-        if (subImage[i] === undefined) {
-          return i
-        }
-      }
-      return subImage.length
     }
   },
 
@@ -269,6 +220,7 @@ export default {
         this.form[key] = this.data[key]
       }
     })
+
     this.preview.eyecatch_image_url = this.data.eyecatch_image.url
     this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
   },
@@ -312,38 +264,6 @@ export default {
       } catch (e) {
         // TODO: 何が起きるかはわからないが、そのログをとりたい。
       }
-    },
-
-    eyecatchImageFileChange(e) {
-      // e は FILE Objectであることに注意
-      try {
-        this.preview.eyecatch_image_url = URL.createObjectURL(e)
-      } catch (err) {
-        this.preview.eyecatch_image_url = null
-      }
-    },
-
-    subImageFileChange(e) {
-      // e は FILE Objectであることに注意
-      const idx = this.newNumber - 1
-      try {
-        this.preview.storage_sub_image[idx] = URL.createObjectURL(e)
-      } catch (err) {
-        this.preview.storage_sub_image[idx] = null
-      }
-    },
-
-    onFileChange(e) {
-      const files = e.target.files || e.dataTransfer.files
-      this.createImage(files[0])
-    },
-    // アップロードした画像を表示
-    createImage(file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        this.uploadedImage = e.target.result
-      }
-      reader.readAsDataURL(file)
     }
   }
 }

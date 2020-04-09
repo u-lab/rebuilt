@@ -1,6 +1,34 @@
 import * as arrayFunc from '@/utils/array'
 
 describe('utils/array', () => {
+  describe('convertToArray', () => {
+    it('配列型がそのままか(正常系)', () => {
+      expect(arrayFunc.convertToArray(['aaa', 'bbb'])).toEqual(['aaa', 'bbb']) // 一般的な配列
+      expect(arrayFunc.convertToArray(['aaa', 'bbb', ['ccc', 'ddd']])).toEqual([
+        'aaa',
+        'bbb',
+        ['ccc', 'ddd']
+      ]) // 一般的な連想配列配列
+      expect(arrayFunc.convertToArray([])).toEqual([]) // 空の配列
+    })
+
+    it('配列以外の型が配列になるか(正常系)', () => {
+      expect(arrayFunc.convertToArray(null)).toEqual([]) // 一般的な数字
+      expect(arrayFunc.convertToArray(0)).toEqual([0]) // 一般的な数字
+      expect(arrayFunc.convertToArray(1)).toEqual([1]) // 一般的な数字
+      expect(arrayFunc.convertToArray(true)).toEqual([true]) // bool型
+      expect(arrayFunc.convertToArray('aiueo')).toEqual(['aiueo']) // 一般的な文字列
+      expect(arrayFunc.convertToArray({})).toEqual([{}]) // 空のオブジェクト
+      expect(
+        arrayFunc.convertToArray({
+          a: 'aa',
+          b: ['hoge', 'foo']
+        })
+      ).toEqual([{ a: 'aa', b: ['hoge', 'foo'] }]) // 一般的なオブジェクト
+      expect(arrayFunc.convertToArray('')).toEqual(['']) // 空の文字列
+    })
+  })
+
   describe('isArray', () => {
     it('配列がtrueか(正常系)', () => {
       expect(arrayFunc.isArray(['aaa', 'bbb'])).toBeTruthy() // 一般的な配列

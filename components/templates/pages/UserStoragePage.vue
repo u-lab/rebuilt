@@ -1,11 +1,7 @@
 <template>
   <div>
-    <div style="width: 100%; height: 200px; background-color:green">
-      モデルの表示
-    </div>
-
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12">
         <v-img :src="getEyecatchSrc(storage.eyecatch_image)" />
 
         <v-row>
@@ -21,7 +17,7 @@
         </v-row>
       </v-col>
 
-      <v-col cols="6">
+      <v-col cols="12">
         <tab-box :content="storage.long_comment" title="Comment" />
       </v-col>
     </v-row>
