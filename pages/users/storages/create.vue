@@ -81,14 +81,14 @@
               </v-col>
 
               <v-col cols="5">
-                <h3>Stl obj fbxファイル</h3>
+                <h3>Stl objファイル</h3>
 
                 <div class="pos-relative v-file-input-icon-none">
                   <!-- storage -->
                   <v-file-input
                     v-model="form.storage"
                     :label="$t('storage')"
-                    accept=".obj, .stl, .fbx"
+                    accept=".obj, .stl"
                     filled
                     height="200px"
                   />
