@@ -123,9 +123,7 @@
                 <!-- TODO: 作品一覧の表示 -->
               </v-col>
               <v-col cols="6">
-                <v-card-title>
-                  これまでの歴史
-                </v-card-title>
+                <v-card-title> -{{ $t('career') }}- </v-card-title>
                 <v-card height="200px">
                   <v-btn @click.stop="historyModal = true">追加</v-btn>
 
