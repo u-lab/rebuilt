@@ -9,6 +9,17 @@ import { isObject } from '@/utils/object'
 export const convertToImage = (v) => (isImageType(v) ? v : newImage)
 
 /**
+ * アイコンサイズの画像を取得
+ *
+ * @param {*} image
+ * @returns { String }
+ */
+export const getIconUrl = (image) => {
+  image = convertToImage(image)
+  return image.url_80 || image.url_160 || image.url
+}
+
+/**
  * サムネイルサイズの画像を取得
  *
  * @param {*} image
