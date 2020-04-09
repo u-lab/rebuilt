@@ -101,40 +101,6 @@
               </v-col>
             </v-row>
 
-            <div>
-              <h3>パース画像</h3>
-
-              <v-row>
-                <v-col cols="2">
-                  <base-file-input
-                    v-model="form.storage_sub_images[newNumber]"
-                    @change="subImageFileChange"
-                    accept="image/*"
-                    filled
-                    no-icon
-                    height="150px"
-                    label="サブ画像"
-                  />
-                </v-col>
-
-                <v-col
-                  v-for="subImageNum in 5"
-                  :key="`subImage-${subImageNum}`"
-                  cols="2"
-                >
-                  <base-file-input
-                    v-model="form.storage_sub_images[subImageNum - 1]"
-                    @change="subImageFileChange"
-                    accept="image/*"
-                    filled
-                    height="150px"
-                    no-icon
-                    label="サブ画像"
-                  />
-                </v-col>
-              </v-row>
-            </div>
-
             <v-row>
               <v-col cols="12">
                 <!-- description -->
@@ -182,7 +148,6 @@
 import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
-import BaseFileInput from '@/components/molecues/form/BaseFileInput'
 import FormTitle from '@/components/molecues/form/FormTitle'
 import FormWebAddress from '@/components/molecues/form/FormWebAddress'
 import FormDescription from '@/components/molecues/form/FormDescription'
@@ -198,7 +163,6 @@ function throwNotEqualStorageID() {
 export default {
   middleware: 'auth',
   components: {
-    BaseFileInput,
     FormTitle,
     FormWebAddress,
     FormDescription,
@@ -220,15 +184,12 @@ export default {
         eyecatch_image_id: '' /* UUID Never Change!! */,
         title: '' /* String */,
         storage: '' /* FILE */,
-        storage_sub_images: [] /* FILE */,
-        storage_sub_images_id: [] /* UUID[] */,
         web_address: '' /* URL */
       }),
       formDirty: false,
       /* preview表示用 */
       preview: {
-        eyecatch_image: null,
-        storage_sub_images: []
+        eyecatch_image: null
       }
     }
   },
@@ -244,16 +205,6 @@ export default {
       }
 
       return ''
-    },
-
-    newNumber() {
-      const subImage = this.form.storage_sub_images
-      for (let i = 0; i < subImage.length; i++) {
-        if (subImage[i] === undefined) {
-          return i
-        }
-      }
-      return subImage.length
     }
   },
 
@@ -270,14 +221,8 @@ export default {
       }
     })
 
-    this.form.storage_sub_images_id = []
-    for (let i = 0; i < this.data.storage_sub_images.length; i++) {
-      this.form.storage_sub_images_id[i] = this.data.storage_sub_images[i].id
-    }
-
     this.preview.eyecatch_image_url = this.data.eyecatch_image.url
     this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
-    this.form.storage_sub_images = []
   },
 
   methods: {
@@ -319,38 +264,6 @@ export default {
       } catch (e) {
         // TODO: 何が起きるかはわからないが、そのログをとりたい。
       }
-    },
-
-    // eyecatchImageFileChange(e) {
-    //   // e は FILE Objectであることに注意
-    //   try {
-    //     this.preview.eyecatch_image_url = URL.createObjectURL(e)
-    //   } catch (err) {
-    //     this.preview.eyecatch_image_url = null
-    //   }
-    // },
-
-    subImageFileChange(e) {
-      // e は FILE Objectであることに注意
-      const idx = this.newNumber - 1
-      try {
-        this.preview.storage_sub_images[idx] = URL.createObjectURL(e)
-      } catch (err) {
-        this.preview.storage_sub_images[idx] = null
-      }
-    },
-
-    onFileChange(e) {
-      const files = e.target.files || e.dataTransfer.files
-      this.createImage(files[0])
-    },
-    // アップロードした画像を表示
-    createImage(file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        this.uploadedImage = e.target.result
-      }
-      reader.readAsDataURL(file)
     }
   }
 }
