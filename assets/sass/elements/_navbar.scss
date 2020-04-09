@@ -17,24 +17,3 @@
     font-size: 1.4rem;
   }
 }
-.triangle {
-  position: absolute;
-  top: 25%;
-  right: 5%;
-  margin: 0 auto;
-  border-top: 50px solid #000000;
-  border-right: 50px solid transparent;
-  border-bottom: 50px solid #bdbdbd;
-  border-left: 50px solid transparent;
-  border-left-width: 35px;
-  border-right-width: 35px;
-  border-bottom-width: 40px;
-  border-top-width: 40px;
-  @include mq(sm) {
-    top: 22%;
-    border-left-width: 50px;
-    border-right-width: 50px;
-    border-bottom-width: 50px;
-    border-top-width: 50px;
-  }
-}
