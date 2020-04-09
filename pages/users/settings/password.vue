@@ -39,14 +39,24 @@
         </div>
       </div> -->
 
-      <form-password-with-confirmation />
+      <!-- Password -->
+      <form-password-with-confirmation
+        v-model="form.password"
+        :confirmationField="form.password_confirmation"
+        :dirty="formDirty"
+        :errors="form.errors"
+        :lazy-validation="true"
+        @confirmation="updatePasswordConfirmation"
+        @dirty="dirty"
+        obj-key="password"
+      />
 
       <!-- Submit Button -->
       <div class="form-group row">
         <div class="col-md-9 ml-md-auto">
-          <v-button :loading="form.busy" type="success">
+          <v-btn @submit="update" type="submit">
             {{ $t('update') }}
-          </v-button>
+          </v-btn>
         </div>
       </div>
     </v-form>
@@ -68,6 +78,7 @@ export default {
   },
 
   data: () => ({
+    formDirty: false,
     form: new Form({
       password: '',
       password_confirmation: ''
@@ -79,6 +90,12 @@ export default {
       await this.form.patch('/settings/password')
 
       this.form.reset()
+    },
+    updatePasswordConfirmation(value) {
+      this.form.password_confirmation = value
+    },
+    dirty() {
+      this.formDirty = true
     }
   }
 }
