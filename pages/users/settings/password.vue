@@ -6,7 +6,7 @@
       <alert-success :form="form" :message="$t('password_updated')" />
 
       <!-- Password -->
-      <div class="form-group row">
+      <!-- <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">{{
           $t('new_password')
         }}</label>
@@ -20,10 +20,10 @@
           />
           <has-error :form="form" field="password" />
         </div>
-      </div>
+      </div> -->
 
       <!-- Password Confirmation -->
-      <div class="form-group row">
+      <!-- <div class="form-group row">
         <label class="col-md-3 col-form-label text-md-right">{{
           $t('confirm_password')
         }}</label>
@@ -37,7 +37,9 @@
           />
           <has-error :form="form" field="password_confirmation" />
         </div>
-      </div>
+      </div> -->
+
+      <form-password-with-confirmation />
 
       <!-- Submit Button -->
       <div class="form-group row">
@@ -54,13 +56,15 @@
 <script>
 import Form from 'vform'
 import UserTitle from '~/components/molecues/pages/UserTitle'
+import FormPasswordWithConfirmation from '~/components/molecues/auth/FormPasswordWithConfirmation'
 export default {
   middleware: 'auth',
 
   layout: 'user',
 
   components: {
-    UserTitle
+    UserTitle,
+    FormPasswordWithConfirmation
   },
 
   data: () => ({
