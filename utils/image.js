@@ -4,6 +4,7 @@ import { isObject } from '@/utils/object'
  * image型に変換
  *
  * @param {*} v
+ * @returns { Object }
  */
 export const convertToImage = (v) => (isImageType(v) ? v : newImage)
 
