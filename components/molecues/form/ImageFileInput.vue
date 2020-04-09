@@ -85,6 +85,7 @@ export default {
   methods: {
     onChange(e) {
       // e は FILE Objectであることに注意
+      this.$emit('change', e)
       try {
         this.newPreview = URL.createObjectURL(e)
       } catch (err) {
