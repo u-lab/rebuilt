@@ -11,7 +11,7 @@
           dark
           color="white"
         >
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
         </v-list-item>
 
         <v-list-group
@@ -21,7 +21,7 @@
           sub-group
         >
           <template v-slot:activator>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
           </template>
 
           <v-list-item
@@ -32,7 +32,7 @@
             nuxt
             dark
           >
-            <v-list-item-title>{{ subItem.title }}</v-list-item-title>
+            <v-list-item-title>{{ $t(subItem.title) }}</v-list-item-title>
           </v-list-item>
         </v-list-group>
       </template>
@@ -52,14 +52,14 @@ export default {
   computed: {
     getLinkList: () => {
       return [
-        { title: 'ダッシュボード', name: 'users.dashboard' },
-        { title: '新規作品追加', name: 'users.storages.create' },
-        { title: '作品一覧', name: 'users.storages.index' },
-        { title: 'みんなの作品を見る', name: 'users.storages' },
-        { title: 'ポートフォリオを見る', name: 'users.page.index' },
-        { title: 'ポートフォリオを編集', name: 'users.page.edit' },
+        { title: 'dashboard', name: 'users.dashboard' },
+        { title: 'add_new_work', name: 'users.storages.create' },
+        { title: 'list_of_works', name: 'users.storages.index' },
+        { title: 'see_everyones_works', name: 'users.storages' },
+        { title: 'see_portfolio', name: 'users.page.index' },
+        { title: 'edit_my_portfolio', name: 'users.page.edit' },
         {
-          title: '設定',
+          title: 'settings',
           name: 'users.settings.index'
         }
       ]
