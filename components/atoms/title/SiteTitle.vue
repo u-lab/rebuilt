@@ -72,6 +72,7 @@ export default {
   color: #333;
 
   font-size: 1.5rem;
+  font-weight: normal;
   @include mq(sm) {
     font-size: 2rem;
   }
