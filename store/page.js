@@ -74,7 +74,7 @@ export const actions = {
    * @param { String } force 強制的に空にするか
    */
   clearAllData({ getters, commit }, { name, force = false }) {
-    if (name === undefined || getters.user.name !== name || force) {
+    if (force || getters.user.name !== name) {
       commit('CLEAR_ALL')
     }
   },

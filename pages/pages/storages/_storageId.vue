@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- TODO 作品紹介ページ(1作品を紹介) -->
-    <!-- <v-container class="stl-viewer-parent">
+    <v-container class="stl-viewer-parent">
       <v-card height="500px" color="#E3F2FD" class="stl-viewer">
         <v-container style="height: 100%" class="text-center pa-10">
           <p>モデルの表示</p>
@@ -22,7 +22,10 @@
             </v-col>
             <v-col cols="11">
               <h2>{{ user.name }}</h2>
-              <p>{{ user.name }}</p>
+              <nuxt-link
+                :to="{ name: 'pages.user', params: { user: user.name } }"
+                >{{ user.name }}</nuxt-link
+              >
             </v-col>
           </v-row>
         </v-container>
@@ -71,17 +74,17 @@
           :user="user.name"
         />
       </div>
-    </v-container> -->
+    </v-container>
   </div>
 </template>
 
 <script>
-// import StorageCardList from '@/components/molecues/storages/StorageCardList'
+import StorageCardList from '@/components/molecues/storages/StorageCardList'
 import { getIconUrl, getMediumUrl } from '@/utils/image'
 
 export default {
   components: {
-    // StorageCardList
+    StorageCardList
   },
 
   computed: {
@@ -123,23 +126,19 @@ export default {
     },
 
     user() {
-      console.log(this.$store.getters['page/user'])
       return this.$store.getters['page/user']
     }
   },
 
   async fetch({ store, params, error }) {
     try {
-      // 別のuserページから遷移してきた場合、内容を削除する
-      // store.dispatch('page/clearAllData', { name: params.user, force: false })
-
       await store.dispatch('page/fetchUser', params.user)
       await store.dispatch('page/fetchStorage', params.storageId)
     } catch (e) {
-      // return error({
-      //   statusCode: 404,
-      //   message: 'Page Not Found'
-      // })
+      return error({
+        statusCode: 404,
+        message: 'Page Not Found'
+      })
     }
   },
 

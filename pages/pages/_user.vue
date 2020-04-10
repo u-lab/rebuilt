@@ -97,34 +97,12 @@ export default {
 
   async fetch({ store, params, error }) {
     try {
-      // 別のuserページから遷移してきた場合、内容を削除する
-      store.dispatch('page/clearAllData', { name: params.user, force: true })
-
       await store.dispatch('page/fetchUser', params.user)
     } catch (e) {
       return error({
         statusCode: 404,
         message: 'Page Not Found'
       })
-    }
-  },
-
-  async beforeCreate() {
-    if (!process.server) {
-      try {
-        // 別のuserページから遷移してきた場合、内容を削除する
-        this.$store.dispatch('page/clearAllData', {
-          name: this.$route.params.user,
-          force: true
-        })
-
-        await this.$store.dispatch('page/fetchUser', this.$route.params.user)
-      } catch (e) {
-        return this.$nuxt.error({
-          statusCode: 404,
-          message: 'Page Not Found'
-        })
-      }
     }
   },
 
