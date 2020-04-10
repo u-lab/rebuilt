@@ -51,4 +51,52 @@ describe('utils/array', () => {
       expect(arrayFunc.isArray('')).toBeFalsy() // 空の文字列
     })
   })
+
+  describe('uniq', () => {
+    it('重複を削除できたか', () => {
+      expect(arrayFunc.uniq([1, 2, 1, 4, 1, 3])).toEqual([1, 2, 4, 3])
+      expect(
+        arrayFunc.uniq(
+          [
+            { key: 1, name: 'foo' },
+            { key: 2, name: 'goo' },
+            { key: 1, name: 'foo' },
+            { key: 4, name: 'foo' },
+            { key: 1, name: 'foo' },
+            { key: 3, name: 'hoge' }
+          ],
+          'key'
+        )
+      ).toEqual([
+        { key: 1, name: 'foo' },
+        { key: 2, name: 'goo' },
+        { key: 4, name: 'foo' },
+        { key: 3, name: 'hoge' }
+      ])
+
+      expect(
+        arrayFunc.uniq(
+          [
+            { key: 1, name: 'foo' },
+            { key: 2, name: 'goo' },
+            { key: 1, name: 'foo' },
+            { key: 4, name: 'foo' },
+            { key: 1, name: 'bar' },
+            { key: 3, name: 'hoge' }
+          ],
+          'name'
+        )
+      ).toEqual([
+        { key: 1, name: 'foo' },
+        { key: 2, name: 'goo' },
+        { key: 1, name: 'bar' },
+        { key: 3, name: 'hoge' }
+      ])
+    })
+
+    it('引数が配列でないとき、空の配列が返ってくるか', () => {
+      expect(arrayFunc.uniq('hoge')).toBe([]) // 文字列型
+      expect(arrayFunc.uniq({ name: 'hoge' })).toBe([]) // object型
+    })
+  })
 })
