@@ -93,5 +93,10 @@ describe('utils/array', () => {
         { key: 3, name: 'hoge' }
       ])
     })
+
+    it('引数が配列でないとき、空の配列が返ってくるか', () => {
+      expect(arrayFunc.uniq('hoge')).toBe([]) // 文字列型
+      expect(arrayFunc.uniq({ name: 'hoge' })).toBe([]) // object型
+    })
   })
 })
