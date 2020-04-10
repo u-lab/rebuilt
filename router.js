@@ -61,12 +61,6 @@ const routes = [
     name: 'users.storages.create',
     component: pageUsers('storages/create.vue')
   },
-  // 作品を見る
-  {
-    path: '/users/storages/:storageId',
-    name: 'users.storages.show',
-    component: pageUsers('storages/show.vue')
-  },
   // 作品編集
   {
     path: '/users/storages/:storageId/edit',
@@ -74,15 +68,23 @@ const routes = [
     component: pageUsers('storages/edit.vue')
   },
 
+  // 設定
   {
     path: '/users/settings',
     name: 'users.settings.index',
     component: pageUsers('settings/index.vue')
   },
+  // パスワードの変更
   {
     path: '/users/settings/password',
     name: 'users.settings.password',
     component: pageUsers('settings/password.vue')
+  },
+  // メールアドレスを変更する
+  {
+    path: '/users/settings/email',
+    name: 'users.settings.email',
+    component: pageUsers('settings/email.vue')
   },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
@@ -111,24 +113,6 @@ const routes = [
     path: '/email/resend',
     name: 'verification.resend',
     component: page('auth/verification/resend.vue')
-  },
-
-  {
-    path: '/settings',
-    component: page('settings/index.vue'),
-    children: [
-      { path: '', redirect: { name: 'settings.profile' } },
-      {
-        path: 'profile',
-        name: 'settings.profile',
-        component: page('settings/profile.vue')
-      },
-      {
-        path: 'password',
-        name: 'settings.password',
-        component: page('settings/password.vue')
-      }
-    ]
   }
 ]
 
