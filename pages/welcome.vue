@@ -18,6 +18,7 @@
 
     <div class="text-center">
       <nuxt-link to="/pages/admin">管理者のページ</nuxt-link>
+      <nuxt-link to="/pages/aaa">aaaのページ</nuxt-link>
     </div>
   </div>
 </template>

@@ -14,8 +14,10 @@
           <template v-slot:first>
             <div class="pa-4">
               <user-storage-page
+                v-if="user.user_portfolio.masterpiece_storage"
                 :storage="user.user_portfolio.masterpiece_storage"
               />
+              <p v-else>代表作ないよ</p>
             </div>
           </template>
 

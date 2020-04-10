@@ -101,8 +101,11 @@ export const actions = {
    */
   async fetchUser({ getters, commit }, name) {
     // データが取得済みの場合はreturn
-    if (getters.checkUser && getters.user.name === name) {
-      return
+    if (getters.checkUser) {
+      if (getters.user.name === name) {
+        return
+      }
+      commit('CLEAR_ALL') // state内を空にする
     }
 
     try {
