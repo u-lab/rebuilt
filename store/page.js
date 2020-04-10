@@ -4,6 +4,7 @@ import { getStorageByStorageId } from '@/utils/storage'
 
 // state
 export const state = () => ({
+  storage: null,
   storages: null,
   storagesPageNext: null,
   user: null
@@ -13,6 +14,7 @@ export const state = () => ({
 export const getters = {
   checkStorages: (state) => state.storages !== null,
   checkUser: (state) => state.user !== null,
+  storage: (state) => state.storage,
   storages: (state) => state.storages,
   storagesPageNext: (state) => state.storagesPageNext,
   user: (state) => state.user
@@ -34,17 +36,19 @@ export const mutations = {
     state.user = null
   },
 
-  PUSH_STORSGE(state, storage) {
+  PUSH_STORAGE(state, storage) {
+    state.storage = storage
     state.storages = [...state.storages, ...[storage]] // 配列のマージ
     state.storages = uniq(state.storages, 'storage_id') // 重複の削除
   },
 
-  PUSH_STORSGES(state, storages) {
+  PUSH_STORAGES(state, storages) {
     state.storages = [...state.storages, ...storages] // 配列のマージ
     state.storages = uniq(state.storages, 'storage_id') // 重複の削除
   },
 
   SET_STORAGE(state, storage) {
+    state.storage = storage
     state.storages = [storage]
   },
 
@@ -69,7 +73,7 @@ export const actions = {
    * @param { String } name ユーザー名
    * @param { String } force 強制的に空にするか
    */
-  clearAllData({ commit }, { name, force = false }) {
+  clearAllData({ getters, commit }, { name, force = false }) {
     if (name === undefined || getters.user.name !== name || force) {
       commit('CLEAR_ALL')
     }
@@ -81,8 +85,8 @@ export const actions = {
   async fetchFurthermoreStorages({ getters, commit }) {
     if (getters.storagesPageNext) {
       try {
-        const data = await axios.get(getters.storagesPageNext)
-        commit('PUSH_STORSGES', data.data)
+        const { data } = await axios.get(getters.storagesPageNext)
+        commit('PUSH_STORAGESS', data.data)
         commit('SET_STORAGES_PAGE_NEXT', data.links.next)
       } catch (e) {
         throw new Error('Page Not Found')
@@ -104,7 +108,7 @@ export const actions = {
     try {
       const { data } = await axios.get(`pages/${name}`)
 
-      commit('SET_USER', data)
+      commit('SET_USER', data.data)
     } catch (e) {
       throw new Error('Page Not Found')
     }
@@ -121,24 +125,28 @@ export const actions = {
       const storage = getStorageByStorageId(getters.storages, storageId)
 
       if (storage !== undefined) {
-        return storage
+        if (getters.checkStorages) {
+          commit('PUSH_STORAGE', storage) // すでにデータがある場合はPush
+        } else {
+          commit('SET_STORAGE', storage)
+        }
       }
     }
 
-    const user = getters.user
-    if (user === null) {
+    if (!getters.checkUser) {
       throw new Error('fetchUserを先に使用してください')
     }
 
     try {
+      const user = getters.user
       const { data } = await axios.get(
         `pages/${user.name}/storages/${storageId}`
       )
 
       if (getters.checkStorages) {
-        commit('PUSH_STORSGE', data) // すでにデータがある場合はPush
+        commit('PUSH_STORAGE', data.data) // すでにデータがある場合はPush
       } else {
-        commit('SET_STORAGE', data)
+        commit('SET_STORAGE', data.data)
       }
       return data
     } catch (e) {
@@ -150,7 +158,7 @@ export const actions = {
    * 複数の作品を取得する
    */
   async fetchStorages({ getters, commit }) {
-    if (getters.checkStorages) {
+    if (getters.checkStorages && getters.storages.length > 1) {
       return
     }
 
@@ -160,14 +168,14 @@ export const actions = {
     }
 
     try {
-      const { data, links } = await axios.get(`pages/${user.name}/storages`)
+      const { data } = await axios.get(`pages/${user.name}/storages`)
 
       if (getters.checkStorages) {
-        commit('PUSH_STORAGES', data) // すでにデータがある場合はPush
+        commit('PUSH_STORAGES', data.data) // すでにデータがある場合はPush
       } else {
-        commit('SET_STORAGES', data)
+        commit('SET_STORAGES', data.data)
       }
-      commit('SET_STORAGES_PAGE_NEXT', links.next)
+      commit('SET_STORAGES_PAGE_NEXT', data.links.next)
     } catch (e) {
       throw new Error('Page Not Found')
     }
