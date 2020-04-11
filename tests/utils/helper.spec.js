@@ -24,6 +24,10 @@ describe('utils/helper', () => {
         HelperFunc.getType(new Promise(() => {})) === 'promise'
       ).toBeTruthy()
       expect(HelperFunc.getType(Symbol('hoge')) === 'symbol').toBeTruthy()
+      expect(HelperFunc.getType(new Date()) === 'date').toBeTruthy()
+      expect(
+        HelperFunc.getType(new Date('2018/09/01 10:00')) === 'date'
+      ).toBeTruthy()
       expect(HelperFunc.getType(new Map()) === 'map').toBeTruthy()
       expect(HelperFunc.getType(new Set()) === 'set').toBeTruthy()
     })

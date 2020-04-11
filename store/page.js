@@ -129,10 +129,9 @@ export const actions = {
 
       if (storage !== undefined) {
         if (getters.checkStorages) {
-          commit('PUSH_STORAGE', storage) // すでにデータがある場合はPush
-        } else {
-          commit('SET_STORAGE', storage)
+          return commit('PUSH_STORAGE', storage) // すでにデータがある場合はPush
         }
+        return commit('SET_STORAGE', storage)
       }
     }
 
@@ -151,7 +150,6 @@ export const actions = {
       } else {
         commit('SET_STORAGE', data.data)
       }
-      return data
     } catch (e) {
       throw new Error('Page Not Found')
     }
