@@ -35,7 +35,7 @@ describe('store/page', () => {
   beforeEach(async () => {
     store = new Vuex.Store(cloneDeep(pageStore))
     mockAxiosError = false // テストをする前に、falseに戻す。
-    await store.dispatch('clearAllData', { name: 'admin' }) // stateをリセットする
+    await store.dispatch('clearAllData', { name: 'admin', force: true }) // stateをリセットする
   })
 
   describe('actions', () => {
@@ -43,8 +43,10 @@ describe('store/page', () => {
       it('ユーザーを取得しstateを更新できるか(正常系)', async () => {
         mockAxiosGetResult = {
           data: {
-            id: 1,
-            name: 'admin'
+            data: {
+              id: 1,
+              name: 'admin'
+            }
           }
         }
 
@@ -63,8 +65,10 @@ describe('store/page', () => {
         beforeEach(async () => {
           mockAxiosGetResult = {
             data: {
-              id: 1,
-              name: 'admin'
+              data: {
+                id: 1,
+                name: 'admin'
+              }
             }
           }
           await store.dispatch('fetchUser', 'admin')
@@ -76,19 +80,13 @@ describe('store/page', () => {
 
           mockAxiosGetResult = {
             data: {
-              user_id: 1,
-              storage_id: '1581315433ra05d0'
+              data: {
+                user_id: 1,
+                storage_id: '1581315433ra05d0'
+              }
             }
           }
-          const retStorage = await store.dispatch(
-            'fetchStorage',
-            '1581315433ra05d0'
-          )
-          // 戻り値の確認
-          expect(retStorage).toEqual({
-            user_id: 1,
-            storage_id: '1581315433ra05d0'
-          })
+          await store.dispatch('fetchStorage', '1581315433ra05d0')
 
           // stateが更新されたか確認
           expect(store.getters.checkStorages).toBeTruthy()
@@ -96,6 +94,10 @@ describe('store/page', () => {
           expect(store.getters.storages).toEqual([
             { user_id: 1, storage_id: '1581315433ra05d0' }
           ])
+          expect(store.getters.storage).toEqual({
+            user_id: 1,
+            storage_id: '1581315433ra05d0'
+          })
         })
 
         it('stateにデータがあるとき、state内のstorageを取得できるか(正常系)', async () => {
@@ -110,15 +112,18 @@ describe('store/page', () => {
             { user_id: 1, storage_id: '1581315433ra05d0' }
           ])
 
-          const retStorage = await store.dispatch(
-            'fetchStorage',
-            '1581315433ra05d0'
-          )
+          await store.dispatch('fetchStorage', '1581315433ra05d0')
 
-          expect(retStorage).toEqual({
+          expect(store.getters.checkStorages).toBeTruthy()
+          expect(store.getters.storages).toHaveLength(1)
+          expect(store.getters.storages).toEqual([
+            { user_id: 1, storage_id: '1581315433ra05d0' }
+          ])
+          expect(store.getters.storage).toEqual({
             user_id: 1,
             storage_id: '1581315433ra05d0'
           })
+          // TODO: axiosがcallされてないことをテストしたい
         })
 
         it('stateにデータがあるとき、state内に必要なデータがないとき、apiからstorageを取得しているか(正常系)', async () => {
@@ -132,23 +137,31 @@ describe('store/page', () => {
           expect(store.getters.storages).toEqual([
             { user_id: 1, storage_id: '1581315433ra05d0' }
           ])
+          expect(store.getters.storage).toEqual({
+            user_id: 1,
+            storage_id: '1581315433ra05d0'
+          })
 
           mockAxiosGetResult = {
             data: {
-              user_id: 1,
-              storage_id: '1586415933mus3lf'
+              data: {
+                user_id: 1,
+                storage_id: '1586415933mus3lf'
+              }
             }
           }
-          const retStorage = await store.dispatch(
-            'fetchStorage',
-            '1586415933mus3lf'
-          )
+          await store.dispatch('fetchStorage', '1586415933mus3lf')
 
-          expect(retStorage).toEqual({
+          expect(store.getters.checkStorages).toBeTruthy()
+          expect(store.getters.storages).toHaveLength(2)
+          expect(store.getters.storages).toEqual([
+            { user_id: 1, storage_id: '1581315433ra05d0' },
+            { user_id: 1, storage_id: '1586415933mus3lf' }
+          ])
+          expect(store.getters.storage).toEqual({
             user_id: 1,
             storage_id: '1586415933mus3lf'
           })
-          expect(store.getters.storages).toHaveLength(2)
         })
       })
     })
@@ -158,8 +171,10 @@ describe('store/page', () => {
       beforeEach(async () => {
         mockAxiosGetResult = {
           data: {
-            id: 1,
-            name: 'admin'
+            data: {
+              id: 1,
+              name: 'admin'
+            }
           }
         }
         await store.dispatch('fetchUser', 'admin')
@@ -167,25 +182,27 @@ describe('store/page', () => {
 
       it('storagesが取得できるか', async () => {
         mockAxiosGetResult = {
-          data: [
-            {
-              user_id: 1,
-              storage_id: '1581315433ra05d0'
-            },
-            {
-              user_id: 1,
-              storage_id: '1586415933mus3lf'
-            },
-            {
-              user_id: 1,
-              storage_id: '1586415933m924xz'
+          data: {
+            data: [
+              {
+                user_id: 1,
+                storage_id: '1581315433ra05d0'
+              },
+              {
+                user_id: 1,
+                storage_id: '1586415933mus3lf'
+              },
+              {
+                user_id: 1,
+                storage_id: '1586415933m924xz'
+              }
+            ],
+            links: {
+              first: 'http://localhost:8000/api/v1/pages/admin/storages?page=1',
+              last: 'http://localhost:8000/api/v1/pages/admin/storages?page=1',
+              prev: null,
+              next: null
             }
-          ],
-          links: {
-            first: 'http://localhost:8000/api/v1/pages/admin/storages?page=1',
-            last: 'http://localhost:8000/api/v1/pages/admin/storages?page=1',
-            prev: null,
-            next: null
           }
         }
 

@@ -95,8 +95,8 @@ describe('utils/array', () => {
     })
 
     it('引数が配列でないとき、空の配列が返ってくるか', () => {
-      expect(arrayFunc.uniq('hoge')).toBe([]) // 文字列型
-      expect(arrayFunc.uniq({ name: 'hoge' })).toBe([]) // object型
+      expect(arrayFunc.uniq('hoge')).toStrictEqual([]) // 文字列型
+      expect(arrayFunc.uniq({ name: 'hoge' })).toStrictEqual([]) // object型
     })
   })
 })
