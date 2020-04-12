@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-lg-8 m-auto">
-      <card :title="$t('verify_email')">
+      <v-card :title="$t('verify_email')">
         <template v-if="success">
           <div class="alert alert-success" role="alert">
             {{ status }}
@@ -23,7 +23,7 @@
             {{ $t('resend_verification_link') }}
           </router-link>
         </template>
-      </card>
+      </v-card>
     </div>
   </div>
 </template>
