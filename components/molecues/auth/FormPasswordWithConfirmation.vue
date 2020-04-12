@@ -67,9 +67,10 @@ export default {
       }
       const errors = []
       !validate.helpers &&
-        errors.push('半角英小文字大文字数字をそれぞれ1種類以上入力してください')
+        !validate.minLength &&
+        errors.push('8文字以上で入力してください')
+      errors.push('半角英小文字大文字数字をそれぞれ1種類以上入力してください')
       !validate.required && errors.push('パスワードは必須です')
-      !validate.minLength && errors.push('8文字以上で入力してください')
       return errors
     },
 
