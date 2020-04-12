@@ -52,6 +52,7 @@ export const formConfirmation = {
 
   computed: {
     /**
+     * サーバーでエラーが発生したかどうか
      * これはapiに一度、リクエストを送った後、apiのバリデーションで弾かれた場合にtrueになる
      *
      * @return {Boolean}

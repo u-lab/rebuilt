@@ -68,6 +68,7 @@ export default {
       return errors
     },
 
+    // バリデーションをする
     errorMessageConfirmation() {
       const validateConfiramtion = this.$v.vc
       if (!this.dirty || !validateConfiramtion.$dirty) {

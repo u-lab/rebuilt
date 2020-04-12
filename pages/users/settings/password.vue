@@ -3,47 +3,6 @@
     <user-title title="パスワードを変更する" />
 
     <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <!-- <v-alert
-        :form="form"
-        :message="$t('password_updated')"
-        type="success"
-      ></v-alert>
-      <alert-success :form="form" :message="$t('password_updated')" /> -->
-
-      <!-- Password -->
-      <!-- <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{
-          $t('new_password')
-        }}</label>
-        <div class="col-md-7">
-          <input
-            v-model="form.password"
-            :class="{ 'is-invalid': form.errors.has('password') }"
-            type="password"
-            name="password"
-            class="form-control"
-          />
-          <has-error :form="form" field="password" />
-        </div>
-      </div> -->
-
-      <!-- Password Confirmation -->
-      <!-- <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{
-          $t('confirm_password')
-        }}</label>
-        <div class="col-md-7">
-          <input
-            v-model="form.password_confirmation"
-            :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
-            type="password"
-            name="password_confirmation"
-            class="form-control"
-          />
-          <has-error :form="form" field="password_confirmation" />
-        </div>
-      </div> -->
-
       <!-- Password -->
       <form-password-with-confirmation
         v-model="form.password"
@@ -57,13 +16,10 @@
       />
 
       <!-- Submit Button -->
-      <div class="form-group row">
-        <div class="col-md-9 ml-md-auto">
-          <v-btn @submit="update" type="submit">
-            {{ $t('update') }}
-          </v-btn>
-        </div>
-      </div>
+
+      <v-btn @submit="update" type="submit">
+        {{ $t('update') }}
+      </v-btn>
     </v-form>
   </div>
 </template>
@@ -98,11 +54,11 @@ export default {
         this.$router.push({ name: 'users.settings.success' })
       } catch (e) {}
     },
-    updatePasswordConfirmation(value) {
-      this.form.password_confirmation = value
-    },
     dirty() {
       this.formDirty = true
+    },
+    updatePasswordConfirmation(value) {
+      this.form.password_confirmation = value
     }
   }
 }
