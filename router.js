@@ -86,6 +86,11 @@ const routes = [
     name: 'users.settings.email',
     component: pageUsers('settings/email.vue')
   },
+  {
+    path: '/users/settings/success',
+    name: 'users.settings.success',
+    component: pageUsers('settings/success.vue')
+  },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
