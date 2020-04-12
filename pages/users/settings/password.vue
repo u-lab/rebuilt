@@ -3,7 +3,12 @@
     <user-title title="パスワードを変更する" />
 
     <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('password_updated')" />
+      <!-- <v-alert
+        :form="form"
+        :message="$t('password_updated')"
+        type="success"
+      ></v-alert>
+      <alert-success :form="form" :message="$t('password_updated')" /> -->
 
       <!-- Password -->
       <!-- <div class="form-group row">
@@ -87,9 +92,11 @@ export default {
 
   methods: {
     async update() {
-      await this.form.patch('/settings/password')
-
-      this.form.reset()
+      try {
+        await this.form.patch('/settings/password')
+        this.form.reset()
+        this.$router.push({ name: 'users.settings.success' })
+      } catch (e) {}
     },
     updatePasswordConfirmation(value) {
       this.form.password_confirmation = value

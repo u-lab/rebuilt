@@ -84,6 +84,11 @@ const routes = [
     name: 'users.settings.password',
     component: pageUsers('settings/password.vue')
   },
+  {
+    path: '/users/settings/success',
+    name: 'users.settings.success',
+    component: pageUsers('settings/success.vue')
+  },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
