@@ -1,32 +1,24 @@
 <template>
   <div>
-    <div class="top-right links">
+    <div class="text-center mb-4">
       <template v-if="authenticated">
-        <router-link :to="{ name: 'users.dashboard' }">
+        <v-btn :to="{ name: 'users.dashboard' }" larage>
           {{ $t('dashboard') }}
-        </router-link>
+        </v-btn>
       </template>
       <template v-else>
-        <router-link :to="{ name: 'login' }">
+        <v-btn :to="{ name: 'login' }" large>
           {{ $t('login') }}
-        </router-link>
-        <router-link :to="{ name: 'register' }">
+        </v-btn>
+        <v-btn :to="{ name: 'register' }" large>
           {{ $t('register') }}
-        </router-link>
+        </v-btn>
       </template>
     </div>
 
     <div class="text-center">
-      <div class="title mb-4">
-        <span class="laravel">Laravel</span><span class="nuxt">Nuxt</span>
-        <!-- {{ title }} -->
-      </div>
-
-      <div class="links">
-        <a href="https://github.com/cretueusebiu/laravel-nuxt"
-          >github.com/cretueusebiu/laravel-nuxt</a
-        >
-      </div>
+      <nuxt-link to="/pages/admin">管理者のページ</nuxt-link>
+      <nuxt-link to="/pages/aaa">aaaのページ</nuxt-link>
     </div>
   </div>
 </template>
@@ -35,38 +27,12 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  layout: 'simple',
-
   head() {
     return { title: this.$t('home') }
   },
-
-  data: () => ({
-    title: process.env.appName
-  }),
 
   computed: mapGetters({
     authenticated: 'auth/check'
   })
 }
 </script>
-
-<style scoped>
-.top-right {
-  position: absolute;
-  right: 10px;
-  top: 18px;
-}
-
-.title {
-  font-size: 85px;
-}
-
-.laravel {
-  color: #2e495e;
-}
-
-.nuxt {
-  color: #00c48d;
-}
-</style>
