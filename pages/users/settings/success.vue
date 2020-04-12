@@ -1,7 +1,7 @@
 <template>
   <div>
     <user-title title="パスワードの変更をしました" />
-    <v-btn :to="{ name: 'users.settings.password' }" nuxt>戻る</v-btn>
+    <v-btn :to="{ name: 'users.settings.index' }" nuxt>戻る</v-btn>
   </div>
 </template>
 
