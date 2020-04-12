@@ -2,6 +2,7 @@
   <div class="pt-2 pt-sm-4">
     <pages-storages-storageid :storage="storage" :user="user" />
 
+    <!-- other work -->
     <v-container>
       <other-storage-list :user-name="user.name" :storages="storages" />
     </v-container>

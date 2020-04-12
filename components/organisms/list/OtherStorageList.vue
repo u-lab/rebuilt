@@ -2,7 +2,11 @@
   <div>
     <h2 v-text="$t('other_work')" />
 
-    <storage-card-list :user-name="userName" :storages="storages" />
+    <storage-card-list
+      v-if="storages"
+      :user-name="userName"
+      :storages="storages"
+    />
   </div>
 </template>
 
@@ -28,5 +32,3 @@ export default {
   }
 }
 </script>
-
-<style></style>
