@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="default">
     <navbar />
 
     <!-- Sizes your content based upon application components -->

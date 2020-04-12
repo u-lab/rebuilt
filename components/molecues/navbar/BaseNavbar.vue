@@ -48,7 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .navbar-wrapper {
-  border-bottom: 0.25rem solid #333;
+  border-bottom: 0.25rem solid $font-color-light-navy;
   position: relative;
 }
 

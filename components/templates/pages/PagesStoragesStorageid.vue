@@ -70,6 +70,6 @@ export default {
 
 <style lang="scss" scoped>
 .background-navy {
-  background: lighten(#1f2f54, 30%);
+  background: $background-page-header;
 }
 </style>

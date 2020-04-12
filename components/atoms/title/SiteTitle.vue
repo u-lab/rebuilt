@@ -69,8 +69,6 @@ export default {
 
 <style lang="scss" scoped>
 .site-title {
-  color: #333;
-
   font-size: 1.5rem;
   font-weight: normal;
   @include mq(sm) {
@@ -79,7 +77,7 @@ export default {
 }
 
 .link {
-  color: #333;
+  color: $font-color-light-navy;
   text-decoration: none;
 }
 </style>
