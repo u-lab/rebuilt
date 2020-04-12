@@ -71,7 +71,7 @@ module.exports = {
   },
 
   styleResources: {
-    scss: ['@/assets/sass/variables.scss', '@/assets/sass/functions/*.scss']
+    scss: ['@/assets/sass/_variables.scss', '@/assets/sass/functions/*.scss']
   },
 
   googleAnalytics: {

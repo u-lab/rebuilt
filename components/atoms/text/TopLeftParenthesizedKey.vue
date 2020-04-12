@@ -28,13 +28,11 @@ export default {
     content: '';
     width: 1rem;
     height: 1rem;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
 
     top: 0;
     left: 0;
-    border-top: 0.25rem solid #333333;
-    border-left: 0.25rem solid #333333;
+    border-top: 0.25rem solid $font-color-light-navy;
+    border-left: 0.25rem solid $font-color-light-navy;
   }
 }
 </style>

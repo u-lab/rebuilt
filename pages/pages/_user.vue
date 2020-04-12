@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pt-2 pt-sm-4">
     <!-- kanaをjobにしてる。デザインを見て直すか決める -->
     <user-header
       :bgSrc="getBgUrl"
@@ -38,27 +38,23 @@
           </template>
         </base-tab>
       </v-card>
+    </v-container>
 
-      <div class="py-4">
-        <h3>- Other Work -</h3>
-
-        <storage-card-list
-          v-if="storages"
-          :storages="storages"
-          :user="user.name"
-        />
-      </div>
+    <!-- other work -->
+    <v-container>
+      <other-storage-list :user-name="user.name" :storages="storages" />
     </v-container>
   </div>
 </template>
 
 <script>
 import BaseTab from '@/components/molecues/tabs/BaseTab'
-import StorageCardList from '@/components/molecues/storages/StorageCardList'
 import UserHeader from '@/components/molecues/pages/UserHeader'
 import TabBox from '@/components/molecues/pages/TabBox'
 import TabBoxHistory from '@/components/molecues/storages/TabBoxHistory'
 import UserStoragePage from '@/components/templates/pages/UserStoragePage'
+import OtherStorageList from '@/components/organisms/list/OtherStorageList'
+
 import { getIconUrl, getMediumUrl } from '@/utils/image'
 
 export default {
@@ -66,9 +62,9 @@ export default {
     BaseTab,
     UserHeader,
     UserStoragePage,
-    StorageCardList,
     TabBox,
-    TabBoxHistory
+    TabBoxHistory,
+    OtherStorageList
   },
 
   computed: {
