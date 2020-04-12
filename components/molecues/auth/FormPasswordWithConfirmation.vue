@@ -35,8 +35,8 @@ export default {
     v: {
       minLength: minLength(8),
       required,
-      helpers: helpers.regex(
-        'alphaNum',
+      regex: helpers.regex(
+        'password',
         /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/
       )
     },
@@ -66,10 +66,10 @@ export default {
         return this.errorServerMessage
       }
       const errors = []
-      !validate.helpers &&
-        !validate.minLength &&
-        errors.push('8文字以上で入力してください')
-      errors.push('半角英小文字大文字数字をそれぞれ1種類以上入力してください')
+
+      !validate.minLength && errors.push('8文字以上で入力してください')
+      !validate.regex &&
+        errors.push('半角英小文字大文字数字をそれぞれ1種類以上入力してください')
       !validate.required && errors.push('パスワードは必須です')
       return errors
     },
