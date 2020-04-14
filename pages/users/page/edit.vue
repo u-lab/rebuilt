@@ -3,12 +3,12 @@
     <!-- TODO 自分の情報を修正 -->
     <user-title title="ポートフォリオ編集" />
 
-    <v-form @submit.prevent="updatePage" @keydown="formPage.onKeydown($event)">
+    <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
       <v-container>
         <div class="d-flex justify-end mb-2">
           <!-- Submit Button -->
           <v-btn
-            :disabled="formPage.busy"
+            :disabled="form.busy"
             class="teal--text text--lighten-1"
             color="grey lighten-3"
             large
@@ -38,7 +38,7 @@
             />
 
             <v-file-input
-              v-model="formPage.background_image"
+              v-model="form.background_image"
               :label="$t('background_image')"
               @change="backgroundImageFileChange"
               class="pos-topLeftAlign v-file-input-icon-none w-100"
@@ -73,7 +73,7 @@
                   />
 
                   <v-file-input
-                    v-model="formPage.icon_image"
+                    v-model="form.icon_image"
                     :label="$t('icon')"
                     @change="iconImageFileChange"
                     class="pos-topLeftAlign v-file-input-icon-none w-100"
@@ -97,11 +97,7 @@
 
           <v-row justify="center">
             <v-col cols="4">
-              <v-text-field
-                v-model="formPage.nick_name"
-                label="name"
-                single-line
-              />
+              <v-text-field v-model="form.nick_name" label="name" single-line />
             </v-col>
           </v-row>
 
@@ -109,7 +105,7 @@
             <v-row>
               <v-col cols="12">
                 <v-textarea
-                  v-model="formPage.description"
+                  v-model="form.description"
                   filled
                   auto-grow
                   label="Four rows"
@@ -129,7 +125,7 @@
 
                   <v-list>
                     <v-list-item
-                      v-for="(item, key) in formPage.user_career"
+                      v-for="(item, key) in form.user_career"
                       :key="`history-${key}`"
                     >
                       <v-list-item-title
@@ -205,6 +201,8 @@
 <script>
 import Form from 'vform'
 import { mapGetters } from 'vuex'
+import { objectToFormData } from 'object-to-formdata'
+import clonedeep from 'lodash.clonedeep'
 import axios from 'axios'
 import UserTitle from '~/components/molecues/pages/UserTitle'
 import headerimg from '~/assets/img/work2.jpg'
@@ -217,16 +215,18 @@ export default {
   components: {
     UserTitle
   },
+
   data() {
     return {
-      formPage: new Form({
+      form: new Form({
         user_id: '' /* Integer */,
         description: '' /* String */,
         nick_name: '' /* String */,
         icon_image: '' /* FILE */,
         background_image: '' /* FILE */,
         web_address: '' /* URL */,
-        user_career: []
+        user_career: [] /* Array */,
+        user_career_did: [] /* Integer 削除したいuser_carrerのID */
       }),
       preview: {
         icon_image_url: '',
@@ -274,27 +274,38 @@ export default {
   },
 
   created() {
-    this.formPage.keys().forEach((key) => {
+    this.form.keys().forEach((key) => {
       if (this.data[key] !== null) {
-        this.formPage[key] = this.data[key]
+        this.form[key] = this.data[key]
       }
     })
 
     this.preview.icon_image_url = this.data.icon_image.url
     this.preview.background_image_url = this.data.background_image.url
-    this.formPage.background_image = ''
-    this.formPage.icon_image = ''
+    this.form.background_image = ''
+    this.form.icon_image = ''
+    this.form.user_career_did = []
   },
 
   methods: {
-    async updatePage() {
+    async update() {
+      // API Serverに PATCH する
       try {
-        await this.formPage.patch('/users/profile')
-
-        // Redirect dashboard.
-        this.$router.push({ name: 'users.dashboard' })
+        await this.form
+          .post(`/users/profile`, {
+            transformRequest: [
+              function(data, headers) {
+                data._method = 'PATCH'
+                return objectToFormData(data)
+              }
+            ]
+          })
+          .then((response) => {
+            // Redirect User Dashboard.
+            this.$router.push({ name: 'users.dashboard' })
+          })
       } catch (e) {
-        console.log(e)
+        // TODO: 何が起きるかはわからないが、そのログをとりたい。
       }
     },
 
@@ -318,7 +329,7 @@ export default {
 
     historyAdd() {
       const history = this.history
-      this.formPage.user_career.push(Object.create(history))
+      this.form.user_career.push(clonedeep(history))
       this.history = {
         id: '',
         name: '',
@@ -329,41 +340,3 @@ export default {
   }
 }
 </script>
-<style>
-/* .pt170 {
-  padding-top: 170px;
-}
-.pb150 {
-  padding-bottom: 150px;
-}
-
-.user-icon {
-  position: absolute;
-  left: 50%;
-  bottom: 50%;
-
-  transform: translateY(50%) translateX(-50%);
-  -webkit-transform: translateY(50%) translateX(-50%);
-  z-index: 2;
-}
-.z-index1 {
-  z-index: 1;
-}
-.btn {
-  z-index: 1;
-  position: absolute;
-  left: 95%;
-  top: 10%;
-
-  transform: translateY(50%) translateX(-50%);
-  -webkit-transform: translateY(50%) translateX(-50%);
-}
-.img-form {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  z-index: 1;
-  transform: translateY(50%) translateX(-50%);
-  -webkit-transform: translateY(50%) translateX(-50%);
-} */
-</style>
