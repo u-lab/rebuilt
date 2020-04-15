@@ -176,12 +176,12 @@ export default {
   data() {
     return {
       form: new Form({
-        user_id: '' /* Never Change!! */,
-        storage_id: '' /* Never Change!! */,
+        user_id: '' /* Integer Never Change!! */,
+        storage_id: '' /* String Never Change!! */,
         description: '' /* String */,
         long_comment: '' /* String */,
         eyecatch_image: '' /* FILE */,
-        eyecatch_image_id: '' /* UUID Never Change!! */,
+        eyecatch_image_id: '' /* Integer Never Change!! */,
         release_id: '' /* Integer */,
         title: '' /* String */,
         storage: '' /* FILE */,
