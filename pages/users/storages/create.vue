@@ -180,6 +180,7 @@ export default {
         long_comment: '' /* String */,
         title: '' /* String */,
         eyecatch_image: '' /* FILE */,
+        release_id: '' /* Integer */,
         storage: '' /* FILE */,
         web_address: '' /* URL */
       }),

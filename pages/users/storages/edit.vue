@@ -182,6 +182,7 @@ export default {
         long_comment: '' /* String */,
         eyecatch_image: '' /* FILE */,
         eyecatch_image_id: '' /* UUID Never Change!! */,
+        release_id: '' /* Integer */,
         title: '' /* String */,
         storage: '' /* FILE */,
         web_address: '' /* URL */
