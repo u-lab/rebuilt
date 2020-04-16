@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <client-only>
     <v-btn
       v-if="to"
       v-text="text"
@@ -26,7 +26,7 @@
     />
 
     <v-btn v-else v-text="text" color="#fff" text rounded class="my-2" dark />
-  </div>
+  </client-only>
 </template>
 
 <script>

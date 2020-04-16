@@ -1,6 +1,6 @@
 <template>
   <v-footer absolute app padless>
-    <v-row justify="center" no-gutters class="bg-top">
+    <v-row justify="center" class="bg-top">
       <template v-for="(link, key) in links">
         <footer-btn
           v-if="link.isDisplay"
