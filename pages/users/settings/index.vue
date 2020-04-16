@@ -1,20 +1,30 @@
 <template>
-  <div>
-    <!-- TODO 設定 -->
+  <v-container>
     <user-title title="設定" />
 
-    <!-- メールアドレス変更へのリンク -->
+    <v-list>
+      <!-- メールアドレス変更へのリンク -->
+      <v-list-item :to="{ name: 'users.settings.email' }" nuxt>
+        ユーザー名・メールアドレスを変更する
+      </v-list-item>
 
-    <div>
-      <nuxt-link :to="{ name: 'users.settings.password' }">
+      <v-divider />
+
+      <v-list-item :to="{ name: 'users.settings.password' }" nuxt>
         パスワードを変更する
-      </nuxt-link>
-    </div>
+      </v-list-item>
 
-    <div>
+      <v-divider />
+
+      <v-list-item :to="{ name: 'users.settings.deactivate' }" nuxt>
+        {{ $t('deactivate_your_account') }}
+      </v-list-item>
+    </v-list>
+
+    <div class="text-right mt-4">
       <v-btn @click.prevent="logout" dark color="red">ログアウト</v-btn>
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>

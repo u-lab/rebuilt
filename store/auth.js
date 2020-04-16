@@ -20,6 +20,11 @@ export const mutations = {
     state.token = token
   },
 
+  DEACTIVATED_USER(state) {
+    state.user = null
+    state.token = null
+  },
+
   FETCH_USER_SUCCESS(state, user) {
     state.user = user
   },
@@ -40,12 +45,25 @@ export const mutations = {
 
 // actions
 export const actions = {
-  saveToken({ commit, dispatch }, { token, remember }) {
-    commit('SET_TOKEN', token)
+  // ユーザーの退会処理
+  async deactivatedUser({ commit }) {
+    try {
+      await axios.delete('/users')
+    } catch (e) {}
 
-    Cookies.set('token', token, { expires: remember ? 365 : null })
+    Cookies.remove('token')
+
+    commit('DEACTIVATED_USER')
   },
 
+  // oauthのurlを取得
+  async fetchOauthUrl(ctx, { provider }) {
+    const { data } = await axios.post(`/oauth/${provider}`)
+
+    return data.url
+  },
+
+  // ユーザーの取得
   async fetchUser({ commit }) {
     try {
       const { data } = await axios.get('/user')
@@ -58,10 +76,7 @@ export const actions = {
     }
   },
 
-  updateUser({ commit }, payload) {
-    commit('UPDATE_USER', payload)
-  },
-
+  // ログアウトの処理
   async logout({ commit }) {
     try {
       await axios.post('/logout')
@@ -72,9 +87,14 @@ export const actions = {
     commit('LOGOUT')
   },
 
-  async fetchOauthUrl(ctx, { provider }) {
-    const { data } = await axios.post(`/oauth/${provider}`)
+  // tokenをセットする
+  saveToken({ commit, dispatch }, { token, remember }) {
+    commit('SET_TOKEN', token)
 
-    return data.url
+    Cookies.set('token', token, { expires: remember ? 365 : null })
+  },
+
+  updateUser({ commit }, payload) {
+    commit('UPDATE_USER', payload)
   }
 }
