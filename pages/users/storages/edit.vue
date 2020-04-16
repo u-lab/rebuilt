@@ -176,12 +176,13 @@ export default {
   data() {
     return {
       form: new Form({
-        user_id: '' /* Never Change!! */,
-        storage_id: '' /* Never Change!! */,
+        user_id: '' /* Integer Never Change!! */,
+        storage_id: '' /* String Never Change!! */,
         description: '' /* String */,
         long_comment: '' /* String */,
         eyecatch_image: '' /* FILE */,
-        eyecatch_image_id: '' /* UUID Never Change!! */,
+        eyecatch_image_id: '' /* Integer Never Change!! */,
+        release_id: '' /* Integer */,
         title: '' /* String */,
         storage: '' /* FILE */,
         web_address: '' /* URL */
@@ -205,12 +206,21 @@ export default {
       }
 
       return ''
+    },
+
+    releases() {
+      return this.$store.getters['release/releases']
     }
   },
 
   async asyncData({ params, error }) {
     const { data } = await axios.get(`/users/storage/${params.storageId}`)
     return { success: true, data: data.data }
+  },
+
+  async fetch({ store, error }) {
+    // releaseの取得
+    await store.dispatch('release/fetchReleases')
   },
 
   created() {
