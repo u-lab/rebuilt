@@ -26,7 +26,7 @@ export default {
     to: {
       type: [String, Object],
       required: false,
-      default: null
+      default: undefined
     }
   }
 }
