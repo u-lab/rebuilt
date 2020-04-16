@@ -199,7 +199,16 @@ export default {
       }
 
       return ''
+    },
+
+    releases() {
+      return this.$store.getters['release/releases']
     }
+  },
+
+  async fetch({ store, error }) {
+    // releaseの取得
+    await store.dispatch('release/fetchReleases')
   },
 
   methods: {

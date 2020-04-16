@@ -206,12 +206,21 @@ export default {
       }
 
       return ''
+    },
+
+    releases() {
+      return this.$store.getters['release/releases']
     }
   },
 
   async asyncData({ params, error }) {
     const { data } = await axios.get(`/users/storage/${params.storageId}`)
     return { success: true, data: data.data }
+  },
+
+  async fetch({ store, error }) {
+    // releaseの取得
+    await store.dispatch('release/fetchReleases')
   },
 
   created() {
