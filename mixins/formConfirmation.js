@@ -53,10 +53,15 @@ export const formConfirmation = {
   computed: {
     /**
      * サーバーでエラーが発生したかどうか
+     * これはapiに一度、リクエストを送った後、apiのバリデーションで弾かれた場合にtrueになる
      *
      * @return {Boolean}
      */
     isErrorServer() {
+      if (this.errors === null || !('errors' in this.errors)) {
+        return false
+      }
+
       const err = this.errors.errors
       return err && this.objKey in err && `${this.objKey}_confirmation` in err
     },

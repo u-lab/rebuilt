@@ -86,6 +86,12 @@ const routes = [
     name: 'users.settings.email',
     component: pageUsers('settings/email.vue')
   },
+  {
+    path: '/users/settings/success',
+    name: 'users.settings.success',
+    component: pageUsers('settings/success.vue')
+  },
+
   // アカウントを削除する
   {
     path: '/users/settings/deactivate',

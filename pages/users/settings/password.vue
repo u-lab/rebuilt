@@ -3,50 +3,23 @@
     <user-title title="パスワードを変更する" />
 
     <v-form @submit.prevent="update" @keydown="form.onKeydown($event)">
-      <alert-success :form="form" :message="$t('password_updated')" />
-
       <!-- Password -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{
-          $t('new_password')
-        }}</label>
-        <div class="col-md-7">
-          <input
-            v-model="form.password"
-            :class="{ 'is-invalid': form.errors.has('password') }"
-            type="password"
-            name="password"
-            class="form-control"
-          />
-          <has-error :form="form" field="password" />
-        </div>
-      </div>
-
-      <!-- Password Confirmation -->
-      <div class="form-group row">
-        <label class="col-md-3 col-form-label text-md-right">{{
-          $t('confirm_password')
-        }}</label>
-        <div class="col-md-7">
-          <input
-            v-model="form.password_confirmation"
-            :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
-            type="password"
-            name="password_confirmation"
-            class="form-control"
-          />
-          <has-error :form="form" field="password_confirmation" />
-        </div>
-      </div>
+      <form-password-with-confirmation
+        v-model="form.password"
+        :confirmationField="form.password_confirmation"
+        :dirty="formDirty"
+        :errors="form.errors"
+        :lazy-validation="true"
+        @confirmation="updatePasswordConfirmation"
+        @dirty="dirty"
+        obj-key="password"
+      />
 
       <!-- Submit Button -->
-      <div class="form-group row">
-        <div class="col-md-9 ml-md-auto">
-          <v-button :loading="form.busy" type="success">
-            {{ $t('update') }}
-          </v-button>
-        </div>
-      </div>
+
+      <v-btn @submit="update" type="submit">
+        {{ $t('update') }}
+      </v-btn>
     </v-form>
   </div>
 </template>
@@ -54,16 +27,19 @@
 <script>
 import Form from 'vform'
 import UserTitle from '~/components/molecues/pages/UserTitle'
+import FormPasswordWithConfirmation from '~/components/molecues/auth/FormPasswordWithConfirmation'
 export default {
   middleware: 'auth',
 
   layout: 'user',
 
   components: {
-    UserTitle
+    UserTitle,
+    FormPasswordWithConfirmation
   },
 
   data: () => ({
+    formDirty: false,
     form: new Form({
       password: '',
       password_confirmation: ''
@@ -72,9 +48,17 @@ export default {
 
   methods: {
     async update() {
-      await this.form.patch('/settings/password')
-
-      this.form.reset()
+      try {
+        await this.form.patch('/settings/password')
+        this.form.reset()
+        this.$router.push({ name: 'users.settings.success' })
+      } catch (e) {}
+    },
+    dirty() {
+      this.formDirty = true
+    },
+    updatePasswordConfirmation(value) {
+      this.form.password_confirmation = value
     }
   }
 }
