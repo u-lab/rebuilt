@@ -1,31 +1,33 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <v-card :title="$t('verify_email')">
+  <v-row justify="center">
+    <v-col md="8">
+      <v-card class="pa-4">
+        <v-card-title v-text="$t('verify_email')" />
+
         <template v-if="success">
-          <div class="alert alert-success" role="alert">
+          <v-alert type="success">
             {{ status }}
-          </div>
+          </v-alert>
 
-          <router-link :to="{ name: 'login' }" class="btn btn-primary">
+          <v-btn :to="{ name: 'login' }" color="primary">
             {{ $t('login') }}
-          </router-link>
+          </v-btn>
         </template>
-        <template v-else>
-          <div class="alert alert-danger" role="alert">
-            {{ status || $t('failed_to_verify_email') }}
-          </div>
 
-          <router-link
-            :to="{ name: 'verification.resend' }"
-            class="small float-right"
-          >
-            {{ $t('resend_verification_link') }}
-          </router-link>
+        <template v-else>
+          <v-alert type="error">
+            {{ status || $t('failed_to_verify_email') }}
+          </v-alert>
+
+          <div class="d-flex justify-center">
+            <v-btn :to="{ name: 'verification.resend' }" color="primary">
+              {{ $t('resend_verification_link') }}
+            </v-btn>
+          </div>
         </template>
       </v-card>
-    </div>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -38,6 +40,8 @@ const qs = (params) =>
 
 export default {
   middleware: 'guest',
+
+  layout: 'auth',
 
   metaInfo() {
     return { title: this.$t('verify_email') }

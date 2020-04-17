@@ -92,6 +92,13 @@ const routes = [
     component: pageUsers('settings/success.vue')
   },
 
+  // アカウントを削除する
+  {
+    path: '/users/settings/deactivate',
+    name: 'users.settings.deactivate',
+    component: pageUsers('settings/deactivate.vue')
+  },
+
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
   {
