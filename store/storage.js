@@ -13,7 +13,7 @@ export const state = () => ({
 export const getters = {
   storage: (state) => state.storage,
   storages: (state) => state.storages,
-  storageCheck: (state) => state.storages !== null,
+  storageCheck: (state) => state.storage !== null,
   storagesCheck: (state) => state.storages.length !== 0,
   storagesPageNext: (state) => state.storagesPageNext
 }
@@ -47,9 +47,12 @@ export const mutations = {
 // actions
 export const actions = {
   async fetchStorage({ commit, getters }, storageId) {
+    console.log('h')
     if (getters.storageCheck && getters.storage.storage_id === storageId) {
+      console.log('hoge')
       return
     }
+    console.log('hogehoge')
 
     if (getters.storagesCheck) {
       const storages = getters.storages
