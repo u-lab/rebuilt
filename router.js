@@ -37,12 +37,6 @@ const routes = [
     name: 'users.dashboard',
     component: pageUsers('dashboard.vue')
   },
-  // 自分のポートフォリオ
-  {
-    path: '/users/page',
-    name: 'users.page.index',
-    component: pageUsers('page/index.vue')
-  },
   // 自分のポートフォリオ編集
   {
     path: '/users/page/edit',

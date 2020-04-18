@@ -1,12 +1,18 @@
 import axios from 'axios'
 import { uniq } from '@/utils/array'
-import { getStorageByStorageId } from '@/utils/storage'
+import {
+  getStorageByStorageId,
+  getStorageByUserAndStorageId,
+  getUserFromAllStorages
+} from '@/utils/storage'
 
 // state
 export const state = () => ({
   storage: null,
   storages: null,
   storagesPageNext: null,
+  allStorages: [],
+  allStoragesPageNext: null,
   user: null
 })
 
@@ -17,6 +23,9 @@ export const getters = {
   storage: (state) => state.storage,
   storages: (state) => state.storages,
   storagesPageNext: (state) => state.storagesPageNext,
+  checkAllStorages: (state) => state.allStorages.length !== 0,
+  allStorages: (state) => state.allStorages,
+  allStoragesPageNext: (state) => state.allStoragesPageNext,
   user: (state) => state.user
 }
 
@@ -45,6 +54,19 @@ export const mutations = {
   PUSH_STORAGES(state, storages) {
     state.storages = [...state.storages, ...storages] // 配列のマージ
     state.storages = uniq(state.storages, 'storage_id') // 重複の削除
+  },
+
+  PUSH_ALLSTORAGES(state, storages) {
+    state.allStorages = [...state.allStorages, ...storages] // 配列のマージ
+    state.allStorages = uniq(state.allStorages, 'storage_id') // 重複の削除
+  },
+
+  SET_ALLSTORAGES(state, storages) {
+    state.allStorages = storages
+  },
+
+  SET_ALLSTORAGES_PAGE_NEXT(state, nextUrl) {
+    state.allStoragesPageNext = nextUrl
   },
 
   SET_STORAGE(state, storage) {
@@ -118,6 +140,30 @@ export const actions = {
   },
 
   /**
+   * ユーザーデータを取得する
+   *
+   * @param { String } name ユーザー名
+   */
+  async fetchUserFromAllStorages({ getters, commit, dispatch }, name) {
+    // データが取得済みの場合はreturn
+    if (getters.checkUser) {
+      if (getters.user.name === name) {
+        return
+      }
+      commit('CLEAR_ALL') // state内を空にする
+    }
+
+    if (getters.checkAllStorages) {
+      const storages = getters.allStorages
+      const { user } = getUserFromAllStorages(storages, name)
+
+      return commit('SET_USER', user)
+    }
+
+    await dispatch('fetchUser', name)
+  },
+
+  /**
    * 1つの作品を取得する
    *
    * @param { String } storageId
@@ -155,6 +201,24 @@ export const actions = {
     }
   },
 
+  async fetchStorageFromAllStorages({ getters, commit, dispatch }, storageId) {
+    if (getters.checkAllStorages) {
+      const user = getters.user
+      const storages = getters.allStorages
+      const { data } = getStorageByUserAndStorageId(
+        storages,
+        user.name,
+        storageId
+      )
+
+      if (data !== undefined) {
+        return commit('SET_STORAGE', data)
+      }
+    }
+
+    await dispatch('fetchStorage', storageId)
+  },
+
   /**
    * 複数の作品を取得する
    */
@@ -177,6 +241,39 @@ export const actions = {
         commit('SET_STORAGES', data.data)
       }
       commit('SET_STORAGES_PAGE_NEXT', data.links.next)
+    } catch (e) {
+      throw new Error('Page Not Found')
+    }
+  },
+
+  /**
+   * 更にユーザーデータを取得する
+   */
+  async fetchFurthermoreAllStorages({ getters, commit }) {
+    if (getters.storagesAllPageNext) {
+      try {
+        const { data } = await axios.get(getters.allStoragesPageNext)
+        commit('PUSH_ALLSTORAGESS', data.data)
+        commit('SET_ALLSTORAGES_PAGE_NEXT', data.links.next)
+      } catch (e) {
+        throw new Error('Page Not Found')
+      }
+    }
+  },
+
+  /**
+   * 複数の作品を取得する
+   */
+  async fetchAllStorages({ getters, commit }) {
+    if (getters.checkAllStorages) {
+      return
+    }
+
+    try {
+      const { data } = await axios.get(`storages`)
+
+      commit('SET_ALLSTORAGES', data.data)
+      commit('SET_ALLSTORAGES_PAGE_NEXT', data.links.next)
     } catch (e) {
       throw new Error('Page Not Found')
     }

@@ -11,8 +11,6 @@ import Password from '@/components/templates/users/settings/Password'
 export default {
   middleware: 'auth',
 
-  layout: 'user',
-
   components: {
     Password
   },

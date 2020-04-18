@@ -162,8 +162,6 @@ import FormLongComment from '@/components/molecues/form/FormLongComment'
 export default {
   middleware: 'auth',
 
-  layout: 'user',
-
   components: {
     EyeCatchImageDisplay,
     FormTitle,

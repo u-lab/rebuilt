@@ -1,14 +1,20 @@
 <template>
-  <div class="pt-2 pt-sm-4">
-    <pages-user v-if="user && storages" :user="user" :storages="storages" />
+  <div>
+    <navbar />
+
+    <div class="pt-2 pt-sm-4">
+      <pages-user v-if="user && storages" :user="user" :storages="storages" />
+    </div>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/organisms/navbar/DefaultNavbar'
 import PagesUser from '@/components/templates/pages/PagesUser'
 
 export default {
   components: {
+    Navbar,
     PagesUser
   },
 
@@ -22,8 +28,12 @@ export default {
     }
   },
 
-  async fetch({ store, params, error }) {
+  async fetch({ store, params, query, error }) {
     try {
+      if (query.data) {
+        await store.dispatch('page/fetchUserFromAllStorages', params.user)
+      }
+
       await store.dispatch('page/fetchUser', params.user)
     } catch (e) {
       return error({
