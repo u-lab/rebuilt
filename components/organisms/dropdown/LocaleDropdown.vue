@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import BaseDropdown from '@/components/molecues/dropdown/BaseDropdown'
 import { loadMessages } from '~/plugins/i18n'
 
@@ -32,10 +31,15 @@ export default {
     }
   },
 
-  computed: mapGetters({
-    locale: 'lang/locale',
-    locales: 'lang/locales'
-  }),
+  computed: {
+    locale() {
+      return this.$store.getters['lang/locale']
+    },
+
+    locales() {
+      return this.$store.getters['lang/locales']
+    }
+  },
 
   methods: {
     setLocale(locale) {

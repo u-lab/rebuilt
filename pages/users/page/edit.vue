@@ -200,7 +200,6 @@
 
 <script>
 import Form from 'vform'
-import { mapGetters } from 'vuex'
 import { objectToFormData } from 'object-to-formdata'
 import clonedeep from 'lodash.clonedeep'
 import axios from 'axios'
@@ -245,9 +244,9 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      user: 'auth/user'
-    }),
+    user() {
+      return this.$store.getters['auth/user']
+    },
 
     dialogWidth() {
       return '290px'

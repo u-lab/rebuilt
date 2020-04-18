@@ -24,15 +24,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   head() {
     return { title: this.$t('home') }
   },
 
-  computed: mapGetters({
-    authenticated: 'auth/check'
-  })
+  computed: {
+    authenticated() {
+      return this.$store.getters['auth/check']
+    }
+  }
 }
 </script>
