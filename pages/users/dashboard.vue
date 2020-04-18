@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- TODO ユーザーダッシュボード -->
     <user-title :title="$t('dashboard')" />
 
     <v-card>
@@ -27,7 +26,7 @@
       </v-col>
 
       <v-col cols="6">
-        <look-storage :data="data" />
+        <look-storage :data="data" :user="user" />
       </v-col>
     </v-row>
   </div>
@@ -44,6 +43,12 @@ export default {
   components: {
     LookStorage,
     UserTitle
+  },
+
+  computed: {
+    user() {
+      return this.$store.getters['auth/user']
+    }
   },
 
   async asyncData() {

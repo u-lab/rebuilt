@@ -11,8 +11,11 @@
           v-for="item in showItems(showItemNum)"
           :key="item.storage_id"
           :to="{
-            name: 'users.storages.show',
-            params: { storageId: item.storage_id }
+            name: 'pages.storages.show',
+            params: {
+              user: user.name,
+              storageId: item.storage_id
+            }
           }"
           link
           nuxt
@@ -53,6 +56,11 @@
 export default {
   props: {
     data: {
+      type: Object,
+      required: true
+    },
+
+    user: {
       type: Object,
       required: true
     }
