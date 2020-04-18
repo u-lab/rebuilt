@@ -22,13 +22,6 @@
           obj-key="user"
         />
 
-        <!-- <v-text-field
-          v-model="form.email"
-          :label="$t('email')"
-          :class="{ 'is-invalid': form.errors.has('email') }"
-          :counter="255"
-          required
-        /> -->
         <form-email
           v-model="form.email"
           :confirmationField="email_confirmation"
@@ -39,7 +32,6 @@
           :outlined="false"
           obj-key="email"
         />
-        <has-error :form="form" field="email" />
 
         <form-password-with-confirmation
           v-model="form.password"
