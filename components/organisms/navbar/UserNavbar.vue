@@ -27,20 +27,16 @@
         class="d-none d-md-flex"
       />
 
-      <locale-dropdown dark color="grey darken-4" />
-
       <user-navbar-menu />
     </v-toolbar-items>
   </v-app-bar>
 </template>
 
 <script>
-import LocaleDropdown from '@/components/organisms/dropdown/LocaleDropdown'
 import UserNavbarMenu from '@/components/organisms/menu/UserNavbarMenu'
 
 export default {
   components: {
-    LocaleDropdown,
     UserNavbarMenu
   },
 
