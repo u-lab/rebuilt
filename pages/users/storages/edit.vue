@@ -145,7 +145,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import FormTitle from '@/components/molecues/form/FormTitle'
@@ -199,11 +198,15 @@ export default {
         return this.preview.eyecatch_image_url
       }
 
-      if (this.data.eyecatch_image.url) {
-        return this.data.eyecatch_image.url
+      if (this.storage.eyecatch_image.url) {
+        return this.storage.eyecatch_image.url
       }
 
       return ''
+    },
+
+    storage() {
+      return this.$store.getters['storage/storage']
     },
 
     releases() {
@@ -211,25 +214,21 @@ export default {
     }
   },
 
-  async asyncData({ params, error }) {
-    const { data } = await axios.get(`/users/storage/${params.storageId}`)
-    return { success: true, data: data.data }
-  },
-
-  async fetch({ store, error }) {
+  async fetch({ store, params, error }) {
     // releaseの取得
     await store.dispatch('release/fetchReleases')
+    await store.dispatch('storage/fetchStorage', params.storageId)
   },
 
   created() {
     // Fill the form with data.
     this.form.keys().forEach((key) => {
-      if (this.data[key] !== null) {
-        this.form[key] = this.data[key]
+      if (this.storage[key] !== null) {
+        this.form[key] = this.storage[key]
       }
     })
 
-    this.preview.eyecatch_image_url = this.data.eyecatch_image.url
+    this.preview.eyecatch_image_url = this.storage.eyecatch_image.url
     this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
   },
 

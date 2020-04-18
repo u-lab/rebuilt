@@ -12,7 +12,7 @@
           />
         </v-col>
 
-        <v-col v-for="(items, key) in data.data" :key="key" cols="4">
+        <v-col v-for="(items, key) in storages" :key="key" cols="4">
           <storage-card-for-edit
             :to="{
               name: 'users.storages.edit',
@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import UserTitle from '~/components/molecues/pages/UserTitle'
 import StorageCardForEdit from '@/components/molecues/storages/StorageCardForEdit'
 import StorageCardForCreate from '@/components/molecues/storages/StorageCardForCreate'
@@ -47,6 +46,10 @@ export default {
       return this.$store.getters['auth/user']
     },
 
+    storages() {
+      return this.$store.getters['storage/storages']
+    },
+
     cardHeight() {
       return '200px'
     },
@@ -56,9 +59,8 @@ export default {
     }
   },
 
-  async asyncData({ params, error }) {
-    const { data } = await axios.get('users/storage')
-    return { success: true, data }
+  async fetch({ store, error }) {
+    await store.dispatch('storage/fetchStorages')
   }
 }
 </script>
