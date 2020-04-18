@@ -12,40 +12,38 @@
         @submit.prevent="register"
         @keydown="form.onKeydown($event)"
       >
-        <v-text-field
-          v-model="form.name"
-          :label="$t('name')"
-          :counter="255"
-          :class="{ 'is-invalid': form.errors.has('name') }"
-          required
+        <form-username
+          v-model="form.user"
+          :dirty="formDirty"
+          :errors="form.errors"
+          :lazy-validation="true"
+          @dirty="dirty"
+          :outlined="false"
+          obj-key="user"
         />
-        <has-error :form="form" field="name" />
 
-        <v-text-field
+        <form-email
           v-model="form.email"
-          :label="$t('email')"
-          :class="{ 'is-invalid': form.errors.has('email') }"
-          :counter="255"
-          required
+          :confirmationField="email_confirmation"
+          :dirty="formDirty"
+          :errors="form.errors"
+          :lazy-validation="true"
+          @dirty="dirty"
+          :outlined="false"
+          obj-key="email"
         />
-        <has-error :form="form" field="email" />
 
-        <v-text-field
+        <form-password-with-confirmation
           v-model="form.password"
-          :label="$t('password')"
-          :class="{ 'is-invalid': form.errors.has('password') }"
-          :counter="255"
-          required
+          :confirmationField="form.password_confirmation"
+          :dirty="formDirty"
+          :errors="form.errors"
+          :lazy-validation="true"
+          @confirmation="updatePasswordConfirmation"
+          @dirty="dirty"
+          :outlined="false"
+          obj-key="password"
         />
-        <has-error :form="form" field="password" />
-
-        <v-text-field
-          v-model="form.password_confirmation"
-          :label="$t('confirm_password')"
-          required
-        />
-        <has-error :form="form" field="password_confirmation" />
-
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
           <v-btn
@@ -67,9 +65,11 @@
 
 <script>
 import Form from 'vform'
+import FormUsername from '@/components/molecues/form/FormUsername'
+import FormEmail from '@/components/molecues/form/FormEmail'
+import FormPasswordWithConfirmation from '@/components/molecues/form/FormPasswordWithConfirmation'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
-
 export default {
   head() {
     return { title: this.$t('register') }
@@ -77,10 +77,14 @@ export default {
 
   components: {
     AuthForm,
-    AuthWrapper
+    AuthWrapper,
+    FormEmail,
+    FormUsername,
+    FormPasswordWithConfirmation
   },
 
   data: () => ({
+    formDirty: false,
     form: new Form({
       name: '',
       email: '',
@@ -122,6 +126,12 @@ export default {
         // Redirect dashboard.
         this.$router.push({ name: 'users.dashboard' })
       }
+    },
+    dirty() {
+      this.formDirty = true
+    },
+    updatePasswordConfirmation(value) {
+      this.form.password_confirmation = value
     }
   }
 }
