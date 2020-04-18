@@ -14,6 +14,7 @@
       >
         <v-text-field
           v-model="form.name"
+          :error-messages="errorMessage"
           :label="$t('name')"
           :counter="255"
           :class="{ 'is-invalid': form.errors.has('name') }"
@@ -67,12 +68,16 @@
 
 <script>
 import Form from 'vform'
+import { required, helpers } from 'vuelidate/lib/validators'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
-
 export default {
   head() {
     return { title: this.$t('register') }
+  },
+  valications: {
+    regex: helpers.regex('alphaNum', /^(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}$/i),
+    required
   },
 
   components: {
@@ -81,6 +86,7 @@ export default {
   },
 
   data: () => ({
+    formDirty: false,
     form: new Form({
       name: '',
       email: '',
@@ -89,6 +95,17 @@ export default {
     }),
     mustVerifyEmail: false
   }),
+  errorMessage() {
+    const validate = this.$v
+    // ユーザーが一回以上touchしたか
+    if (!this.dirty || !validate.$dirty) {
+      return this.errorServerMessage
+    }
+    const errors = []
+
+    !validate.regex && errors.push('半角英数字8文字以上入力してください')
+    return errors
+  },
 
   layout: 'auth',
 
@@ -122,6 +139,9 @@ export default {
         // Redirect dashboard.
         this.$router.push({ name: 'users.dashboard' })
       }
+    },
+    dirty() {
+      this.formDirty = true
     }
   }
 }
