@@ -210,8 +210,6 @@ import headerimg from '~/assets/img/work2.jpg'
 export default {
   middleware: 'auth',
 
-  layout: 'user',
-
   components: {
     UserTitle
   },

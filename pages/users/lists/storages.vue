@@ -72,7 +72,7 @@ export default {
 
   middleware: 'auth',
 
-  layout: 'user',
+
 
   async asyncData() {
     const { data } = await axios.get(`/storages`)

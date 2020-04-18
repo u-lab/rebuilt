@@ -37,8 +37,6 @@ import StorageCardForCreate from '@/components/molecues/storages/StorageCardForC
 export default {
   middleware: 'auth',
 
-  layout: 'user',
-
   components: {
     UserTitle,
     StorageCardForCreate,

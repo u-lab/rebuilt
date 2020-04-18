@@ -12,8 +12,6 @@ export default {
 
   middleware: 'auth',
 
-  layout: 'user',
-
   computed: {
     user() {
       return this.$store.getters['auth/user']

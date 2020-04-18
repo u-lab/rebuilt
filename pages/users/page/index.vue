@@ -93,8 +93,6 @@ import UserTitle from '~/components/molecues/pages/UserTitle'
 export default {
   middleware: 'auth',
 
-  layout: 'user',
-
   components: {
     UserTitle
   },
