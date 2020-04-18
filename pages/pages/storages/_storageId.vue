@@ -1,20 +1,26 @@
 <template>
-  <div class="pt-2 pt-sm-4">
-    <pages-storages-storageid :storage="storage" :user="user" />
+  <div>
+    <navbar />
 
-    <!-- other work -->
-    <v-container>
-      <other-storage-list :user-name="user.name" :storages="storages" />
-    </v-container>
+    <div class="pt-2 pt-sm-4">
+      <pages-storages-storageid :storage="storage" :user="user" />
+
+      <!-- other work -->
+      <v-container>
+        <other-storage-list :user-name="user.name" :storages="storages" />
+      </v-container>
+    </div>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/organisms/navbar/DefaultNavbar'
 import PagesStoragesStorageid from '@/components/templates/pages/PagesStoragesStorageid'
 import OtherStorageList from '@/components/organisms/list/OtherStorageList'
 
 export default {
   components: {
+    Navbar,
     PagesStoragesStorageid,
     OtherStorageList
   },

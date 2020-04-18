@@ -1,14 +1,20 @@
 <template>
-  <div class="pt-2 pt-sm-4">
-    <pages-user v-if="user && storages" :user="user" :storages="storages" />
+  <div>
+    <navbar />
+
+    <div class="pt-2 pt-sm-4">
+      <pages-user v-if="user && storages" :user="user" :storages="storages" />
+    </div>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/organisms/navbar/DefaultNavbar'
 import PagesUser from '@/components/templates/pages/PagesUser'
 
 export default {
   components: {
+    Navbar,
     PagesUser
   },
 

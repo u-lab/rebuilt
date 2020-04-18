@@ -1,34 +1,50 @@
 <template>
   <v-app class="default">
-    <user-navbar v-if="isAuth" />
+    <user-navbar v-if="isAuth" @drawer="onDrawer" />
 
-    <navbar :class="{ 'mt-12': isAuth }" />
+    <sidebar v-if="isAuth" :drawer="drawer" />
 
     <!-- Sizes your content based upon application components -->
     <v-content class="mb-12">
       <!-- Provides the application the proper gutter -->
-      <nuxt />
+      <v-container v-if="isAuth" fluid>
+        <nuxt />
+      </v-container>
+
+      <nuxt v-else />
     </v-content>
 
-    <the-default-footer />
+    <the-default-footer v-if="!isAuth" />
   </v-app>
 </template>
 
 <script>
-import Navbar from '@/components/organisms/navbar/DefaultNavbar'
-import UserNavbar from '@/components/organisms/navbar/UserNavbar'
+import Sidebar from '@/components/organisms/sidebar/Sidebar'
 import TheDefaultFooter from '@/components/organisms/footer/TheDefaultFooter'
+import UserNavbar from '@/components/organisms/navbar/UserNavbar'
 
 export default {
   components: {
-    Navbar,
     TheDefaultFooter,
+    Sidebar,
     UserNavbar
+  },
+
+  data() {
+    return {
+      drawer: false
+    }
   },
 
   computed: {
     isAuth() {
       return this.$store.getters['auth/check']
+    }
+  },
+
+  methods: {
+    onDrawer(payload) {
+      this.drawer = payload
     }
   }
 }
