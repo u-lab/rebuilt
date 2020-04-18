@@ -24,6 +24,12 @@
 
       <v-divider />
 
+      <v-list-item :to="{ name: 'users.settings.locale' }" nuxt>
+        {{ $t('display_language') }}
+      </v-list-item>
+
+      <v-divider />
+
       <v-list-item :to="{ name: 'users.settings.deactivate' }" nuxt>
         {{ $t('deactivate_your_account') }}
       </v-list-item>

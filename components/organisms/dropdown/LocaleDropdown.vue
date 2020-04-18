@@ -47,6 +47,8 @@ export default {
         loadMessages(locale)
 
         this.$store.dispatch('lang/setLocale', { locale })
+
+        this.$emit('click')
       }
     }
   }
