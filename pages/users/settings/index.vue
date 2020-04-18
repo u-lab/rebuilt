@@ -3,15 +3,23 @@
     <user-title title="設定" />
 
     <v-list>
-      <!-- メールアドレス変更へのリンク -->
+      <!-- ユーザー名変更 -->
       <v-list-item :to="{ name: 'users.settings.email' }" nuxt>
-        ユーザー名・メールアドレスを変更する
+        {{ $t('update_your_user_name') }}
       </v-list-item>
 
       <v-divider />
 
+      <!-- メールアドレス変更 -->
+      <v-list-item :to="{ name: 'users.settings.email' }" nuxt>
+        {{ $t('update_your_email_address') }}
+      </v-list-item>
+
+      <v-divider />
+
+      <!-- パスワード変更 -->
       <v-list-item :to="{ name: 'users.settings.password' }" nuxt>
-        パスワードを変更する
+        {{ $t('update_your_password') }}
       </v-list-item>
 
       <v-divider />
@@ -22,7 +30,7 @@
     </v-list>
 
     <div class="text-right mt-4">
-      <v-btn @click.prevent="logout" dark color="red">ログアウト</v-btn>
+      <v-btn @click.prevent="logout" v-text="$t('logout')" dark color="red" />
     </div>
   </v-container>
 </template>
