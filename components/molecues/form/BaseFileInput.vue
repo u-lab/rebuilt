@@ -53,7 +53,7 @@ export default {
     value: {
       default: undefined,
       validator: (val) => {
-        return getType(val) === 'file'
+        return !val || getType(val) === 'file'
       }
     }
   },
