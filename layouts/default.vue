@@ -1,9 +1,11 @@
 <template>
   <v-app class="default">
-    <navbar />
+    <user-navbar v-if="isAuth" />
+
+    <navbar :class="{ 'mt-12': isAuth }" />
 
     <!-- Sizes your content based upon application components -->
-    <v-content>
+    <v-content class="mb-12">
       <!-- Provides the application the proper gutter -->
       <nuxt />
     </v-content>
@@ -14,12 +16,20 @@
 
 <script>
 import Navbar from '@/components/organisms/navbar/DefaultNavbar'
+import UserNavbar from '@/components/organisms/navbar/UserNavbar'
 import TheDefaultFooter from '@/components/organisms/footer/TheDefaultFooter'
 
 export default {
   components: {
     Navbar,
-    TheDefaultFooter
+    TheDefaultFooter,
+    UserNavbar
+  },
+
+  computed: {
+    isAuth() {
+      return this.$store.getters['auth/check']
+    }
   }
 }
 </script>
