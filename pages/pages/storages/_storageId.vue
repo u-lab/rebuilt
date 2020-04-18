@@ -39,10 +39,18 @@ export default {
     }
   },
 
-  async fetch({ store, params, error }) {
+  async fetch({ store, params, query, error }) {
     try {
-      await store.dispatch('page/fetchUser', params.user)
-      await store.dispatch('page/fetchStorage', params.storageId)
+      if (query.data) {
+        await store.dispatch('page/fetchUserFromAllStorages', params.user)
+        await store.dispatch(
+          'page/fetchStorageFromAllStorages',
+          params.storageId
+        )
+      } else {
+        await store.dispatch('page/fetchUser', params.user)
+        await store.dispatch('page/fetchStorage', params.storageId)
+      }
     } catch (e) {
       return error({
         statusCode: 404,

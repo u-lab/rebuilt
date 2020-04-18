@@ -28,8 +28,12 @@ export default {
     }
   },
 
-  async fetch({ store, params, error }) {
+  async fetch({ store, params, query, error }) {
     try {
+      if (query.data) {
+        await store.dispatch('page/fetchUserFromAllStorages', params.user)
+      }
+
       await store.dispatch('page/fetchUser', params.user)
     } catch (e) {
       return error({
