@@ -43,7 +43,7 @@ export default {
 
         this.$store.dispatch('auth/updateUser', { user: data })
 
-        this.$router.push('/users/settings')
+        this.$router.push({ name: 'users.settings.index' })
       } catch (e) {}
     }
   }

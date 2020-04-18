@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="mb-4">
-      <nuxt-link to="/users/settings" class="icon-link">
+      <nuxt-link :to="{ name: 'users.settings.index' }" class="icon-link">
         <v-icon v-text="`mdi-arrow-left`" class="icon-block" large />
       </nuxt-link>
     </div>
@@ -20,12 +20,6 @@ export default {
     title: {
       type: String,
       required: true
-    }
-  },
-
-  methods: {
-    redirect() {
-      return this.$router.push('users/settings')
     }
   }
 }
