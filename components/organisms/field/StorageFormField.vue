@@ -75,6 +75,10 @@
             <v-col cols="5">
               <h3>objファイル</h3>
 
+              <p v-if="previewStorage">
+                objファイルを更新する場合は、以下にファイルを入れてください。
+              </p>
+
               <!-- storage -->
               <v-file-input
                 v-model="form.storage"
@@ -154,6 +158,11 @@ export default {
     },
 
     previewImage: {
+      type: Object,
+      default: undefined
+    },
+
+    previewStorage: {
       type: Object,
       default: undefined
     }
