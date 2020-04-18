@@ -1,9 +1,49 @@
 <template>
   <div>
-    <p>メールアドレスを変更する</p>
+    <email-template v-model="form" :user="user" @submit="update" />
   </div>
 </template>
 
 <script>
-export default {}
+import Form from 'vform'
+import EmailTemplate from '@/components/templates/users/settings/Email'
+
+export default {
+  components: {
+    EmailTemplate
+  },
+
+  middleware: 'auth',
+
+  data() {
+    return {
+      form: new Form({
+        name: '',
+        email: ''
+      })
+    }
+  },
+
+  computed: {
+    user() {
+      return this.$store.getters['auth/user']
+    }
+  },
+
+  created() {
+    this.form.name = this.user.name
+  },
+
+  methods: {
+    async update() {
+      try {
+        const { data } = await this.form.patch('/settings/profile')
+
+        this.$store.dispatch('auth/updateUser', { user: data })
+
+        this.$router.push({ name: 'users.settings.index' })
+      } catch (e) {}
+    }
+  }
+}
 </script>

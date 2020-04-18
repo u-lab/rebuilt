@@ -1,19 +1,36 @@
 <template>
-  <div>
-    <v-tabs v-model="tab" dark grow slider-color="white">
-      <v-tab v-text="title1" />
-      <v-tab v-text="title2" />
+  <div class="tab-container">
+    <v-tabs
+      v-model="tab"
+      centered
+      background-color="transparent"
+      slider-color="#a9ceec"
+    >
+      <v-tab>
+        <span v-text="title1" class="text-capitalize" />
+      </v-tab>
+      <v-tab>
+        <span v-text="title2" class="text-capitalize" />
+      </v-tab>
+
+      <v-tabs-items v-model="tab">
+        <v-tab-item>
+          <div class="tab-item-container">
+            <v-container>
+              <slot name="first" />
+            </v-container>
+          </div>
+        </v-tab-item>
+
+        <v-tab-item>
+          <div class="tab-item-container">
+            <v-container>
+              <slot name="second" />
+            </v-container>
+          </div>
+        </v-tab-item>
+      </v-tabs-items>
     </v-tabs>
-
-    <v-tabs-items v-model="tab">
-      <v-tab-item>
-        <slot name="first" />
-      </v-tab-item>
-
-      <v-tab-item>
-        <slot name="second" />
-      </v-tab-item>
-    </v-tabs-items>
   </div>
 </template>
 
@@ -38,3 +55,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.tab-container {
+  border-top: 1px solid grey;
+}
+
+.tab-item-container {
+  background: $background-page-header;
+}
+</style>

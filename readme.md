@@ -44,6 +44,8 @@ $ npm run dev
 
 - パスワードの変更完了画面(/password/reset/success)
 
+- メールの認証(/email/verify/:id)
+
 ### 会員ページ
 
 - 作品一覧(/storages)
@@ -63,5 +65,6 @@ $ npm run dev
 - 設定 (/users/settings)
   - パスワード変更 (/users/settings/password)
   - メールアドレス変更 (/users/settings/email)
+  - アカウントの削除 (/users/settings/deactivate)
 
 - ログアウト(/logout)

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import AuthNavbar from '@/components/organisms/form/AuthNavbar'
+import AuthNavbar from '@/components/organisms/navbar/AuthNavbar'
 
 export default {
   components: {

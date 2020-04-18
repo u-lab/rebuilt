@@ -1,20 +1,38 @@
 <template>
-  <div>
-    <!-- TODO 設定 -->
-    <user-title title="設定" />
+  <v-container>
+    <user-title :title="$t('settings')" />
 
-    <!-- メールアドレス変更へのリンク -->
+    <v-list>
+      <!-- ユーザー名変更 -->
+      <v-list-item :to="{ name: 'users.settings.username' }" nuxt>
+        {{ $t('update_your_user_name') }}
+      </v-list-item>
 
-    <div>
-      <nuxt-link :to="{ name: 'users.settings.password' }">
-        パスワードを変更する
-      </nuxt-link>
+      <v-divider />
+
+      <!-- メールアドレス変更 -->
+      <v-list-item :to="{ name: 'users.settings.email' }" nuxt>
+        {{ $t('update_your_email_address') }}
+      </v-list-item>
+
+      <v-divider />
+
+      <!-- パスワード変更 -->
+      <v-list-item :to="{ name: 'users.settings.password' }" nuxt>
+        {{ $t('update_your_password') }}
+      </v-list-item>
+
+      <v-divider />
+
+      <v-list-item :to="{ name: 'users.settings.deactivate' }" nuxt>
+        {{ $t('deactivate_your_account') }}
+      </v-list-item>
+    </v-list>
+
+    <div class="text-right mt-4">
+      <v-btn @click.prevent="logout" v-text="$t('logout')" dark color="red" />
     </div>
-
-    <div>
-      <v-btn @click.prevent="logout" dark color="red">ログアウト</v-btn>
-    </div>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -22,8 +40,6 @@ import UserTitle from '~/components/molecues/pages/UserTitle'
 
 export default {
   middleware: 'auth',
-
-  layout: 'user',
 
   components: {
     UserTitle

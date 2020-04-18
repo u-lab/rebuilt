@@ -37,12 +37,6 @@ const routes = [
     name: 'users.dashboard',
     component: pageUsers('dashboard.vue')
   },
-  // 自分のポートフォリオ
-  {
-    path: '/users/page',
-    name: 'users.page.index',
-    component: pageUsers('page/index.vue')
-  },
   // 自分のポートフォリオ編集
   {
     path: '/users/page/edit',
@@ -80,6 +74,12 @@ const routes = [
     name: 'users.settings.password',
     component: pageUsers('settings/password.vue')
   },
+  // ユーザー名を変更する
+  {
+    path: '/users/settings/username',
+    name: 'users.settings.username',
+    component: pageUsers('settings/username.vue')
+  },
   // メールアドレスを変更する
   {
     path: '/users/settings/email',
@@ -90,6 +90,13 @@ const routes = [
     path: '/users/settings/success',
     name: 'users.settings.success',
     component: pageUsers('settings/success.vue')
+  },
+
+  // アカウントを削除する
+  {
+    path: '/users/settings/deactivate',
+    name: 'users.settings.deactivate',
+    component: pageUsers('settings/deactivate.vue')
   },
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },

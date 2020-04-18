@@ -50,29 +50,41 @@ export default {
   },
 
   computed: {
-    getLinkList: () => {
+    getLinkList() {
       return [
         { title: 'dashboard', name: 'users.dashboard' },
         { title: 'add_new_work', name: 'users.storages.create' },
         { title: 'list_of_works', name: 'users.storages.index' },
         { title: 'see_everyones_works', name: 'users.storages' },
-        { title: 'see_portfolio', name: 'users.page.index' },
+        {
+          title: 'see_portfolio',
+          name: 'pages.user',
+          params: { user: this.user.name }
+        },
         { title: 'edit_my_portfolio', name: 'users.page.edit' },
         {
           title: 'settings',
           name: 'users.settings.index'
         }
       ]
+    },
+
+    user() {
+      return this.$store.getters['auth/user']
     }
   },
 
   methods: {
     generateLink(item) {
-      if (item.hasOwnProperty('name')) {
+      if ('name' in item) {
+        if ('params' in item) {
+          return { name: item.name, params: item.params }
+        }
+
         return { name: item.name }
       }
 
-      if (item.hasOwnProperty('link')) {
+      if ('link' in item) {
         return item.link
       }
 

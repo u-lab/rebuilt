@@ -145,7 +145,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import FormTitle from '@/components/molecues/form/FormTitle'
@@ -171,17 +170,16 @@ export default {
     UserTitle
   },
 
-  layout: 'user',
-
   data() {
     return {
       form: new Form({
-        user_id: '' /* Never Change!! */,
-        storage_id: '' /* Never Change!! */,
+        user_id: '' /* Integer Never Change!! */,
+        storage_id: '' /* String Never Change!! */,
         description: '' /* String */,
         long_comment: '' /* String */,
         eyecatch_image: '' /* FILE */,
-        eyecatch_image_id: '' /* UUID Never Change!! */,
+        eyecatch_image_id: '' /* Integer Never Change!! */,
+        release_id: '' /* Integer */,
         title: '' /* String */,
         storage: '' /* FILE */,
         web_address: '' /* URL */
@@ -200,28 +198,37 @@ export default {
         return this.preview.eyecatch_image_url
       }
 
-      if (this.data.eyecatch_image.url) {
-        return this.data.eyecatch_image.url
+      if (this.storage.eyecatch_image.url) {
+        return this.storage.eyecatch_image.url
       }
 
       return ''
+    },
+
+    storage() {
+      return this.$store.getters['storage/storage']
+    },
+
+    releases() {
+      return this.$store.getters['release/releases']
     }
   },
 
-  async asyncData({ params, error }) {
-    const { data } = await axios.get(`/users/storage/${params.storageId}`)
-    return { success: true, data: data.data }
+  async fetch({ store, params, error }) {
+    // releaseの取得
+    await store.dispatch('release/fetchReleases')
+    await store.dispatch('storage/fetchStorage', params.storageId)
   },
 
   created() {
     // Fill the form with data.
     this.form.keys().forEach((key) => {
-      if (this.data[key] !== null) {
-        this.form[key] = this.data[key]
+      if (this.storage[key] !== null) {
+        this.form[key] = this.storage[key]
       }
     })
 
-    this.preview.eyecatch_image_url = this.data.eyecatch_image.url
+    this.preview.eyecatch_image_url = this.storage.eyecatch_image.url
     this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
   },
 
