@@ -47,12 +47,9 @@ export const mutations = {
 // actions
 export const actions = {
   async fetchStorage({ commit, getters }, storageId) {
-    console.log('h')
     if (getters.storageCheck && getters.storage.storage_id === storageId) {
-      console.log('hoge')
       return
     }
-    console.log('hogehoge')
 
     if (getters.storagesCheck) {
       const storages = getters.storages

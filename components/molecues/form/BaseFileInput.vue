@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { convertToArray } from '@/utils/array'
+import { getType } from '@/utils/helper'
 
 export default {
   props: {
@@ -53,9 +53,7 @@ export default {
     value: {
       default: undefined,
       validator: (val) => {
-        return convertToArray(val).every(
-          (v) => v != null && typeof v === 'object'
-        )
+        return getType(val) === 'file'
       }
     }
   },
