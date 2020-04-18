@@ -4,7 +4,7 @@
     :error-messages="errorMessage"
     :label="$t('username')"
     @blur="$v.v.$touch()"
-    outlined
+    :outlined="outlined"
   />
 </template>
 
@@ -26,6 +26,12 @@ export default {
       maxLength: maxLength(50),
       minLength: minLength(4),
       required
+    }
+  },
+  props: {
+    outlined: {
+      type: Boolean,
+      default: true
     }
   },
 
