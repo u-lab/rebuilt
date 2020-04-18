@@ -31,7 +31,7 @@
         />
         <has-error :form="form" field="email" />
 
-        <v-text-field
+        <!-- <v-text-field
           v-model="form.password"
           :label="$t('password')"
           :class="{ 'is-invalid': form.errors.has('password') }"
@@ -45,8 +45,18 @@
           :label="$t('confirm_password')"
           required
         />
-        <has-error :form="form" field="password_confirmation" />
-
+        <has-error :form="form" field="password_confirmation" /> -->
+        <form-password-with-confirmation
+          v-model="form.password"
+          :confirmationField="form.password_confirmation"
+          :dirty="formDirty"
+          :errors="form.errors"
+          :lazy-validation="true"
+          @confirmation="updatePasswordConfirmation"
+          @dirty="dirty"
+          :outlined="false"
+          obj-key="password"
+        />
         <div class="text-center login-btn-wraaper">
           <!-- Submit Button -->
           <v-btn
@@ -69,6 +79,7 @@
 <script>
 import Form from 'vform'
 import FormUsername from '@/components/molecues/form/FormUsername'
+import FormPasswordWithConfirmation from '@/components/molecues/form/FormPasswordWithConfirmation'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
 export default {
@@ -79,7 +90,8 @@ export default {
   components: {
     AuthForm,
     AuthWrapper,
-    FormUsername
+    FormUsername,
+    FormPasswordWithConfirmation
   },
 
   data: () => ({
@@ -128,6 +140,9 @@ export default {
     },
     dirty() {
       this.formDirty = true
+    },
+    updatePasswordConfirmation(value) {
+      this.form.password_confirmation = value
     }
   }
 }

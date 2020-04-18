@@ -8,7 +8,7 @@
       :type="hidden ? 'password' : 'text'"
       @click:append="hidden = !hidden"
       @blur="$v.v.$touch()"
-      outlined
+      :outlined="outlined"
     />
 
     <v-text-field
@@ -19,7 +19,7 @@
       :type="hidden2 ? 'password' : 'text'"
       @click:append="hidden2 = !hidden2"
       @blur="$v.vc.$touch()"
-      outlined
+      :outlined="outlined"
     />
   </div>
 </template>
@@ -39,6 +39,12 @@ export default {
         'password',
         /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/
       )
+    },
+    props: {
+      outlined: {
+        type: Boolean,
+        default: true
+      }
     },
 
     vc: {
