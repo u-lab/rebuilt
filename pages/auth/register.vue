@@ -22,30 +22,25 @@
           obj-key="user"
         />
 
-        <v-text-field
+        <!-- <v-text-field
           v-model="form.email"
           :label="$t('email')"
           :class="{ 'is-invalid': form.errors.has('email') }"
           :counter="255"
           required
+        /> -->
+        <form-email
+          v-model="form.email"
+          :confirmationField="email_confirmation"
+          :dirty="formDirty"
+          :errors="form.errors"
+          :lazy-validation="true"
+          @dirty="dirty"
+          :outlined="false"
+          obj-key="email"
         />
         <has-error :form="form" field="email" />
 
-        <!-- <v-text-field
-          v-model="form.password"
-          :label="$t('password')"
-          :class="{ 'is-invalid': form.errors.has('password') }"
-          :counter="255"
-          required
-        />
-        <has-error :form="form" field="password" />
-
-        <v-text-field
-          v-model="form.password_confirmation"
-          :label="$t('confirm_password')"
-          required
-        />
-        <has-error :form="form" field="password_confirmation" /> -->
         <form-password-with-confirmation
           v-model="form.password"
           :confirmationField="form.password_confirmation"
@@ -79,6 +74,7 @@
 <script>
 import Form from 'vform'
 import FormUsername from '@/components/molecues/form/FormUsername'
+import FormEmail from '@/components/molecues/form/FormEmail'
 import FormPasswordWithConfirmation from '@/components/molecues/form/FormPasswordWithConfirmation'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
@@ -90,6 +86,7 @@ export default {
   components: {
     AuthForm,
     AuthWrapper,
+    FormEmail,
     FormUsername,
     FormPasswordWithConfirmation
   },
