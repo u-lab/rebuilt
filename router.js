@@ -80,6 +80,12 @@ const routes = [
     name: 'users.settings.password',
     component: pageUsers('settings/password.vue')
   },
+  // ユーザー名を変更する
+  {
+    path: '/users/settings/username',
+    name: 'users.settings.username',
+    component: pageUsers('settings/username.vue')
+  },
   // メールアドレスを変更する
   {
     path: '/users/settings/email',

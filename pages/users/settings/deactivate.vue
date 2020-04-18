@@ -1,7 +1,5 @@
 <template>
-  <v-container>
-    <deactivate :user="user" @click="deactivated" />
-  </v-container>
+  <deactivate :user="user" @click="deactivated" />
 </template>
 
 <script>
@@ -28,7 +26,7 @@ export default {
         await this.$store.dispatch('auth/deactivatedUser')
       } catch (e) {}
 
-      this.$router.push('/')
+      this.$router.push({ name: 'welcome' })
     }
   }
 }

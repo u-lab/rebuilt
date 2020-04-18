@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <email-template v-model="form" :user="user" @submit="update" />
-  </div>
+  <username v-model="form" :user="user" @submit="update" />
 </template>
 
 <script>
 import Form from 'vform'
-import EmailTemplate from '@/components/templates/users/settings/Email'
+import Username from '@/components/templates/users/settings/Username'
 
 export default {
   components: {
-    EmailTemplate
+    Username
   },
 
   middleware: 'auth',
@@ -34,6 +32,7 @@ export default {
 
   created() {
     this.form.name = this.user.name
+    this.form.email = this.user.email
   },
 
   methods: {

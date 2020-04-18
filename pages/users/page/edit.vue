@@ -238,9 +238,10 @@ export default {
       historyModal: false,
 
       history: {
-        id: '',
-        name: '',
-        date: new Date().toISOString().substr(0, 10)
+        id: '' /* Integer */,
+        name: '' /* String */,
+        date: new Date().toISOString().substr(0, 10),
+        type: '' /* String */
       }
     }
   },

@@ -63,7 +63,7 @@ export const formConfirmation = {
       }
 
       const err = this.errors.errors
-      return err && this.objKey in err && `${this.objKey}_confirmation` in err
+      return (err && this.objKey in err) || `${this.objKey}_confirmation` in err
     },
 
     /**
