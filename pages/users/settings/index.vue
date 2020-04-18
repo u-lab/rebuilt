@@ -4,7 +4,7 @@
 
     <v-list>
       <!-- ユーザー名変更 -->
-      <v-list-item :to="{ name: 'users.settings.email' }" nuxt>
+      <v-list-item :to="{ name: 'users.settings.username' }" nuxt>
         {{ $t('update_your_user_name') }}
       </v-list-item>
 
