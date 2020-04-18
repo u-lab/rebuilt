@@ -3,12 +3,18 @@
     v-model="valueModel"
     :error-messages="errorMessage"
     :label="$t('username')"
+    @blur="$v.v.$touch()"
     outlined
   />
 </template>
 
 <script>
-import { alphaNum, maxLength, required } from 'vuelidate/lib/validators'
+import {
+  alphaNum,
+  maxLength,
+  required,
+  minLength
+} from 'vuelidate/lib/validators'
 import { form } from '@/mixins/form'
 
 export default {
@@ -18,6 +24,7 @@ export default {
     v: {
       alphaNum,
       maxLength: maxLength(50),
+      minLength: minLength(4),
       required
     }
   },
@@ -37,6 +44,7 @@ export default {
 
       const errors = []
       !validate.required && errors.push('ユーザー名を入力してください')
+      !validate.minLength && errors.push('4文字以上入力してください')
       !validate.alphaNum && errors.push('英数字で入力してください')
       !validate.maxLength && errors.push('50文字以内で入力してください')
       return errors
