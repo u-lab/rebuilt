@@ -1,5 +1,5 @@
 <template>
-  <username v-model="form" :user="user" />
+  <username v-model="form" :user="user" @submit="update" />
 </template>
 
 <script>

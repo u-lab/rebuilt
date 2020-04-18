@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <user-title title="設定" />
+    <user-title :title="$t('settings')" />
 
     <v-list>
       <!-- ユーザー名変更 -->
