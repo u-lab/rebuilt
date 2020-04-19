@@ -1,6 +1,11 @@
 <template>
   <div>
-    <create v-model="form" :releases="releases" @submit="create" />
+    <create
+      v-model="form"
+      :releases="releases"
+      @submit="onSubmit"
+      @preview="onPreview"
+    />
   </div>
 </template>
 
@@ -43,24 +48,48 @@ export default {
   },
 
   methods: {
-    async create() {
-      // API Serverに POST する
+    async onSubmit() {
+      // API Serverに PATCH する
       try {
-        await this.form
-          .post(`/users/storage`, {
-            transformRequest: [
-              function(data, headers) {
-                return objectToFormData(data)
-              }
-            ]
-          })
-          .then((response) => {
-            // Redirect User Dashboard.
-            this.$router.push({ name: 'users.dashboard' })
-          })
-      } catch (e) {
-        // TODO: 何が起きるかはわからないが、そのログをとりたい。
-      }
+        const { data } = await this.form.post(`/users/storage`, {
+          transformRequest: [
+            function(data, headers) {
+              data._method = 'PATCH'
+              return objectToFormData(data)
+            }
+          ]
+        })
+
+        this.$store.commit('storage/PUSH_STORAGE', data.data)
+
+        // Redirect User Dashboard.
+        this.$router.push({ name: 'users.dashboard' })
+      } catch (e) {}
+    },
+
+    async onPreview() {
+      // API Serverに PATCH する
+      try {
+        const { data } = await this.form.post(`/users/storage`, {
+          transformRequest: [
+            function(data, headers) {
+              data._method = 'PATCH'
+              return objectToFormData(data)
+            }
+          ]
+        })
+
+        this.$store.commit('storage/PUSH_STORAGE', data.data)
+
+        // Redirect User Dashboard.
+        this.$router.push({
+          name: 'pages.storages.show',
+          params: {
+            user: this.user.name,
+            storageId: data.data.storage_id
+          }
+        })
+      } catch (e) {}
     }
   }
 }

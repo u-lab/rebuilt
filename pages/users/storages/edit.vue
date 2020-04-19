@@ -94,24 +94,20 @@ export default {
 
       // API Serverに PATCH する
       try {
-        await this.form
-          .post(`/users/storage/${storageId}`, {
-            transformRequest: [
-              function(data, headers) {
-                data._method = 'PATCH'
-                return objectToFormData(data)
-              }
-            ]
-          })
-          .then((response) => {
-            console.log(response)
+        const { data } = await this.form.post(`/users/storage/${storageId}`, {
+          transformRequest: [
+            function(data, headers) {
+              data._method = 'PATCH'
+              return objectToFormData(data)
+            }
+          ]
+        })
 
-            // Redirect User Dashboard.
-            this.$router.push({ name: 'users.dashboard' })
-          })
-      } catch (e) {
-        // TODO: 何が起きるかはわからないが、そのログをとりたい。
-      }
+        this.$store.commit('storage/PUSH_STORAGE', data.data)
+
+        // Redirect User Dashboard.
+        this.$router.push({ name: 'users.dashboard' })
+      } catch (e) {}
     },
 
     async onPreview() {
@@ -131,29 +127,26 @@ export default {
 
       // API Serverに PATCH する
       try {
-        await this.form
-          .post(`/users/storage/${storageId}`, {
-            transformRequest: [
-              function(data, headers) {
-                data._method = 'PATCH'
-                return objectToFormData(data)
-              }
-            ]
-          })
-          .then((response) => {
-            console.log(response)
-            // Redirect User Dashboard.
-            this.$router.push({
-              name: 'pages.storages.show',
-              params: {
-                user: this.user.name,
-                storageId: this.storage.storage_id
-              }
-            })
-          })
-      } catch (e) {
-        // TODO: 何が起きるかはわからないが、そのログをとりたい。
-      }
+        const { data } = await this.form.post(`/users/storage/${storageId}`, {
+          transformRequest: [
+            function(data, headers) {
+              data._method = 'PATCH'
+              return objectToFormData(data)
+            }
+          ]
+        })
+
+        this.$store.commit('storage/PUSH_STORAGE', data.data)
+
+        // Redirect User Dashboard.
+        this.$router.push({
+          name: 'pages.storages.show',
+          params: {
+            user: this.user.name,
+            storageId: this.storage.storage_id
+          }
+        })
+      } catch (e) {}
     }
   }
 }
