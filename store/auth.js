@@ -77,7 +77,7 @@ export const actions = {
   },
 
   // ログアウトの処理
-  async logout({ commit }) {
+  async logout({ commit, dispatch }) {
     try {
       await axios.post('/logout')
     } catch (e) {}
@@ -85,6 +85,7 @@ export const actions = {
     Cookies.remove('token')
 
     commit('LOGOUT')
+    dispatch('storage/clearStorages', null, { root: true })
   },
 
   // tokenをセットする

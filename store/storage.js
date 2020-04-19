@@ -20,6 +20,12 @@ export const getters = {
 
 // mutations
 export const mutations = {
+  CLEAR_STORAGE(state) {
+    state.storage = null
+    state.storages = []
+    state.storagesPageNext = null
+  },
+
   PUSH_STORAGE(state, storage) {
     state.storage = storage
     state.storages = [...state.storages, ...[storage]] // 配列のマージ
@@ -46,6 +52,10 @@ export const mutations = {
 
 // actions
 export const actions = {
+  clearStorages({ commit }) {
+    commit('CLEAR_STORAGE')
+  },
+
   async fetchStorage({ commit, getters }, storageId) {
     if (getters.storageCheck && getters.storage.storage_id === storageId) {
       return
