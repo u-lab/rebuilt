@@ -12,6 +12,13 @@
               </div>
 
               <div class="d-flex align-center">
+                <v-select
+                  v-model="form.release_id"
+                  :label="$t('release')"
+                  :items="releaseItems"
+                  class="mr-4"
+                />
+
                 <v-btn
                   :disabled="form.busy"
                   @click="onPreview"
@@ -187,6 +194,13 @@ export default {
       set(newVal) {
         return this.$emit('input', newVal)
       }
+    },
+
+    releaseItems() {
+      return this.releases.map((obj) => ({
+        text: this.$t(obj.name),
+        value: obj.id
+      }))
     }
   },
 
