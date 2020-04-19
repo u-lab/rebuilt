@@ -4,6 +4,7 @@ import { getStorageByStorageId } from '@/utils/storage'
 
 // state
 export const state = () => ({
+  masterpiece_storage_id: null,
   storage: null,
   storages: [],
   storagesPageNext: null
@@ -11,6 +12,7 @@ export const state = () => ({
 
 // getters
 export const getters = {
+  masterpiece_storage_id: (state) => state.masterpiece_storage_id,
   storage: (state) => state.storage,
   storages: (state) => state.storages,
   storageCheck: (state) => state.storage !== null,
@@ -37,6 +39,10 @@ export const mutations = {
     state.storages = uniq(state.storages, 'storage_id') // 重複の削除
   },
 
+  SET_masterpiece_storage_id(state, storageId) {
+    state.masterpiece_storage_id = storageId
+  },
+
   SET_STORAGE(state, storage) {
     state.storage = storage
   },
@@ -54,6 +60,16 @@ export const mutations = {
 export const actions = {
   clearStorages({ commit }) {
     commit('CLEAR_STORAGE')
+  },
+
+  async fetchMasterpiece({ commit, getters }) {
+    try {
+      const { data } = await axios.get(`users/page`)
+      commit(
+        'SET_masterpiece_storage_id',
+        data.data.masterpiece_storage.storage_id
+      )
+    } catch (e) {}
   },
 
   async fetchStorage({ commit, getters }, storageId) {
