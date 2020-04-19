@@ -4,14 +4,16 @@
       <v-card>
         <v-card color="#26A69A" dark>
           <div class="px-4">
-            <div class="d-flex justify-space-between">
+            <div class="d-flex justify-space-between flex-column flex-sm-row">
               <div>
                 <v-card-title>
                   <v-icon dark x-large>mdi-plus</v-icon>Work
                 </v-card-title>
               </div>
 
-              <div class="d-flex align-center">
+              <div
+                class="d-flex align-center flex-column flex-md-row mb-4 mb-md-0"
+              >
                 <v-select
                   v-model="form.release_id"
                   :label="$t('release')"
@@ -19,23 +21,25 @@
                   class="mr-4"
                 />
 
-                <v-btn
-                  :disabled="form.busy"
-                  @click="onPreview"
-                  class="teal--text text--lighten-1 mr-4"
-                  color="#CFD8DC"
-                >
-                  {{ $t('preview') }}
-                </v-btn>
+                <div>
+                  <v-btn
+                    :disabled="form.busy"
+                    @click="onPreview"
+                    class="teal--text text--lighten-1 mr-4"
+                    color="#CFD8DC"
+                  >
+                    {{ $t('preview') }}
+                  </v-btn>
 
-                <v-btn
-                  :disabled="form.busy"
-                  class="teal--text text--lighten-1 mr-4"
-                  color="#CFD8DC"
-                  type="submit"
-                >
-                  {{ $t('store') }}
-                </v-btn>
+                  <v-btn
+                    :disabled="form.busy"
+                    class="teal--text text--lighten-1 mr-4"
+                    color="#CFD8DC"
+                    type="submit"
+                  >
+                    {{ $t('store') }}
+                  </v-btn>
+                </div>
               </div>
             </div>
           </div>
@@ -67,7 +71,7 @@
           </v-row>
           <v-row>
             <!-- 画像のForm -->
-            <v-col cols="7">
+            <v-col cols="12" sm="7">
               <h3>{{ $t('eyecatch_image') }}</h3>
 
               <image-file-input
@@ -80,7 +84,7 @@
               />
             </v-col>
 
-            <v-col cols="5">
+            <v-col cols="12" sm="5">
               <h3>objファイル</h3>
 
               <p v-if="previewStorage">

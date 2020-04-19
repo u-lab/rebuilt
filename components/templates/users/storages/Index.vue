@@ -4,7 +4,7 @@
     <user-title :title="$t('mywork')" class="text-center" />
     <v-container>
       <v-row>
-        <v-col cols="4">
+        <v-col cols="12" sm="6" md="4">
           <storage-card-for-create
             :to="{
               name: 'users.storages.create'
@@ -12,7 +12,13 @@
           />
         </v-col>
 
-        <v-col v-for="(items, key) in storages" :key="key" cols="4">
+        <v-col
+          v-for="(items, key) in storages"
+          :key="key"
+          cols="12"
+          sm="6"
+          md="4"
+        >
           <storage-card-for-edit
             :to="{
               name: 'users.storages.edit',
