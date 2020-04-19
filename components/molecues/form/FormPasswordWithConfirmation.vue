@@ -8,7 +8,7 @@
       :type="hidden ? 'password' : 'text'"
       @click:append="hidden = !hidden"
       @blur="$v.v.$touch()"
-      outlined
+      :outlined="outlined"
     />
 
     <v-text-field
@@ -19,13 +19,13 @@
       :type="hidden2 ? 'password' : 'text'"
       @click:append="hidden2 = !hidden2"
       @blur="$v.vc.$touch()"
-      outlined
+      :outlined="outlined"
     />
   </div>
 </template>
 
 <script>
-import { minLength, sameAs, required } from 'vuelidate/lib/validators'
+import { minLength, sameAs, required, helpers } from 'vuelidate/lib/validators'
 import { formConfirmation } from '@/mixins/formConfirmation'
 
 export default {
@@ -34,7 +34,17 @@ export default {
   validations: {
     v: {
       minLength: minLength(8),
-      required
+      required,
+      regex: helpers.regex(
+        'password',
+        /^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d)[a-zA-Z\d]{8,100}$/
+      )
+    },
+    props: {
+      outlined: {
+        type: Boolean,
+        default: true
+      }
     },
 
     vc: {
@@ -61,14 +71,16 @@ export default {
       if (!this.dirty || !validate.$dirty) {
         return this.errorServerMessage
       }
-
       const errors = []
-      !validate.required && errors.push('パスワードは必須です')
+
       !validate.minLength && errors.push('8文字以上で入力してください')
+      !validate.regex &&
+        errors.push('半角英小文字大文字数字をそれぞれ1種類以上入力してください')
+      !validate.required && errors.push('パスワードは必須です')
       return errors
     },
 
-    // バリデーションをする
+    // バリデーションをする(確認パスワードと同じか比較)
     errorMessageConfirmation() {
       const validateConfiramtion = this.$v.vc
       if (!this.dirty || !validateConfiramtion.$dirty) {
