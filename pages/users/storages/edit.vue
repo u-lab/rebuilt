@@ -5,7 +5,8 @@
       :releases="releases"
       :preview-image="storage.eyecatch_image"
       :preview-storage="storage.storage_file[0]"
-      @submit="update"
+      @submit="onSubmit"
+      @preview="onPreview"
     />
   </div>
 </template>
@@ -36,7 +37,7 @@ export default {
         long_comment: '' /* String */,
         eyecatch_image: '' /* FILE */,
         eyecatch_image_id: '' /* Integer Never Change!! */,
-        release_id: 1 /* Integer */,
+        release_id: '' /* Integer */,
         title: '' /* String */,
         storage: '' /* FILE */,
         web_address: '' /* URL */
@@ -51,6 +52,10 @@ export default {
 
     releases() {
       return this.$store.getters['release/releases']
+    },
+
+    user() {
+      return this.$store.getters['auth/user']
     }
   },
 
@@ -68,23 +73,22 @@ export default {
       }
     })
 
+    this.form.release_id = this.storage.release.id
     this.form.eyecatch_image = null /* ApiのObjectが入ってしまうので、空にする */
   },
 
   methods: {
-    async update() {
+    async onSubmit() {
       const storageId = this.form.storage_id
-      this.formDirty = false
 
       // storageID が書き換えられていないか確認
       try {
-        if (storageId !== this.data.storage_id) {
+        if (storageId !== this.storage.storage_id) {
           throwNotEqualStorageID()
         }
       } catch (err) {
         return this.$nuxt.error({
-          statusCode: err.response.status,
-          message: err.response.message
+          statusCode: 500
         })
       }
 
@@ -100,8 +104,52 @@ export default {
             ]
           })
           .then((response) => {
+            console.log(response)
+
             // Redirect User Dashboard.
             this.$router.push({ name: 'users.dashboard' })
+          })
+      } catch (e) {
+        // TODO: 何が起きるかはわからないが、そのログをとりたい。
+      }
+    },
+
+    async onPreview() {
+      const storageId = this.form.storage_id
+      this.formDirty = false
+
+      // storageID が書き換えられていないか確認
+      try {
+        if (storageId !== this.storage.storage_id) {
+          throwNotEqualStorageID()
+        }
+      } catch (err) {
+        return this.$nuxt.error({
+          statusCode: 500
+        })
+      }
+
+      // API Serverに PATCH する
+      try {
+        await this.form
+          .post(`/users/storage/${storageId}`, {
+            transformRequest: [
+              function(data, headers) {
+                data._method = 'PATCH'
+                return objectToFormData(data)
+              }
+            ]
+          })
+          .then((response) => {
+            console.log(response)
+            // Redirect User Dashboard.
+            this.$router.push({
+              name: 'pages.storages.show',
+              params: {
+                user: this.user.name,
+                storageId: this.storage.storage_id
+              }
+            })
           })
       } catch (e) {
         // TODO: 何が起きるかはわからないが、そのログをとりたい。

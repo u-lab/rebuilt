@@ -4,6 +4,7 @@
     :preview-image="previewImage"
     :releases="releases"
     @submit="onSubmit"
+    @preview="onPreview"
   />
 </template>
 
@@ -46,6 +47,10 @@ export default {
   methods: {
     onSubmit() {
       return this.$emit('submit')
+    },
+
+    onPreview() {
+      return this.$emit('preview')
     }
   }
 }

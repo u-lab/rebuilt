@@ -14,6 +14,7 @@
               <div class="d-flex align-center">
                 <v-btn
                   :disabled="form.busy"
+                  @click="onPreview"
                   class="teal--text text--lighten-1 mr-4"
                   color="#CFD8DC"
                 >
@@ -195,7 +196,13 @@ export default {
     },
 
     onSubmit() {
+      this.formDirty = false
       return this.$emit('submit')
+    },
+
+    onPreview() {
+      this.formDirty = false
+      return this.$emit('preview')
     }
   }
 }
