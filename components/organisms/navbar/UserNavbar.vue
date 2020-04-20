@@ -13,21 +13,21 @@
     <v-spacer />
 
     <v-toolbar-items>
-      <v-btn
-        :to="{ name: 'users.storages.index' }"
-        v-text="$t('look_at_the_storage')"
-        dark
-        class="d-none d-md-flex"
-      />
+      <client-only>
+        <v-btn
+          :to="{ name: 'users.storages.index' }"
+          v-text="$t('look_at_the_storage')"
+          dark
+          class="d-none d-md-flex"
+        />
 
-      <v-btn
-        :to="{ name: 'users.storages.create' }"
-        v-text="$t('add_new_work')"
-        dark
-        class="d-none d-md-flex"
-      />
-
-      <locale-dropdown dark color="grey darken-4" />
+        <v-btn
+          :to="{ name: 'users.storages.create' }"
+          v-text="$t('add_new_work')"
+          dark
+          class="d-none d-md-flex"
+        />
+      </client-only>
 
       <user-navbar-menu />
     </v-toolbar-items>
@@ -35,12 +35,10 @@
 </template>
 
 <script>
-import LocaleDropdown from '@/components/organisms/dropdown/LocaleDropdown'
 import UserNavbarMenu from '@/components/organisms/menu/UserNavbarMenu'
 
 export default {
   components: {
-    LocaleDropdown,
     UserNavbarMenu
   },
 

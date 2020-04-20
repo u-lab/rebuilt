@@ -12,9 +12,9 @@
 </template>
 
 <script>
+import { getType } from '@/utils/helper'
 import BaseFileInput from '@/components/molecues/form/BaseFileInput'
 import EyeCatchImageDisplay from '@/components/molecues/form/EyeCatchImageDisplay'
-import { convertToArray } from '@/utils/array'
 
 export default {
   components: {
@@ -53,9 +53,7 @@ export default {
     value: {
       default: undefined,
       validator: (val) => {
-        return convertToArray(val).every(
-          (v) => v != null && typeof v === 'object'
-        )
+        return !val || getType(val) === 'file'
       }
     }
   },

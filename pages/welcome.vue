@@ -1,5 +1,7 @@
 <template>
   <div>
+    <navbar />
+
     <div class="text-center mb-4">
       <template v-if="authenticated">
         <v-btn :to="{ name: 'users.dashboard' }" larage>
@@ -24,7 +26,13 @@
 </template>
 
 <script>
+import Navbar from '@/components/organisms/navbar/DefaultNavbar'
+
 export default {
+  components: {
+    Navbar
+  },
+
   head() {
     return { title: this.$t('home') }
   },

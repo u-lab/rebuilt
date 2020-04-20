@@ -9,7 +9,7 @@
       <v-tab>
         <span v-text="title1" class="text-capitalize" />
       </v-tab>
-      <v-tab>
+      <v-tab v-if="title2">
         <span v-text="title2" class="text-capitalize" />
       </v-tab>
 
@@ -22,7 +22,7 @@
           </div>
         </v-tab-item>
 
-        <v-tab-item>
+        <v-tab-item v-if="title2">
           <div class="tab-item-container">
             <v-container>
               <slot name="second" />
@@ -44,7 +44,7 @@ export default {
 
     title2: {
       type: String,
-      required: true
+      default: undefined
     }
   },
 

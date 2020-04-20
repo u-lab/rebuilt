@@ -86,6 +86,12 @@ const routes = [
     name: 'users.settings.email',
     component: pageUsers('settings/email.vue')
   },
+  // 言語設定
+  {
+    path: '/users/settings/locale',
+    name: 'users.settings.locale',
+    component: pageUsers('settings/locale.vue')
+  },
   {
     path: '/users/settings/success',
     name: 'users.settings.success',

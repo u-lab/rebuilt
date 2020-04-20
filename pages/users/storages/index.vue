@@ -1,44 +1,33 @@
 <template>
   <div>
-    <!-- TODO 自分の作品を見る -->
-    <user-title :title="$t('mywork')" class="text-center" />
-    <v-container>
-      <v-row>
-        <v-col cols="4">
-          <storage-card-for-create
-            :to="{
-              name: 'users.storages.create'
-            }"
-          />
-        </v-col>
-
-        <v-col v-for="(items, key) in storages" :key="key" cols="4">
-          <storage-card-for-edit
-            :to="{
-              name: 'users.storages.edit',
-              params: { storageId: items.storage_id }
-            }"
-            :title="items.title"
-            :src="items.eyecatch_image.url"
-          />
-        </v-col>
-      </v-row>
-    </v-container>
+    <index
+      :disabled="form.busy"
+      :masterpiece-storage-id="masterpieceStorageId"
+      :user="user"
+      :storages="storages"
+      @click="onClick"
+    />
   </div>
 </template>
 
 <script>
-import UserTitle from '~/components/molecues/pages/UserTitle'
-import StorageCardForEdit from '@/components/molecues/storages/StorageCardForEdit'
-import StorageCardForCreate from '@/components/molecues/storages/StorageCardForCreate'
+import Form from 'vform'
+import Index from '@/components/templates/users/storages/Index'
 
 export default {
+  components: {
+    Index
+  },
+
   middleware: 'auth',
 
-  components: {
-    UserTitle,
-    StorageCardForCreate,
-    StorageCardForEdit
+  data() {
+    return {
+      form: new Form({
+        user_id: '',
+        masterpiece_storage_id: ''
+      })
+    }
   },
 
   computed: {
@@ -50,17 +39,36 @@ export default {
       return this.$store.getters['storage/storages']
     },
 
-    cardHeight() {
-      return '200px'
-    },
-
-    cardHeightStyle() {
-      return `height: ${this.cardHeight};`
+    masterpieceStorageId() {
+      return this.$store.getters['storage/masterpiece_storage_id']
     }
   },
 
   async fetch({ store, error }) {
     await store.dispatch('storage/fetchStorages')
+    await store.dispatch('storage/fetchMasterpiece')
+  },
+
+  created() {
+    this.form.user_id = this.user.id
+    this.form.masterpiece_storage_id = this.masterpieceStorageId
+  },
+
+  methods: {
+    async onClick(storageId) {
+      this.form.masterpiece_storage_id = storageId
+
+      try {
+        const { data } = await this.form.patch(`users/page`)
+
+        this.$store.commit(
+          'storage/SET_masterpiece_storage_id',
+          data.data.masterpiece_storage.storage_id
+        )
+
+        document.activeElement.blur()
+      } catch (e) {}
+    }
   }
 }
 </script>

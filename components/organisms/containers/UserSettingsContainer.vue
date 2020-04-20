@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="mb-4">
-      <nuxt-link :to="{ name: 'users.settings.index' }" class="icon-link">
+      <nuxt-link :to="to" class="icon-link">
         <v-icon v-text="`mdi-arrow-left`" class="icon-block" large />
       </nuxt-link>
     </div>
@@ -17,9 +17,20 @@
 <script>
 export default {
   props: {
+    backLink: {
+      type: [Object, String],
+      default: undefined
+    },
+
     title: {
       type: String,
       required: true
+    }
+  },
+
+  computed: {
+    to() {
+      return this.backLink || { name: 'users.settings.index' }
     }
   }
 }

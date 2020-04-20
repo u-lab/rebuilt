@@ -4,6 +4,7 @@ import { getStorageByStorageId } from '@/utils/storage'
 
 // state
 export const state = () => ({
+  masterpiece_storage_id: null,
   storage: null,
   storages: [],
   storagesPageNext: null
@@ -11,15 +12,22 @@ export const state = () => ({
 
 // getters
 export const getters = {
+  masterpiece_storage_id: (state) => state.masterpiece_storage_id,
   storage: (state) => state.storage,
   storages: (state) => state.storages,
-  storageCheck: (state) => state.storages !== null,
+  storageCheck: (state) => state.storage !== null,
   storagesCheck: (state) => state.storages.length !== 0,
   storagesPageNext: (state) => state.storagesPageNext
 }
 
 // mutations
 export const mutations = {
+  CLEAR_STORAGE(state) {
+    state.storage = null
+    state.storages = []
+    state.storagesPageNext = null
+  },
+
   PUSH_STORAGE(state, storage) {
     state.storage = storage
     state.storages = [...state.storages, ...[storage]] // 配列のマージ
@@ -29,6 +37,10 @@ export const mutations = {
   PUSH_STORAGES(state, storages) {
     state.storages = [...state.storages, ...storages] // 配列のマージ
     state.storages = uniq(state.storages, 'storage_id') // 重複の削除
+  },
+
+  SET_masterpiece_storage_id(state, storageId) {
+    state.masterpiece_storage_id = storageId
   },
 
   SET_STORAGE(state, storage) {
@@ -46,6 +58,20 @@ export const mutations = {
 
 // actions
 export const actions = {
+  clearStorages({ commit }) {
+    commit('CLEAR_STORAGE')
+  },
+
+  async fetchMasterpiece({ commit, getters }) {
+    try {
+      const { data } = await axios.get(`users/page`)
+      commit(
+        'SET_masterpiece_storage_id',
+        data.data.masterpiece_storage.storage_id
+      )
+    } catch (e) {}
+  },
+
   async fetchStorage({ commit, getters }, storageId) {
     if (getters.storageCheck && getters.storage.storage_id === storageId) {
       return
