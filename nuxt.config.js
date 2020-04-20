@@ -49,6 +49,7 @@ module.exports = {
     '~plugins/i18n',
     '~plugins/vform',
     '~plugins/axios',
+    '@/plugins/vue-inject',
     '@/plugins/vuelidate'
   ],
 

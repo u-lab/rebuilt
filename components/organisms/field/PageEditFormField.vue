@@ -14,89 +14,80 @@
         </v-btn>
       </div>
 
-      <div class="pos-relative">
-        <image-file-input
-          v-model="form.background_image"
-          :label="$t('background_image')"
-          :preview="backgroundImageSrc"
-          height="180px"
-        />
+      <v-row class="flex-column pt-8">
+        <v-col cols="12" sm="6" md="4" class="pb-0">
+          <v-text-field v-model="form.nick_name" :label="$t('name')" outlined />
 
-        <div class="pos-marginBottomCenter mb-12" style="z-index: 3">
-          <div class="pos-relative">
-            <v-avatar :size="130" class="pages-user-header-avatar pos-relative">
-              <v-img
-                v-if="preview_icon_src"
-                :src="preview_icon_src"
-                class="user_storage_eyecatch_image_preview"
-                style="z-index:5;"
-              />
-
-              <v-img
-                v-else-if="iconImageSrc"
-                :src="iconImageSrc"
-                class="user_storage_eyecatch_image_preview"
-                style="z-index:5;"
-              />
-
-              <span
-                v-else
-                v-text="`アイコン`"
-                class="user_storage_eyecatch_image_preview"
-              />
-
-              <v-file-input
-                v-model="form.icon_image"
-                :label="$t('icon')"
-                @change="iconImageFileChange"
-                accept="image/*"
-                class="pos-topLeftAlign v-file-input-icon-none w-100"
-                show-size
-                filled
-                height="130px"
-              />
-            </v-avatar>
-
-            <div
-              class="pos-topAndBottomCenter"
-              style="z-index: 10; pointer-events: none;"
-            >
-              <v-icon size="40" class="user_storage_eyecatch_image_preview">
-                mdi-plus
-              </v-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <v-row justify="center" align="center" class="flex-column pt-8">
-        <v-col cols="4" class="pb-0">
-          <v-text-field v-model="form.nick_name" label="name" />
-
-          <v-text-field v-model="form.job_name" label="name" />
+          <v-text-field v-model="form.job_name" :label="$t('kana')" outlined />
         </v-col>
 
         <v-col cols="10" class="pt-0">
           <v-textarea
             v-model="form.description"
             :label="$t('description')"
-            filled
             auto-grow
+            outlined
             rows="4"
             row-height="30"
           />
         </v-col>
       </v-row>
+
+      <div class="pos-relative">
+        <p>ヘッダー画像</p>
+
+        <v-row>
+          <v-col cols="12" sm="8">
+            <image-file-input
+              v-model="form.background_image"
+              :label="$t('background_image')"
+              :preview="backgroundImageSrc"
+              height="180px"
+            />
+          </v-col>
+          <v-col cols="12" sm="4">
+            <p>画像ファイルは10MB以下でお願いします</p>
+            <p>推奨サイズは1200×300です</p>
+          </v-col>
+        </v-row>
+
+        <p v-text="$t('icon_image')" />
+
+        <v-row>
+          <v-col cols="4" sm="2">
+            <image-file-input
+              v-model="form.icon_image"
+              :label="$t('icon_image')"
+              :preview="iconImageSrc"
+              height="130px"
+            />
+          </v-col>
+          <v-col cols="12" sm="4">
+            <p>画像ファイルは10MB以下でお願いします</p>
+            <p>推奨サイズは300×300です</p>
+          </v-col>
+        </v-row>
+      </div>
+
+      <div>
+        <user-career-field
+          v-model="form.user_career"
+          :did="form.user_career_did"
+          @did="updateDid"
+        />
+      </div>
     </v-form>
   </div>
 </template>
 
 <script>
 import ImageFileInput from '@/components/molecues/form/ImageFileInput'
+import UserCareerField from '@/components/organisms/field/UserCareerField'
 
 export default {
   components: {
-    ImageFileInput
+    ImageFileInput,
+    UserCareerField
   },
 
   props: {
@@ -139,16 +130,13 @@ export default {
   },
 
   methods: {
-    iconImageFileChange(e) {
-      // e は FILE Objectであることに注意
-      try {
-        this.preview.icon_image_url = URL.createObjectURL(e)
-      } catch (e) {
-        this.preview.icon_image_url = null
-      }
+    onSubmit() {
+      return this.$emit('submit')
+    },
+
+    updateDid(newVal) {
+      this.form.user_career_did = newVal
     }
   }
 }
 </script>
-
-<style></style>

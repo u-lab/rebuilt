@@ -1,6 +1,6 @@
 <template>
   <div>
-    <edit v-model="form" :page="data" />
+    <edit v-model="form" :page="data" @submit="update" />
   </div>
 </template>
 
@@ -62,6 +62,12 @@ export default {
     async update() {
       // API Serverに PATCH する
       try {
+        this.form.user_career = this.form.user_career.map((obj) => ({
+          date: obj.date,
+          id: obj.id,
+          name: obj.name,
+          type: obj.type
+        }))
         await this.form
           .post(`/users/profile`, {
             transformRequest: [

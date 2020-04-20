@@ -1,21 +1,24 @@
 <template>
-  <div>
+  <b-container :title="$t('see_portfolio')">
     <page-edit-form-field
       v-model="form"
       :background-image-src="backgroundImageSrc"
       :icon-image-src="iconImageSrc"
       :page="page"
+      @submit="onSubmit"
       class="mt-12"
     />
-  </div>
+  </b-container>
 </template>
 
 <script>
 import { getMediumUrl } from '@/utils/image'
+import BContainer from '@/components/organisms/containers/UserSettingsContainer'
 import PageEditFormField from '@/components/organisms/field/PageEditFormField'
 
 export default {
   components: {
+    BContainer,
     PageEditFormField
   },
 
