@@ -12,9 +12,7 @@
 
           <v-spacer />
 
-          <client-only>
-            <v-btn v-text="$t('add_new_career')" @click="add" color="primary" />
-          </client-only>
+          <v-btn v-text="$t('add_new_career')" @click="add" color="primary" />
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">

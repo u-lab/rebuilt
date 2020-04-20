@@ -5,20 +5,19 @@
         <!-- Submit Button -->
         <v-btn
           :disabled="form.busy"
+          v-text="$t('store')"
           class="teal--text text--lighten-1"
           color="grey lighten-3"
           large
           type="submit"
-        >
-          {{ $t('store') }}
-        </v-btn>
+        />
       </div>
 
       <v-row class="flex-column pt-8">
         <v-col cols="12" sm="6" md="4" class="pb-0">
           <v-text-field v-model="form.nick_name" :label="$t('name')" outlined />
 
-          <v-text-field v-model="form.job_name" :label="$t('kana')" outlined />
+          <v-text-field v-model="form.kana" :label="$t('kana')" outlined />
         </v-col>
 
         <v-col cols="10" class="pt-0">

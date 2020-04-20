@@ -1,5 +1,8 @@
 <template>
-  <b-container :title="$t('see_portfolio')">
+  <b-container
+    :back-link="{ name: 'users.dashboard' }"
+    :title="$t('see_portfolio')"
+  >
     <page-edit-form-field
       v-model="form"
       :background-image-src="backgroundImageSrc"

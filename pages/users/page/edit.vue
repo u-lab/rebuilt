@@ -23,6 +23,7 @@ export default {
         user_id: '' /* Integer */,
         description: '' /* String */,
         nick_name: '' /* String */,
+        kana: '' /* String */,
         icon_image: '' /* FILE */,
         background_image: '' /* FILE */,
         web_address: '' /* URL */,
@@ -68,19 +69,18 @@ export default {
           name: obj.name,
           type: obj.type
         }))
-        await this.form
-          .post(`/users/profile`, {
-            transformRequest: [
-              function(data, headers) {
-                data._method = 'PATCH'
-                return objectToFormData(data)
-              }
-            ]
-          })
-          .then((response) => {
-            // Redirect User Dashboard.
-            this.$router.push({ name: 'users.dashboard' })
-          })
+
+        const { data } = await this.form.post(`/users/profile`, {
+          transformRequest: [
+            function(data, headers) {
+              data._method = 'PATCH'
+              return objectToFormData(data)
+            }
+          ]
+        })
+
+        // Redirect User Dashboard.
+        this.$router.push({ name: 'users.dashboard' })
       } catch (e) {
         // TODO: 何が起きるかはわからないが、そのログをとりたい。
       }
