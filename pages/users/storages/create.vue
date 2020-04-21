@@ -61,6 +61,7 @@ export default {
         })
 
         this.$store.commit('storage/PUSH_STORAGE', data.data)
+        this.$store.commit('page/CLEAR_ALL')
 
         // Redirect User Dashboard.
         this.$router.push({ name: 'users.dashboard' })
@@ -80,6 +81,7 @@ export default {
         })
 
         this.$store.commit('storage/PUSH_STORAGE', data.data)
+        this.$store.commit('page/CLEAR_ALL')
 
         // Redirect User Dashboard.
         this.$router.push({

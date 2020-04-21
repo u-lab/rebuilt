@@ -79,6 +79,8 @@ export default {
           ]
         })
 
+        this.$store.commit('page/CLEAR_ALL')
+
         // Redirect User Dashboard.
         this.$router.push({ name: 'users.dashboard' })
       } catch (e) {
