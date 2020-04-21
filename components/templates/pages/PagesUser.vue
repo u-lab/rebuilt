@@ -28,16 +28,94 @@
       </template>
 
       <template v-slot:second>
-        <v-card flat style="min-height: 640px">
-          <tab-box :content="user.user_profile.web_address" title="My Site" />
+        <template v-if="getCareer">
+          <h2 v-text="$t('career')" />
 
-          <tab-box
-            :content="user.user_profile.description"
-            :title="$t('description')"
-          />
+          <v-row justify="center">
+            <v-card
+              v-for="(career, key) in getCareer"
+              :key="key"
+              width="150px"
+              class="mr-2"
+            >
+              <div class="pa-2">
+                <school01 />
+              </div>
 
-          <tab-box-history :career="user.user_profile.user_career" />
-        </v-card>
+              <v-card-text v-text="career.name" class="pa-2 text-center" />
+            </v-card>
+          </v-row>
+        </template>
+
+        <template v-if="getReward">
+          <h2 v-text="$t('reward')" />
+
+          <v-row justify="center">
+            <v-card
+              v-for="(career, key) in getReward"
+              :key="key"
+              width="150px"
+              class="mr-2"
+            >
+              <div class="pa-2">
+                <school01 />
+              </div>
+
+              <v-card-text v-text="career.name" class="pa-2 text-center" />
+            </v-card>
+          </v-row>
+        </template>
+
+        <template v-if="getSkill">
+          <h2 v-text="$t('skill')" />
+
+          <v-row justify="center">
+            <v-card
+              v-for="(career, key) in getSkill"
+              :key="key"
+              width="150px"
+              class="mr-2"
+            >
+              <div class="pa-2">
+                <school01 />
+              </div>
+
+              <v-card-text v-text="career.name" class="pa-2 text-center" />
+            </v-card>
+          </v-row>
+        </template>
+
+        <template v-if="getOther">
+          <h2 v-text="$t('other')" />
+
+          <v-row justify="center">
+            <v-card
+              v-for="(career, key) in getOther"
+              :key="key"
+              width="150px"
+              class="mr-2"
+            >
+              <div class="pa-2">
+                <school01 />
+              </div>
+
+              <v-card-text v-text="career.name" class="pa-2 text-center" />
+            </v-card>
+          </v-row>
+        </template>
+
+        <h2>Social & Link</h2>
+        <v-row justify="center">
+          <div v-if="user.user_profile.web_address">
+            <a
+              :href="user.user_profile.web_address"
+              target="_blank"
+              rel="noopener"
+            >
+              <v-img src="/hp.png" width="80px" />
+            </a>
+          </div>
+        </v-row>
       </template>
     </base-tab>
   </div>
@@ -47,8 +125,7 @@
 import RepezenWorkCard from '@/components/organisms/cards/RepezenWorkCard'
 import BaseTab from '@/components/molecues/tabs/BaseTab'
 import UserHeader from '@/components/molecues/pages/UserHeader'
-import TabBox from '@/components/molecues/pages/TabBox'
-import TabBoxHistory from '@/components/molecues/storages/TabBoxHistory'
+import School01 from '@/components/atoms/icons/School01'
 import OtherStorageList from '@/components/organisms/list/OtherStorageList'
 import { getIconUrl, getMediumUrl } from '@/utils/image'
 
@@ -56,8 +133,7 @@ export default {
   components: {
     BaseTab,
     UserHeader,
-    TabBox,
-    TabBoxHistory,
+    School01,
     OtherStorageList,
     RepezenWorkCard
   },
@@ -89,6 +165,46 @@ export default {
         return getMediumUrl(image)
       }
       return null
+    },
+
+    getCareer() {
+      const career = this.user.user_profile.user_career
+      if (!career) {
+        return null
+      }
+
+      const arr = career.filter((obj) => obj.type === 'career')
+      return arr.length !== 0 ? arr : null
+    },
+
+    getReward() {
+      const career = this.user.user_profile.user_career
+      if (!career) {
+        return null
+      }
+
+      const arr = career.filter((obj) => obj.type === 'reward')
+      return arr.length !== 0 ? arr : null
+    },
+
+    getSkill() {
+      const career = this.user.user_profile.user_career
+      if (!career) {
+        return null
+      }
+
+      const arr = career.filter((obj) => obj.type === 'skill')
+      return arr.length !== 0 ? arr : null
+    },
+
+    getOther() {
+      const career = this.user.user_profile.user_career
+      if (!career) {
+        return null
+      }
+
+      const arr = career.filter((obj) => obj.type === null)
+      return arr.length !== 0 ? arr : null
     }
   }
 }
