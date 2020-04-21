@@ -29,7 +29,7 @@
             "
             :disabled="disabled"
             :title="items.title"
-            :src="items.eyecatch_image.url"
+            :src="getSrc(items.eyecatch_image)"
             @click="onClick(items.storage_id)"
           />
         </v-col>
@@ -42,6 +42,7 @@
 import UserTitle from '~/components/molecues/pages/UserTitle'
 import StorageCardForEdit from '@/components/molecues/storages/StorageCardForEdit'
 import StorageCardForCreate from '@/components/molecues/storages/StorageCardForCreate'
+import { getSmallUrl } from '@/utils/image'
 
 export default {
   components: {
@@ -79,6 +80,10 @@ export default {
 
     cardHeightStyle() {
       return `height: ${this.cardHeight};`
+    },
+
+    getSrc() {
+      return (image) => getSmallUrl(image)
     }
   },
 

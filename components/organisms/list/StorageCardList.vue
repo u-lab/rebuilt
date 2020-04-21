@@ -22,7 +22,7 @@
 
 <script>
 import StorageCard from '@/components/molecues/cards/StorageCard'
-import { getThumbnailUrl } from '@/utils/image'
+import { getSmallUrl } from '@/utils/image'
 
 export default {
   components: {
@@ -43,7 +43,7 @@ export default {
 
   computed: {
     getSrc() {
-      return (image) => getThumbnailUrl(image)
+      return (image) => getSmallUrl(image)
     }
   }
 }
