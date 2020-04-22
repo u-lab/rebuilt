@@ -28,81 +28,29 @@
       </template>
 
       <template v-slot:second>
-        <template v-if="getCareer">
-          <h2 v-text="$t('career')" />
+        <profile-icon-list
+          v-if="getCareer"
+          :title="$t('career')"
+          :items="getCareer"
+        />
 
-          <v-row justify="center">
-            <v-card
-              v-for="(career, key) in getCareer"
-              :key="key"
-              width="150px"
-              class="mr-2"
-            >
-              <div class="pa-2">
-                <school01 />
-              </div>
+        <profile-icon-list
+          v-if="getReward"
+          :title="$t('reward')"
+          :items="getReward"
+        />
 
-              <v-card-text v-text="career.name" class="pa-2 text-center" />
-            </v-card>
-          </v-row>
-        </template>
+        <profile-icon-list
+          v-if="getSkill"
+          :title="$t('skill')"
+          :items="getSkill"
+        />
 
-        <template v-if="getReward">
-          <h2 v-text="$t('reward')" />
-
-          <v-row justify="center">
-            <v-card
-              v-for="(career, key) in getReward"
-              :key="key"
-              width="150px"
-              class="mr-2"
-            >
-              <div class="pa-2">
-                <school01 />
-              </div>
-
-              <v-card-text v-text="career.name" class="pa-2 text-center" />
-            </v-card>
-          </v-row>
-        </template>
-
-        <template v-if="getSkill">
-          <h2 v-text="$t('skill')" />
-
-          <v-row justify="center">
-            <v-card
-              v-for="(career, key) in getSkill"
-              :key="key"
-              width="150px"
-              class="mr-2"
-            >
-              <div class="pa-2">
-                <school01 />
-              </div>
-
-              <v-card-text v-text="career.name" class="pa-2 text-center" />
-            </v-card>
-          </v-row>
-        </template>
-
-        <template v-if="getOther">
-          <h2 v-text="$t('other')" />
-
-          <v-row justify="center">
-            <v-card
-              v-for="(career, key) in getOther"
-              :key="key"
-              width="150px"
-              class="mr-2"
-            >
-              <div class="pa-2">
-                <school01 />
-              </div>
-
-              <v-card-text v-text="career.name" class="pa-2 text-center" />
-            </v-card>
-          </v-row>
-        </template>
+        <profile-icon-list
+          v-if="getOther"
+          :title="$t('other')"
+          :items="getOther"
+        />
 
         <h2>Social & Link</h2>
         <v-row justify="center">
@@ -125,16 +73,16 @@
 import RepezenWorkCard from '@/components/organisms/cards/RepezenWorkCard'
 import BaseTab from '@/components/molecues/tabs/BaseTab'
 import UserHeader from '@/components/molecues/pages/UserHeader'
-import School01 from '@/components/atoms/icons/School01'
 import OtherStorageList from '@/components/organisms/list/OtherStorageList'
+import ProfileIconList from '@/components/organisms/list/ProfileIconList'
 import { getIconUrl, getMediumUrl } from '@/utils/image'
 
 export default {
   components: {
     BaseTab,
     UserHeader,
-    School01,
     OtherStorageList,
+    ProfileIconList,
     RepezenWorkCard
   },
 

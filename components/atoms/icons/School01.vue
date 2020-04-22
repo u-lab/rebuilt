@@ -1,5 +1,5 @@
 <template>
-  <v-img :src="iconSrc" :height="height" :width="width" />
+  <v-icon v-text="`mdi-school`" :size="height" />
 </template>
 
 <script>
