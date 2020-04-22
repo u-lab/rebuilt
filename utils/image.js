@@ -31,6 +31,17 @@ export const getThumbnailUrl = (image) => {
 }
 
 /**
+ * 小サイズの画像を取得
+ *
+ * @param {*} image
+ * @returns { String }
+ */
+export const getSmallUrl = (image) => {
+  image = convertToImage(image)
+  return image.url_320 || image.url_640 || image.url
+}
+
+/**
  * 中サイズの画像を取得
  *
  * @param {*} image
@@ -49,7 +60,7 @@ export const getMediumUrl = (image) => {
  */
 export const getLargeUrl = (image) => {
   image = convertToImage(image)
-  return image.url_640 || image.url_1024 || image.url
+  return image.url_1024 || image.url_1280 || image.url
 }
 
 /**

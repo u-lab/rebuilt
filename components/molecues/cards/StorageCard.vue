@@ -1,6 +1,6 @@
 <template>
   <v-card :to="to" nuxt>
-    <v-img :src="src" />
+    <v-img :src="src" :height="height" />
 
     <v-card-title
       v-text="title"
@@ -12,6 +12,11 @@
 <script>
 export default {
   props: {
+    height: {
+      type: [String, Number],
+      default: '200px'
+    },
+
     src: {
       type: String,
       required: false,

@@ -20,7 +20,7 @@
           <v-text-field v-model="form.kana" :label="$t('kana')" outlined />
         </v-col>
 
-        <v-col cols="10" class="pt-0">
+        <v-col cols="12" sm="10" class="pt-0">
           <v-textarea
             v-model="form.description"
             :label="$t('description')"
@@ -73,6 +73,18 @@
           v-model="form.user_career"
           :did="form.user_career_did"
           @did="updateDid"
+        />
+      </div>
+
+      <div class="d-flex justify-end mb-2 pt-4">
+        <!-- Submit Button -->
+        <v-btn
+          :disabled="form.busy"
+          v-text="$t('store')"
+          class="teal--text text--lighten-1"
+          color="grey lighten-3"
+          large
+          type="submit"
         />
       </div>
     </v-form>

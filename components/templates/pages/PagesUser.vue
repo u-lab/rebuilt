@@ -28,16 +28,42 @@
       </template>
 
       <template v-slot:second>
-        <v-card flat style="min-height: 640px">
-          <tab-box :content="user.user_profile.web_address" title="My Site" />
+        <profile-icon-list
+          v-if="getCareer"
+          :title="$t('career')"
+          :items="getCareer"
+        />
 
-          <tab-box
-            :content="user.user_profile.description"
-            :title="$t('description')"
-          />
+        <profile-icon-list
+          v-if="getReward"
+          :title="$t('reward')"
+          :items="getReward"
+        />
 
-          <tab-box-history :career="user.user_profile.user_career" />
-        </v-card>
+        <profile-icon-list
+          v-if="getSkill"
+          :title="$t('skill')"
+          :items="getSkill"
+        />
+
+        <profile-icon-list
+          v-if="getOther"
+          :title="$t('other')"
+          :items="getOther"
+        />
+
+        <h2>Social & Link</h2>
+        <v-row justify="center">
+          <div v-if="user.user_profile.web_address">
+            <a
+              :href="user.user_profile.web_address"
+              target="_blank"
+              rel="noopener"
+            >
+              <v-img src="/hp.png" width="80px" />
+            </a>
+          </div>
+        </v-row>
       </template>
     </base-tab>
   </div>
@@ -47,18 +73,16 @@
 import RepezenWorkCard from '@/components/organisms/cards/RepezenWorkCard'
 import BaseTab from '@/components/molecues/tabs/BaseTab'
 import UserHeader from '@/components/molecues/pages/UserHeader'
-import TabBox from '@/components/molecues/pages/TabBox'
-import TabBoxHistory from '@/components/molecues/storages/TabBoxHistory'
 import OtherStorageList from '@/components/organisms/list/OtherStorageList'
+import ProfileIconList from '@/components/organisms/list/ProfileIconList'
 import { getIconUrl, getMediumUrl } from '@/utils/image'
 
 export default {
   components: {
     BaseTab,
     UserHeader,
-    TabBox,
-    TabBoxHistory,
     OtherStorageList,
+    ProfileIconList,
     RepezenWorkCard
   },
 
@@ -89,6 +113,46 @@ export default {
         return getMediumUrl(image)
       }
       return null
+    },
+
+    getCareer() {
+      const career = this.user.user_profile.user_career
+      if (!career) {
+        return null
+      }
+
+      const arr = career.filter((obj) => obj.type === 'career')
+      return arr.length !== 0 ? arr : null
+    },
+
+    getReward() {
+      const career = this.user.user_profile.user_career
+      if (!career) {
+        return null
+      }
+
+      const arr = career.filter((obj) => obj.type === 'reward')
+      return arr.length !== 0 ? arr : null
+    },
+
+    getSkill() {
+      const career = this.user.user_profile.user_career
+      if (!career) {
+        return null
+      }
+
+      const arr = career.filter((obj) => obj.type === 'skill')
+      return arr.length !== 0 ? arr : null
+    },
+
+    getOther() {
+      const career = this.user.user_profile.user_career
+      if (!career) {
+        return null
+      }
+
+      const arr = career.filter((obj) => obj.type === null)
+      return arr.length !== 0 ? arr : null
     }
   }
 }
