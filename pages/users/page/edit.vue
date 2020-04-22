@@ -70,7 +70,7 @@ export default {
           type: obj.type
         }))
 
-        const { data } = await this.form.post(`/users/profile`, {
+        await this.form.post(`/users/profile`, {
           transformRequest: [
             function(data, headers) {
               data._method = 'PATCH'

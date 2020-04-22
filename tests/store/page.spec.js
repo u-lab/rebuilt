@@ -1,4 +1,3 @@
-import axios from 'axios'
 import Vuex from 'vuex'
 import { createLocalVue } from '@vue/test-utils'
 import cloneDeep from 'lodash.clonedeep'

@@ -4,7 +4,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "lint": "eslint --fix --ext .js,.vue",
+    "lint": "eslint --fix --ext .js,.vue .",
     "test": "jest --config jest.config.js"
   },
   "dependencies": {
