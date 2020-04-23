@@ -43,8 +43,8 @@ export default {
   },
 
   methods: {
-    onDrawer(payload) {
-      this.drawer = payload
+    onDrawer() {
+      this.drawer = !this.drawer
     }
   }
 }
