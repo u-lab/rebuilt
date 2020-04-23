@@ -32,24 +32,28 @@
           v-if="getCareer"
           :title="$t('career')"
           :items="getCareer"
+          icon-name="school"
         />
 
         <profile-icon-list
           v-if="getReward"
           :title="$t('reward')"
           :items="getReward"
+          icon-name="reward"
         />
 
         <profile-icon-list
           v-if="getSkill"
           :title="$t('skill')"
           :items="getSkill"
+          icon-name="skill"
         />
 
         <profile-icon-list
           v-if="getOther"
           :title="$t('other')"
           :items="getOther"
+          icon-name="library"
         />
 
         <h2>Social & Link</h2>
