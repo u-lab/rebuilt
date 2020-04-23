@@ -42,10 +42,6 @@ export default {
     UserNavbarMenu
   },
 
-  data: () => ({
-    drawer: false
-  }),
-
   computed: {
     siteTitle() {
       return process.env.appName
@@ -58,8 +54,7 @@ export default {
 
   methods: {
     onDrawer() {
-      this.drawer = !this.drawer
-      this.$emit('drawer', this.drawer)
+      this.$emit('drawer')
     }
   }
 }
