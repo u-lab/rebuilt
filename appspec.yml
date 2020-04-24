@@ -9,6 +9,7 @@ permissions:
     group: ec2-user
     mode: 700
 hooks:
-   ValidateService:
-     - location: scripts/init.sh
-       timeout: 600
+  AfterInstall:
+    - location: scripts/afterinstall.sh
+  ApplicationStart:
+    - location: scripts/applicationstart.sh

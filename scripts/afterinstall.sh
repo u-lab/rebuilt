@@ -1,4 +1,3 @@
-# 初回は手動で.envを作成する
 #!/bin/bash
 sudo chown ec2-user:ec2-user /home/ec2-user/rebuilt
 sudo cp -r /home/ec2-user/rebuilt/components/ /home/ec2-user/
@@ -8,9 +7,4 @@ list=(${result// / })
 num=${list[1]}
 kill -9 $num
 
-cd /home/ec2-user/rebuilt
-sudo rm -rf node_modules
-sudo rm -f package-lock.json
-npm install
 sudo service nginx restart
-npm run dev &
