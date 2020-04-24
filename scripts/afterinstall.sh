@@ -1,6 +1,6 @@
 #!/bin/bash
-sudo chown ec2-user:ec2-user /home/ec2-user/rebuilt
 sudo cp -r /home/ec2-user/rebuilt/components/ /home/ec2-user/
+sudo chmod -R 755 /home/ec2-user/components
 
 result=`ps aux | grep node | head -n 1`
 list=(${result// / })
