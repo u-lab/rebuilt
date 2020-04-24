@@ -7,8 +7,9 @@ permissions:
   - object: /home/ec2-user/rebuilt
     owner: ec2-user
     group: ec2-user
-    mode: 700
+    mode: 755
 hooks:
-   ValidateService:
-     - location: scripts/init.sh
-       timeout: 600
+  AfterInstall:
+    - location: scripts/afterinstall.sh
+  ApplicationStart:
+    - location: scripts/applicationstart.sh
