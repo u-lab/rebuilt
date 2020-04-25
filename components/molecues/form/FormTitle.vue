@@ -8,6 +8,7 @@
     outlined
     required
     placeholder="必須"
+    maxlength="50"
   />
 </template>
 
