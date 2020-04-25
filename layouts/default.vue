@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import TheDefaultFooter from '@/components/organisms/footer/TheDefaultFooter'
+const TheDefaultFooter = () =>
+  import('@/components/organisms/footer/TheDefaultFooter')
 const Sidebar = () => import('@/components/organisms/sidebar/Sidebar')
 const UserNavbar = () => import('@/components/organisms/navbar/UserNavbar')
 
