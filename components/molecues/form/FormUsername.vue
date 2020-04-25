@@ -5,6 +5,9 @@
     :label="$t('username')"
     @blur="$v.v.$touch()"
     :outlined="outlined"
+    autocomplete="username"
+    type="name"
+    required
   />
 </template>
 

@@ -1,7 +1,11 @@
 <template>
   <auth-wrapper>
-    <auth-form>
-      <v-form @submit.prevent="login" @keydown="form.onKeydown($event)">
+    <auth-form :title="$t('login')">
+      <v-form
+        @submit.prevent="login"
+        @keydown="form.onKeydown($event)"
+        class="mb-4"
+      >
         <!-- Email -->
         <form-email-or-name
           v-model="form.email"
@@ -21,16 +25,12 @@
           obj-key="password"
         />
 
-        <div class="d-flex justify-space-between">
+        <div class="d-sm-flex justify-space-between">
           <v-checkbox
             v-model="remember"
             :label="$t('remember_me')"
             class="mt-0 small"
           />
-
-          <router-link :to="{ name: 'password.request' }" class="small">
-            {{ $t('forgot_password') }}
-          </router-link>
         </div>
 
         <div class="text-center login-btn-wraaper">
@@ -45,6 +45,20 @@
           </v-btn>
         </div>
       </v-form>
+
+      <div class="d-flex justify-center justify-sm-end mb-2">
+        <div>
+          <p>
+            <nuxt-link :to="{ name: 'password.request' }" class="small">
+              {{ $t('forgot_password') }}
+            </nuxt-link>
+          </p>
+
+          <p>
+            <nuxt-link v-text="$t('register_with')" to="register" />
+          </p>
+        </div>
+      </div>
     </auth-form>
   </auth-wrapper>
 </template>

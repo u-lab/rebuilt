@@ -5,7 +5,8 @@
     :label="$t('web_address')"
     :error-messages="errorMessage"
     outlined
-    clearable
+    autocomplete="url"
+    type="url"
   />
 </template>
 

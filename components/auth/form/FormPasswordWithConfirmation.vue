@@ -5,10 +5,10 @@
       :append-icon="hidden ? 'mdi-eye-off' : 'mdi-eye'"
       :error-messages="errorMessage"
       :label="$t('password')"
+      :outlined="outlined"
       :type="hidden ? 'password' : 'text'"
       @click:append="hidden = !hidden"
       @blur="$v.v.$touch()"
-      outlined
     />
 
     <v-text-field
@@ -16,10 +16,10 @@
       :append-icon="hidden2 ? 'mdi-eye-off' : 'mdi-eye'"
       :error-messages="errorMessageConfirmation"
       :label="$t('confirm_password')"
+      :outlined="outlined"
       :type="hidden2 ? 'password' : 'text'"
       @click:append="hidden2 = !hidden2"
       @blur="$v.vc.$touch()"
-      outlined
     />
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <v-text-field
     v-model="valueModel"
-    :label="$t('email')"
+    :label="$t('username_or_email')"
     :error-messages="errorMessage"
     @blur="$v.v.$touch()"
     outlined

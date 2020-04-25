@@ -7,6 +7,7 @@
       @click:append="hidden = !hidden"
       @blur="$v.v.$touch()"
       :outlined="outlined"
+      type="email"
     />
   </div>
 </template>
