@@ -4,8 +4,8 @@
     :label="$t('email')"
     :error-messages="errorMessage"
     @blur="$v.v.$touch()"
-    outlined
-    clearable
+    :outlined="outlined"
+    type="email"
   />
 </template>
 

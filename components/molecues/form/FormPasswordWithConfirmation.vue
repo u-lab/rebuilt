@@ -9,6 +9,7 @@
       @click:append="hidden = !hidden"
       @blur="$v.v.$touch()"
       :outlined="outlined"
+      required
     />
 
     <v-text-field
@@ -20,6 +21,7 @@
       @click:append="hidden2 = !hidden2"
       @blur="$v.vc.$touch()"
       :outlined="outlined"
+      required
     />
   </div>
 </template>

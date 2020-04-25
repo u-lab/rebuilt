@@ -1,9 +1,11 @@
 <template>
   <auth-wrapper>
-    <auth-form>
-      <p>パスワードの変更をしました</p>
-
-      <nuxt-link :to="{ name: 'login' }">ログインへ</nuxt-link>
+    <auth-form :title="$t('changed_password')">
+      <div class="d-flex justify-center">
+        <v-btn :to="{ name: 'login' }" color="primary">
+          {{ $t('login') }}
+        </v-btn>
+      </div>
     </auth-form>
   </auth-wrapper>
 </template>
@@ -18,6 +20,8 @@ export default {
     AuthWrapper
   },
 
-  layout: 'auth'
+  layout: 'auth',
+
+  middleware: 'guest'
 }
 </script>
