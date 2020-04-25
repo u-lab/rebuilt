@@ -1,9 +1,11 @@
 <template>
   <auth-wrapper>
-    <auth-form>
-      <v-form @submit.prevent="send" @keydown="form.onKeydown($event)">
-        <alert-success :form="form" :message="status" />
+    <auth-form :title="$t('reset_password')">
+      <template v-if="status">
+        <v-alert v-text="status" type="success" />
+      </template>
 
+      <v-form v-else @submit.prevent="send" @keydown="form.onKeydown($event)">
         <!-- Email -->
         <form-email
           v-model="form.email"
@@ -48,6 +50,8 @@ export default {
   },
 
   layout: 'auth',
+
+  middleware: 'guest',
 
   data: () => ({
     status: '',
