@@ -22,3 +22,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.auth-container {
+  background-color: #444;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+</style>

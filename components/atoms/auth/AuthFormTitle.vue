@@ -14,3 +14,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.auth-form-title {
+  padding: 1rem;
+}
+</style>
