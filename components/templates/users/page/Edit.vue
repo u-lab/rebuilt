@@ -39,11 +39,17 @@ export default {
 
   computed: {
     backgroundImageSrc() {
-      return getMediumUrl(this.page.background_image)
+      if (this.page && this.page.background_image) {
+        return getMediumUrl(this.page.background_image)
+      }
+      return null
     },
 
     iconImageSrc() {
-      return getMediumUrl(this.page.icon_image)
+      if (this.page && this.page.icon_image) {
+        return getMediumUrl(this.page.icon_image)
+      }
+      return null
     },
 
     form: {

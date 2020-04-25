@@ -48,15 +48,14 @@ export default {
   },
 
   created() {
-    this.form.keys().forEach((key) => {
-      if (this.data[key] !== null) {
-        this.form[key] = this.data[key]
-      }
-    })
-
-    this.form.background_image = ''
-    this.form.icon_image = ''
-    this.form.user_career_did = []
+    this.form.user_id = this.user.id
+    if (this.data) {
+      this.form.description = this.data.description
+      this.form.nick_name = this.data.nick_name
+      this.form.kana = this.data.kana
+      this.form.web_address = this.data.web_address
+      this.form.user_career = this.data.user_career
+    }
   },
 
   methods: {
