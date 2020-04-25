@@ -55,7 +55,7 @@
           </p>
 
           <p>
-            <nuxt-link v-text="$t('register_with')" to="register" />
+            <nuxt-link v-text="$t('create_an_account')" to="register" />
           </p>
         </div>
       </div>

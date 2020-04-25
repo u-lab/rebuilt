@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <auth-navbar />
-
     <!-- Sizes your content based upon application components -->
     <v-content class="auth-container d-flex align-center">
       <!-- Provides the application the proper gutter -->
@@ -12,16 +10,6 @@
     </v-content>
   </v-app>
 </template>
-
-<script>
-import AuthNavbar from '@/components/organisms/navbar/AuthNavbar'
-
-export default {
-  components: {
-    AuthNavbar
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .auth-container {

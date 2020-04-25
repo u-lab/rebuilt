@@ -28,6 +28,12 @@
           </v-btn>
         </div>
       </v-form>
+
+      <div class="d-flex justify-end">
+        <p>
+          <nuxt-link :to="{ name: 'login' }" v-text="$t('go_to_login')" />
+        </p>
+      </div>
     </auth-form>
   </auth-wrapper>
 </template>

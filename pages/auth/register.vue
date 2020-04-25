@@ -54,7 +54,7 @@
         <div class="d-flex justify-center justify-sm-end mb-2">
           <div>
             <p>
-              <nuxt-link v-text="$t('login')" :to="{ name: 'login' }" />
+              <nuxt-link v-text="$t('go_to_login')" :to="{ name: 'login' }" />
             </p>
           </div>
         </div>
