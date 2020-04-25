@@ -14,9 +14,11 @@
 </template>
 
 <script>
-import Navbar from '@/components/organisms/navbar/DefaultNavbar'
-import PagesStoragesStorageid from '@/components/templates/pages/PagesStoragesStorageid'
-import OtherStorageList from '@/components/organisms/list/OtherStorageList'
+const Navbar = () => import('@/components/organisms/navbar/DefaultNavbar')
+const PagesStoragesStorageid = () =>
+  import('@/components/templates/pages/PagesStoragesStorageid')
+const OtherStorageList = () =>
+  import('@/components/organisms/list/OtherStorageList')
 
 export default {
   components: {

@@ -46,9 +46,8 @@ export default {
   css: [{ src: '~assets/sass/app.scss', lang: 'scss' }],
 
   plugins: [
-    '~plugins/i18n',
-    '~plugins/vform',
-    '~plugins/axios',
+    '@/plugins/i18n',
+    '@/plugins/axios',
     '@/plugins/vue-inject',
     '@/plugins/vuelidate'
   ],

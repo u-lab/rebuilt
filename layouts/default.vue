@@ -19,9 +19,10 @@
 </template>
 
 <script>
-import Sidebar from '@/components/organisms/sidebar/Sidebar'
-import TheDefaultFooter from '@/components/organisms/footer/TheDefaultFooter'
-import UserNavbar from '@/components/organisms/navbar/UserNavbar'
+const TheDefaultFooter = () =>
+  import('@/components/organisms/footer/TheDefaultFooter')
+const Sidebar = () => import('@/components/organisms/sidebar/Sidebar')
+const UserNavbar = () => import('@/components/organisms/navbar/UserNavbar')
 
 export default {
   components: {
