@@ -11,4 +11,3 @@ kill -9 $num
 
 cd /home/ec2-user/rebuilt
 npm install
-# forever start -c "npm run start" ./
