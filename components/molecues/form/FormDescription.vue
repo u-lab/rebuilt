@@ -5,7 +5,6 @@
     :label="$t('description')"
     :error-messages="errorMessage"
     outlined
-    clearable
   />
 </template>
 

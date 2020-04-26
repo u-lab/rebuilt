@@ -3,6 +3,7 @@
     v-model="valueModel"
     :label="$t('long_comment')"
     :error-messages="errorMessage"
+    @blur="$v.v.$touch()"
     outlined
   />
 </template>

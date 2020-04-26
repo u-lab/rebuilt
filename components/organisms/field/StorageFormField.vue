@@ -53,6 +53,7 @@
                 v-model="form.title"
                 :dirty="formDirty"
                 :errors="form.errors"
+                :lazy-validation="true"
                 @dirty="dirty"
                 obj-key="title"
               />
@@ -64,6 +65,7 @@
                 v-model="form.web_address"
                 :dirty="formDirty"
                 :errors="form.errors"
+                :lazy-validation="true"
                 @dirty="dirty"
                 obj-key="web_address"
               />
@@ -106,6 +108,7 @@
                 v-model="form.description"
                 :dirty="formDirty"
                 :errors="form.errors"
+                :lazy-validation="true"
                 @dirty="dirty"
                 obj-key="description"
               />
@@ -118,6 +121,7 @@
                 v-model="form.long_comment"
                 :dirty="formDirty"
                 :errors="form.errors"
+                :lazy-validation="true"
                 @dirty="dirty"
                 obj-key="long_comment"
               />
