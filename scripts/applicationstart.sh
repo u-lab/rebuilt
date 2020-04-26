@@ -10,4 +10,7 @@ num=${list[1]}
 kill -9 $num
 
 cd /home/ec2-user/rebuilt
+sudo rm -rf node_modules
+npm install
+npm run build
 forever start -c "npm run start" ./
