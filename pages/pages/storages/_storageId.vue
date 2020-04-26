@@ -33,7 +33,14 @@ export default {
     },
 
     storages() {
-      return this.$store.getters['page/storages']
+      const storages = this.$store.getters['page/storages']
+      if (storages.length === 0) {
+        return []
+      }
+
+      return storages.filter((obj) => {
+        return obj.storage_id !== this.$route.params.storageId
+      })
     },
 
     user() {

@@ -15,16 +15,39 @@
 
       <v-row class="flex-column pt-8">
         <v-col cols="12" sm="6" md="4" class="pb-0">
-          <v-text-field v-model="form.nick_name" :label="$t('name')" outlined />
+          <v-text-field
+            v-model="form.nick_name"
+            :dirty="formDirty"
+            :errors="form.errors"
+            :label="$t('name')"
+            :lazy-validation="true"
+            @dirty="dirty"
+            obj-key="nick_name"
+            outlined
+          />
 
-          <v-text-field v-model="form.kana" :label="$t('kana')" outlined />
+          <v-text-field
+            v-model="form.kana"
+            :dirty="formDirty"
+            :errors="form.errors"
+            :label="$t('kana')"
+            :lazy-validation="true"
+            @dirty="dirty"
+            obj-key="kana"
+            outlined
+          />
         </v-col>
 
         <v-col cols="12" sm="10" class="pt-0">
           <v-textarea
             v-model="form.description"
+            :dirty="formDirty"
+            :errors="form.errors"
             :label="$t('description')"
+            :lazy-validation="true"
+            @dirty="dirty"
             auto-grow
+            obj-key="description"
             outlined
             rows="4"
             row-height="30"
@@ -125,7 +148,8 @@ export default {
 
   data() {
     return {
-      preview_icon_src: null
+      preview_icon_src: null,
+      formDirty: false
     }
   },
 
@@ -141,6 +165,10 @@ export default {
   },
 
   methods: {
+    dirty() {
+      this.formDirty = true
+    },
+
     onSubmit() {
       return this.$emit('submit')
     },
