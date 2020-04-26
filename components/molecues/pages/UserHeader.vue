@@ -1,7 +1,7 @@
 <template>
   <div>
     <div :style="getHeaderMarginBottom" class="user-header">
-      <v-img :src="bgSrc" height="180px" />
+      <v-img :src="bgSrc" height="250px" />
 
       <div class="user-header-content">
         <v-avatar :size="avaterSize" class="user-header-avatar">
