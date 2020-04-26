@@ -1,5 +1,5 @@
 # 初回は手動で.envを作成する
-#!/bin/bash
+#!/bin/bash +x
 result=`ps aux | grep forever | head -n 1`
 list=(${result// / })
 num=${list[1]}
