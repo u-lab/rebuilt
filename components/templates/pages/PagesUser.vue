@@ -13,7 +13,9 @@
       <template v-slot:first>
         <div class="d-flex justify-center">
           <repezen-work-card
-            v-if="user.user_portfolio.masterpiece_storage"
+            v-if="
+              user.user_portfolio && user.user_portfolio.masterpiece_storage
+            "
             :storage="user.user_portfolio.masterpiece_storage"
             :user-name="user.name"
           />
