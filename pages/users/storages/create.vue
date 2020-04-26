@@ -54,7 +54,6 @@ export default {
         const { data } = await this.form.post(`/users/storage`, {
           transformRequest: [
             function(data, headers) {
-              data._method = 'PATCH'
               return objectToFormData(data)
             }
           ]
@@ -74,7 +73,6 @@ export default {
         const { data } = await this.form.post(`/users/storage`, {
           transformRequest: [
             function(data, headers) {
-              data._method = 'PATCH'
               return objectToFormData(data)
             }
           ]
