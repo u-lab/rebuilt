@@ -16,16 +16,6 @@
         <v-card-text>
           <v-text-field v-model="history.name" :label="$t('name')" outlined />
 
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              v-on="on"
-              label="Picker in dialog"
-              prepend-icon="event"
-              readonly
-            />
-          </template>
-
           <v-dialog
             ref="dialog"
             v-model="dateDialog"
@@ -42,7 +32,7 @@
               />
             </template>
             <v-date-picker v-model="history.date" type="month" scrollable>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-btn
                 @click="dateDialog = false"
                 v-text="$t('cancel')"
@@ -63,7 +53,7 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn
             @click="dialog = false"
             v-text="$t('cancel')"
@@ -98,7 +88,11 @@ const UserCareerDataTable = () =>
 
 const History = class {
   constructor(lid, date = null, id = null, name = null, type = null) {
-    this.date = date || new Date().toISOString().substr(0, 10)
+    this.date = date
+      ? convertToDate(date)
+          .toISOString()
+          .substr(0, 7)
+      : new Date().toISOString().substr(0, 7)
     this.id = id
     this.lid = lid
     this.name = name
