@@ -1,30 +1,11 @@
 <template>
   <div>
-    <v-data-table
-      :headers="headers"
-      :items="items()"
-      :items-per-page="10"
-      class="elevation-1"
-    >
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-toolbar-title>経歴</v-toolbar-title>
-
-          <v-spacer />
-
-          <v-btn v-text="$t('add_new_career')" @click="add" color="primary" />
-        </v-toolbar>
-      </template>
-      <template v-slot:item.actions="{ item }">
-        <v-btn
-          @click="edit(item.lid)"
-          v-text="$t('edit')"
-          color="warning"
-          class="mr-2"
-        />
-        <v-icon @click="deleted(item.lid)" v-text="`mdi-delete`" />
-      </template>
-    </v-data-table>
+    <user-career-data-table
+      :items="items"
+      @add="add"
+      @edit="edit"
+      @delete="deleted"
+    />
 
     <v-dialog v-model="dialog" width="300px">
       <v-card>
@@ -34,16 +15,6 @@
 
         <v-card-text>
           <v-text-field v-model="history.name" :label="$t('name')" outlined />
-
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="date"
-              v-on="on"
-              label="Picker in dialog"
-              prepend-icon="event"
-              readonly
-            />
-          </template>
 
           <v-dialog
             ref="dialog"
@@ -61,7 +32,7 @@
               />
             </template>
             <v-date-picker v-model="history.date" type="month" scrollable>
-              <v-spacer></v-spacer>
+              <v-spacer />
               <v-btn
                 @click="dateDialog = false"
                 v-text="$t('cancel')"
@@ -82,7 +53,7 @@
         </v-card-text>
 
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn
             @click="dialog = false"
             v-text="$t('cancel')"
@@ -99,34 +70,46 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="deleteDialog" width="300px">
-      <v-card>
-        <v-alert
-          v-text="$t('are_you_sure_you_want_to_delete')"
-          width="100%"
-          type="error"
-        />
-
-        <v-card-actions>
-          <v-btn
-            @click="deleteDialog = false"
-            v-text="$t('cancel')"
-            color="primary"
-            text
-          />
-          <v-spacer></v-spacer>
-          <v-btn @click="onDelete" v-text="$t('ok')" color="red" text />
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <user-career-alert-dialog
+      :dialog="deleteDialog"
+      @cancel="deleteDialog = false"
+      @delete="onDelete"
+    />
   </div>
 </template>
 
 <script>
 import clonedeep from 'lodash.clonedeep'
 import { convertToDate, formatDate } from '@/utils/date'
+const UserCareerAlertDialog = () =>
+  import('@/components/organisms/dialog/UserCareerAlertDialog')
+const UserCareerDataTable = () =>
+  import('@/components/organisms/dataTable/UserCareerDataTable')
+
+const History = class {
+  constructor(lid, date = null, id = null, name = null, type = null) {
+    this.date = date
+      ? convertToDate(date)
+          .toISOString()
+          .substr(0, 7)
+      : new Date().toISOString().substr(0, 7)
+    this.id = id
+    this.lid = lid
+    this.name = name
+    this.type = type
+  }
+
+  get formatDate() {
+    return formatDate(convertToDate(this.date), 'yyyy-MM')
+  }
+}
 
 export default {
+  components: {
+    UserCareerAlertDialog,
+    UserCareerDataTable
+  },
+
   props: {
     value: {
       type: Array,
@@ -145,25 +128,11 @@ export default {
       dateDialog: false,
       deleteDialog: false,
       deleteLid: '',
-      history: {
-        lid: this.value.length + 1,
-        name: '',
-        date: new Date().toISOString().substr(0, 10),
-        type: ''
-      }
+      history: new History(this.value.length + 1)
     }
   },
 
   computed: {
-    headers() {
-      return [
-        { text: this.$t('name'), value: 'name' },
-        { text: '日付', value: 'date' },
-        { text: this.$t('category'), value: 'typeText' },
-        { text: '', value: 'actions' }
-      ]
-    },
-
     typeList() {
       return [
         { text: this.$t('career'), value: 'career' },
@@ -188,24 +157,24 @@ export default {
       set(newVal) {
         return this.$emit('did', newVal)
       }
+    },
+
+    items() {
+      return this.value.map((obj, idx) => {
+        return new History(idx + 1, obj.date, obj.id, obj.name, obj.type)
+      })
     }
   },
 
   methods: {
     add() {
+      this.history = new History(this.value.length + 1)
       this.dialog = true
-      this.history = {
-        lid: this.value.length + 1,
-        id: '',
-        name: '',
-        date: new Date().toISOString().substr(0, 10),
-        type: ''
-      }
     },
 
     edit(lid) {
+      this.history = clonedeep(this.items.find((obj) => obj.lid === lid))
       this.dialog = true
-      this.history = clonedeep(this.items().find((obj) => obj.lid === lid))
     },
 
     deleted(lid) {
@@ -214,13 +183,13 @@ export default {
     },
 
     onDelete() {
-      const item = this.items().find((obj) => obj.lid === this.deleteLid)
+      const item = this.items.find((obj) => obj.lid === this.deleteLid)
       if (item.id) {
         this.didModel.push(item.id)
       }
       if (this.valueModel.length > 0) {
         this.valueModel = clonedeep(
-          this.items().filter((obj) => {
+          this.items.filter((obj) => {
             return obj.lid !== this.deleteLid
           })
         )
@@ -234,31 +203,14 @@ export default {
       return this.$emit('did')
     },
 
-    items() {
-      return this.value.map((obj, idx) => ({
-        lid: idx + 1,
-        name: obj.name,
-        date: formatDate(convertToDate(obj.date), 'yyyy-MM'),
-        type: obj.type,
-        typeText: this.$t(obj.type !== null ? this.$sanitize(obj.type) : null),
-        id: obj.id
-      }))
-    },
-
     historyAdd() {
-      if (this.history.lid < this.value.length) {
-        this.valueModel[this.history.lid] = clonedeep(this.history)
+      if (this.history.lid <= this.value.length) {
+        this.valueModel.splice(this.history.lid - 1, 1, clonedeep(this.history)) // 配列置換
       } else {
         this.valueModel.push(clonedeep(this.history))
       }
 
-      this.history = {
-        lid: this.value.length + 1,
-        id: '',
-        name: '',
-        date: new Date().toISOString().substr(0, 10),
-        type: ''
-      }
+      this.history = new History(this.value.length + 1)
       this.dialog = false
     }
   }

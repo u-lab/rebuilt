@@ -11,6 +11,10 @@ export const convertToDate = (v) => {
     return null
   }
 
+  if (isDate(v)) {
+    return v
+  }
+
   return new Date(v)
 }
 
