@@ -1,5 +1,7 @@
 # Rebuilt
 
+[![CodeFactor](https://www.codefactor.io/repository/github/u-lab/rebuilt/badge)](https://www.codefactor.io/repository/github/u-lab/rebuilt)
+
 ## 概説
 
 建築生のためのポートフォリオ作成サービス。
