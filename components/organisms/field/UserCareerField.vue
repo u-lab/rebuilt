@@ -1,33 +1,11 @@
 <template>
   <div>
-    <v-data-table
-      :headers="headers"
+    <user-career-data-table
       :items="items"
-      :items-per-page="10"
-      class="elevation-1"
-    >
-      <template v-slot:top>
-        <v-toolbar flat>
-          <v-toolbar-title>経歴</v-toolbar-title>
-
-          <v-spacer />
-
-          <v-btn v-text="$t('add_new_career')" @click="add" color="primary" />
-        </v-toolbar>
-      </template>
-      <template v-slot:item.typeText="{ item }">
-        {{ item.type !== null ? $t($sanitize(item.type)) : null }}
-      </template>
-      <template v-slot:item.actions="{ item }">
-        <v-btn
-          @click="edit(item.lid)"
-          v-text="$t('edit')"
-          color="warning"
-          class="mr-2"
-        />
-        <v-icon @click="deleted(item.lid)" v-text="`mdi-delete`" />
-      </template>
-    </v-data-table>
+      @add="add"
+      @edit="edit"
+      @delete="deleted"
+    />
 
     <v-dialog v-model="dialog" width="300px">
       <v-card>
@@ -115,6 +93,8 @@ import clonedeep from 'lodash.clonedeep'
 import { convertToDate, formatDate } from '@/utils/date'
 const UserCareerAlertDialog = () =>
   import('@/components/organisms/dialog/UserCareerAlertDialog')
+const UserCareerDataTable = () =>
+  import('@/components/organisms/dataTable/UserCareerDataTable')
 
 const History = class {
   constructor(lid, date = null, id = null, name = null, type = null) {
@@ -132,7 +112,8 @@ const History = class {
 
 export default {
   components: {
-    UserCareerAlertDialog
+    UserCareerAlertDialog,
+    UserCareerDataTable
   },
 
   props: {
@@ -158,15 +139,6 @@ export default {
   },
 
   computed: {
-    headers() {
-      return [
-        { text: this.$t('name'), value: 'name' },
-        { text: '日付', value: 'formatDate' },
-        { text: this.$t('category'), value: 'typeText' },
-        { text: '', value: 'actions' }
-      ]
-    },
-
     typeList() {
       return [
         { text: this.$t('career'), value: 'career' },
@@ -202,13 +174,13 @@ export default {
 
   methods: {
     add() {
-      this.dialog = true
       this.history = new History(this.value.length + 1)
+      this.dialog = true
     },
 
     edit(lid) {
-      this.dialog = true
       this.history = clonedeep(this.items.find((obj) => obj.lid === lid))
+      this.dialog = true
     },
 
     deleted(lid) {
@@ -238,8 +210,8 @@ export default {
     },
 
     historyAdd() {
-      if (this.history.lid < this.value.length) {
-        this.valueModel[this.history.lid] = clonedeep(this.history)
+      if (this.history.lid <= this.value.length) {
+        this.valueModel.splice(this.history.lid - 1, 1, clonedeep(this.history)) // 配列置換
       } else {
         this.valueModel.push(clonedeep(this.history))
       }
