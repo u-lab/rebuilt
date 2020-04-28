@@ -7,16 +7,18 @@
       @click:append="hidden = !hidden"
       @blur="$v.v.$touch()"
       :outlined="outlined"
+      type="email"
+      required
     />
   </div>
 </template>
 
 <script>
 import { email, required } from 'vuelidate/lib/validators'
-import { formConfirmation } from '@/mixins/formConfirmation'
+import { form } from '@/mixins/form'
 
 export default {
-  mixins: [formConfirmation],
+  mixins: [form],
 
   validations: {
     v: {

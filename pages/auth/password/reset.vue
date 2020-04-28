@@ -1,17 +1,7 @@
 <template>
   <auth-wrapper>
-    <auth-form>
+    <auth-form :title="$t('reset_password')">
       <v-form @submit.prevent="reset" @keydown="form.onKeydown($event)">
-        <!-- Email -->
-        <form-email
-          v-model="form.email"
-          :dirty="formDirty"
-          :errors="form.errors"
-          :lazy-validation="true"
-          @dirty="dirty"
-          obj-key="email"
-        />
-
         <!-- Password -->
         <form-password-with-confirmation
           v-model="form.password"
@@ -44,7 +34,6 @@
 import Form from 'vform'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
-import FormEmail from '@/components/auth/form/FormEmail'
 import FormPasswordWithConfirmation from '@/components/auth/form/FormPasswordWithConfirmation'
 
 export default {
@@ -55,11 +44,12 @@ export default {
   components: {
     AuthForm,
     AuthWrapper,
-    FormEmail,
     FormPasswordWithConfirmation
   },
 
   layout: 'auth',
+
+  middleware: 'guest',
 
   data: () => ({
     status: '',
@@ -87,13 +77,19 @@ export default {
     },
 
     async reset() {
-      const { data } = await this.form.post('/password/reset')
+      try {
+        const { data } = await this.form.post('/password/reset')
 
-      this.status = data.status
+        this.status = data.status
 
-      this.form.reset()
+        this.form.reset()
 
-      this.$router.push({ name: 'password.reset.success' })
+        this.$router.push({ name: 'password.reset.success' })
+      } catch (e) {
+        this.$nuxt.error({
+          statusCode: e.response.status
+        })
+      }
     }
   }
 }

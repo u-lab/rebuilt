@@ -6,7 +6,9 @@
       :label="$t('email')"
       @click:append="hidden = !hidden"
       @blur="$v.v.$touch()"
+      type="email"
       outlined
+      required
     />
 
     <v-text-field
@@ -15,7 +17,9 @@
       :label="$t('confirm_email')"
       @click:append="hidden2 = !hidden2"
       @blur="$v.vc.$touch()"
+      type="email"
       outlined
+      required
     />
   </div>
 </template>

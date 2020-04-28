@@ -18,7 +18,6 @@
                 type="email"
                 name="email"
               />
-              <has-error :form="form" field="email" />
             </div>
           </div>
 

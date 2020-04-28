@@ -174,10 +174,7 @@ export const actions = {
       const storage = getStorageByStorageId(getters.storages, storageId)
 
       if (storage !== undefined) {
-        if (getters.checkStorages) {
-          return commit('PUSH_STORAGE', storage) // すでにデータがある場合はPush
-        }
-        return commit('SET_STORAGE', storage)
+        return commit('PUSH_STORAGE', storage) // すでにデータがある場合はPush
       }
     }
 
@@ -192,10 +189,9 @@ export const actions = {
       )
 
       if (getters.checkStorages) {
-        commit('PUSH_STORAGE', data.data) // すでにデータがある場合はPush
-      } else {
-        commit('SET_STORAGE', data.data)
+        return commit('PUSH_STORAGE', data.data) // すでにデータがある場合はPush
       }
+      return commit('SET_STORAGE', data.data)
     } catch (e) {
       throw new Error('Page Not Found')
     }

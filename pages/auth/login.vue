@@ -1,92 +1,41 @@
 <template>
-  <auth-wrapper>
-    <auth-form>
-      <v-form @submit.prevent="login" @keydown="form.onKeydown($event)">
-        <!-- Email -->
-        <form-email-or-name
-          v-model="form.email"
-          :dirty="formDirty"
-          :errors="form.errors"
-          :lazy-validation="true"
-          @dirty="dirty"
-          obj-key="email"
-        />
-
-        <form-password
-          v-model="form.password"
-          :dirty="formDirty"
-          :errors="form.errors"
-          :lazy-validation="true"
-          @dirty="dirty"
-          obj-key="password"
-        />
-
-        <div class="d-flex justify-space-between">
-          <v-checkbox
-            v-model="remember"
-            :label="$t('remember_me')"
-            class="mt-0 small"
-          />
-
-          <router-link :to="{ name: 'password.request' }" class="small">
-            {{ $t('forgot_password') }}
-          </router-link>
-        </div>
-
-        <div class="text-center login-btn-wraaper">
-          <!-- Submit Button -->
-          <v-btn
-            :disabled="form.busy"
-            color="grey lighten-1"
-            large
-            type="submit"
-          >
-            {{ $t('login') }}
-          </v-btn>
-        </div>
-      </v-form>
-    </auth-form>
-  </auth-wrapper>
+  <login-template
+    v-model="form"
+    :value-remember="remember"
+    @remember="onRemember"
+    @submit="login"
+  />
 </template>
 
 <script>
 import Form from 'vform'
-import AuthForm from '~/components/molecues/auth/AuthForm'
-import AuthWrapper from '~/components/atoms/Wrapper'
-import FormEmailOrName from '@/components/auth/form/FormEmailOrName'
-import FormPassword from '@/components/auth/form/FormPassword'
+import LoginTemplate from '@/components/templates/auth/LoginTemplate'
 
 export default {
-  head() {
-    return { title: this.$t('login') }
+  components: {
+    LoginTemplate
   },
 
-  components: {
-    AuthForm,
-    AuthWrapper,
-    FormEmailOrName,
-    FormPassword
+  head() {
+    return { title: this.$t('login') }
   },
 
   layout: 'auth',
 
   data: () => ({
     form: new Form({
+      name: '',
       email: '',
       password: ''
     }),
-    formDirty: false,
-    remember: false,
-    field: {
-      password: false
-    }
+    remember: false
   }),
 
   middleware: 'guest',
 
   methods: {
-    dirty() {
-      this.formDirty = true
+    onRemember(newVal) {
+      this.remember = newVal
     },
 
     async login() {
@@ -94,8 +43,8 @@ export default {
 
       // Submit the form.
       try {
-        const response = await this.form.post('/login')
-        data = response.data
+        const res = await this.form.post('/login')
+        data = res.data
       } catch (e) {
         return
       }

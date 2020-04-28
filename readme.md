@@ -1,5 +1,8 @@
 # Rebuilt
 
+[![CodeFactor](https://www.codefactor.io/repository/github/u-lab/rebuilt/badge)](https://www.codefactor.io/repository/github/u-lab/rebuilt)
+[![DeepScan grade](https://deepscan.io/api/teams/8910/projects/11139/branches/161911/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=8910&pid=11139&bid=161911)
+
 ## 概説
 
 建築生のためのポートフォリオ作成サービス。

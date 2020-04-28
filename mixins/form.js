@@ -23,6 +23,16 @@ export const form = {
     objKey: {
       type: String,
       required: true
+    },
+
+    outlined: {
+      type: Boolean,
+      default: true
+    },
+
+    type: {
+      type: String,
+      default: undefined
     }
   },
 

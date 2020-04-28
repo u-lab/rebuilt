@@ -146,7 +146,7 @@ export default {
       deleteDialog: false,
       deleteLid: '',
       history: {
-        lid: this.value.length,
+        lid: this.value.length + 1,
         name: '',
         date: new Date().toISOString().substr(0, 10),
         type: ''
@@ -195,7 +195,7 @@ export default {
     add() {
       this.dialog = true
       this.history = {
-        lid: this.value.length,
+        lid: this.value.length + 1,
         id: '',
         name: '',
         date: new Date().toISOString().substr(0, 10),
@@ -218,9 +218,11 @@ export default {
       if (item.id) {
         this.didModel.push(item.id)
       }
-      if (this.valueModel.length > 1) {
+      if (this.valueModel.length > 0) {
         this.valueModel = clonedeep(
-          this.valueModel.splice(this.deleteLid - 1, 1)
+          this.items().filter((obj) => {
+            return obj.lid !== this.deleteLid
+          })
         )
       } else {
         this.valueModel = []
@@ -234,7 +236,7 @@ export default {
 
     items() {
       return this.value.map((obj, idx) => ({
-        lid: idx,
+        lid: idx + 1,
         name: obj.name,
         date: formatDate(convertToDate(obj.date), 'yyyy-MM'),
         type: obj.type,
@@ -251,7 +253,7 @@ export default {
       }
 
       this.history = {
-        lid: this.value.length,
+        lid: this.value.length + 1,
         id: '',
         name: '',
         date: new Date().toISOString().substr(0, 10),

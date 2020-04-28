@@ -4,9 +4,11 @@
     :counter="50"
     :error-messages="errorMessage"
     :label="$t('title')"
-    clearable
+    @blur="$v.v.$touch()"
     outlined
+    required
     placeholder="必須"
+    maxlength="50"
   />
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <nuxt-link :to="to" class="link">
-    <div class="field px-4 py-2 d-flex align-center">
+    <div class="background-navy field px-4 py-2 d-flex align-center">
       <v-avatar size="70">
         <v-img :src="src" />
       </v-avatar>
@@ -60,5 +60,9 @@ export default {
 
 .name {
   font-size: 1.5rem;
+}
+
+.background-navy {
+  background: $background-page-header;
 }
 </style>

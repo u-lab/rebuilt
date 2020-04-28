@@ -1,64 +1,64 @@
 <template>
   <auth-wrapper>
-    <auth-form>
-      <card v-if="mustVerifyEmail" :title="$t('register')">
-        <div class="alert alert-success" role="alert">
+    <auth-form :title="$t('register')">
+      <div v-if="mustVerifyEmail">
+        <v-alert type="success" role="alert">
           {{ $t('verify_email_address') }}
+        </v-alert>
+      </div>
+
+      <div v-else>
+        <v-form @submit.prevent="register" @keydown="form.onKeydown($event)">
+          <form-username
+            v-model="form.name"
+            :dirty="formDirty"
+            :errors="form.errors"
+            :lazy-validation="true"
+            @dirty="dirty"
+            obj-key="name"
+          />
+
+          <form-email
+            v-model="form.email"
+            :dirty="formDirty"
+            :errors="form.errors"
+            :lazy-validation="true"
+            @dirty="dirty"
+            obj-key="email"
+          />
+
+          <form-password-with-confirmation
+            v-model="form.password"
+            :confirmationField="form.password_confirmation"
+            :dirty="formDirty"
+            :errors="form.errors"
+            :lazy-validation="true"
+            @confirmation="updatePasswordConfirmation"
+            @dirty="dirty"
+            obj-key="password"
+          />
+
+          <div class="text-center login-btn-wraaper">
+            <!-- Submit Button -->
+            <v-btn
+              :disabled="form.busy"
+              color="grey lighten-1"
+              large
+              type="submit"
+            >
+              {{ $t('register') }}
+            </v-btn>
+          </div>
+        </v-form>
+
+        <div class="d-flex justify-center justify-sm-end mb-2">
+          <div>
+            <p>
+              <nuxt-link v-text="$t('go_to_login')" :to="{ name: 'login' }" />
+            </p>
+          </div>
         </div>
-      </card>
-
-      <v-form
-        v-else
-        @submit.prevent="register"
-        @keydown="form.onKeydown($event)"
-      >
-        <form-username
-          v-model="form.user"
-          :dirty="formDirty"
-          :errors="form.errors"
-          :lazy-validation="true"
-          @dirty="dirty"
-          :outlined="false"
-          obj-key="user"
-        />
-
-        <form-email
-          v-model="form.email"
-          :confirmationField="email_confirmation"
-          :dirty="formDirty"
-          :errors="form.errors"
-          :lazy-validation="true"
-          @dirty="dirty"
-          :outlined="false"
-          obj-key="email"
-        />
-
-        <form-password-with-confirmation
-          v-model="form.password"
-          :confirmationField="form.password_confirmation"
-          :dirty="formDirty"
-          :errors="form.errors"
-          :lazy-validation="true"
-          @confirmation="updatePasswordConfirmation"
-          @dirty="dirty"
-          :outlined="false"
-          obj-key="password"
-        />
-        <div class="text-center login-btn-wraaper">
-          <!-- Submit Button -->
-          <v-btn
-            :disabled="form.busy"
-            color="grey lighten-1"
-            large
-            type="submit"
-          >
-            {{ $t('register') }}
-          </v-btn>
-
-          <!-- GitHub Login Button -->
-          <login-with-github />
-        </div>
-      </v-form>
+      </div>
     </auth-form>
   </auth-wrapper>
 </template>
@@ -70,6 +70,7 @@ import FormEmail from '@/components/molecues/form/FormEmail'
 import FormPasswordWithConfirmation from '@/components/molecues/form/FormPasswordWithConfirmation'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
+
 export default {
   head() {
     return { title: this.$t('register') }

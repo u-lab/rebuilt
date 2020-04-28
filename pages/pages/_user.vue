@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Navbar from '@/components/organisms/navbar/DefaultNavbar'
-import PagesUser from '@/components/templates/pages/PagesUser'
+const PagesUser = () => import('@/components/templates/pages/PagesUser')
+const Navbar = () => import('@/components/organisms/navbar/DefaultNavbar')
 
 export default {
   components: {

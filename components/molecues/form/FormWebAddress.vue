@@ -4,8 +4,10 @@
     :counter="255"
     :label="$t('web_address')"
     :error-messages="errorMessage"
+    @blur="$v.v.$touch()"
     outlined
-    clearable
+    autocomplete="url"
+    type="url"
   />
 </template>
 
@@ -30,15 +32,15 @@ export default {
      * @return {String[]} エラーメッセージ
      */
     errorMessage() {
-      const validate = this.$v.v
+      const v = this.$v.v
       // ユーザーが一回以上touchしたか
-      if (!this.dirty || !validate.$dirty) {
+      if (!this.dirty || !v.$dirty) {
         return this.errorServerMessage
       }
 
       const errors = []
-      !validate.url && errors.push('正しいURLを入力してください')
-      !validate.maxLength && errors.push('255文字以内で入力してください')
+      !v.url && errors.push('正しいURLを入力してください')
+      !v.maxLength && errors.push('255文字以内で入力してください')
       return errors
     }
   }
