@@ -3,20 +3,16 @@
     <div class="px-sm-10 py-4">
       <header class="d-flex justify-space-between navbar-wrapper">
         <site-title :title="title" :titleElement="getElement" :to="toTitle" />
-
-        <triangle class="triangle" />
       </header>
     </div>
   </v-container>
 </template>
 
 <script>
-import Triangle from '@/components/atoms/icons/Triangle'
 import SiteTitle from '@/components/atoms/title/SiteTitle'
 
 export default {
   components: {
-    Triangle,
     SiteTitle
   },
 

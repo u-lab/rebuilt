@@ -3,13 +3,7 @@
     <!-- header -->
     <div class="background-navy">
       <v-container>
-        <storage-page-header
-          :kana="user.name"
-          :name="user.name"
-          :src="getUserIconUrl"
-          :to="{ name: 'pages.user', params: { user: user.name } }"
-          :title="storage.title"
-        />
+        <storage-page-header :title="storage.title" />
 
         <storage-page-model :src="getEyecatchUrl" />
       </v-container>
@@ -17,6 +11,15 @@
 
     <div>
       <v-container>
+        <v-col cols="12" sm="5" class="background-navy">
+          <storage-author-field
+            :kana="user.kana"
+            :name="user.name"
+            :src="getUserIconUrl"
+            :to="{ name: 'pages.user', params: { user: user.name } }"
+          />
+        </v-col>
+
         <storage-page-main-field
           :content="storage.long_comment"
           :src="getEyecatchUrl"
@@ -27,6 +30,7 @@
 </template>
 
 <script>
+import StorageAuthorField from '@/components/organisms/field/StorageAuthorField'
 import StoragePageHeader from '@/components/organisms/header/StoragePageHeader'
 import StoragePageMainField from '@/components/organisms/field/StoragePageMainField'
 import StoragePageModel from '@/components/organisms/models/StoragePageModel'
@@ -34,6 +38,7 @@ import { getIconUrl, getMediumUrl } from '@/utils/image'
 
 export default {
   components: {
+    StorageAuthorField,
     StoragePageHeader,
     StoragePageMainField,
     StoragePageModel
