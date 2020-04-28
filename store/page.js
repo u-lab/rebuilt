@@ -188,7 +188,10 @@ export const actions = {
         `pages/${user.name}/storages/${storageId}`
       )
 
-      commit('PUSH_STORAGE', data.data) // すでにデータがある場合はPush
+      if (getters.checkStorages) {
+        return commit('PUSH_STORAGE', data.data) // すでにデータがある場合はPush
+      }
+      return commit('SET_STORAGE', data.data)
     } catch (e) {
       throw new Error('Page Not Found')
     }
