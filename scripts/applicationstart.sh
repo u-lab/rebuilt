@@ -10,4 +10,6 @@ num=${list[1]}
 kill -9 $num
 
 cd /home/ec2-user/rebuilt
-forever start -c "npm run start" ./
+install="npm install"
+eval $install
+# forever start -c "npm run start" ./
