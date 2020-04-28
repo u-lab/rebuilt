@@ -2,7 +2,7 @@
   <div>
     <v-data-table
       :headers="headers"
-      :items="items()"
+      :items="items"
       :items-per-page="10"
       class="elevation-1"
     >
@@ -191,6 +191,12 @@ export default {
       set(newVal) {
         return this.$emit('did', newVal)
       }
+    },
+
+    items() {
+      return this.value.map((obj, idx) => {
+        return new History(idx + 1, obj.date, obj.id, obj.name, obj.type)
+      })
     }
   },
 
@@ -202,7 +208,7 @@ export default {
 
     edit(lid) {
       this.dialog = true
-      this.history = clonedeep(this.items().find((obj) => obj.lid === lid))
+      this.history = clonedeep(this.items.find((obj) => obj.lid === lid))
     },
 
     deleted(lid) {
@@ -211,13 +217,13 @@ export default {
     },
 
     onDelete() {
-      const item = this.items().find((obj) => obj.lid === this.deleteLid)
+      const item = this.items.find((obj) => obj.lid === this.deleteLid)
       if (item.id) {
         this.didModel.push(item.id)
       }
       if (this.valueModel.length > 0) {
         this.valueModel = clonedeep(
-          this.items().filter((obj) => {
+          this.items.filter((obj) => {
             return obj.lid !== this.deleteLid
           })
         )
@@ -229,12 +235,6 @@ export default {
 
     updateDid() {
       return this.$emit('did')
-    },
-
-    items() {
-      return this.value.map((obj, idx) => {
-        return new History(idx + 1, obj.date, obj.id, obj.name, obj.type)
-      })
     },
 
     historyAdd() {
