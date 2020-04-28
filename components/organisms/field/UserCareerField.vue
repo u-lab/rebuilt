@@ -15,6 +15,9 @@
           <v-btn v-text="$t('add_new_career')" @click="add" color="primary" />
         </v-toolbar>
       </template>
+      <template v-slot:item.typeText="{ item }">
+        {{ item.type !== null ? $t($sanitize(item.type)) : null }}
+      </template>
       <template v-slot:item.actions="{ item }">
         <v-btn
           @click="edit(item.lid)"
@@ -99,34 +102,39 @@
       </v-card>
     </v-dialog>
 
-    <v-dialog v-model="deleteDialog" width="300px">
-      <v-card>
-        <v-alert
-          v-text="$t('are_you_sure_you_want_to_delete')"
-          width="100%"
-          type="error"
-        />
-
-        <v-card-actions>
-          <v-btn
-            @click="deleteDialog = false"
-            v-text="$t('cancel')"
-            color="primary"
-            text
-          />
-          <v-spacer></v-spacer>
-          <v-btn @click="onDelete" v-text="$t('ok')" color="red" text />
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+    <user-career-alert-dialog
+      :dialog="deleteDialog"
+      @cancel="deleteDialog = false"
+      @delete="onDelete"
+    />
   </div>
 </template>
 
 <script>
 import clonedeep from 'lodash.clonedeep'
 import { convertToDate, formatDate } from '@/utils/date'
+const UserCareerAlertDialog = () =>
+  import('@/components/organisms/dialog/UserCareerAlertDialog')
+
+const History = class {
+  constructor(lid, date = null, id = null, name = null, type = null) {
+    this.date = date || new Date().toISOString().substr(0, 10)
+    this.id = id
+    this.lid = lid
+    this.name = name
+    this.type = type
+  }
+
+  get formatDate() {
+    return formatDate(convertToDate(this.date), 'yyyy-MM')
+  }
+}
 
 export default {
+  components: {
+    UserCareerAlertDialog
+  },
+
   props: {
     value: {
       type: Array,
@@ -145,12 +153,7 @@ export default {
       dateDialog: false,
       deleteDialog: false,
       deleteLid: '',
-      history: {
-        lid: this.value.length + 1,
-        name: '',
-        date: new Date().toISOString().substr(0, 10),
-        type: ''
-      }
+      history: new History(this.value.length + 1)
     }
   },
 
@@ -158,7 +161,7 @@ export default {
     headers() {
       return [
         { text: this.$t('name'), value: 'name' },
-        { text: '日付', value: 'date' },
+        { text: '日付', value: 'formatDate' },
         { text: this.$t('category'), value: 'typeText' },
         { text: '', value: 'actions' }
       ]
@@ -194,13 +197,7 @@ export default {
   methods: {
     add() {
       this.dialog = true
-      this.history = {
-        lid: this.value.length + 1,
-        id: '',
-        name: '',
-        date: new Date().toISOString().substr(0, 10),
-        type: ''
-      }
+      this.history = new History(this.value.length + 1)
     },
 
     edit(lid) {
@@ -235,14 +232,9 @@ export default {
     },
 
     items() {
-      return this.value.map((obj, idx) => ({
-        lid: idx + 1,
-        name: obj.name,
-        date: formatDate(convertToDate(obj.date), 'yyyy-MM'),
-        type: obj.type,
-        typeText: this.$t(obj.type !== null ? this.$sanitize(obj.type) : null),
-        id: obj.id
-      }))
+      return this.value.map((obj, idx) => {
+        return new History(idx + 1, obj.date, obj.id, obj.name, obj.type)
+      })
     },
 
     historyAdd() {
@@ -252,13 +244,7 @@ export default {
         this.valueModel.push(clonedeep(this.history))
       }
 
-      this.history = {
-        lid: this.value.length + 1,
-        id: '',
-        name: '',
-        date: new Date().toISOString().substr(0, 10),
-        type: ''
-      }
+      this.history = new History(this.value.length + 1)
       this.dialog = false
     }
   }
