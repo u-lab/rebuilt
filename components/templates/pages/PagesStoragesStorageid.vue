@@ -5,7 +5,7 @@
       <v-container>
         <storage-page-header :title="storage.title" />
 
-        <storage-page-model :src="getEyecatchUrl" />
+        <storage-page-model :src="storage.storage_file[0].url" />
       </v-container>
     </div>
 
