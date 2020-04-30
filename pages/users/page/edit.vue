@@ -8,7 +8,7 @@
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import axios from 'axios'
-import Edit from '@/components/templates/users/page/Edit'
+const Edit = () => import('@/components/templates/users/page/Edit')
 
 export default {
   middleware: 'auth',

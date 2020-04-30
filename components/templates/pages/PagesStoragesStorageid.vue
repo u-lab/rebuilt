@@ -5,7 +5,7 @@
       <v-container>
         <storage-page-header :title="storage.title" />
 
-        <storage-page-model :src="getEyecatchUrl" />
+        <storage-page-model :src="storage.storage_file[0].url" />
       </v-container>
     </div>
 
@@ -30,11 +30,15 @@
 </template>
 
 <script>
-import StorageAuthorField from '@/components/organisms/field/StorageAuthorField'
-import StoragePageHeader from '@/components/organisms/header/StoragePageHeader'
-import StoragePageMainField from '@/components/organisms/field/StoragePageMainField'
-import StoragePageModel from '@/components/organisms/models/StoragePageModel'
 import { getIconUrl, getMediumUrl } from '@/utils/image'
+const StorageAuthorField = () =>
+  import('@/components/organisms/field/StorageAuthorField')
+const StoragePageHeader = () =>
+  import('@/components/organisms/header/StoragePageHeader')
+const StoragePageMainField = () =>
+  import('@/components/organisms/field/StoragePageMainField')
+const StoragePageModel = () =>
+  import('@/components/organisms/models/StoragePageModel')
 
 export default {
   components: {

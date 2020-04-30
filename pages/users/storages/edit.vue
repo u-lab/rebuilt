@@ -14,7 +14,7 @@
 <script>
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
-import Edit from '@/components/templates/users/storages/Edit'
+const Edit = () => import('@/components/templates/users/storages/Edit')
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {

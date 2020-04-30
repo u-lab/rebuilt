@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Navbar from '@/components/organisms/navbar/DefaultNavbar'
+const Navbar = () => import('@/components/organisms/navbar/DefaultNavbar')
 
 export default {
   components: {
