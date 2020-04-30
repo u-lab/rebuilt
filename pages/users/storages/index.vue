@@ -12,7 +12,7 @@
 
 <script>
 import Form from 'vform'
-import Index from '@/components/templates/users/storages/Index'
+const Index = () => import('@/components/templates/users/storages/Index')
 
 export default {
   components: {

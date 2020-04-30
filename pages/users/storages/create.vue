@@ -12,7 +12,7 @@
 <script>
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
-import Create from '@/components/templates/users/storages/Create'
+const Create = () => import('@/components/templates/users/storages/Create')
 
 export default {
   middleware: 'auth',
