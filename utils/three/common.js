@@ -33,7 +33,7 @@ class Common {
       0.1,
       10000
     )
-    this.camera.position.set(0, 10, -10)
+    this.camera.position.set(0, 10, -50)
     this.camera.lookAt(this.scene.position)
 
     this.renderer = new THREE.WebGLRenderer({
