@@ -7,40 +7,16 @@
 
     <v-list>
       <v-list-item-group>
-        <v-list-item
+        <user-dashboard-storage-list-item
           v-for="item in showItems(showItemNum)"
           :key="item.storage_id"
-          :to="{
-            name: 'pages.storages.show',
-            params: {
-              user: user.name,
-              storageId: item.storage_id
-            }
-          }"
-          link
-          nuxt
-        >
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-
-          <v-list-item-avatar
-            v-if="
-              item.eyecatch_image &&
-                item.eyecatch_image.hasOwnProperty('url_160')
-            "
-          >
-            <v-img
-              v-if="item.eyecatch_image.url_160"
-              :src="item.eyecatch_image.url_160"
-            ></v-img>
-            <v-img v-else :src="item.eyecatch_image.url"></v-img>
-          </v-list-item-avatar>
-        </v-list-item>
+          :item="item"
+          :user-name="user.name"
+        />
       </v-list-item-group>
 
       <template v-if="showItemNum !== maxShowItmeNum">
-        <v-divider></v-divider>
+        <v-divider />
 
         <v-list-item @click="showItemNum = maxShowItmeNum" link>
           <v-list-item-content>
@@ -53,7 +29,14 @@
 </template>
 
 <script>
+const UserDashboardStorageListItem = () =>
+  import('@/components/organisms/list/UserDashboardStorageListItem')
+
 export default {
+  components: {
+    UserDashboardStorageListItem
+  },
+
   props: {
     data: {
       type: Object,
