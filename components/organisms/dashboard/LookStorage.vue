@@ -5,7 +5,7 @@
       <v-icon>mdi-book-open-variant</v-icon>
     </v-card-title>
 
-    <v-list dense>
+    <v-list>
       <v-list-item-group>
         <v-list-item
           v-for="item in showItems(showItemNum)"
