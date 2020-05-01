@@ -10,6 +10,8 @@ export default class ArtworkGL {
 
   init() {
     Common.init(this.props.$canvas, this.path)
+    window.addEventListener('resize', this.resize.bind(this))
+    this.loop()
   }
 
   resize() {
