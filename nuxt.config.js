@@ -74,6 +74,10 @@ export default {
     scss: ['@/assets/sass/_variables.scss', '@/assets/sass/functions/*.scss']
   },
 
+  vuetify: {
+    customVariables: ['@/assets/sass/_variables.scss']
+  },
+
   googleAnalytics: {
     // custom configuration for @nuxtjs/google-analytics
     // id: "UA-12301-2"

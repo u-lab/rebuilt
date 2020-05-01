@@ -1,13 +1,12 @@
-// Borders
-$border-radius: 0.125rem;
-$border-radius-lg: 0.2rem;
-$border-radius-sm: 0.15rem;
-
-// Nav Pills
-$nav-pills-border-radius: 0;
-
 // Background
 $background-page-header: #eef2f7;
 
 // Font Color
 $font-color-light-navy: #2b3360;
+
+// v-card
+$card-text-font-size: 1rem;
+// v-list
+$list-item-title-font-size: 1rem;
+
+@import "~vuetify/src/styles/styles.sass";
