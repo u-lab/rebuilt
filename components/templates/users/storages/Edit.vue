@@ -1,20 +1,27 @@
 <template>
-  <storage-form-field
-    v-model="form"
-    :preview-image="previewImage"
-    :preview-storage="previewStorage"
-    :releases="releases"
-    @submit="onSubmit"
-    @preview="onPreview"
-  />
+  <div>
+    <user-title :title="$t('edit_my_work')" class="text-center" />
+
+    <storage-form-field
+      v-model="form"
+      :preview-image="previewImage"
+      :preview-storage="previewStorage"
+      :releases="releases"
+      @submit="onSubmit"
+      @preview="onPreview"
+    />
+  </div>
 </template>
 
 <script>
-import StorageFormField from '@/components/organisms/field/StorageFormField'
+const StorageFormField = () =>
+  import('@/components/organisms/field/StorageFormField')
+const UserTitle = () => import('~/components/molecues/pages/UserTitle')
 
 export default {
   components: {
-    StorageFormField
+    StorageFormField,
+    UserTitle
   },
 
   props: {

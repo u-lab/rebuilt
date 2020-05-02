@@ -45,7 +45,7 @@
           </div>
         </v-card>
 
-        <v-container>
+        <v-container class="px-4 px-md-6">
           <v-row>
             <v-col cols="12">
               <!-- title -->
