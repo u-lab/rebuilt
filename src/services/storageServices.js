@@ -16,7 +16,7 @@ export const isStorageID = (id) => {
     return false
   }
 
-  if (new RegExp(/^([a-z0-9]{6})$/).test(id.slice(TIMESTAMP_LEN))) {
+  if (!new RegExp(/^([a-z0-9]{6})$/).test(id.slice(TIMESTAMP_LEN))) {
     return false
   }
 
