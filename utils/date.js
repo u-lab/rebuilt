@@ -47,3 +47,16 @@ export const formatDate = (date, format = 'yyyy-MM-dd') => {
  * @returns Boolean
  */
 export const isDate = (v) => getType(v) === 'date'
+
+/**
+ * Unix TimestampをDate型に変える
+ *
+ * @param {*} v
+ * @returns { Date|null }
+ */
+export const unixTimeToDate = (v) => {
+  if (v.length === 10) {
+    return convertToDate(v * 1000)
+  }
+  return convertToDate(v)
+}

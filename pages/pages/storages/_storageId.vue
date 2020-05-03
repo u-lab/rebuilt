@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { isStorageID } from '@/src/services/storageServices'
 const Navbar = () => import('@/components/organisms/navbar/DefaultNavbar')
 const PagesStoragesStorageid = () =>
   import('@/components/templates/pages/PagesStoragesStorageid')
@@ -25,6 +26,10 @@ export default {
     Navbar,
     PagesStoragesStorageid,
     OtherStorageList
+  },
+
+  validate({ params }) {
+    return isStorageID(params.storageId)
   },
 
   computed: {
