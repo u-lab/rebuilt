@@ -1,7 +1,9 @@
 <template>
-  <div>
+  <div class="px-4 px-sm-6">
     <v-form @submit.prevent="onSubmit" @keydown="form.onKeydown($event)">
-      <div class="d-flex justify-end mb-2">
+      <div class="d-flex justify-space-between mb-2">
+        <user-title :title="$t('edit_my_portfolio')" />
+
         <!-- Submit Button -->
         <v-btn
           :disabled="form.busy"
@@ -115,13 +117,16 @@
 </template>
 
 <script>
-import ImageFileInput from '@/components/molecues/form/ImageFileInput'
-import UserCareerField from '@/components/organisms/field/UserCareerField'
+const ImageFileInput = () => import('@/components/molecues/form/ImageFileInput')
+const UserCareerField = () =>
+  import('@/components/organisms/field/UserCareerField')
+const UserTitle = () => import('~/components/molecues/pages/UserTitle')
 
 export default {
   components: {
     ImageFileInput,
-    UserCareerField
+    UserCareerField,
+    UserTitle
   },
 
   props: {

@@ -1,8 +1,5 @@
 <template>
-  <b-container
-    :back-link="{ name: 'users.dashboard' }"
-    :title="$t('see_portfolio')"
-  >
+  <div>
     <page-edit-form-field
       v-model="form"
       :background-image-src="backgroundImageSrc"
@@ -11,17 +8,16 @@
       @submit="onSubmit"
       class="mt-12"
     />
-  </b-container>
+  </div>
 </template>
 
 <script>
 import { getMediumUrl } from '@/utils/image'
-import BContainer from '@/components/organisms/containers/UserSettingsContainer'
-import PageEditFormField from '@/components/organisms/field/PageEditFormField'
+const PageEditFormField = () =>
+  import('@/components/organisms/field/PageEditFormField')
 
 export default {
   components: {
-    BContainer,
     PageEditFormField
   },
 
