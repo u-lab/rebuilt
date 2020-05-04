@@ -1,17 +1,12 @@
 <template>
   <v-list dark>
-    <template v-for="item in getLinkList">
-      <v-list-item
+    <template v-for="item in list">
+      <sidebar-list-item
         v-if="!item.subtitles"
         :key="item.name"
+        :title="$t(item.title)"
         :to="generateLink(item)"
-        nuxt
-        link
-        dark
-        color="white"
-      >
-        <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-      </v-list-item>
+      />
 
       <v-list-group
         v-if="item.subtitles"
@@ -23,22 +18,20 @@
           <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
         </template>
 
-        <v-list-item
+        <sidebar-list-item
           v-for="subItem in item.subtitles"
           :key="subItem.name"
+          :title="$t(subItem.title)"
           :to="generateLink(subItem)"
-          link
-          nuxt
-          dark
-        >
-          <v-list-item-title>{{ $t(subItem.title) }}</v-list-item-title>
-        </v-list-item>
+        />
       </v-list-group>
     </template>
   </v-list>
 </template>
 
 <script>
+const SidebarListItem = () =>
+  import('@/components/organisms/list/SidebarListItem')
 const generateLink = (item) => {
   if ('name' in item) {
     if ('params' in item) {
@@ -56,6 +49,10 @@ const generateLink = (item) => {
 }
 
 export default {
+  components: {
+    SidebarListItem
+  },
+
   props: {
     list: {
       type: Array,
