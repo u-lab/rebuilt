@@ -6,7 +6,7 @@
     </div>
 
     <v-form @submit.prevent="onSubmit">
-      <form-email-with-confirmation
+      <form-email-with-confirmation-text-field
         v-model="form.email"
         :confirmationField="email_confirmation"
         :dirty="formDirty"
@@ -24,13 +24,13 @@
 <script>
 const BContainer = () =>
   import('@/components/organisms/containers/UserSettingsContainer')
-const FormEmailWithConfirmation = () =>
-  import('@/components/molecues/form/FormEmailWithConfirmation')
+const FormEmailWithConfirmationTextField = () =>
+  import('@/components/organisms/textField/FormEmailWithConfirmationTextField')
 
 export default {
   components: {
     BContainer,
-    FormEmailWithConfirmation
+    FormEmailWithConfirmationTextField
   },
 
   props: {

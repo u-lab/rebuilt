@@ -1,6 +1,6 @@
 <template>
   <v-form @submit.prevent="onSubmit" @keydown="form.onKeydown($event)">
-    <form-username
+    <form-username-text-field
       v-model="form.name"
       :dirty="formDirty"
       :errors="form.errors"
@@ -39,7 +39,8 @@
 </template>
 
 <script>
-const FormUsername = () => import('@/components/molecues/form/FormUsername')
+const FormUsernameTextField = () =>
+  import('@/components/organisms/textField/FormUsernameTextField')
 const FormEmailTextField = () =>
   import('@/components/organisms/textField/FormEmailTextField')
 const FormPasswordWithConfirmationTextField = () =>
@@ -50,7 +51,7 @@ const FormPasswordWithConfirmationTextField = () =>
 export default {
   components: {
     FormEmailTextField,
-    FormUsername,
+    FormUsernameTextField,
     FormPasswordWithConfirmationTextField
   },
 

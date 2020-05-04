@@ -49,7 +49,7 @@
           <v-row>
             <v-col cols="12">
               <!-- title -->
-              <form-title
+              <form-title-text-field
                 v-model="form.title"
                 :dirty="formDirty"
                 :errors="form.errors"
@@ -61,7 +61,7 @@
 
             <v-col cols="12">
               <!-- web_address -->
-              <form-web-address
+              <form-web-address-text-field
                 v-model="form.web_address"
                 :dirty="formDirty"
                 :errors="form.errors"
@@ -104,7 +104,7 @@
 
             <v-col cols="12">
               <!-- description -->
-              <form-description
+              <form-description-text-field
                 v-model="form.description"
                 :dirty="formDirty"
                 :errors="form.errors"
@@ -117,7 +117,7 @@
             <v-col cols="12">
               <!-- long_comment -->
               <!-- TODO: tinyMCEのようなエディタに置き換えたい -->
-              <form-long-comment
+              <form-long-comment-text-field
                 v-model="form.long_comment"
                 :dirty="formDirty"
                 :errors="form.errors"
@@ -147,19 +147,23 @@
 
 <script>
 import { getThumbnailUrl } from '@/utils/image'
-import FormTitle from '@/components/molecues/form/FormTitle'
-import FormWebAddress from '@/components/molecues/form/FormWebAddress'
-import FormDescription from '@/components/molecues/form/FormDescription'
-import FormLongComment from '@/components/molecues/form/FormLongComment'
-import ImageFileInput from '@/components/molecues/form/ImageFileInput'
+const FormTitleTextField = () =>
+  import('@/components/organisms/textField/FormTitleTextField')
+const FormWebAddressTextField = () =>
+  import('@/components/organisms/textField/FormWebAddressTextField')
+const FormDescriptionTextField = () =>
+  import('@/components/organisms/textField/FormDescriptionTextField')
+const FormLongCommentTextField = () =>
+  import('@/components/organisms/textField/FormLongCommentTextField')
+const ImageFileInput = () => import('@/components/molecues/form/ImageFileInput')
 
 export default {
   components: {
     ImageFileInput,
-    FormTitle,
-    FormWebAddress,
-    FormDescription,
-    FormLongComment
+    FormTitleTextField,
+    FormWebAddressTextField,
+    FormDescriptionTextField,
+    FormLongCommentTextField
   },
 
   props: {
