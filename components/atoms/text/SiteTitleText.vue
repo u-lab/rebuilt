@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import TopLeftParenthesizedKey from '@/components/atoms/text/TopLeftParenthesizedKey'
+const TopLeftParenthesizedKey = () =>
+  import('@/components/atoms/text/TopLeftParenthesizedKey')
 
 export default {
   components: {

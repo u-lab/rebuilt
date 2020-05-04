@@ -7,8 +7,9 @@
 </template>
 
 <script>
-import AllStorageCardList from '@/components/organisms/list/AllStorageCardList'
-import UserTitleText from '@/components/atoms/text/UserTitleText'
+const AllStorageCardList = () =>
+  import('@/components/organisms/list/AllStorageCardList')
+const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
 
 export default {
   components: {

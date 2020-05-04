@@ -35,7 +35,8 @@
 </template>
 
 <script>
-import UserNavbarMenu from '@/components/organisms/menu/UserNavbarMenu'
+const UserNavbarMenu = () =>
+  import('@/components/organisms/menu/UserNavbarMenu')
 
 export default {
   components: {

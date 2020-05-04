@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import UserTitleText from '@/components/atoms/text/UserTitleText'
+const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
+
 export default {
   components: {
     UserTitleText

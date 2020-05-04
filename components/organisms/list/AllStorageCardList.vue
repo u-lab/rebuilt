@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import StorageCard from '@/components/molecues/cards/StorageCard'
 import { getSmallUrl } from '@/utils/image'
+const StorageCard = () => import('@/components/molecues/cards/StorageCard')
 
 export default {
   components: {
