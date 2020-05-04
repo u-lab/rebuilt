@@ -2,7 +2,7 @@
   <div>
     <user-title :title="$t('edit_my_work')" class="text-center" />
 
-    <storage-form-field
+    <storage-form
       v-model="form"
       :preview-image="previewImage"
       :preview-storage="previewStorage"
@@ -14,13 +14,12 @@
 </template>
 
 <script>
-const StorageFormField = () =>
-  import('@/components/organisms/field/StorageFormField')
+const StorageForm = () => import('@/components/organisms/field/StorageForm')
 const UserTitle = () => import('~/components/molecues/pages/UserTitle')
 
 export default {
   components: {
-    StorageFormField,
+    StorageForm,
     UserTitle
   },
 
