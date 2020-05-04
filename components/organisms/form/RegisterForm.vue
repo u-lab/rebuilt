@@ -18,7 +18,7 @@
       obj-key="email"
     />
 
-    <form-password-with-confirmation
+    <form-password-with-confirmation-text-field
       v-model="form.password"
       :confirmationField="form.password_confirmation"
       :dirty="formDirty"
@@ -41,14 +41,16 @@
 <script>
 const FormUsername = () => import('@/components/molecues/form/FormUsername')
 const FormEmail = () => import('@/components/molecues/form/FormEmail')
-const FormPasswordWithConfirmation = () =>
-  import('@/components/molecues/form/FormPasswordWithConfirmation')
+const FormPasswordWithConfirmationTextField = () =>
+  import(
+    '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
+  )
 
 export default {
   components: {
     FormEmail,
     FormUsername,
-    FormPasswordWithConfirmation
+    FormPasswordWithConfirmationTextField
   },
 
   props: {

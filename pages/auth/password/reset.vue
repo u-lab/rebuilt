@@ -3,7 +3,7 @@
     <auth-form :title="$t('reset_password')">
       <v-form @submit.prevent="reset" @keydown="form.onKeydown($event)">
         <!-- Password -->
-        <form-password-with-confirmation
+        <form-password-with-confirmation-text-field
           v-model="form.password"
           :confirmationField="form.password_confirmation"
           :dirty="formDirty"
@@ -34,7 +34,7 @@
 import Form from 'vform'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
-import FormPasswordWithConfirmation from '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
+import FormPasswordWithConfirmationTextField from '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
 
 export default {
   head() {
@@ -44,7 +44,7 @@ export default {
   components: {
     AuthForm,
     AuthWrapper,
-    FormPasswordWithConfirmation
+    FormPasswordWithConfirmationTextField
   },
 
   layout: 'auth',

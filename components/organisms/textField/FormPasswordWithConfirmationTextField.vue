@@ -9,6 +9,7 @@
       :type="hidden ? 'password' : 'text'"
       @click:append="hidden = !hidden"
       @blur="$v.v.$touch()"
+      required
     />
 
     <v-text-field
@@ -20,6 +21,7 @@
       :type="hidden2 ? 'password' : 'text'"
       @click:append="hidden2 = !hidden2"
       @blur="$v.vc.$touch()"
+      required
     />
   </div>
 </template>
@@ -30,6 +32,13 @@ import { formConfirmation } from '@/mixins/formConfirmation'
 
 export default {
   mixins: [formConfirmation],
+
+  props: {
+    outlined: {
+      type: Boolean,
+      default: true
+    }
+  },
 
   validations: {
     v: {
