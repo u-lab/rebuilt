@@ -1,24 +1,23 @@
 <template>
-  <div>
-    <create
-      v-model="form"
-      :releases="releases"
-      @submit="onSubmit"
-      @preview="onPreview"
-    />
-  </div>
+  <storage-create-template
+    v-model="form"
+    :releases="releases"
+    @submit="onSubmit"
+    @preview="onPreview"
+  />
 </template>
 
 <script>
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
-const Create = () => import('@/components/templates/users/storages/Create')
+const StorageCreateTemplate = () =>
+  import('@/components/templates/users/StorageCreateTemplate')
 
 export default {
   middleware: 'auth',
 
   components: {
-    Create
+    StorageCreateTemplate
   },
 
   data() {

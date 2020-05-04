@@ -2,6 +2,7 @@
   <div>
     <!-- TODO 自分の作品を見る -->
     <user-title :title="$t('mywork')" class="text-center" />
+
     <v-container>
       <v-row>
         <v-col cols="12" sm="6" md="4">
@@ -39,10 +40,12 @@
 </template>
 
 <script>
-import UserTitle from '~/components/molecues/pages/UserTitle'
-import StorageCardForEdit from '@/components/molecues/storages/StorageCardForEdit'
-import StorageCardForCreate from '@/components/molecues/storages/StorageCardForCreate'
 import { getSmallUrl } from '@/utils/image'
+const UserTitle = () => import('@/components/molecues/pages/UserTitle')
+const StorageCardForEdit = () =>
+  import('@/components/molecues/storages/StorageCardForEdit')
+const StorageCardForCreate = () =>
+  import('@/components/molecues/storages/StorageCardForCreate')
 
 export default {
   components: {

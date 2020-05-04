@@ -1,6 +1,6 @@
 <template>
   <div>
-    <index
+    <storage-index-template
       :disabled="form.busy"
       :masterpiece-storage-id="masterpieceStorageId"
       :user="user"
@@ -12,11 +12,12 @@
 
 <script>
 import Form from 'vform'
-const Index = () => import('@/components/templates/users/storages/Index')
+const StorageIndexTemplate = () =>
+  import('@/components/templates/users/StorageIndexTemplate')
 
 export default {
   components: {
-    Index
+    StorageIndexTemplate
   },
 
   middleware: 'auth',

@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <storages :storages="storages" />
-  </div>
+  <storages-list-template :storages="storages" />
 </template>
 
 <script>
-import Storages from '@/components/templates/users/list/Storages'
+const StoragesListTemplate = () =>
+  import('@/components/templates/users/StoragesListTemplate')
 
 export default {
   components: {
-    Storages
+    StoragesListTemplate
   },
 
   middleware: 'auth',
