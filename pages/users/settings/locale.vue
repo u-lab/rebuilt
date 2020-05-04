@@ -1,13 +1,14 @@
 <template>
-  <locale @click="onClick" />
+  <settings-locale-template @click="onClick" />
 </template>
 
 <script>
-import Locale from '@/components/templates/users/settings/Locale'
+const SettingsLocaleTemplate = () =>
+  import('@/components/templates/users/SettingsLocaleTemplate')
 
 export default {
   components: {
-    Locale
+    SettingsLocaleTemplate
   },
 
   middleware: 'auth',

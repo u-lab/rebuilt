@@ -22,8 +22,10 @@
 </template>
 
 <script>
-import BContainer from '@/components/organisms/containers/UserSettingsContainer'
-import FormEmailWithConfirmation from '@/components/molecues/form/FormEmailWithConfirmation'
+const BContainer = () =>
+  import('@/components/organisms/containers/UserSettingsContainer')
+const FormEmailWithConfirmation = () =>
+  import('@/components/molecues/form/FormEmailWithConfirmation')
 
 export default {
   components: {

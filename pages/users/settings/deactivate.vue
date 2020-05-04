@@ -1,13 +1,14 @@
 <template>
-  <deactivate :user="user" @click="deactivated" />
+  <settings-deactivate-template :user="user" @click="deactivated" />
 </template>
 
 <script>
-import Deactivate from '@/components/templates/users/settings/Deactivate'
+const SettingsDeactivateTemplate = () =>
+  import('@/components/templates/users/SettingsDeactivateTemplate')
 
 export default {
   components: {
-    Deactivate
+    SettingsDeactivateTemplate
   },
 
   middleware: 'auth',
