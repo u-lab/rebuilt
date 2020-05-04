@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import UserTitle from '~/components/molecues/pages/UserTitle'
+import UserTitle from '@/components/molecues/pages/UserTitle'
 export default {
   components: {
     UserTitle

@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import AuthForm from '~/components/molecues/auth/AuthForm'
-import AuthWrapper from '~/components/atoms/Wrapper'
+import AuthForm from '@/components/molecues/auth/AuthForm'
+import AuthWrapper from '@/components/atoms/Wrapper'
 
 export default {
   components: {

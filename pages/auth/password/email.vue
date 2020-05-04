@@ -40,8 +40,8 @@
 
 <script>
 import Form from 'vform'
-const AuthForm = () => import('~/components/molecues/auth/AuthForm')
-const AuthWrapper = () => import('~/components/atoms/Wrapper')
+const AuthForm = () => import('@/components/molecues/auth/AuthForm')
+const AuthWrapper = () => import('@/components/atoms/Wrapper')
 const FormEmailTextField = () =>
   import('@/components/organisms/textField/FormEmailTextField')
 

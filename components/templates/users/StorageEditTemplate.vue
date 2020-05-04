@@ -15,7 +15,7 @@
 
 <script>
 const StorageForm = () => import('@/components/organisms/form/StorageForm')
-const UserTitle = () => import('~/components/molecues/pages/UserTitle')
+const UserTitle = () => import('@/components/molecues/pages/UserTitle')
 
 export default {
   components: {

@@ -120,7 +120,7 @@
 const ImageFileInput = () => import('@/components/molecues/form/ImageFileInput')
 const UserCareerField = () =>
   import('@/components/organisms/field/UserCareerField')
-const UserTitle = () => import('~/components/molecues/pages/UserTitle')
+const UserTitle = () => import('@/components/molecues/pages/UserTitle')
 
 export default {
   components: {

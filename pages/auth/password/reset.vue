@@ -32,8 +32,8 @@
 
 <script>
 import Form from 'vform'
-import AuthForm from '~/components/molecues/auth/AuthForm'
-import AuthWrapper from '~/components/atoms/Wrapper'
+import AuthForm from '@/components/molecues/auth/AuthForm'
+import AuthWrapper from '@/components/atoms/Wrapper'
 import FormPasswordWithConfirmationTextField from '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
 
 export default {

@@ -8,7 +8,7 @@
 
 <script>
 import AllStorageCardList from '@/components/organisms/list/AllStorageCardList'
-import UserTitle from '~/components/molecues/pages/UserTitle'
+import UserTitle from '@/components/molecues/pages/UserTitle'
 
 export default {
   components: {
