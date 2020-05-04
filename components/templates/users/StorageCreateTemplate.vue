@@ -13,7 +13,7 @@
 </template>
 
 <script>
-const StorageForm = () => import('@/components/organisms/field/StorageForm')
+const StorageForm = () => import('@/components/organisms/form/StorageForm')
 const UserTitle = () => import('~/components/molecues/pages/UserTitle')
 
 export default {
