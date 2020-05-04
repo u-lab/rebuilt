@@ -1,7 +1,7 @@
 <template>
   <v-row class="auth-form" justify="center">
     <v-col cols="12" md="10">
-      <auth-form-title :title="title" />
+      <auth-form-title-text :title="title" />
 
       <slot />
     </v-col>
@@ -9,11 +9,12 @@
 </template>
 
 <script>
-import AuthFormTitle from '@/components/atoms/auth/AuthFormTitle'
+const AuthFormTitleText = () =>
+  import('@/components/atoms/text/AuthFormTitleText')
 
 export default {
   components: {
-    AuthFormTitle
+    AuthFormTitleText
   },
 
   props: {
