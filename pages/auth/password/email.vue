@@ -42,7 +42,7 @@
 import Form from 'vform'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
-import FormEmail from '@/components/auth/form/FormEmail'
+import FormEmail from '@/components/organisms/textField/FormEmailTextField'
 
 export default {
   head() {

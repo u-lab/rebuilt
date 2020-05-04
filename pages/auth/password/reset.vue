@@ -34,7 +34,7 @@
 import Form from 'vform'
 import AuthForm from '~/components/molecues/auth/AuthForm'
 import AuthWrapper from '~/components/atoms/Wrapper'
-import FormPasswordWithConfirmation from '@/components/auth/form/FormPasswordWithConfirmation'
+import FormPasswordWithConfirmation from '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
 
 export default {
   head() {
