@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="to" class="link">
+  <nuxt-link :to="to" class="link text-decoration-none">
     <div class="background-navy field px-4 py-2 d-flex align-center">
       <v-avatar size="70">
         <v-img :src="src" />
@@ -51,8 +51,6 @@ export default {
 }
 
 .link {
-  text-decoration: none;
-
   p {
     color: rgba(0, 0, 0, 0.85);
   }

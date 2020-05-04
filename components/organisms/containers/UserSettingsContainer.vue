@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="mb-4">
-      <nuxt-link :to="to" class="icon-link">
+      <nuxt-link :to="to" class="text-decoration-none">
         <v-icon v-text="`mdi-arrow-left`" class="icon-block" large />
       </nuxt-link>
     </div>
@@ -40,9 +40,5 @@ export default {
 .icon-block {
   border: 1px solid #333;
   border-radius: 50%;
-}
-
-.icon-link {
-  text-decoration: none;
 }
 </style>

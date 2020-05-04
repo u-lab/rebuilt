@@ -6,7 +6,7 @@
       <nuxt-link
         :to="{ name: 'users.dashboard' }"
         v-text="siteTitle"
-        class="user-navbar-title"
+        class="text--white text-decoration-none"
       />
     </v-toolbar-title>
 
@@ -59,10 +59,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.user-navbar-title {
-  color: white;
-  text-decoration: none;
-}
-</style>
