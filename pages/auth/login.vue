@@ -9,7 +9,7 @@
 
 <script>
 import Form from 'vform'
-import LoginTemplate from '@/components/templates/auth/LoginTemplate'
+const LoginTemplate = () => import('@/components/templates/auth/LoginTemplate')
 
 export default {
   components: {
