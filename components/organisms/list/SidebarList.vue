@@ -1,31 +1,11 @@
 <template>
   <v-list dark>
-    <template v-for="item in list">
-      <sidebar-list-item
-        v-if="!item.subtitles"
-        :key="item.name"
-        :title="$t(item.title)"
-        :to="generateLink(item)"
-      />
-
-      <v-list-group
-        v-if="item.subtitles"
-        :key="item.name"
-        color="white"
-        sub-group
-      >
-        <template v-slot:activator>
-          <v-list-item-title v-text="$t(item.title)" />
-        </template>
-
-        <sidebar-list-item
-          v-for="subItem in item.subtitles"
-          :key="subItem.name"
-          :title="$t(subItem.title)"
-          :to="generateLink(subItem)"
-        />
-      </v-list-group>
-    </template>
+    <sidebar-list-item
+      v-for="item in list"
+      :key="item.name"
+      :title="$t(item.title)"
+      :to="generateLink(item)"
+    />
   </v-list>
 </template>
 
@@ -61,7 +41,7 @@ export default {
   },
 
   computed: {
-    generateLink() {
+    generateLink: () => {
       return (item) => generateLink(item)
     }
   }
