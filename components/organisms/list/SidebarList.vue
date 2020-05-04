@@ -15,7 +15,7 @@
         sub-group
       >
         <template v-slot:activator>
-          <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
+          <v-list-item-title v-text="$t(item.title)" />
         </template>
 
         <sidebar-list-item
@@ -57,11 +57,6 @@ export default {
     list: {
       type: Array,
       required: true
-    },
-
-    user: {
-      type: Object,
-      required: true
     }
   },
 
@@ -72,5 +67,3 @@ export default {
   }
 }
 </script>
-
-<style></style>

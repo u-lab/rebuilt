@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer v-model="drawer" fixed clipped app dark>
-    <sidebar-list :list="getLinkList" :user="user" />
+    <sidebar-list :list="getLinkList" />
   </v-navigation-drawer>
 </template>
 
