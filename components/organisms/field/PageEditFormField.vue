@@ -2,7 +2,7 @@
   <div class="px-4 px-sm-6">
     <v-form @submit.prevent="onSubmit" @keydown="form.onKeydown($event)">
       <div class="d-flex justify-space-between mb-2">
-        <user-title :title="$t('edit_my_portfolio')" />
+        <user-title-text :title="$t('edit_my_portfolio')" />
 
         <!-- Submit Button -->
         <v-btn
@@ -120,13 +120,13 @@
 const ImageFileInput = () => import('@/components/molecues/form/ImageFileInput')
 const UserCareerField = () =>
   import('@/components/organisms/field/UserCareerField')
-const UserTitle = () => import('@/components/molecues/pages/UserTitle')
+const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
 
 export default {
   components: {
     ImageFileInput,
     UserCareerField,
-    UserTitle
+    UserTitleText
   },
 
   props: {

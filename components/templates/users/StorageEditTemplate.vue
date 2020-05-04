@@ -1,6 +1,6 @@
 <template>
   <div>
-    <user-title :title="$t('edit_my_work')" class="text-center" />
+    <user-title-text :title="$t('edit_my_work')" class="text-center" />
 
     <storage-form
       v-model="form"
@@ -15,12 +15,12 @@
 
 <script>
 const StorageForm = () => import('@/components/organisms/form/StorageForm')
-const UserTitle = () => import('@/components/molecues/pages/UserTitle')
+const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
 
 export default {
   components: {
     StorageForm,
-    UserTitle
+    UserTitleText
   },
 
   props: {

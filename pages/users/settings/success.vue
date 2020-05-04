@@ -1,15 +1,15 @@
 <template>
   <div>
-    <user-title title="パスワードの変更をしました" />
+    <user-title-text title="パスワードの変更をしました" />
     <v-btn :to="{ name: 'users.settings.index' }" nuxt>戻る</v-btn>
   </div>
 </template>
 
 <script>
-import UserTitle from '@/components/molecues/pages/UserTitle'
+import UserTitleText from '@/components/atoms/text/UserTitleText'
 export default {
   components: {
-    UserTitle
+    UserTitleText
   },
 
   layout: 'user'

@@ -129,7 +129,7 @@
           </v-row>
 
           <!-- Submit Button -->
-          <div class="text-right login-btn-wraaper">
+          <div class="text-right p-2">
             <v-btn
               :disabled="form.busy"
               color="grey lighten-1"

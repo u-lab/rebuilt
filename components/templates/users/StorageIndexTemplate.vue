@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- TODO 自分の作品を見る -->
-    <user-title :title="$t('mywork')" class="text-center" />
+    <user-title-text :title="$t('mywork')" class="text-center" />
 
     <v-container>
       <v-row>
@@ -41,7 +41,7 @@
 
 <script>
 import { getSmallUrl } from '@/utils/image'
-const UserTitle = () => import('@/components/molecues/pages/UserTitle')
+const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
 const StorageCardForEdit = () =>
   import('@/components/molecues/storages/StorageCardForEdit')
 const StorageCardForCreate = () =>
@@ -49,7 +49,7 @@ const StorageCardForCreate = () =>
 
 export default {
   components: {
-    UserTitle,
+    UserTitleText,
     StorageCardForCreate,
     StorageCardForEdit
   },

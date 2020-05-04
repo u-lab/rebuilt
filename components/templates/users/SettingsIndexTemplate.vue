@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <user-title :title="$t('settings')" />
+    <user-title-text :title="$t('settings')" />
 
     <user-settings-index-list />
 
@@ -11,13 +11,13 @@
 </template>
 
 <script>
-const UserTitle = () => import('@/components/molecues/pages/UserTitle')
+const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
 const UserSettingsIndexList = () =>
   import('@/components/organisms/list/UserSettingsIndexList')
 
 export default {
   components: {
-    UserTitle,
+    UserTitleText,
     UserSettingsIndexList
   },
 

@@ -16,7 +16,7 @@
           obj-key="email"
         />
 
-        <div class="text-center login-btn-wraaper">
+        <div class="text-center p-2">
           <!-- Submit Button -->
           <v-btn
             :disabled="form.busy"

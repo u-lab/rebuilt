@@ -1,6 +1,6 @@
 <template>
   <div>
-    <user-title :title="$t('see_everyones_works')" class="text-center" />
+    <user-title-text :title="$t('see_everyones_works')" class="text-center" />
 
     <all-storage-card-list :storages="storages" />
   </div>
@@ -8,12 +8,12 @@
 
 <script>
 import AllStorageCardList from '@/components/organisms/list/AllStorageCardList'
-import UserTitle from '@/components/molecues/pages/UserTitle'
+import UserTitleText from '@/components/atoms/text/UserTitleText'
 
 export default {
   components: {
     AllStorageCardList,
-    UserTitle
+    UserTitleText
   },
 
   props: {
