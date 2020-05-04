@@ -6,7 +6,7 @@
     <v-container>
       <v-row>
         <v-col cols="12" sm="6" md="4">
-          <storage-card-for-create
+          <storage-create-card
             :to="{
               name: 'users.storages.create'
             }"
@@ -20,7 +20,7 @@
           sm="6"
           md="4"
         >
-          <storage-card-for-edit
+          <storage-edit-card
             :to="{
               name: 'users.storages.edit',
               params: { storageId: items.storage_id }
@@ -42,16 +42,16 @@
 <script>
 import { getSmallUrl } from '@/utils/image'
 const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
-const StorageCardForEdit = () =>
-  import('@/components/molecues/storages/StorageCardForEdit')
-const StorageCardForCreate = () =>
-  import('@/components/molecues/storages/StorageCardForCreate')
+const StorageEditCard = () =>
+  import('@/components/molecues/cards/StorageEditCard')
+const StorageCreateCard = () =>
+  import('@/components/molecues/cards/StorageCreateCard')
 
 export default {
   components: {
     UserTitleText,
-    StorageCardForCreate,
-    StorageCardForEdit
+    StorageCreateCard,
+    StorageEditCard
   },
 
   props: {
