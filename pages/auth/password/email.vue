@@ -7,7 +7,7 @@
 
       <v-form v-else @submit.prevent="send" @keydown="form.onKeydown($event)">
         <!-- Email -->
-        <form-email
+        <form-email-text-field
           v-model="form.email"
           :dirty="formDirty"
           :errors="form.errors"
@@ -40,9 +40,10 @@
 
 <script>
 import Form from 'vform'
-import AuthForm from '~/components/molecues/auth/AuthForm'
-import AuthWrapper from '~/components/atoms/Wrapper'
-import FormEmail from '@/components/organisms/textField/FormEmailTextField'
+const AuthForm = () => import('~/components/molecues/auth/AuthForm')
+const AuthWrapper = () => import('~/components/atoms/Wrapper')
+const FormEmailTextField = () =>
+  import('@/components/organisms/textField/FormEmailTextField')
 
 export default {
   head() {
@@ -52,7 +53,7 @@ export default {
   components: {
     AuthForm,
     AuthWrapper,
-    FormEmail
+    FormEmailTextField
   },
 
   layout: 'auth',

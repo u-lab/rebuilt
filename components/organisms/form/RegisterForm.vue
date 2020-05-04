@@ -9,7 +9,7 @@
       obj-key="name"
     />
 
-    <form-email
+    <form-email-text-field
       v-model="form.email"
       :dirty="formDirty"
       :errors="form.errors"
@@ -40,7 +40,8 @@
 
 <script>
 const FormUsername = () => import('@/components/molecues/form/FormUsername')
-const FormEmail = () => import('@/components/molecues/form/FormEmail')
+const FormEmailTextField = () =>
+  import('@/components/organisms/textField/FormEmailTextField')
 const FormPasswordWithConfirmationTextField = () =>
   import(
     '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
@@ -48,7 +49,7 @@ const FormPasswordWithConfirmationTextField = () =>
 
 export default {
   components: {
-    FormEmail,
+    FormEmailTextField,
     FormUsername,
     FormPasswordWithConfirmationTextField
   },

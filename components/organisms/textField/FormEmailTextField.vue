@@ -5,6 +5,7 @@
     :error-messages="errorMessage"
     @blur="$v.v.$touch()"
     :outlined="outlined"
+    :required="required"
     type="email"
   />
 </template>
@@ -24,6 +25,13 @@ export default {
     }
   },
 
+  props: {
+    outlined: {
+      type: Boolean,
+      default: true
+    }
+  },
+
   computed: {
     /**
      * エラーメッセージ
@@ -38,8 +46,10 @@ export default {
       }
 
       const errors = []
-      !validate.required && errors.push('メールアドレスは必須です')
-      !validate.email && errors.push('正しいメールアドレスを入力してください')
+      this.required &&
+        !validate.required &&
+        errors.push('メールアドレスは必須です')
+      !validate.email && errors.push('正しいメールアドレスではありません')
       !validate.maxLength && errors.push('255文字以内で入力してください')
       return errors
     }
