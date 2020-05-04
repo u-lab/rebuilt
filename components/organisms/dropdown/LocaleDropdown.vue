@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import BaseDropdown from '@/components/molecues/dropdown/BaseDropdown'
-import { loadMessages } from '~/plugins/i18n'
+import { loadMessages } from '@/plugins/i18n'
+const BaseDropdown = () => import('@/components/molecues/dropdown/BaseDropdown')
 
 export default {
   components: {

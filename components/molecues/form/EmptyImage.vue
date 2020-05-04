@@ -24,3 +24,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.user_storage_eyecatch_image_empty {
+  border: 1px solid #444;
+  width: 100%;
+
+  /* クリックイベントの無効 */
+  pointer-events: none;
+}
+</style>

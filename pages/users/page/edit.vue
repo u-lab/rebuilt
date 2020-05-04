@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <edit v-model="form" :page="data" @submit="update" />
-  </div>
+  <page-edit-template v-model="form" :page="data" @submit="update" />
 </template>
 
 <script>
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
 import axios from 'axios'
-const Edit = () => import('@/components/templates/users/page/Edit')
+const PageEditTemplate = () =>
+  import('@/components/templates/users/PageEditTemplate')
 
 export default {
   middleware: 'auth',
 
   components: {
-    Edit
+    PageEditTemplate
   },
 
   data() {

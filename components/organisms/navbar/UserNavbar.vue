@@ -6,7 +6,7 @@
       <nuxt-link
         :to="{ name: 'users.dashboard' }"
         v-text="siteTitle"
-        class="user-navbar-title"
+        class="site-title text-decoration-none"
       />
     </v-toolbar-title>
 
@@ -35,7 +35,8 @@
 </template>
 
 <script>
-import UserNavbarMenu from '@/components/organisms/menu/UserNavbarMenu'
+const UserNavbarMenu = () =>
+  import('@/components/organisms/menu/UserNavbarMenu')
 
 export default {
   components: {
@@ -61,8 +62,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-navbar-title {
+.site-title {
   color: white;
-  text-decoration: none;
 }
 </style>

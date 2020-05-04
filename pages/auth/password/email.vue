@@ -1,13 +1,13 @@
 <template>
   <auth-wrapper>
-    <auth-form :title="$t('reset_password')">
+    <auth-form-container :title="$t('reset_password')">
       <template v-if="status">
         <v-alert v-text="status" type="success" />
       </template>
 
       <v-form v-else @submit.prevent="send" @keydown="form.onKeydown($event)">
         <!-- Email -->
-        <form-email
+        <form-email-text-field
           v-model="form.email"
           :dirty="formDirty"
           :errors="form.errors"
@@ -16,7 +16,7 @@
           obj-key="email"
         />
 
-        <div class="text-center login-btn-wraaper">
+        <div class="text-center p-2">
           <!-- Submit Button -->
           <v-btn
             :disabled="form.busy"
@@ -34,15 +34,17 @@
           <nuxt-link :to="{ name: 'login' }" v-text="$t('go_to_login')" />
         </p>
       </div>
-    </auth-form>
+    </auth-form-container>
   </auth-wrapper>
 </template>
 
 <script>
 import Form from 'vform'
-import AuthForm from '~/components/molecues/auth/AuthForm'
-import AuthWrapper from '~/components/atoms/Wrapper'
-import FormEmail from '@/components/auth/form/FormEmail'
+const AuthFormContainer = () =>
+  import('@/components/organisms/containers/AuthFormContainer')
+const AuthWrapper = () => import('@/components/atoms/Wrapper')
+const FormEmailTextField = () =>
+  import('@/components/organisms/textField/FormEmailTextField')
 
 export default {
   head() {
@@ -50,9 +52,9 @@ export default {
   },
 
   components: {
-    AuthForm,
+    AuthFormContainer,
     AuthWrapper,
-    FormEmail
+    FormEmailTextField
   },
 
   layout: 'auth',

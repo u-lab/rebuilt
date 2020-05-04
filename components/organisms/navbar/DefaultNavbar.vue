@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BaseNavbar from '@/components/molecues/navbar/BaseNavbar'
+const BaseNavbar = () => import('@/components/molecues/navbar/BaseNavbar')
 
 export default {
   components: {

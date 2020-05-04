@@ -1,8 +1,8 @@
 <template>
   <div>
-    <user-title :title="$t('add_new_work')" class="text-center" />
+    <user-title-text :title="$t('add_new_work')" class="text-center" />
 
-    <storage-form-field
+    <storage-form
       v-model="form"
       :preview-image="previewImage"
       :releases="releases"
@@ -13,14 +13,13 @@
 </template>
 
 <script>
-const StorageFormField = () =>
-  import('@/components/organisms/field/StorageFormField')
-const UserTitle = () => import('~/components/molecues/pages/UserTitle')
+const StorageForm = () => import('@/components/organisms/form/StorageForm')
+const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
 
 export default {
   components: {
-    StorageFormField,
-    UserTitle
+    StorageForm,
+    UserTitleText
   },
 
   props: {

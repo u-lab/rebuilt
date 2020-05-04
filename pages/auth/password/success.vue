@@ -1,22 +1,23 @@
 <template>
   <auth-wrapper>
-    <auth-form :title="$t('changed_password')">
+    <auth-form-container :title="$t('changed_password')">
       <div class="d-flex justify-center">
         <v-btn :to="{ name: 'login' }" color="primary">
           {{ $t('login') }}
         </v-btn>
       </div>
-    </auth-form>
+    </auth-form-container>
   </auth-wrapper>
 </template>
 
 <script>
-import AuthForm from '~/components/molecues/auth/AuthForm'
-import AuthWrapper from '~/components/atoms/Wrapper'
+const AuthFormContainer = () =>
+  import('@/components/organisms/containers/AuthFormContainer')
+const AuthWrapper = () => import('@/components/atoms/Wrapper')
 
 export default {
   components: {
-    AuthForm,
+    AuthFormContainer,
     AuthWrapper
   },
 

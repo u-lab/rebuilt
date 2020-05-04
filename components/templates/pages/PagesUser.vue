@@ -76,12 +76,15 @@
 </template>
 
 <script>
-import RepezenWorkCard from '@/components/organisms/cards/RepezenWorkCard'
-import BaseTab from '@/components/molecues/tabs/BaseTab'
-import UserHeader from '@/components/molecues/pages/UserHeader'
-import OtherStorageList from '@/components/organisms/list/OtherStorageList'
-import ProfileIconList from '@/components/organisms/list/ProfileIconList'
 import { getIconUrl, getMediumUrl } from '@/utils/image'
+const RepezenWorkCard = () =>
+  import('@/components/organisms/cards/RepezenWorkCard')
+const BaseTab = () => import('@/components/molecues/tabs/BaseTab')
+const UserHeader = () => import('@/components/organisms/header/UserHeader')
+const OtherStorageList = () =>
+  import('@/components/organisms/list/OtherStorageList')
+const ProfileIconList = () =>
+  import('@/components/organisms/list/ProfileIconList')
 
 export default {
   components: {

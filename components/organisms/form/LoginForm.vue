@@ -31,7 +31,7 @@
       />
     </div>
 
-    <div class="text-center login-btn-wraaper">
+    <div class="text-center p-2">
       <!-- Submit Button -->
       <v-btn
         :disabled="form.busy"
@@ -46,8 +46,10 @@
 
 <script>
 import { isEmail } from '@/utils/helper'
-const FormEmailOrName = () => import('@/components/auth/form/FormEmailOrName')
-const FormPassword = () => import('@/components/auth/form/FormPassword')
+const FormEmailOrName = () =>
+  import('@/components/organisms/textField/FormEmailOrNameTextField')
+const FormPassword = () =>
+  import('@/components/organisms/textField/FormPasswordTextField')
 
 export default {
   components: {

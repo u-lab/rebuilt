@@ -11,7 +11,8 @@
 </template>
 
 <script>
-import StorageCardList from '@/components/organisms/list/StorageCardList'
+const StorageCardList = () =>
+  import('@/components/organisms/list/StorageCardList')
 
 export default {
   components: {

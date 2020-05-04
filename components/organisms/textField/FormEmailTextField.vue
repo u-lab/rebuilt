@@ -1,20 +1,17 @@
 <template>
-  <div>
-    <v-text-field
-      v-model="valueModel"
-      :error-messages="errorMessage"
-      :label="$t('email')"
-      @click:append="hidden = !hidden"
-      @blur="$v.v.$touch()"
-      :outlined="outlined"
-      type="email"
-      required
-    />
-  </div>
+  <v-text-field
+    v-model="valueModel"
+    :label="$t('email')"
+    :error-messages="errorMessage"
+    @blur="$v.v.$touch()"
+    :outlined="outlined"
+    :required="required"
+    type="email"
+  />
 </template>
 
 <script>
-import { email, required } from 'vuelidate/lib/validators'
+import { email, maxLength, required } from 'vuelidate/lib/validators'
 import { form } from '@/mixins/form'
 
 export default {
@@ -23,9 +20,11 @@ export default {
   validations: {
     v: {
       email,
+      maxLength: maxLength(255),
       required
     }
   },
+
   props: {
     outlined: {
       type: Boolean,
@@ -47,8 +46,11 @@ export default {
       }
 
       const errors = []
-      !validate.required && errors.push('メールアドレスは必須です')
+      this.required &&
+        !validate.required &&
+        errors.push('メールアドレスは必須です')
       !validate.email && errors.push('正しいメールアドレスではありません')
+      !validate.maxLength && errors.push('255文字以内で入力してください')
       return errors
     }
   }

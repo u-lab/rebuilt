@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt-link v-if="to" :to="to" class="link">
+    <nuxt-link v-if="to" :to="to" class="link text-decoration-none">
       <top-left-parenthesized-key
         :element="titleElement"
         :text="title"
@@ -11,7 +11,7 @@
     <a
       v-else-if="href"
       :href="href"
-      class="link"
+      class="link text-decoration-none"
       rel="noopener"
       target="_blank"
     >
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import TopLeftParenthesizedKey from '@/components/atoms/text/TopLeftParenthesizedKey'
+const TopLeftParenthesizedKey = () =>
+  import('@/components/atoms/text/TopLeftParenthesizedKey')
 
 export default {
   components: {
@@ -78,6 +79,5 @@ export default {
 
 .link {
   color: $font-color-light-navy;
-  text-decoration: none;
 }
 </style>

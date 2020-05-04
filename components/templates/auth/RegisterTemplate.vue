@@ -1,6 +1,6 @@
 <template>
   <auth-wrapper>
-    <auth-form :title="$t('register')">
+    <auth-form-container :title="$t('register')">
       <div v-if="mustVerifyEmail">
         <v-alert type="success" role="alert">
           {{ $t('verify_email_address') }}
@@ -18,18 +18,19 @@
           </div>
         </div>
       </div>
-    </auth-form>
+    </auth-form-container>
   </auth-wrapper>
 </template>
 
 <script>
-const AuthForm = () => import('@/components/molecues/auth/AuthForm')
+const AuthFormContainer = () =>
+  import('@/components/organisms/containers/AuthFormContainer')
 const AuthWrapper = () => import('@/components/atoms/Wrapper')
 const RegisterForm = () => import('@/components/organisms/form/RegisterForm')
 
 export default {
   components: {
-    AuthForm,
+    AuthFormContainer,
     AuthWrapper,
     RegisterForm
   },

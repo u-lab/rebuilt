@@ -2,7 +2,7 @@
   <b-container :title="$t('update_your_password')">
     <v-form @submit.prevent="onSubmit">
       <!-- Password -->
-      <form-password-with-confirmation
+      <form-password-with-confirmation-text-field
         v-model="form.password"
         :confirmationField="form.password_confirmation"
         :dirty="formDirty"
@@ -21,13 +21,15 @@
 <script>
 const BContainer = () =>
   import('@/components/organisms/containers/UserSettingsContainer')
-const FormPasswordWithConfirmation = () =>
-  import('@/components/molecues/form/FormPasswordWithConfirmation')
+const FormPasswordWithConfirmationTextField = () =>
+  import(
+    '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
+  )
 
 export default {
   components: {
     BContainer,
-    FormPasswordWithConfirmation
+    FormPasswordWithConfirmationTextField
   },
 
   props: {

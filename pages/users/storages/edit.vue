@@ -1,6 +1,6 @@
 <template>
   <div>
-    <edit
+    <storage-edit-template
       v-model="form"
       :releases="releases"
       :preview-image="storage.eyecatch_image"
@@ -14,7 +14,8 @@
 <script>
 import Form from 'vform'
 import { objectToFormData } from 'object-to-formdata'
-const Edit = () => import('@/components/templates/users/storages/Edit')
+const StorageEditTemplate = () =>
+  import('@/components/templates/users/StorageEditTemplate')
 
 // ストレージIDの不一致時にエラーを投げる
 function throwNotEqualStorageID() {
@@ -25,7 +26,7 @@ export default {
   middleware: 'auth',
 
   components: {
-    Edit
+    StorageEditTemplate
   },
 
   data() {

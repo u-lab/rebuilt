@@ -1,6 +1,6 @@
 <template>
   <div>
-    <user-title :title="$t('dashboard')" class="text-center mb-3" />
+    <user-title-text :title="$t('dashboard')" class="text-center mb-3" />
 
     <v-card>
       <v-card-title>{{ $t('welcome_to_the_archi_walk') }}</v-card-title>
@@ -24,13 +24,13 @@ const UserDashboardStorageList = () =>
   import('@/components/organisms/list/UserDashboardStorageList')
 const UserDashboardIntroCard = () =>
   import('@/components/organisms/cards/UserDashboardIntroCard')
-const UserTitle = () => import('@/components/molecues/pages/UserTitle')
+const UserTitleText = () => import('@/components/atoms/text/UserTitleText')
 
 export default {
   components: {
     UserDashboardStorageList,
     UserDashboardIntroCard,
-    UserTitle
+    UserTitleText
   },
 
   props: {

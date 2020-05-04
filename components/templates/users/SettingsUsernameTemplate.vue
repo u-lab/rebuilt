@@ -1,7 +1,7 @@
 <template>
   <b-container :title="$t('update_your_user_name')">
     <v-form @submit.prevent="onSubmit">
-      <form-username
+      <form-username-text-field
         v-model="form.user"
         :dirty="formDirty"
         :errors="form.errors"
@@ -18,12 +18,13 @@
 <script>
 const BContainer = () =>
   import('@/components/organisms/containers/UserSettingsContainer')
-const FormUsername = () => import('@/components/molecues/form/FormUsername')
+const FormUsernameTextField = () =>
+  import('@/components/organisms/textField/FormUsernameTextField')
 
 export default {
   components: {
     BContainer,
-    FormUsername
+    FormUsernameTextField
   },
 
   props: {

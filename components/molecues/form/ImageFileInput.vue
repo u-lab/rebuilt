@@ -13,8 +13,9 @@
 
 <script>
 import { getType } from '@/utils/helper'
-import BaseFileInput from '@/components/molecues/form/BaseFileInput'
-import EyeCatchImageDisplay from '@/components/molecues/form/EyeCatchImageDisplay'
+const BaseFileInput = () => import('@/components/molecues/form/BaseFileInput')
+const EyeCatchImageDisplay = () =>
+  import('@/components/molecues/form/EyeCatchImageDisplay')
 
 export default {
   components: {

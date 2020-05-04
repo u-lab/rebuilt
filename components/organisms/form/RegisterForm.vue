@@ -1,6 +1,6 @@
 <template>
   <v-form @submit.prevent="onSubmit" @keydown="form.onKeydown($event)">
-    <form-username
+    <form-username-text-field
       v-model="form.name"
       :dirty="formDirty"
       :errors="form.errors"
@@ -9,7 +9,7 @@
       obj-key="name"
     />
 
-    <form-email
+    <form-email-text-field
       v-model="form.email"
       :dirty="formDirty"
       :errors="form.errors"
@@ -18,7 +18,7 @@
       obj-key="email"
     />
 
-    <form-password-with-confirmation
+    <form-password-with-confirmation-text-field
       v-model="form.password"
       :confirmationField="form.password_confirmation"
       :dirty="formDirty"
@@ -29,7 +29,7 @@
       obj-key="password"
     />
 
-    <div class="text-center login-btn-wraaper">
+    <div class="text-center p-2">
       <!-- Submit Button -->
       <v-btn :disabled="form.busy" color="grey lighten-1" large type="submit">
         {{ $t('register') }}
@@ -39,16 +39,20 @@
 </template>
 
 <script>
-const FormUsername = () => import('@/components/molecues/form/FormUsername')
-const FormEmail = () => import('@/components/molecues/form/FormEmail')
-const FormPasswordWithConfirmation = () =>
-  import('@/components/molecues/form/FormPasswordWithConfirmation')
+const FormUsernameTextField = () =>
+  import('@/components/organisms/textField/FormUsernameTextField')
+const FormEmailTextField = () =>
+  import('@/components/organisms/textField/FormEmailTextField')
+const FormPasswordWithConfirmationTextField = () =>
+  import(
+    '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
+  )
 
 export default {
   components: {
-    FormEmail,
-    FormUsername,
-    FormPasswordWithConfirmation
+    FormEmailTextField,
+    FormUsernameTextField,
+    FormPasswordWithConfirmationTextField
   },
 
   props: {

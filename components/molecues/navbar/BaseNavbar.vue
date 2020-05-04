@@ -2,18 +2,22 @@
   <v-container fluid class="mb-4">
     <div class="px-sm-10 py-4">
       <header class="d-flex justify-space-between navbar-wrapper">
-        <site-title :title="title" :titleElement="getElement" :to="toTitle" />
+        <site-title-text
+          :title="title"
+          :titleElement="getElement"
+          :to="toTitle"
+        />
       </header>
     </div>
   </v-container>
 </template>
 
 <script>
-import SiteTitle from '@/components/atoms/title/SiteTitle'
+const SiteTitleText = () => import('@/components/atoms/text/SiteTitleText')
 
 export default {
   components: {
-    SiteTitle
+    SiteTitleText
   },
 
   props: {
