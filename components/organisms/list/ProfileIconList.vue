@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import Library01 from '@/components/atoms/icons/Library01'
-import School01 from '@/components/atoms/icons/School01'
-import Skill01 from '@/components/atoms/icons/Skill01'
-import Trophy01 from '@/components/atoms/icons/Trophy01'
+const Library01 = () => import('@/components/atoms/icons/Library01')
+const School01 = () => import('@/components/atoms/icons/School01')
+const Skill01 = () => import('@/components/atoms/icons/Skill01')
+const Trophy01 = () => import('@/components/atoms/icons/Trophy01')
 
 export default {
   components: {

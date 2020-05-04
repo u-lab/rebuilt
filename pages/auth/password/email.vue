@@ -1,6 +1,6 @@
 <template>
   <auth-wrapper>
-    <auth-form :title="$t('reset_password')">
+    <auth-form-container :title="$t('reset_password')">
       <template v-if="status">
         <v-alert v-text="status" type="success" />
       </template>
@@ -34,13 +34,14 @@
           <nuxt-link :to="{ name: 'login' }" v-text="$t('go_to_login')" />
         </p>
       </div>
-    </auth-form>
+    </auth-form-container>
   </auth-wrapper>
 </template>
 
 <script>
 import Form from 'vform'
-const AuthForm = () => import('@/components/molecues/auth/AuthForm')
+const AuthFormContainer = () =>
+  import('@/components/organisms/containers/AuthFormContainer')
 const AuthWrapper = () => import('@/components/atoms/Wrapper')
 const FormEmailTextField = () =>
   import('@/components/organisms/textField/FormEmailTextField')
@@ -51,7 +52,7 @@ export default {
   },
 
   components: {
-    AuthForm,
+    AuthFormContainer,
     AuthWrapper,
     FormEmailTextField
   },

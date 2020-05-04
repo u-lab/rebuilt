@@ -1,9 +1,11 @@
 <template>
   <client-only>
     <v-btn
-      v-if="to"
       v-text="text"
       :to="to"
+      :href="href"
+      :target="target"
+      :rel="rel"
       color="#fff"
       text
       rounded
@@ -11,21 +13,6 @@
       dark
       nuxt
     />
-
-    <v-btn
-      v-else-if="href"
-      v-text="text"
-      :href="href"
-      color="#fff"
-      text
-      rounded
-      class="my-2"
-      dark
-      target="_blank"
-      rel="noopener"
-    />
-
-    <v-btn v-else v-text="text" color="#fff" text rounded class="my-2" dark />
   </client-only>
 </template>
 
@@ -45,6 +32,16 @@ export default {
     text: {
       type: String,
       required: true
+    }
+  },
+
+  computed: {
+    target() {
+      return this.href ? '_blank' : undefined
+    },
+
+    rel() {
+      return this.href ? 'noopener' : undefined
     }
   }
 }

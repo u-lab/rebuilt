@@ -1,6 +1,6 @@
 <template>
   <auth-wrapper>
-    <auth-form :title="$t('reset_password')">
+    <auth-form-container :title="$t('reset_password')">
       <v-form @submit.prevent="reset" @keydown="form.onKeydown($event)">
         <!-- Password -->
         <form-password-with-confirmation-text-field
@@ -26,15 +26,19 @@
           </v-btn>
         </div>
       </v-form>
-    </auth-form>
+    </auth-form-container>
   </auth-wrapper>
 </template>
 
 <script>
 import Form from 'vform'
-import AuthForm from '@/components/molecues/auth/AuthForm'
-import AuthWrapper from '@/components/atoms/Wrapper'
-import FormPasswordWithConfirmationTextField from '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
+const AuthFormContainer = () =>
+  import('@/components/organisms/containers/AuthFormContainer')
+const AuthWrapper = () => import('@/components/atoms/Wrapper')
+const FormPasswordWithConfirmationTextField = () =>
+  import(
+    '@/components/organisms/textField/FormPasswordWithConfirmationTextField'
+  )
 
 export default {
   head() {
@@ -42,7 +46,7 @@ export default {
   },
 
   components: {
-    AuthForm,
+    AuthFormContainer,
     AuthWrapper,
     FormPasswordWithConfirmationTextField
   },

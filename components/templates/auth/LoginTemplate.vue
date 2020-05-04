@@ -1,6 +1,6 @@
 <template>
   <auth-wrapper>
-    <auth-form :title="$t('login')">
+    <auth-form-container :title="$t('login')">
       <login-form
         v-model="form"
         :value-remember="valueRemember"
@@ -21,18 +21,19 @@
           </p>
         </div>
       </div>
-    </auth-form>
+    </auth-form-container>
   </auth-wrapper>
 </template>
 
 <script>
-const AuthForm = () => import('@/components/molecues/auth/AuthForm')
+const AuthFormContainer = () =>
+  import('@/components/organisms/containers/AuthFormContainer')
 const AuthWrapper = () => import('@/components/atoms/Wrapper')
 const LoginForm = () => import('@/components/organisms/form/LoginForm')
 
 export default {
   components: {
-    AuthForm,
+    AuthFormContainer,
     AuthWrapper,
     LoginForm
   },
