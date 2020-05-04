@@ -1,16 +1,17 @@
 <template>
   <div>
-    <email-template v-model="form" :user="user" @submit="update" />
+    <settings-email-template v-model="form" :user="user" @submit="update" />
   </div>
 </template>
 
 <script>
 import Form from 'vform'
-import EmailTemplate from '@/components/templates/users/settings/Email'
+const SettingsEmailTemplate = () =>
+  import('@/components/templates/users/SettingsEmailTemplate')
 
 export default {
   components: {
-    EmailTemplate
+    SettingsEmailTemplate
   },
 
   middleware: 'auth',

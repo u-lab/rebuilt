@@ -1,13 +1,16 @@
 <template>
-  <b-container :title="$t('update_your_user_name')">
+  <b-container :title="$t('update_your_password')">
     <v-form @submit.prevent="onSubmit">
-      <form-username
-        v-model="form.user"
+      <!-- Password -->
+      <form-password-with-confirmation
+        v-model="form.password"
+        :confirmationField="form.password_confirmation"
         :dirty="formDirty"
         :errors="form.errors"
         :lazy-validation="true"
+        @confirmation="updatePasswordConfirmation"
         @dirty="dirty"
-        obj-key="user"
+        obj-key="password"
       />
 
       <v-btn v-text="$t('update')" color="primary" large type="submit" />
@@ -16,22 +19,19 @@
 </template>
 
 <script>
-import BContainer from '@/components/organisms/containers/UserSettingsContainer'
-import FormUsername from '@/components/molecues/form/FormUsername'
+const BContainer = () =>
+  import('@/components/organisms/containers/UserSettingsContainer')
+const FormPasswordWithConfirmation = () =>
+  import('@/components/molecues/form/FormPasswordWithConfirmation')
 
 export default {
   components: {
     BContainer,
-    FormUsername
+    FormPasswordWithConfirmation
   },
 
   props: {
     value: {
-      type: Object,
-      required: true
-    },
-
-    user: {
       type: Object,
       required: true
     }
@@ -60,7 +60,12 @@ export default {
     },
 
     onSubmit() {
+      this.formDirty = false
       return this.$emit('submit')
+    },
+
+    updatePasswordConfirmation(value) {
+      this.form.password_confirmation = value
     }
   }
 }

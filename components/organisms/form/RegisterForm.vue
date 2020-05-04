@@ -1,0 +1,92 @@
+<template>
+  <v-form @submit.prevent="onSubmit" @keydown="form.onKeydown($event)">
+    <form-username
+      v-model="form.name"
+      :dirty="formDirty"
+      :errors="form.errors"
+      :lazy-validation="true"
+      @dirty="dirty"
+      obj-key="name"
+    />
+
+    <form-email
+      v-model="form.email"
+      :dirty="formDirty"
+      :errors="form.errors"
+      :lazy-validation="true"
+      @dirty="dirty"
+      obj-key="email"
+    />
+
+    <form-password-with-confirmation
+      v-model="form.password"
+      :confirmationField="form.password_confirmation"
+      :dirty="formDirty"
+      :errors="form.errors"
+      :lazy-validation="true"
+      @confirmation="updatePasswordConfirmation"
+      @dirty="dirty"
+      obj-key="password"
+    />
+
+    <div class="text-center login-btn-wraaper">
+      <!-- Submit Button -->
+      <v-btn :disabled="form.busy" color="grey lighten-1" large type="submit">
+        {{ $t('register') }}
+      </v-btn>
+    </div>
+  </v-form>
+</template>
+
+<script>
+const FormUsername = () => import('@/components/molecues/form/FormUsername')
+const FormEmail = () => import('@/components/molecues/form/FormEmail')
+const FormPasswordWithConfirmation = () =>
+  import('@/components/molecues/form/FormPasswordWithConfirmation')
+
+export default {
+  components: {
+    FormEmail,
+    FormUsername,
+    FormPasswordWithConfirmation
+  },
+
+  props: {
+    value: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data: () => ({
+    formDirty: false
+  }),
+
+  computed: {
+    form: {
+      get() {
+        return this.value
+      },
+      set(newVal) {
+        return this.$emit('input', newVal)
+      }
+    }
+  },
+
+  methods: {
+    dirty() {
+      this.formDirty = true
+    },
+
+    onSubmit() {
+      return this.$emit('submit')
+    },
+
+    updatePasswordConfirmation(value) {
+      this.form.password_confirmation = value
+    }
+  }
+}
+</script>
+
+<style></style>

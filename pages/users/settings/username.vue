@@ -1,14 +1,15 @@
 <template>
-  <username v-model="form" :user="user" @submit="update" />
+  <settings-username-template v-model="form" :user="user" @submit="update" />
 </template>
 
 <script>
 import Form from 'vform'
-import Username from '@/components/templates/users/settings/Username'
+const SettingsUsernameTemplate = () =>
+  import('@/components/templates/users/SettingsUsernameTemplate')
 
 export default {
   components: {
-    Username
+    SettingsUsernameTemplate
   },
 
   middleware: 'auth',

@@ -5,8 +5,10 @@
 </template>
 
 <script>
-import BContainer from '@/components/organisms/containers/UserSettingsContainer'
-import LocaleDropdown from '@/components/organisms/dropdown/LocaleDropdown'
+const BContainer = () =>
+  import('@/components/organisms/containers/UserSettingsContainer')
+const LocaleDropdown = () =>
+  import('@/components/organisms/dropdown/LocaleDropdown')
 
 export default {
   components: {

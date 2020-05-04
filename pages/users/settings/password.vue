@@ -1,18 +1,17 @@
 <template>
-  <div>
-    <password v-model="form" @submit="update" />
-  </div>
+  <settings-password-template v-model="form" @submit="update" />
 </template>
 
 <script>
 import Form from 'vform'
-import Password from '@/components/templates/users/settings/Password'
+const SettingsPasswordTemplate = () =>
+  import('@/components/templates/users/SettingsPasswordTemplate')
 
 export default {
   middleware: 'auth',
 
   components: {
-    Password
+    SettingsPasswordTemplate
   },
 
   data: () => ({

@@ -9,8 +9,10 @@
 </template>
 
 <script>
-import BContainer from '@/components/organisms/containers/UserSettingsContainer'
-import DeactivateDialog from '@/components/organisms/dialog/DeactivateDialog'
+const BContainer = () =>
+  import('@/components/organisms/containers/UserSettingsContainer')
+const DeactivateDialog = () =>
+  import('@/components/organisms/dialog/DeactivateDialog')
 
 export default {
   components: {
