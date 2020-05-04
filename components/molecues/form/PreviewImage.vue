@@ -38,3 +38,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.user_storage_eyecatch_image_preview {
+  width: 100%;
+
+  /* クリックイベントの無効 */
+  pointer-events: none;
+}
+</style>
