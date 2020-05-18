@@ -8,6 +8,8 @@ class Common {
     this.camera = null
     this.renderer = null
     this.path = null
+    this.controlls = null
+    this.light = null
 
     this.size = {
       windowW: null,
@@ -36,6 +38,11 @@ class Common {
     this.camera.position.set(0, 10, -50)
     this.camera.lookAt(this.scene.position)
 
+    this.controls = new THREE.OrbitControls(this.camera)
+    this.controls.maxDistance = 5000.0
+    this.controls.autoRotate = true
+    this.controls.autoRotateSpeed = 2.0
+
     this.renderer = new THREE.WebGLRenderer({
       canvas: $canvas
     })
@@ -44,6 +51,11 @@ class Common {
 
     this.renderer.setClearColor(0xeaf2f5)
     this.renderer.setSize(this.size.windowW, this.size.windowH)
+
+    // 平行光源
+    this.light = new THREE.DirectionalLight(0xffffff)
+    this.light.intensity = 1 // 光の強さを倍に
+    this.light.position.set(1, 1, 1)
 
     this.setObj()
 
