@@ -3,9 +3,6 @@
     <!-- modelの表示をする -->
     <div class="py-2 px-sm-2">
       <div class="d-flex justify-center">
-        <!-- <v-card :max-width="maxWidth" width="100%">
-          <v-img :src="src" :max-width="maxWidth" width="100%" />
-        </v-card> -->
         <canvas ref="canvas" />
       </div>
     </div>

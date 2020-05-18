@@ -19,7 +19,7 @@
 </template>
 
 <script>
-const FooterBtn = () => import('@/components/atoms/buttons/FooterBtn')
+import FooterBtn from '@/components/atoms/buttons/FooterBtn'
 
 export default {
   components: {

@@ -1,19 +1,17 @@
 <template>
-  <client-only>
-    <v-btn
-      v-text="text"
-      :to="to"
-      :href="href"
-      :target="target"
-      :rel="rel"
-      color="#fff"
-      text
-      rounded
-      class="my-2 opacity-100"
-      dark
-      nuxt
-    />
-  </client-only>
+  <v-btn
+    v-text="text"
+    :to="to"
+    :href="href"
+    :target="target"
+    :rel="rel"
+    color="#fff"
+    text
+    rounded
+    class="my-2 opacity-100"
+    dark
+    nuxt
+  />
 </template>
 
 <script>
