@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import * as OBJLoader from 'three-obj-loader'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 OBJLoader(THREE)
 
 class Common {
@@ -8,7 +9,7 @@ class Common {
     this.camera = null
     this.renderer = null
     this.path = null
-    this.controlls = null
+    this.controls = null
     this.light = null
 
     this.size = {
@@ -38,7 +39,7 @@ class Common {
     this.camera.position.set(0, 10, -50)
     this.camera.lookAt(this.scene.position)
 
-    this.controls = new THREE.OrbitControls(this.camera)
+    this.controls = new OrbitControls(this.camera, $canvas)
     this.controls.maxDistance = 5000.0
     this.controls.autoRotate = true
     this.controls.autoRotateSpeed = 2.0
