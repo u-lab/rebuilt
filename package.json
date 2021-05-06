@@ -18,7 +18,7 @@
     "js-cookie": "^2.2.1",
     "nuxt": "^2.11.0",
     "object-to-formdata": "^3.0.6",
-    "sanitize-html": "^1.23.0",
+    "sanitize-html": "^2.3.2",
     "sweetalert2": "^8.19.0",
     "three": "^0.115.0",
     "three-obj-loader": "^1.1.3",
